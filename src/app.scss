@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-image: url(../images/dots.png);
+  background-size: 600px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+}
+
+.sidebar {
+  background-image: url(../images/tear.png);
+  background-size: 82px;
+  width: 82px;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
