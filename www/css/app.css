@@ -1,0 +1,318 @@
+* {
+  box-sizing: border-box;
+}
+
+* *:before, * *:after {
+  box-sizing: inherit;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url("../fonts/merriweather_light-webfont.woff2") format("woff2"), url("../fonts/merriweather_light-webfont.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url("../fonts/merriweather-bold-webfont.woff2") format("woff2"), url("../fonts/merriweather-bold-webfont.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url("../fonts/merriweather-boldit-webfont.woff2") format("woff2"), url("../fonts/merriweather-boldit-webfont.woff") format("woff");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url("../fonts/merriweather-lightit-webfont.woff2") format("woff2"), url("../fonts/merriweather-lightit-webfont.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+}
+
+:focus {
+  outline-color: #daa520;
+}
+
+body {
+  font-family: 'Merriweather', serif;
+  font-weight: 300;
+  font-size: 80%;
+  background-image: url(../images/leather.jpg);
+  background-size: 640px;
+  margin: 0 0 10rem 0;
+  padding: 0;
+}
+
+p {
+  margin: 0 0 1rem 0;
+}
+
+p:last-of-type {
+  margin-bottom: 0;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 700;
+  font-style: italic;
+}
+
+header {
+  padding: 84px 1rem 1rem 1rem;
+}
+
+header img {
+  display: block;
+  max-width: 220px;
+}
+
+header small {
+  color: #6f795d;
+  font-size: 1rem;
+  font-variant: small-caps;
+  letter-spacing: 0.22rem;
+  text-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 17, 0, 0.8);
+}
+
+header nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 3;
+  background-image: url(../images/navbar.jpg);
+  background-size: 1077px;
+  padding: 6px 1rem 10px 1rem;
+  box-shadow: 0 0.1rem 0.5rem rgba(0, 17, 0, 0.5);
+}
+
+header nav ul {
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+header nav ul li:not(:first-child) {
+  margin-left: 1rem;
+}
+
+footer {
+  color: #6f795d;
+  padding: 2rem;
+  text-align: center;
+  font-size: 0.7rem;
+  text-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 17, 0, 0.8);
+}
+
+footer a {
+  color: #6f795d;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  position: relative;
+  appearance: none;
+  border: none;
+  display: inline-block;
+  font-family: inherit;
+  box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.5), inset 0px -5px 0px 0px rgba(0, 0, 0, 0.3), inset 0px 2px 0px 0px rgba(229, 215, 185, 0.3);
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+  background-image: url(../images/wood_tile_400.jpg);
+  background-size: 200px;
+}
+
+button:active {
+  box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.5), inset 0px -2px 0px 0px rgba(0, 0, 0, 0.3), inset 0px 2px 0px 0px rgba(229, 215, 185, 0.3);
+  top: 3px;
+}
+
+button:active span {
+  padding-bottom: 4px;
+}
+
+button span {
+  display: block;
+  font-size: 1.2rem;
+  padding: 4px 7px 7px 7px;
+  color: #e5d7b9;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.4);
+}
+
+button:disabled {
+  opacity: 0.5;
+}
+
+.social-icon {
+  background-color: #6f795d;
+  background-image: linear-gradient(to bottom, #6f795d, #555c47);
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.2rem 0rem 0.2rem;
+  fill: #010;
+}
+
+.panel {
+  background-color: #010;
+  color: #e5d7b9;
+  padding: 1.4rem 1.7rem;
+  margin: 0 1rem 1rem 1rem;
+  text-align: center;
+  border-radius: 0.25rem;
+  box-shadow: 0.15rem 0.15rem 0.3rem rgba(0, 17, 0, 0.3), inset 0px 0px 0px 0.7rem #010, inset 0px 0px 0px 0.8rem rgba(218, 165, 32, 0.8);
+}
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  padding: 0 0.5rem;
+}
+
+.card {
+  flex: 1 1 280px;
+  margin: 1rem 0.5rem;
+  padding: 0.5rem 1rem 1.5rem 1rem;
+  background-color: #e5d7b9;
+  background: linear-gradient(135deg, transparent 10px, #e5d7b9 0) top left, linear-gradient(225deg, transparent 10px, #e5d7b9 0) top right, linear-gradient(315deg, transparent 10px, #e5d7b9 0) bottom right, linear-gradient(45deg, transparent 10px, #e5d7b9 0) bottom left;
+  background-size: 51% 51%;
+  background-repeat: no-repeat;
+  background-image: radial-gradient(circle at 0 0, rgba(229, 215, 185, 0) 15px, #e5d7b9 15px), radial-gradient(circle at 100% 0, rgba(229, 215, 185, 0) 15px, #e5d7b9 15px), radial-gradient(circle at 100% 100%, rgba(229, 215, 185, 0) 15px, #e5d7b9 15px), radial-gradient(circle at 0 100%, rgba(229, 215, 185, 0) 15px, #e5d7b9 15px);
+}
+
+.card .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.card .card-header > :nth-child(2) {
+  flex: 1;
+  margin: 0 1rem;
+}
+
+.card .card-header > :last-child {
+  margin-left: 1rem;
+}
+
+.card fieldset {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #7f3a2b;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  margin: 0;
+}
+
+.card legend {
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.card h2 {
+  margin: 0;
+  color: #7f3a2b;
+  font-size: 1.1rem;
+}
+
+.card h2 small {
+  font-size: 0.9rem;
+}
+
+.card .line {
+  display: flex;
+  margin-top: 1rem;
+}
+
+.card .line > :first-child {
+  width: 4rem;
+}
+
+.card .line > :nth-child(2) {
+  flex: 1;
+}
+
+.v-select {
+  font-family: inherit !important;
+}
+
+.v-select .dropdown-toggle {
+  display: flex !important;
+  border: 2px solid #7f3a2b !important;
+}
+
+.v-select .dropdown-toggle > * {
+  flex: 0 0 auto;
+}
+
+.v-select .open-indicator:before {
+  border-color: #7f3a2b !important;
+}
+
+.v-select input[type=search], .v-select input[type=search]:focus {
+  float: none !important;
+  height: 37px !important;
+  width: 100% !important;
+}
+
+.v-select .selected-tag {
+  display: none !important;
+}
+
+.v-select .dropdown-menu li > a {
+  padding: 3px 7px !important;
+}
+
+.v-select .dropdown-menu li.highlight > a {
+  background: #6f795d !important;
+}
+
+.icon {
+  display: inline-block;
+  width: 1.2rem;
+  height: 1.2rem;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+.icon-button {
+  margin: 6px 4px;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.4);
+}
+
+.icon-mirrored {
+  transform: rotate(180deg);
+}
+
+.headroom {
+  will-change: transform;
+  transition: transform 200ms linear;
+  position: fixed;
+  z-index: 10;
+  right: 0;
+  left: 0;
+  top: 0;
+}
+
+.headroom--pinned {
+  transform: translateY(0%);
+}
+
+.headroom--unpinned {
+  transform: translateY(-100%);
+}
