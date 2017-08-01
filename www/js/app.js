@@ -10371,6 +10371,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -10379,7 +10389,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       store: __WEBPACK_IMPORTED_MODULE_1__store__["a" /* default */].load(),
-      showRoller: false
+      showRoller: false,
+      newCharacter: {
+        name: '',
+        resistances: []
+      }
     };
   },
 
@@ -10418,7 +10432,9 @@ var store = {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('roller', {
+  return _c('div', {
+    staticClass: "estresso"
+  }, [_c('roller', {
     attrs: {
       "show": _vm.showRoller
     },
@@ -10435,7 +10451,36 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Open")]), _vm._v(" "), _c('ul', _vm._l((_vm.store.characters), function(c) {
     return _c('li', [_c('h2', [_vm._v(_vm._s(c.name))])])
-  }))], 1)
+  })), _vm._v(" "), _c('form', [_c('div', {
+    staticClass: "input-row"
+  }, [_c('label', {
+    attrs: {
+      "for": "new-character-name"
+    }
+  }, [_vm._v("Name")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newCharacter.name),
+      expression: "newCharacter.name"
+    }],
+    attrs: {
+      "type": "text",
+      "name": "new-character-name",
+      "id": "new-character-name"
+    },
+    domProps: {
+      "value": (_vm.newCharacter.name)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newCharacter.name = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "input-row"
+  }, [_c('btn', [_vm._v("Add")])], 1)])], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -10493,6 +10538,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     class: _vm.classes
   }, [_c('btn', {
+    staticClass: "close",
     nativeOn: {
       "click": function($event) {
         _vm.$emit('close')
@@ -10629,6 +10675,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         roller: true,
         open: this.show
       };
+    }
+  },
+
+  watch: {
+    show: function show(active) {
+      if (active) {
+        document.body.classList.add('roller-open');
+      } else {
+        document.body.classList.remove('roller-open');
+      }
     }
   }
 });

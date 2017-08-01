@@ -1,6 +1,6 @@
 <template>
   <div :class="classes">
-    <btn @click.native="$emit('close')">&times;</btn>
+    <btn @click.native="$emit('close')" class="close">&times;</btn>
     <div class="roller-content">
       <p>Once upon a midnight dreary...</p>
     </div>
@@ -20,6 +20,16 @@
           open: this.show,
         };
       },
+    },
+
+    watch: {
+      show(active) {
+        if (active) {
+          document.body.classList.add('roller-open');
+        } else {
+          document.body.classList.remove('roller-open');
+        }
+      }
     },
   };
 </script>

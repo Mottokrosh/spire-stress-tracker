@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="estresso">
     <roller :show="showRoller" @close="showRoller = false"></roller>
     <btn @click.native="showRoller = true">Open</btn>
     <ul>
@@ -7,6 +7,16 @@
         <h2>{{ c.name }}</h2>
       </li>
     </ul>
+
+    <form>
+      <div class="input-row">
+        <label for="new-character-name">Name</label>
+        <input type="text" name="new-character-name" id="new-character-name" v-model="newCharacter.name">
+      </div>
+      <div class="input-row">
+        <btn>Add</btn>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -19,6 +29,10 @@
       return {
         store: Store.load(),
         showRoller: false,
+        newCharacter: {
+          name: '',
+          resistances: [],
+        },
       };
     },
 
