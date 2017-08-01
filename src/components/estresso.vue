@@ -1,6 +1,7 @@
 <template>
   <div>
-    <sidebar></sidebar>
+    <roller :show="showRoller" @close="showRoller = false"></roller>
+    <btn @click.native="showRoller = true">Open</btn>
     <ul>
       <li v-for="c in store.characters">
         <h2>{{ c.name }}</h2>
@@ -10,18 +11,19 @@
 </template>
 
 <script>
-  import Sidebar from './sidebar.vue';
+  import Roller from './roller.vue';
   import Store from '../store';
 
   export default {
     data() {
       return {
         store: Store.load(),
+        showRoller: false,
       };
     },
 
     components: {
-      Sidebar,
+      Roller,
     },
   };
 </script>

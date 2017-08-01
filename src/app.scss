@@ -6,18 +6,36 @@ body {
   background-size: 600px;
   position: fixed;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
+  left: 0;
   overflow: auto;
 }
 
-.sidebar {
-  background-image: url(../images/tear.png);
-  background-size: 82px;
-  width: 82px;
-  height: 100vh;
-  position: absolute;
+.roller {
+  background-image: url(../images/texture-512x512.jpg);
+  background-size: 512px;
+  position: fixed;
   top: 0;
   right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: visible;
+  transform: translateX(100%);
+  transition: transform 500ms ease-out;
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: -48px;
+    width: 48px;
+    height: 100%;
+    background-image: url(../images/tear-48x512.png);
+    background-size: 48px;
+    background-repeat: repeat-y;
+  }
+
+  &.open {
+    transform: translateX(0);
+  }
 }

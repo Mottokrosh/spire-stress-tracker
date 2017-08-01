@@ -78,10 +78,15 @@ module.exports = __webpack_require__(1);
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_estresso_vue__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_estresso_vue__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_estresso_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_estresso_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_btn_vue__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_btn_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_btn_vue__);
 
 
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('btn', __WEBPACK_IMPORTED_MODULE_2__components_btn_vue___default.a);
 
 var app = {
   isWebView: function isWebView() {
@@ -10210,36 +10215,12 @@ module.exports = g;
 
 /***/ }),
 /* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var store = {
-  data: '{}',
-
-  load: function load() {
-    var d = localStorage.getItem('estresso') || this.data;
-    this.data = JSON.parse(d);
-
-    return this.data;
-  },
-  save: function save(data) {
-    this.data = JSON.stringify(data);
-    localStorage.setItem('estresso', this.data);
-
-    return this.data;
-  }
-};
-
-/* harmony default export */ __webpack_exports__["a"] = (store);
-
-/***/ }),
-/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(6)(
+var Component = __webpack_require__(5)(
   /* script */
-  __webpack_require__(7),
+  __webpack_require__(6),
   /* template */
   __webpack_require__(8),
   /* styles */
@@ -10273,7 +10254,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -10370,14 +10351,15 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sidebar_vue__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sidebar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__sidebar_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__roller_vue__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__roller_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__roller_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store__ = __webpack_require__(7);
+//
 //
 //
 //
@@ -10396,22 +10378,62 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      store: __WEBPACK_IMPORTED_MODULE_1__store__["a" /* default */].load()
+      store: __WEBPACK_IMPORTED_MODULE_1__store__["a" /* default */].load(),
+      showRoller: false
     };
   },
 
 
   components: {
-    Sidebar: __WEBPACK_IMPORTED_MODULE_0__sidebar_vue___default.a
+    Roller: __WEBPACK_IMPORTED_MODULE_0__roller_vue___default.a
   }
 });
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var store = {
+  data: '{}',
+
+  load: function load() {
+    var d = localStorage.getItem('estresso') || this.data;
+    this.data = JSON.parse(d);
+
+    return this.data;
+  },
+  save: function save(data) {
+    this.data = JSON.stringify(data);
+    localStorage.setItem('estresso', this.data);
+
+    return this.data;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (store);
 
 /***/ }),
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('sidebar'), _vm._v(" "), _c('ul', _vm._l((_vm.store.characters), function(c) {
+  return _c('div', [_c('roller', {
+    attrs: {
+      "show": _vm.showRoller
+    },
+    on: {
+      "close": function($event) {
+        _vm.showRoller = false
+      }
+    }
+  }), _vm._v(" "), _c('btn', {
+    nativeOn: {
+      "click": function($event) {
+        _vm.showRoller = true
+      }
+    }
+  }, [_vm._v("Open")]), _vm._v(" "), _c('ul', _vm._l((_vm.store.characters), function(c) {
     return _c('li', [_c('h2', [_vm._v(_vm._s(c.name))])])
   }))], 1)
 },staticRenderFns: []}
@@ -10428,9 +10450,9 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(6)(
+var Component = __webpack_require__(5)(
   /* script */
-  null,
+  __webpack_require__(14),
   /* template */
   __webpack_require__(10),
   /* styles */
@@ -10440,9 +10462,9 @@ var Component = __webpack_require__(6)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/mottokrosh/Projects/spire-stress-tracker/src/components/sidebar.vue"
+Component.options.__file = "/Users/mottokrosh/Projects/spire-stress-tracker/src/components/roller.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] sidebar.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] roller.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -10451,9 +10473,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2c39f65c", Component.options)
+    hotAPI.createRecord("data-v-b18ab238", Component.options)
   } else {
-    hotAPI.reload("data-v-2c39f65c", Component.options)
+    hotAPI.reload("data-v-b18ab238", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -10469,16 +10491,147 @@ module.exports = Component.exports
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "sidebar"
+    class: _vm.classes
+  }, [_c('btn', {
+    nativeOn: {
+      "click": function($event) {
+        _vm.$emit('close')
+      }
+    }
+  }, [_vm._v("×")]), _vm._v(" "), _vm._m(0)], 1)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "roller-content"
+  }, [_c('p', [_vm._v("Once upon a midnight dreary...")])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-b18ab238", module.exports)
+  }
+}
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(5)(
+  /* script */
+  __webpack_require__(12),
+  /* template */
+  __webpack_require__(13),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/mottokrosh/Projects/spire-stress-tracker/src/components/btn.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] btn.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7c3bd25c", Component.options)
+  } else {
+    hotAPI.reload("data-v-7c3bd25c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
   })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      type: 'button'
+    };
+  },
+
+
+  computed: {
+    classes: function classes() {
+      return {
+        btn: true
+      };
+    }
+  }
+});
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('button', {
+    attrs: {
+      "type": _vm.type,
+      "classes": _vm.classes
+    }
+  }, [_vm._t("default")], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-2c39f65c", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-7c3bd25c", module.exports)
   }
 }
+
+/***/ }),
+/* 14 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    show: Boolean
+  },
+
+  computed: {
+    classes: function classes() {
+      return {
+        roller: true,
+        open: this.show
+      };
+    }
+  }
+});
 
 /***/ })
 /******/ ]);

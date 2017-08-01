@@ -1,5 +1,8 @@
 import Vue from 'vue';
 import Estresso from './components/estresso.vue';
+import Btn from './components/btn.vue';
+
+Vue.component('btn', Btn);
 
 var app = {
   isWebView() {
