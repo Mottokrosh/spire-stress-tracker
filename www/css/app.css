@@ -101,8 +101,9 @@ button {
   border: none;
   border-radius: 0.25rem;
   padding: 0.5rem 0.75rem;
+  margin: 0;
   cursor: pointer;
-  appearance: none;
+  -webkit-appearance: none;
   transition: all 100ms linear;
   box-shadow: 0.125rem 0.125rem 0.5rem rgba(0, 0, 0, 0.4);
 }
@@ -231,7 +232,7 @@ button.shadowless:active {
   bottom: 0;
   left: 0;
   overflow: visible;
-  z-index: 3;
+  z-index: 10;
   color: #fff;
 }
 

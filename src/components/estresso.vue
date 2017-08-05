@@ -1,7 +1,7 @@
 <template>
   <div class="estresso">
 
-    <roller :show="showRoller" @close="showRoller = false"></roller>
+    <roller :show="showRoller" @close="showRoller = null"></roller>
 
     <header>
       <div class="column">

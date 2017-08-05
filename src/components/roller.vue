@@ -32,11 +32,11 @@
 
     computed: {
       character() {
-        return this.show.character ? this.show.character : '';
+        return this.show && this.show.character ? this.show.character : '';
       },
 
       resistance() {
-        return this.show.resistance ? this.show.resistance : '';
+        return this.show && this.show.resistance ? this.show.resistance : '';
       },
 
       name() {

@@ -10845,10 +10845,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   computed: {
     character: function character() {
-      return this.show.character ? this.show.character : '';
+      return this.show && this.show.character ? this.show.character : '';
     },
     resistance: function resistance() {
-      return this.show.resistance ? this.show.resistance : '';
+      return this.show && this.show.resistance ? this.show.resistance : '';
     },
     name: function name() {
       return this.character ? this.character.name : '';
@@ -10952,7 +10952,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     on: {
       "close": function($event) {
-        _vm.showRoller = false
+        _vm.showRoller = null
       }
     }
   }), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('ul', {
