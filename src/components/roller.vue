@@ -1,18 +1,34 @@
 <template>
-  <div :class="classes">
-    <btn @click.native="$emit('close')" class="close">&times;</btn>
-    <div class="roller-content">
-      <p><strong>{{ name }} / {{ resistance }}</strong></p>
-      <p>Multiple dice rollers here (1, d3, d6, d8).</p>
-      <p>Underneath each roller a "Brutal &times; 0" button perhaps, which you can click before rolling to add Brutal multipliers.</p>
-      <p>If fallout occurs, shake screen (and perhaps buzz phone in mobile app version), and show a random appropriate fallout, with option to choose another. Also potential fallout splitting/combining.</p>
-    </div>
-  </div>
+  <motion :value="offset" spring="wobbly">
+    <template scope="props">
+      <div :style="{ transform: `translateX(${props.value}%)` }" :class="classes">
+        <btn @click.native="$emit('close')" class="close">&times;</btn>
+        <div class="roller-content">
+          <p><strong>{{ name }} / {{ resistance }}</strong></p>
+          <p>Multiple dice rollers here (1, d3, d6, d8).</p>
+          <p>Underneath each roller a "Brutal &times; 0" button perhaps, which you can click before rolling to add Brutal multipliers.</p>
+          <p>If fallout occurs, shake screen (and perhaps buzz phone in mobile app version), and show a random appropriate fallout, with option to choose another. Also potential fallout splitting/combining.</p>
+        </div>
+      </div>
+    </template>
+  </motion>
 </template>
 
 <script>
+  import { Motion } from 'vue-motion';
+
   export default {
     props: ['show'],
+
+    components: {
+      motion: Motion,
+    },
+
+    data() {
+      return {
+        offset: 100,
+      };
+    },
 
     computed: {
       character() {
@@ -39,8 +55,10 @@
       show(active) {
         if (active) {
           document.body.classList.add('roller-open');
+          this.offset = 0;
         } else {
           document.body.classList.remove('roller-open');
+          this.offset = 100;
         }
       }
     },

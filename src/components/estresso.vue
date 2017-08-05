@@ -120,7 +120,6 @@
 
       addStress(options) {
         const {character, resistance} = options;
-        console.log('adding stress', character, resistance);
         this.showRoller = options;
       }
     },

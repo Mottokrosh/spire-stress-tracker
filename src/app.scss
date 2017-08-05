@@ -265,8 +265,6 @@ button {
   left: 0;
   overflow: visible;
   z-index: 3;
-  transform: translateX(100%);
-  transition: transform 500ms ease-out;
   color: #fff;
 
   &:before {
@@ -280,8 +278,17 @@ button {
     background-repeat: repeat-y;
   }
 
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -100px;
+    width: 100px;
+    height: 100%;
+    background-color: #900;
+  }
+
   &.open {
-    transform: translateX(0);
   }
 
   .close {
