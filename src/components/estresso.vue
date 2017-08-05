@@ -12,34 +12,40 @@
       </ul>
     </div>
 
-    <form>
+    <form class="new-character">
       <div class="column">
+        <h2>New Character</h2>
+
         <div class="input-row">
           <label for="new-character-name">Name</label>
-          <input type="text" name="new-character-name" id="new-character-name" v-model="newCharacter.name">
+          <input type="text" name="new-character-name" id="new-character-name" class="new-character-name" v-model="newCharacter.name">
         </div>
+
+        <h3>Free Slots</h3>
+
         <div class="input-row">
           <label for="resistance-blood">Blood</label>
-          <counter-control id="resistance-blood" @change="(val) => { newCharacter.resistances.blood = val }"></counter-control>
+          <counter-control id="resistance-blood" @change="(val) => { newCharacter.blood.freeSlots = val }"></counter-control>
         </div>
         <div class="input-row">
           <label for="resistance-mind">Mind</label>
-          <counter-control id="resistance-mind" @change="(val) => { newCharacter.resistances.mind = val }"></counter-control>
+          <counter-control id="resistance-mind" @change="(val) => { newCharacter.mind.freeSlots = val }"></counter-control>
         </div>
         <div class="input-row">
           <label for="resistance-shadow">Shadow</label>
-          <counter-control id="resistance-shadow" @change="(val) => { newCharacter.resistances.shadow = val }"></counter-control>
+          <counter-control id="resistance-shadow" @change="(val) => { newCharacter.shadow.freeSlots = val }"></counter-control>
         </div>
         <div class="input-row">
           <label for="resistance-silver">Silver</label>
-          <counter-control id="resistance-silver" @change="(val) => { newCharacter.resistances.silver = val }"></counter-control>
+          <counter-control id="resistance-silver" @change="(val) => { newCharacter.silver.freeSlots = val }"></counter-control>
         </div>
         <div class="input-row">
           <label for="resistance-reputation">Reputation</label>
-          <counter-control id="resistance-reputation" @change="(val) => { newCharacter.resistances.reputation = val }"></counter-control>
+          <counter-control id="resistance-reputation" @change="(val) => { newCharacter.reputation.freeSlots = val }"></counter-control>
         </div>
-        <div class="input-row">
-          <btn>Add</btn>
+
+        <div class="input-row action-row">
+          <btn class="tilded">Add</btn>
         </div>
       </div>
     </form>
@@ -59,13 +65,11 @@
         showRoller: false,
         newCharacter: {
           name: '',
-          resistances: {
-            blood: 0,
-            mind: 0,
-            shadow: 0,
-            silver: 0,
-            reputation: 0,
-          },
+          blood: { freeSlots: 0, stress: 0 },
+          mind: { freeSlots: 0, stress: 0 },
+          shadow: { freeSlots: 0, stress: 0 },
+          silver: { freeSlots: 0, stress: 0 },
+          reputation: { freeSlots: 0, stress: 0 },
         },
       };
     },

@@ -1,7 +1,7 @@
 <template>
   <div class="button-group counter-control">
     <btn @click.native="decrement" class="secondary">-</btn>
-    <input type="number" v-model="value">
+    <input type="text" pattern="[0-9]" v-model="value">
     <btn @click.native="increment" class="secondary">+</btn>
   </div>
 </template>

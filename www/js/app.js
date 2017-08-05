@@ -10471,6 +10471,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -10483,13 +10489,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       showRoller: false,
       newCharacter: {
         name: '',
-        resistances: {
-          blood: 0,
-          mind: 0,
-          shadow: 0,
-          silver: 0,
-          reputation: 0
-        }
+        blood: { freeSlots: 0, stress: 0 },
+        mind: { freeSlots: 0, stress: 0 },
+        shadow: { freeSlots: 0, stress: 0 },
+        silver: { freeSlots: 0, stress: 0 },
+        reputation: { freeSlots: 0, stress: 0 }
       }
     };
   },
@@ -10671,7 +10675,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "value"
     }],
     attrs: {
-      "type": "number"
+      "type": "text",
+      "pattern": "[0-9]"
     },
     domProps: {
       "value": (_vm.value)
@@ -10858,9 +10863,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Open")]), _vm._v(" "), _c('ul', _vm._l((_vm.store.characters), function(c) {
     return _c('li', [_c('h2', [_vm._v(_vm._s(c.name))])])
-  }))], 1), _vm._v(" "), _c('form', [_c('div', {
-    staticClass: "column"
+  }))], 1), _vm._v(" "), _c('form', {
+    staticClass: "new-character"
   }, [_c('div', {
+    staticClass: "column"
+  }, [_c('h2', [_vm._v("New Character")]), _vm._v(" "), _c('div', {
     staticClass: "input-row"
   }, [_c('label', {
     attrs: {
@@ -10873,6 +10880,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       value: (_vm.newCharacter.name),
       expression: "newCharacter.name"
     }],
+    staticClass: "new-character-name",
     attrs: {
       "type": "text",
       "name": "new-character-name",
@@ -10887,7 +10895,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.newCharacter.name = $event.target.value
       }
     }
-  })]), _vm._v(" "), _c('div', {
+  })]), _vm._v(" "), _c('h3', [_vm._v("Free Slots")]), _vm._v(" "), _c('div', {
     staticClass: "input-row"
   }, [_c('label', {
     attrs: {
@@ -10899,7 +10907,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     on: {
       "change": function (val) {
-        _vm.newCharacter.resistances.blood = val
+        _vm.newCharacter.blood.freeSlots = val
       }
     }
   })], 1), _vm._v(" "), _c('div', {
@@ -10914,7 +10922,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     on: {
       "change": function (val) {
-        _vm.newCharacter.resistances.mind = val
+        _vm.newCharacter.mind.freeSlots = val
       }
     }
   })], 1), _vm._v(" "), _c('div', {
@@ -10929,7 +10937,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     on: {
       "change": function (val) {
-        _vm.newCharacter.resistances.shadow = val
+        _vm.newCharacter.shadow.freeSlots = val
       }
     }
   })], 1), _vm._v(" "), _c('div', {
@@ -10944,7 +10952,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     on: {
       "change": function (val) {
-        _vm.newCharacter.resistances.silver = val
+        _vm.newCharacter.silver.freeSlots = val
       }
     }
   })], 1), _vm._v(" "), _c('div', {
@@ -10959,12 +10967,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     on: {
       "change": function (val) {
-        _vm.newCharacter.resistances.reputation = val
+        _vm.newCharacter.reputation.freeSlots = val
       }
     }
   })], 1), _vm._v(" "), _c('div', {
-    staticClass: "input-row"
-  }, [_c('btn', [_vm._v("Add")])], 1)])])], 1)
+    staticClass: "input-row action-row"
+  }, [_c('btn', {
+    staticClass: "tilded"
+  }, [_vm._v("Add")])], 1)])])], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

@@ -1,6 +1,18 @@
 @import url("https://fonts.googleapis.com/css?family=Zilla+Slab");
+@font-face {
+  font-family: 'Mahalo';
+  src: url("../fonts/Mahalo.woff2") format("woff2"), url("../fonts/Mahalo.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 * + * {
   margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+* + * :first-child {
+  margin-top: 0;
 }
 
 body {
@@ -20,6 +32,27 @@ body {
 
 h1, h2, h3, h4 {
   color: #214050;
+  text-transform: uppercase;
+  font-family: Mahalo, sans-serif;
+  font-weight: normal;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+  color: #9a9a92;
+  margin-top: 1.5rem;
+}
+
+h4 {
+  font-size: 1rem;
 }
 
 .estresso {
@@ -30,17 +63,123 @@ h1, h2, h3, h4 {
   min-height: 100vh;
 }
 
-.estresso form {
+.column {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+button {
+  font-family: inherit;
+  background-color: #214050;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  appearance: none;
+  transition: all 100ms linear;
+  box-shadow: 0.125rem 0.125rem 0.5rem rgba(0, 0, 0, 0.4);
+}
+
+button.secondary {
+  background-color: #8fa5b0;
+}
+
+button.tilded:before, button.tilded:after {
+  content: '\2020';
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: bold;
+  display: inline-block;
+  width: 1.75rem;
+}
+
+button.tilded:before {
+  transform: rotate(90deg);
+}
+
+button.tilded:after {
+  transform: rotate(-90deg);
+}
+
+button:hover {
+  box-shadow: none;
+  transform: translate(0.125rem, 0.125rem);
+  background-color: #305d74;
+}
+
+button:focus {
+  outline: none;
+  background-color: #3f7a98;
+}
+
+button:active {
+  background-color: #fff;
+  color: #214050;
+  transform: translate(0.125rem, 0.125rem);
+}
+
+.button-group button:first-of-type {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.button-group button:last-of-type {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.action-row {
+  margin-top: 1.5rem;
+  justify-content: flex-end !important;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+}
+
+.input-row > * {
+  margin-top: 0;
+}
+
+.input-row label {
+  margin-right: 1rem;
+}
+
+.input-row input {
+  background-color: #e4e6e7;
+  border: none;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.input-row input:focus {
+  outline: 0;
+  box-shadow: inset 0.125rem 0.125rem 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+.new-character {
   flex: 1;
   margin: 0;
   background-color: #f6f6f4;
+  background-image: url(../images/circles.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0;
   border-top: 2px solid rgba(154, 154, 146, 0.25);
 }
 
-.column {
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 2rem;
+.new-character .input-row {
+  justify-content: space-between;
+  padding: 0 2rem 0 1rem;
+}
+
+.new-character .new-character-name {
+  width: 100%;
 }
 
 .roller {
@@ -85,78 +224,6 @@ h1, h2, h3, h4 {
   overflow: auto;
 }
 
-button {
-  font-family: inherit;
-  background-color: #214050;
-  color: #fff;
-  font-size: 1rem;
-  border: none;
-  border-radius: 0.25rem;
-  padding: 0.5rem 0.75rem;
-  cursor: pointer;
-  appearance: none;
-  transition: all 100ms linear;
-  box-shadow: 0.125rem 0.125rem 0.5rem rgba(0, 0, 0, 0.4);
-}
-
-button.secondary {
-  background-color: #8fa5b0;
-}
-
-button:hover {
-  box-shadow: none;
-  transform: translate(0.125rem, 0.125rem);
-  background-color: #305d74;
-}
-
-button:focus {
-  outline: none;
-  background-color: #3f7a98;
-}
-
-button:active {
-  background-color: #fff;
-  color: #214050;
-  transform: translate(0.125rem, 0.125rem);
-}
-
-.button-group button:first-of-type {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.button-group button:last-of-type {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.input-row {
-  display: flex;
-  align-items: center;
-}
-
-.input-row > * {
-  margin-top: 0;
-}
-
-.input-row label {
-  margin-right: 1rem;
-}
-
-.input-row input {
-  background-color: #e4e6e7;
-  border: none;
-  font-family: inherit;
-  font-size: 1rem;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-}
-
-.input-row input:focus {
-  outline: 0;
-  box-shadow: inset 0.125rem 0.125rem 0.5rem rgba(0, 0, 0, 0.2);
-}
-
 .counter-control {
   display: flex;
 }
@@ -184,7 +251,7 @@ button:active {
 .counter-control input {
   border-radius: 0;
   max-width: 1.5rem;
-  padding: calc(0.5rem - 2px) 0 calc(0.5rem - 2px) 0.75rem;
+  padding: calc(0.5rem - 2px) 0.25rem;
   text-align: center;
   border-top: 2px solid #8fa5b0;
   border-bottom: 2px solid #8fa5b0;

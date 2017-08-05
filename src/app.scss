@@ -1,4 +1,20 @@
+//
+// --- Fonts ---
+//
+
 @import url('https://fonts.googleapis.com/css?family=Zilla+Slab');
+
+@font-face {
+  font-family: 'Mahalo';
+  src: url('../fonts/Mahalo.woff2') format('woff2'),
+       url('../fonts/Mahalo.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+//
+// --- Variables ---
+//
 
 $grey: #e4e6e7;
 $primary: #214050;
@@ -6,14 +22,27 @@ $secondary: #8fa5b0;
 $beigeDark: #9a9a92;
 $beigeLight: #f6f6f4;
 
-$mainColumnWidth: 640px;
+$mainColumnWidth: 480px;
+
+//
+// --- Mixins ---
+//
 
 @mixin shadow($xOffset: 0.125rem, $yOffset: 0.125rem) {
   box-shadow: $xOffset $yOffset 0.5rem rgba(0, 0, 0, 0.4);
 }
 
+//
+// --- Basics
+//
+
 * + * {
   margin-top: 1rem;
+  margin-bottom: 0;
+
+  :first-child {
+    margin-top: 0;
+  }
 }
 
 body {
@@ -33,7 +62,19 @@ body {
 
 h1, h2, h3, h4 {
   color: $primary;
+  text-transform: uppercase;
+  font-family: Mahalo, sans-serif;
+  font-weight: normal;
 }
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; color: $beigeDark; margin-top: 1.5rem; }
+h4 { font-size: 1rem; }
+
+//
+// --- Layout
+//
 
 .estresso {
   padding: 0;
@@ -41,19 +82,137 @@ h1, h2, h3, h4 {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-
-  form {
-    flex: 1;
-    margin: 0;
-    background-color: $beigeLight;
-    border-top: 2px solid transparentize($beigeDark, 0.75);
-  }
 }
 
 .column {
   max-width: $mainColumnWidth;
   margin: 0 auto;
   padding: 2rem;
+}
+
+//
+// --- Buttons ---
+//
+
+button {
+  font-family: inherit;
+  background-color: $primary;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  appearance: none;
+  transition: all 100ms linear;
+  @include shadow();
+
+  &.secondary {
+    background-color: $secondary;
+  }
+
+  &.tilded {
+    &:before, &:after {
+      content: '\2020';
+      color: rgba(255, 255, 255, 0.5);
+      font-weight: bold;
+      display: inline-block;
+      width: 1.75rem;
+    }
+
+    &:before {
+      transform: rotate(90deg);
+    }
+
+    &:after {
+      transform: rotate(-90deg);
+    }
+  }
+
+  &:hover {
+    box-shadow: none;
+    transform: translate(0.125rem, 0.125rem);
+    background-color: lighten($primary, 10%);
+  }
+
+  &:focus {
+    outline: none;
+    background-color: lighten($primary, 20%);
+  }
+
+  &:active {
+    background-color: #fff;
+    color: $primary;
+    transform: translate(0.125rem, 0.125rem);
+  }
+}
+
+.button-group {
+  button:first-of-type {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  button:last-of-type {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+.action-row {
+  margin-top: 1.5rem;
+  justify-content: flex-end !important;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+
+  & > * {
+    margin-top: 0;
+  }
+
+  label {
+    margin-right: 1rem;
+  }
+
+  input {
+    background-color: $grey;
+    border: none;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+
+    &:focus {
+      outline: 0;
+      box-shadow: inset 0.125rem 0.125rem 0.5rem rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+//
+// --- Components ---
+//
+
+.new-character {
+  flex: 1;
+  margin: 0;
+  background-color: $beigeLight;
+  background-image: url(../images/circles.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0;
+  border-top: 2px solid transparentize($beigeDark, 0.75);
+
+  .input-row {
+    justify-content: space-between;
+    padding: 0 2rem 0 1rem;
+  }
+
+  .new-character-name {
+    width: 100%;
+  }
 }
 
 .roller {
@@ -98,80 +257,6 @@ h1, h2, h3, h4 {
   }
 }
 
-button {
-  font-family: inherit;
-  background-color: $primary;
-  color: #fff;
-  font-size: 1rem;
-  border: none;
-  border-radius: 0.25rem;
-  padding: 0.5rem 0.75rem;
-  cursor: pointer;
-  appearance: none;
-  transition: all 100ms linear;
-  @include shadow();
-
-  &.secondary {
-    background-color: $secondary;
-  }
-
-  &:hover {
-    box-shadow: none;
-    transform: translate(0.125rem, 0.125rem);
-    background-color: lighten($primary, 10%);
-  }
-
-  &:focus {
-    outline: none;
-    background-color: lighten($primary, 20%);
-  }
-
-  &:active {
-    background-color: #fff;
-    color: $primary;
-    transform: translate(0.125rem, 0.125rem);
-  }
-}
-
-.button-group {
-  button:first-of-type {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
-  button:last-of-type {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-}
-
-.input-row {
-  display: flex;
-  align-items: center;
-
-  & > * {
-    margin-top: 0;
-  }
-
-  label {
-    margin-right: 1rem;
-  }
-
-  input {
-    background-color: $grey;
-    border: none;
-    font-family: inherit;
-    font-size: 1rem;
-    padding: 0.5rem;
-    border-radius: 0.25rem;
-
-    &:focus {
-      outline: 0;
-      box-shadow: inset 0.125rem 0.125rem 0.5rem rgba(0, 0, 0, 0.2);
-    }
-  }
-}
-
 .counter-control {
   display: flex;
 
@@ -198,7 +283,7 @@ button {
   input {
     border-radius: 0;
     max-width: 1.5rem;
-    padding: calc(0.5rem - 2px) 0 calc(0.5rem - 2px) 0.75rem;
+    padding: calc(0.5rem - 2px) 0.25rem;
     text-align: center;
     border-top: 2px solid $secondary;
     border-bottom: 2px solid $secondary;
