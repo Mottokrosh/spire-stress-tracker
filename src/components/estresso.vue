@@ -3,8 +3,10 @@
 
     <roller :show="showRoller" @close="showRoller = false"></roller>
 
-    <header class="column">
-      <h1>Spire Stress Tracker</h1>
+    <header>
+      <div class="column">
+        <h1>Spire Stress Tracker</h1>
+      </div>
     </header>
 
     <!-- <btn @click.native="showRoller = true">Open</btn> -->

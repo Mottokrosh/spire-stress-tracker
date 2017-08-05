@@ -78,6 +78,7 @@ h4 {
 }
 
 .estresso > header {
+  margin: 0;
   background-color: #fff;
   background-image: url(../images/circles.svg);
   background-repeat: no-repeat;

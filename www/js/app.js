@@ -10488,6 +10488,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -11055,9 +11057,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Add")])], 1)])])], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('header', {
+  return _c('header', [_c('div', {
     staticClass: "column"
-  }, [_c('h1', [_vm._v("Spire Stress Tracker")])])
+  }, [_c('h1', [_vm._v("Spire Stress Tracker")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
