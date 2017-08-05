@@ -18,7 +18,12 @@
 
         <div class="input-row">
           <label for="new-character-name">Name</label>
-          <input type="text" name="new-character-name" id="new-character-name" class="new-character-name" v-model="newCharacter.name">
+          <input type="text"
+            name="new-character-name"
+            id="new-character-name"
+            class="new-character-name"
+            v-model="newCharacter.name"
+            :placeholder="'e.g. ' + randomName()">
         </div>
 
         <h3>Free Slots</h3>
@@ -54,6 +59,7 @@
 </template>
 
 <script>
+  import Axios from 'axios';
   import CounterControl from './counter-control.vue';
   import Roller from './roller.vue';
   import Store from '../store';
@@ -74,6 +80,7 @@
         characters: [],
         showRoller: false,
         newCharacter: Object.assign({}, characterSchema),
+        names: null,
       };
     },
 
@@ -88,11 +95,27 @@
         this.newCharacter = Object.assign({}, characterSchema);
         this.store.save();
       },
+
+      getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min;
+      },
+
+      randomName() {
+        if (!this.names) return;
+        return this.names[this.getRandomInt(0, this.names.length - 1)];
+      }
     },
 
     created() {
       this.store.load();
       this.characters = this.store.data.characters;
+
+      Axios.get('data/drow_names.json')
+        .then(response => {
+          this.names = response.data.female;
+        });
     }
   };
 </script>
