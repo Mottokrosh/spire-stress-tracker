@@ -1,8 +1,8 @@
 <template>
   <div class="button-group counter-control">
-    <btn @click.native="decrement" class="secondary">-</btn>
+    <btn @click.native="decrement" class="secondary shadowless">-</btn>
     <input type="text" pattern="[0-9]" v-model="localValue">
-    <btn @click.native="increment" class="secondary">+</btn>
+    <btn @click.native="increment" class="secondary shadowless">+</btn>
   </div>
 </template>
 

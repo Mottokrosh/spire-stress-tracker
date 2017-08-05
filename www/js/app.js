@@ -10419,11 +10419,13 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__counter_control_vue__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__counter_control_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__counter_control_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__roller_vue__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__roller_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__roller_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__character_vue__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__character_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__character_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__counter_control_vue__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__counter_control_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__counter_control_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__roller_vue__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__roller_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__roller_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store__ = __webpack_require__(16);
 //
 //
 //
@@ -10484,6 +10486,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+
 
 
 
@@ -10502,7 +10507,7 @@ var characterSchema = {
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      store: __WEBPACK_IMPORTED_MODULE_3__store__["a" /* default */],
+      store: __WEBPACK_IMPORTED_MODULE_4__store__["a" /* default */],
       characters: [],
       showRoller: false,
       newCharacter: Object.assign({}, characterSchema),
@@ -10512,8 +10517,9 @@ var characterSchema = {
 
 
   components: {
-    CounterControl: __WEBPACK_IMPORTED_MODULE_1__counter_control_vue___default.a,
-    Roller: __WEBPACK_IMPORTED_MODULE_2__roller_vue___default.a
+    Character: __WEBPACK_IMPORTED_MODULE_1__character_vue___default.a,
+    CounterControl: __WEBPACK_IMPORTED_MODULE_2__counter_control_vue___default.a,
+    Roller: __WEBPACK_IMPORTED_MODULE_3__roller_vue___default.a
   },
 
   methods: {
@@ -10530,6 +10536,13 @@ var characterSchema = {
     randomName: function randomName() {
       if (!this.names) return;
       return this.names[this.getRandomInt(0, this.names.length - 1)];
+    },
+    addStress: function addStress(options) {
+      var character = options.character,
+          resistance = options.resistance;
+
+      console.log('adding stress', character, resistance);
+      this.showRoller = options;
     }
   },
 
@@ -10701,7 +10714,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "button-group counter-control"
   }, [_c('btn', {
-    staticClass: "secondary",
+    staticClass: "secondary shadowless",
     nativeOn: {
       "click": function($event) {
         _vm.decrement($event)
@@ -10728,7 +10741,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }), _vm._v(" "), _c('btn', {
-    staticClass: "secondary",
+    staticClass: "secondary shadowless",
     nativeOn: {
       "click": function($event) {
         _vm.increment($event)
@@ -10799,13 +10812,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    show: Boolean
-  },
+  props: ['show'],
 
   computed: {
+    character: function character() {
+      return this.show.character ? this.show.character : '';
+    },
+    resistance: function resistance() {
+      return this.show.resistance ? this.show.resistance : '';
+    },
+    name: function name() {
+      return this.character ? this.character.name : '';
+    },
     classes: function classes() {
       return {
         roller: true,
@@ -10839,12 +10862,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.$emit('close')
       }
     }
-  }, [_vm._v("×")]), _vm._v(" "), _vm._m(0)], 1)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+  }, [_vm._v("×")]), _vm._v(" "), _c('div', {
     staticClass: "roller-content"
-  }, [_c('p', [_vm._v("Once upon a midnight dreary...")])])
-}]}
+  }, [_c('p', [_c('strong', [_vm._v(_vm._s(_vm.name) + " / " + _vm._s(_vm.resistance))])]), _vm._v(" "), _c('p', [_vm._v("Multiple dice rollers here (1, d3, d6, d8).")]), _vm._v(" "), _c('p', [_vm._v("Underneath each roller a \"Brutal × 0\" button perhaps, which you can click before rolling to add Brutal multipliers.")]), _vm._v(" "), _c('p', [_vm._v("If fallout occurs, shake screen (and perhaps buzz phone in mobile app version), and show a random appropriate fallout, with option to choose another. Also potential fallout splitting/combining.")])])], 1)
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -10859,7 +10880,7 @@ if (false) {
 
 "use strict";
 var store = {
-  json: '{ "characters": [] }',
+  json: '{"characters":[{"name":"Nadege","blood":{"freeSlots":2,"stress":3},"mind":{"freeSlots":1,"stress":0},"shadow":{"freeSlots":0,"stress":0},"silver":{"freeSlots":0,"stress":0},"reputation":{"freeSlots":1,"stress":0}}]}', // some dummy starting data
   data: {},
 
   load: function load() {
@@ -10894,17 +10915,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.showRoller = false
       }
     }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "column"
-  }, [_c('btn', {
-    nativeOn: {
-      "click": function($event) {
-        _vm.showRoller = true
+  }), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('ul', {
+    staticClass: "characters"
+  }, _vm._l((_vm.characters), function(c) {
+    return _c('li', [_c('character', {
+      attrs: {
+        "c": c
+      },
+      on: {
+        "stress": _vm.addStress
       }
-    }
-  }, [_vm._v("Open")]), _vm._v(" "), _c('ul', _vm._l((_vm.characters), function(c) {
-    return _c('li', [_c('h2', [_vm._v(_vm._s(c.name))])])
-  }))], 1), _vm._v(" "), _c('form', {
+    })], 1)
+  })), _vm._v(" "), _c('form', {
     staticClass: "new-character"
   }, [_c('div', {
     staticClass: "column"
@@ -11027,7 +11049,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }, [_vm._v("Add")])], 1)])])], 1)
-},staticRenderFns: []}
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('header', {
+    staticClass: "column"
+  }, [_c('h1', [_vm._v("Spire Stress Tracker")])])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -12737,6 +12763,127 @@ module.exports = function spread(callback) {
   };
 };
 
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(45),
+  /* template */
+  __webpack_require__(46),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/mottokrosh/Documents/Projects/spire-stress-tracker/src/components/character.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] character.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-8da772c2", Component.options)
+  } else {
+    hotAPI.reload("data-v-8da772c2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 45 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    c: Object
+  },
+
+  data: function data() {
+    return {
+      resistances: ['blood', 'mind', 'shadow', 'silver', 'reputation']
+    };
+  },
+
+
+  methods: {
+    ucfirst: function ucfirst(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    },
+    freeSlot: function freeSlot(resistance) {
+      return this.c[resistance].freeSlots || null;
+    },
+    addStress: function addStress(resistance) {
+      this.$emit('stress', { character: this.c, resistance: resistance });
+    }
+  }
+});
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "character"
+  }, [_c('h2', [_vm._v(_vm._s(_vm.c.name))]), _vm._v(" "), _c('div', {
+    staticClass: "resistances"
+  }, _vm._l((_vm.resistances), function(r) {
+    return _c('div', {
+      staticClass: "resistance"
+    }, [_c('h3', [_vm._v(_vm._s(_vm.ucfirst(r))), (_vm.freeSlot(r)) ? _c('small', [_vm._v(" + " + _vm._s(_vm.freeSlot(r)))]) : _vm._e()]), _vm._v(" "), _c('div', [_c('span', [_vm._v("Stress")]), _vm._v(" "), _c('strong', [_vm._v(_vm._s(_vm.c[r].stress))])]), _vm._v(" "), _c('btn', {
+      staticClass: "shadowless",
+      nativeOn: {
+        "click": function($event) {
+          _vm.addStress(r)
+        }
+      }
+    }, [_vm._v("+")])], 1)
+  }))])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-8da772c2", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

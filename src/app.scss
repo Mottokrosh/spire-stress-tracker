@@ -36,6 +36,14 @@ $mainColumnWidth: 480px;
 // --- Basics
 //
 
+* {
+  box-sizing: border-box;
+
+  *:before, *:after {
+    box-sizing: inherit;
+  }
+}
+
 * + * {
   margin-top: 1rem;
   margin-bottom: 0;
@@ -65,6 +73,7 @@ h1, h2, h3, h4 {
   text-transform: uppercase;
   font-family: Mahalo, sans-serif;
   font-weight: normal;
+  margin-bottom: 0;
 }
 
 h1 { font-size: 2rem; }
@@ -91,6 +100,7 @@ h4 { font-size: 1rem; }
 
 .column {
   max-width: $mainColumnWidth;
+  width: 100%;
   margin: 0 auto;
   padding: 2rem;
 }
@@ -149,6 +159,22 @@ button {
     background-color: #fff;
     color: $primary;
     transform: translate(0.125rem, 0.125rem);
+  }
+
+  &.shadowless {
+    box-shadow: none;
+
+    &:hover {
+      box-shadow: none;
+      transform: none;
+      background-color: lighten($primary, 10%);
+    }
+
+    &:active {
+      background-color: #fff;
+      color: $primary;
+      transform: none;
+    }
   }
 }
 
@@ -269,22 +295,6 @@ button {
     margin: 0;
   }
 
-  button {
-    box-shadow: none;
-
-    &:hover {
-      box-shadow: none;
-      transform: none;
-      background-color: lighten($primary, 10%);
-    }
-
-    &:active {
-      background-color: #fff;
-      color: $primary;
-      transform: none;
-    }
-  }
-
   input {
     border-radius: 0;
     max-width: 1.5rem;
@@ -292,5 +302,61 @@ button {
     text-align: center;
     border-top: 2px solid $secondary;
     border-bottom: 2px solid $secondary;
+  }
+}
+
+.characters {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    margin: 0;
+    border-top: 2px solid $grey;
+  }
+}
+
+.character {
+  padding: 2rem;
+  max-width: $mainColumnWidth;
+  margin: 0 auto;
+
+  .resistance {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid $primary;
+    margin: 0;
+
+    h3 {
+      font-size: 1rem;
+      padding-left: 0.5rem;
+      transform: translateY(2px); // Because of the weird font baseline
+
+      small { font-size: 0.8rem; }
+    }
+
+    & > div {
+      margin: 0 0.5rem 0 auto;
+    }
+
+    button {
+      border-radius: 0;
+      margin-top: 0;
+    }
+
+    &:first-of-type {
+      border-top-left-radius: 0.25rem;
+      border-top-right-radius: 0.25rem;
+    }
+
+    &:last-of-type {
+      border-bottom-left-radius: 0.25rem;
+      border-bottom-right-radius: 0.25rem;
+    }
+  }
+
+  .resistance + .resistance {
+    margin-top: -1px;
   }
 }

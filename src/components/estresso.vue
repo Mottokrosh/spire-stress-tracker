@@ -3,14 +3,16 @@
 
     <roller :show="showRoller" @close="showRoller = false"></roller>
 
-    <div class="column">
-      <btn @click.native="showRoller = true">Open</btn>
-      <ul>
-        <li v-for="c in characters">
-          <h2>{{ c.name }}</h2>
-        </li>
-      </ul>
-    </div>
+    <header class="column">
+      <h1>Spire Stress Tracker</h1>
+    </header>
+
+    <!-- <btn @click.native="showRoller = true">Open</btn> -->
+    <ul class="characters">
+      <li v-for="c in characters">
+        <character :c="c" @stress="addStress"></character>
+      </li>
+    </ul>
 
     <form class="new-character">
       <div class="column">
@@ -60,6 +62,7 @@
 
 <script>
   import Axios from 'axios';
+  import Character from './character.vue';
   import CounterControl from './counter-control.vue';
   import Roller from './roller.vue';
   import Store from '../store';
@@ -85,6 +88,7 @@
     },
 
     components: {
+      Character,
       CounterControl,
       Roller,
     },
@@ -105,6 +109,12 @@
       randomName() {
         if (!this.names) return;
         return this.names[this.getRandomInt(0, this.names.length - 1)];
+      },
+
+      addStress(options) {
+        const {character, resistance} = options;
+        console.log('adding stress', character, resistance);
+        this.showRoller = options;
       }
     },
 
