@@ -1,7 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Zilla+Slab');
 
 $grey: #e4e6e7;
-$dark: #214050;
+$primary: #214050;
+$secondary: #8fa5b0;
+$beigeDark: #9a9a92;
+$beigeLight: #f6f6f4;
+
+$mainColumnWidth: 640px;
+
+@mixin shadow($xOffset: 0.125rem, $yOffset: 0.125rem) {
+  box-shadow: $xOffset $yOffset 0.5rem rgba(0, 0, 0, 0.4);
+}
 
 * + * {
   margin-top: 1rem;
@@ -23,12 +32,28 @@ body {
 }
 
 h1, h2, h3, h4 {
-  color: $dark;
+  color: $primary;
 }
 
 .estresso {
-  padding: 2rem;
+  padding: 0;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  form {
+    flex: 1;
+    margin: 0;
+    background-color: $beigeLight;
+    border-top: 2px solid transparentize($beigeDark, 0.75);
+  }
+}
+
+.column {
+  max-width: $mainColumnWidth;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
 .roller {
@@ -75,34 +100,48 @@ h1, h2, h3, h4 {
 
 button {
   font-family: inherit;
-  background-color: $dark;
+  background-color: $primary;
   color: #fff;
   font-size: 1rem;
   border: none;
   border-radius: 0.25rem;
   padding: 0.5rem 0.75rem;
-  box-shadow: 0.125rem 0.125rem 0.5rem rgba(0, 0, 0, 0.4);
   cursor: pointer;
   appearance: none;
   transition: all 100ms linear;
+  @include shadow();
+
+  &.secondary {
+    background-color: $secondary;
+  }
 
   &:hover {
     box-shadow: none;
     transform: translate(0.125rem, 0.125rem);
-    background-color: lighten($dark, 10%);
+    background-color: lighten($primary, 10%);
   }
 
   &:focus {
     outline: none;
-    box-shadow:
-      0.125rem 0.125rem 0.5rem rgba(0, 0, 0, 0.4),
-      inset 0 0 0 0.125rem rgba(255, 255, 255, 0.5);
+    background-color: lighten($primary, 20%);
   }
 
   &:active {
     background-color: #fff;
-    color: $dark;
+    color: $primary;
     transform: translate(0.125rem, 0.125rem);
+  }
+}
+
+.button-group {
+  button:first-of-type {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  button:last-of-type {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
   }
 }
 
@@ -130,5 +169,38 @@ button {
       outline: 0;
       box-shadow: inset 0.125rem 0.125rem 0.5rem rgba(0, 0, 0, 0.2);
     }
+  }
+}
+
+.counter-control {
+  display: flex;
+
+  & > * {
+    margin: 0;
+  }
+
+  button {
+    box-shadow: none;
+
+    &:hover {
+      box-shadow: none;
+      transform: none;
+      background-color: lighten($primary, 10%);
+    }
+
+    &:active {
+      background-color: #fff;
+      color: $primary;
+      transform: none;
+    }
+  }
+
+  input {
+    border-radius: 0;
+    max-width: 1.5rem;
+    padding: calc(0.5rem - 2px) 0 calc(0.5rem - 2px) 0.75rem;
+    text-align: center;
+    border-top: 2px solid $secondary;
+    border-bottom: 2px solid $secondary;
   }
 }

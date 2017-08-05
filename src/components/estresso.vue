@@ -3,40 +3,44 @@
 
     <roller :show="showRoller" @close="showRoller = false"></roller>
 
-    <btn @click.native="showRoller = true">Open</btn>
-    <ul>
-      <li v-for="c in store.characters">
-        <h2>{{ c.name }}</h2>
-      </li>
-    </ul>
+    <div class="column">
+      <btn @click.native="showRoller = true">Open</btn>
+      <ul>
+        <li v-for="c in store.characters">
+          <h2>{{ c.name }}</h2>
+        </li>
+      </ul>
+    </div>
 
     <form>
-      <div class="input-row">
-        <label for="new-character-name">Name</label>
-        <input type="text" name="new-character-name" id="new-character-name" v-model="newCharacter.name">
-      </div>
-      <div class="input-row">
-        <label for="resistance-blood">Blood</label>
-        <counter-control id="resistance-blood" @change="(val) => { newCharacter.resistances.blood = val }"></counter-control>
-      </div>
-      <div class="input-row">
-        <label for="resistance-mind">Mind</label>
-        <counter-control id="resistance-mind" @change="(val) => { newCharacter.resistances.mind = val }"></counter-control>
-      </div>
-      <div class="input-row">
-        <label for="resistance-shadow">Shadow</label>
-        <counter-control id="resistance-shadow" @change="(val) => { newCharacter.resistances.shadow = val }"></counter-control>
-      </div>
-      <div class="input-row">
-        <label for="resistance-silver">Silver</label>
-        <counter-control id="resistance-silver" @change="(val) => { newCharacter.resistances.silver = val }"></counter-control>
-      </div>
-      <div class="input-row">
-        <label for="resistance-reputation">Reputation</label>
-        <counter-control id="resistance-reputation" @change="(val) => { newCharacter.resistances.reputation = val }"></counter-control>
-      </div>
-      <div class="input-row">
-        <btn>Add</btn>
+      <div class="column">
+        <div class="input-row">
+          <label for="new-character-name">Name</label>
+          <input type="text" name="new-character-name" id="new-character-name" v-model="newCharacter.name">
+        </div>
+        <div class="input-row">
+          <label for="resistance-blood">Blood</label>
+          <counter-control id="resistance-blood" @change="(val) => { newCharacter.resistances.blood = val }"></counter-control>
+        </div>
+        <div class="input-row">
+          <label for="resistance-mind">Mind</label>
+          <counter-control id="resistance-mind" @change="(val) => { newCharacter.resistances.mind = val }"></counter-control>
+        </div>
+        <div class="input-row">
+          <label for="resistance-shadow">Shadow</label>
+          <counter-control id="resistance-shadow" @change="(val) => { newCharacter.resistances.shadow = val }"></counter-control>
+        </div>
+        <div class="input-row">
+          <label for="resistance-silver">Silver</label>
+          <counter-control id="resistance-silver" @change="(val) => { newCharacter.resistances.silver = val }"></counter-control>
+        </div>
+        <div class="input-row">
+          <label for="resistance-reputation">Reputation</label>
+          <counter-control id="resistance-reputation" @change="(val) => { newCharacter.resistances.reputation = val }"></counter-control>
+        </div>
+        <div class="input-row">
+          <btn>Add</btn>
+        </div>
       </div>
     </form>
 
