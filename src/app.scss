@@ -96,6 +96,14 @@ h4 { font-size: 1rem; }
   bottom: 0;
   left: 0;
   -webkit-overflow-scrolling: touch;
+
+  & > header {
+    background-color: #fff;
+    background-image: url(../images/circles.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0;
+  }
 }
 
 .column {
@@ -238,7 +246,7 @@ button {
 
   .input-row {
     justify-content: space-between;
-    padding: 0 2rem 0 1rem;
+    padding: 0 1rem 0 0.5rem;
   }
 
   .new-character-name {
@@ -317,9 +325,19 @@ button {
 }
 
 .character {
-  padding: 2rem;
+  padding: 1.5rem 3rem 2rem 2rem;
   max-width: $mainColumnWidth;
   margin: 0 auto;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    * {
+      margin-top: 0;
+    }
+  }
 
   .resistance {
     display: flex;
@@ -327,6 +345,11 @@ button {
     align-items: center;
     border: 1px solid $primary;
     margin: 0;
+    background-color: #fff;
+
+    &:hover {
+      background-color: $beigeLight;
+    }
 
     h3 {
       font-size: 1rem;

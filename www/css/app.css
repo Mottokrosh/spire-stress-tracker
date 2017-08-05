@@ -77,6 +77,14 @@ h4 {
   -webkit-overflow-scrolling: touch;
 }
 
+.estresso > header {
+  background-color: #fff;
+  background-image: url(../images/circles.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0;
+}
+
 .column {
   max-width: 480px;
   width: 100%;
@@ -206,7 +214,7 @@ button.shadowless:active {
 
 .new-character .input-row {
   justify-content: space-between;
-  padding: 0 2rem 0 1rem;
+  padding: 0 1rem 0 0.5rem;
 }
 
 .new-character .new-character-name {
@@ -284,9 +292,19 @@ button.shadowless:active {
 }
 
 .character {
-  padding: 2rem;
+  padding: 1.5rem 3rem 2rem 2rem;
   max-width: 480px;
   margin: 0 auto;
+}
+
+.character header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.character header * {
+  margin-top: 0;
 }
 
 .character .resistance {
@@ -295,6 +313,11 @@ button.shadowless:active {
   align-items: center;
   border: 1px solid #214050;
   margin: 0;
+  background-color: #fff;
+}
+
+.character .resistance:hover {
+  background-color: #f6f6f4;
 }
 
 .character .resistance h3 {

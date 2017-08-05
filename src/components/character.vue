@@ -1,7 +1,10 @@
 <template>
   <div class="character">
 
-    <h2>{{ c.name }}</h2>
+    <header>
+      <h2>{{ c.name }}</h2>
+      <btn class="secondary" aria-label="Delete">&times;</btn>
+    </header>
 
     <div class="resistances">
       <div class="resistance" v-for="r in resistances">
