@@ -6,7 +6,7 @@
     <div class="column">
       <btn @click.native="showRoller = true">Open</btn>
       <ul>
-        <li v-for="c in store.characters">
+        <li v-for="c in characters">
           <h2>{{ c.name }}</h2>
         </li>
       </ul>
@@ -25,27 +25,27 @@
 
         <div class="input-row">
           <label for="resistance-blood">Blood</label>
-          <counter-control id="resistance-blood" @change="(val) => { newCharacter.blood.freeSlots = val }"></counter-control>
+          <counter-control id="resistance-blood" :value.sync="newCharacter.blood.freeSlots"></counter-control>
         </div>
         <div class="input-row">
           <label for="resistance-mind">Mind</label>
-          <counter-control id="resistance-mind" @change="(val) => { newCharacter.mind.freeSlots = val }"></counter-control>
+          <counter-control id="resistance-mind" :value.sync="newCharacter.mind.freeSlots"></counter-control>
         </div>
         <div class="input-row">
           <label for="resistance-shadow">Shadow</label>
-          <counter-control id="resistance-shadow" @change="(val) => { newCharacter.shadow.freeSlots = val }"></counter-control>
+          <counter-control id="resistance-shadow" :value.sync="newCharacter.shadow.freeSlots"></counter-control>
         </div>
         <div class="input-row">
           <label for="resistance-silver">Silver</label>
-          <counter-control id="resistance-silver" @change="(val) => { newCharacter.silver.freeSlots = val }"></counter-control>
+          <counter-control id="resistance-silver" :value.sync="newCharacter.silver.freeSlots"></counter-control>
         </div>
         <div class="input-row">
           <label for="resistance-reputation">Reputation</label>
-          <counter-control id="resistance-reputation" @change="(val) => { newCharacter.reputation.freeSlots = val }"></counter-control>
+          <counter-control id="resistance-reputation" :value.sync="newCharacter.reputation.freeSlots"></counter-control>
         </div>
 
         <div class="input-row action-row">
-          <btn class="tilded">Add</btn>
+          <btn class="tilded" @click.native="addCharacter">Add</btn>
         </div>
       </div>
     </form>
@@ -58,19 +58,22 @@
   import Roller from './roller.vue';
   import Store from '../store';
 
+  const characterSchema = {
+    name: '',
+    blood: { freeSlots: 0, stress: 0 },
+    mind: { freeSlots: 0, stress: 0 },
+    shadow: { freeSlots: 0, stress: 0 },
+    silver: { freeSlots: 0, stress: 0 },
+    reputation: { freeSlots: 0, stress: 0 },
+  };
+
   export default {
     data() {
       return {
-        store: Store.load(),
+        store: Store,
+        characters: [],
         showRoller: false,
-        newCharacter: {
-          name: '',
-          blood: { freeSlots: 0, stress: 0 },
-          mind: { freeSlots: 0, stress: 0 },
-          shadow: { freeSlots: 0, stress: 0 },
-          silver: { freeSlots: 0, stress: 0 },
-          reputation: { freeSlots: 0, stress: 0 },
-        },
+        newCharacter: Object.assign({}, characterSchema),
       };
     },
 
@@ -78,5 +81,18 @@
       CounterControl,
       Roller,
     },
+
+    methods: {
+      addCharacter() {
+        this.characters.push(this.newCharacter);
+        this.newCharacter = Object.assign({}, characterSchema);
+        this.store.save();
+      },
+    },
+
+    created() {
+      this.store.load();
+      this.characters = this.store.data.characters;
+    }
   };
 </script>

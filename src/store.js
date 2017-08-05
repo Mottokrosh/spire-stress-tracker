@@ -1,16 +1,17 @@
 const store = {
-  data: '{}',
+  json: '{ "characters": [] }',
+  data: {},
 
   load() {
-    const d = localStorage.getItem('estresso') || this.data;
+    const d = localStorage.getItem('estresso') || this.json;
     this.data = JSON.parse(d);
 
     return this.data;
   },
 
-  save(data) {
-    this.data = JSON.stringify(data);
-    localStorage.setItem('estresso', this.data);
+  save() {
+    this.json = JSON.stringify(this.data);
+    localStorage.setItem('estresso', this.json);
 
     return this.data;
   },

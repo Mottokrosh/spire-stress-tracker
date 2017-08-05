@@ -1,7 +1,7 @@
 <template>
   <div class="button-group counter-control">
     <btn @click.native="decrement" class="secondary">-</btn>
-    <input type="text" pattern="[0-9]" v-model="value">
+    <input type="text" pattern="[0-9]" v-model="localValue">
     <btn @click.native="increment" class="secondary">+</btn>
   </div>
 </template>
@@ -11,13 +11,13 @@
 
   export default {
     props: {
-      initial: Number,
       max: Number,
+      value: Number,
     },
 
     data() {
       return {
-        value: this.initial || 0,
+        localValue: this.value,
       };
     },
 
@@ -27,23 +27,23 @@
 
     methods: {
       decrement() {
-        this.value--;
+        this.localValue--;
 
-        if (this.value < 0) {
-          this.value = 0;
+        if (this.localValue < 0) {
+          this.localValue = 0;
         }
 
-        this.$emit('change', this.value);
+        this.$emit('update:value', this.localValue);
       },
 
       increment() {
-        this.value++;
+        this.localValue++;
 
-        if (this.max && this.value > this.max) {
-          this.value = this.max;
+        if (this.max && this.localValue > this.max) {
+          this.localValue = this.max;
         }
 
-        this.$emit('change', this.value);
+        this.$emit('update:value', this.localValue);
       },
     },
   };

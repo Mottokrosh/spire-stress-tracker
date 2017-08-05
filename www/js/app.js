@@ -10482,19 +10482,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+var characterSchema = {
+  name: '',
+  blood: { freeSlots: 0, stress: 0 },
+  mind: { freeSlots: 0, stress: 0 },
+  shadow: { freeSlots: 0, stress: 0 },
+  silver: { freeSlots: 0, stress: 0 },
+  reputation: { freeSlots: 0, stress: 0 }
+};
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      store: __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].load(),
+      store: __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */],
+      characters: [],
       showRoller: false,
-      newCharacter: {
-        name: '',
-        blood: { freeSlots: 0, stress: 0 },
-        mind: { freeSlots: 0, stress: 0 },
-        shadow: { freeSlots: 0, stress: 0 },
-        silver: { freeSlots: 0, stress: 0 },
-        reputation: { freeSlots: 0, stress: 0 }
-      }
+      newCharacter: Object.assign({}, characterSchema)
     };
   },
 
@@ -10502,6 +10505,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   components: {
     CounterControl: __WEBPACK_IMPORTED_MODULE_0__counter_control_vue___default.a,
     Roller: __WEBPACK_IMPORTED_MODULE_1__roller_vue___default.a
+  },
+
+  methods: {
+    addCharacter: function addCharacter() {
+      this.characters.push(this.newCharacter);
+      this.newCharacter = Object.assign({}, characterSchema);
+      this.store.save();
+    }
+  },
+
+  created: function created() {
+    this.store.load();
+    this.characters = this.store.data.characters;
   }
 });
 
@@ -10566,13 +10582,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    initial: Number,
-    max: Number
+    max: Number,
+    value: Number
   },
 
   data: function data() {
     return {
-      value: this.initial || 0
+      localValue: this.value
     };
   },
 
@@ -10583,22 +10599,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     decrement: function decrement() {
-      this.value--;
+      this.localValue--;
 
-      if (this.value < 0) {
-        this.value = 0;
+      if (this.localValue < 0) {
+        this.localValue = 0;
       }
 
-      this.$emit('change', this.value);
+      this.$emit('update:value', this.localValue);
     },
     increment: function increment() {
-      this.value++;
+      this.localValue++;
 
-      if (this.max && this.value > this.max) {
-        this.value = this.max;
+      if (this.max && this.localValue > this.max) {
+        this.localValue = this.max;
       }
 
-      this.$emit('change', this.value);
+      this.$emit('update:value', this.localValue);
     }
   }
 });
@@ -10671,20 +10687,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.value),
-      expression: "value"
+      value: (_vm.localValue),
+      expression: "localValue"
     }],
     attrs: {
       "type": "text",
       "pattern": "[0-9]"
     },
     domProps: {
-      "value": (_vm.value)
+      "value": (_vm.localValue)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.value = $event.target.value
+        _vm.localValue = $event.target.value
       }
     }
   }), _vm._v(" "), _c('btn', {
@@ -10819,17 +10835,18 @@ if (false) {
 
 "use strict";
 var store = {
-  data: '{}',
+  json: '{ "characters": [] }',
+  data: {},
 
   load: function load() {
-    var d = localStorage.getItem('estresso') || this.data;
+    var d = localStorage.getItem('estresso') || this.json;
     this.data = JSON.parse(d);
 
     return this.data;
   },
-  save: function save(data) {
-    this.data = JSON.stringify(data);
-    localStorage.setItem('estresso', this.data);
+  save: function save() {
+    this.json = JSON.stringify(this.data);
+    localStorage.setItem('estresso', this.json);
 
     return this.data;
   }
@@ -10861,7 +10878,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.showRoller = true
       }
     }
-  }, [_vm._v("Open")]), _vm._v(" "), _c('ul', _vm._l((_vm.store.characters), function(c) {
+  }, [_vm._v("Open")]), _vm._v(" "), _c('ul', _vm._l((_vm.characters), function(c) {
     return _c('li', [_c('h2', [_vm._v(_vm._s(c.name))])])
   }))], 1), _vm._v(" "), _c('form', {
     staticClass: "new-character"
@@ -10903,11 +10920,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Blood")]), _vm._v(" "), _c('counter-control', {
     attrs: {
-      "id": "resistance-blood"
+      "id": "resistance-blood",
+      "value": _vm.newCharacter.blood.freeSlots
     },
     on: {
-      "change": function (val) {
-        _vm.newCharacter.blood.freeSlots = val
+      "update:value": function($event) {
+        _vm.newCharacter.blood.freeSlots = $event
       }
     }
   })], 1), _vm._v(" "), _c('div', {
@@ -10918,11 +10936,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Mind")]), _vm._v(" "), _c('counter-control', {
     attrs: {
-      "id": "resistance-mind"
+      "id": "resistance-mind",
+      "value": _vm.newCharacter.mind.freeSlots
     },
     on: {
-      "change": function (val) {
-        _vm.newCharacter.mind.freeSlots = val
+      "update:value": function($event) {
+        _vm.newCharacter.mind.freeSlots = $event
       }
     }
   })], 1), _vm._v(" "), _c('div', {
@@ -10933,11 +10952,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Shadow")]), _vm._v(" "), _c('counter-control', {
     attrs: {
-      "id": "resistance-shadow"
+      "id": "resistance-shadow",
+      "value": _vm.newCharacter.shadow.freeSlots
     },
     on: {
-      "change": function (val) {
-        _vm.newCharacter.shadow.freeSlots = val
+      "update:value": function($event) {
+        _vm.newCharacter.shadow.freeSlots = $event
       }
     }
   })], 1), _vm._v(" "), _c('div', {
@@ -10948,11 +10968,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Silver")]), _vm._v(" "), _c('counter-control', {
     attrs: {
-      "id": "resistance-silver"
+      "id": "resistance-silver",
+      "value": _vm.newCharacter.silver.freeSlots
     },
     on: {
-      "change": function (val) {
-        _vm.newCharacter.silver.freeSlots = val
+      "update:value": function($event) {
+        _vm.newCharacter.silver.freeSlots = $event
       }
     }
   })], 1), _vm._v(" "), _c('div', {
@@ -10963,17 +10984,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Reputation")]), _vm._v(" "), _c('counter-control', {
     attrs: {
-      "id": "resistance-reputation"
+      "id": "resistance-reputation",
+      "value": _vm.newCharacter.reputation.freeSlots
     },
     on: {
-      "change": function (val) {
-        _vm.newCharacter.reputation.freeSlots = val
+      "update:value": function($event) {
+        _vm.newCharacter.reputation.freeSlots = $event
       }
     }
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "input-row action-row"
   }, [_c('btn', {
-    staticClass: "tilded"
+    staticClass: "tilded",
+    nativeOn: {
+      "click": function($event) {
+        _vm.addCharacter($event)
+      }
+    }
   }, [_vm._v("Add")])], 1)])])], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
