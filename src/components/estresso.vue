@@ -10,7 +10,7 @@
     <!-- <btn @click.native="showRoller = true">Open</btn> -->
     <ul class="characters">
       <li v-for="c in characters">
-        <character :c="c" @stress="addStress"></character>
+        <character :c="c" @stress="addStress" @delete="deleteCharacter"></character>
       </li>
     </ul>
 
@@ -97,6 +97,11 @@
       addCharacter() {
         this.characters.push(this.newCharacter);
         this.newCharacter = Object.assign({}, characterSchema);
+        this.store.save();
+      },
+
+      deleteCharacter(character) {
+        this.characters.splice(this.characters.indexOf(character), 1);
         this.store.save();
       },
 

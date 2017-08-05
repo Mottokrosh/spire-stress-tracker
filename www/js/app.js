@@ -10528,6 +10528,10 @@ var characterSchema = {
       this.newCharacter = Object.assign({}, characterSchema);
       this.store.save();
     },
+    deleteCharacter: function deleteCharacter(character) {
+      this.characters.splice(this.characters.indexOf(character), 1);
+      this.store.save();
+    },
     getRandomInt: function getRandomInt(min, max) {
       min = Math.ceil(min);
       max = Math.floor(max);
@@ -10923,7 +10927,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "c": c
       },
       on: {
-        "stress": _vm.addStress
+        "stress": _vm.addStress,
+        "delete": _vm.deleteCharacter
       }
     })], 1)
   })), _vm._v(" "), _c('form', {
@@ -12854,6 +12859,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     addStress: function addStress(resistance) {
       this.$emit('stress', { character: this.c, resistance: resistance });
+    },
+    deleteCharacter: function deleteCharacter() {
+      this.$emit('delete', this.c);
     }
   }
 });
@@ -12869,6 +12877,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "secondary",
     attrs: {
       "aria-label": "Delete"
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.deleteCharacter($event)
+      }
     }
   }, [_vm._v("×")])], 1), _vm._v(" "), _c('div', {
     staticClass: "resistances"

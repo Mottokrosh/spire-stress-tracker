@@ -3,7 +3,7 @@
 
     <header>
       <h2>{{ c.name }}</h2>
-      <btn class="secondary" aria-label="Delete">&times;</btn>
+      <btn class="secondary" aria-label="Delete" @click.native="deleteCharacter">&times;</btn>
     </header>
 
     <div class="resistances">
@@ -43,6 +43,10 @@
 
       addStress(resistance) {
         this.$emit('stress', { character: this.c, resistance: resistance });
+      },
+
+      deleteCharacter() {
+        this.$emit('delete', this.c);
       },
     },
   };
