@@ -5,6 +5,14 @@
         <btn @click.native="$emit('close')" class="close">&times;</btn>
         <div class="roller-content">
           <p><strong>{{ name }} / {{ resistance }}</strong></p>
+
+          <div class="dice">
+            <div class="one"></div>
+            <icon id="d3"></icon>
+            <div class="d6"></div>
+            <icon id="d8"></icon>
+          </div>
+
           <p>Multiple dice rollers here (1, d3, d6, d8).</p>
           <p>Underneath each roller a "Brutal &times; 0" button perhaps, which you can click before rolling to add Brutal multipliers.</p>
           <p>If fallout occurs, shake screen (and perhaps buzz phone in mobile app version), and show a random appropriate fallout, with option to choose another. Also potential fallout splitting/combining.</p>
@@ -16,12 +24,14 @@
 
 <script>
   import { Motion } from 'vue-motion';
+  import Icon from './icon.vue';
 
   export default {
     props: ['show'],
 
     components: {
       motion: Motion,
+      Icon,
     },
 
     data() {

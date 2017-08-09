@@ -13,7 +13,7 @@
 
         computed: {
             iconId() {
-                return '#icon-' + ( this.id === 'arrow-left' ? 'arrow-right' : this.id );
+                return '#icon-' + this.id;
             },
 
             classes() {
@@ -21,7 +21,6 @@
                     'icon': true,
                     ['icon-' + this.id]: true,
                     'icon-button': this.button,
-                    'icon-mirrored': this.id === 'arrow-left',
                 };
             },
         },

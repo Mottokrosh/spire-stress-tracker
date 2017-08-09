@@ -236,6 +236,15 @@ button {
 // --- Components ---
 //
 
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
 .new-character {
   flex: 1;
   margin: 0;
@@ -302,6 +311,27 @@ button {
     margin: 0;
     padding: 2rem;
     overflow: auto;
+  }
+
+  .dice {
+    display: flex;
+    justify-content: space-around;
+
+    & > * {
+      margin: 0;
+      width: 4rem;
+      height: 4rem;
+    }
+
+    .one {
+      background-color: #fff;
+      border-radius: 50%;
+    }
+
+    .d6 {
+      background-color: #fff;
+      border-radius: 0.5rem;
+    }
   }
 }
 
