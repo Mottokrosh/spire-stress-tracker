@@ -12685,6 +12685,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -13124,26 +13125,26 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           style: ({
             transform: ("translateX(" + (props.value) + "%)")
           })
-        }, [_c('btn', {
+        }, [_c('header', [_c('h2', [_vm._v("Roll " + _vm._s(_vm.resistance) + " Stress "), _c('small', [_vm._v("For " + _vm._s(_vm.name))])]), _vm._v(" "), _c('btn', {
           staticClass: "close has-icon",
           nativeOn: {
             "click": function($event) {
               _vm.$emit('close')
             }
           }
-        }, [_c('x-icon')], 1), _vm._v(" "), _c('div', {
+        }, [_c('x-icon')], 1)], 1), _vm._v(" "), _c('div', {
           staticClass: "roller-content"
-        }, [_c('p', [_c('strong', [_vm._v(_vm._s(_vm.name) + " / " + _vm._s(_vm.resistance))])]), _vm._v(" "), _c('div', {
+        }, [_c('div', {
           staticClass: "dice"
         }, [_c('div', {
           staticClass: "one"
-        }), _vm._v(" "), _c('div', {
+        }, [_vm._v("1")]), _vm._v(" "), _c('div', {
           staticClass: "d3"
-        }), _vm._v(" "), _c('div', {
+        }, [_vm._v("d3")]), _vm._v(" "), _c('div', {
           staticClass: "d6"
-        }), _vm._v(" "), _c('div', {
+        }, [_vm._v("d6")]), _vm._v(" "), _c('div', {
           staticClass: "d8"
-        })]), _vm._v(" "), _c('p', [_vm._v("Multiple dice rollers here (1, d3, d6, d8).")]), _vm._v(" "), _c('p', [_vm._v("Underneath each roller a \"Brutal × 0\" button perhaps, which you can click before rolling to add Brutal multipliers.")]), _vm._v(" "), _c('p', [_vm._v("If fallout occurs, shake screen (and perhaps buzz phone in mobile app version), and show a random appropriate fallout, with option to choose another. Also potential fallout splitting/combining.")])])], 1)]
+        }, [_vm._v("d8")])]), _vm._v(" "), _c('p', [_vm._v("Multiple dice rollers here (1, d3, d6, d8).")]), _vm._v(" "), _c('p', [_vm._v("Underneath each roller a \"Brutal × 0\" button perhaps, which you can click before rolling to add Brutal multipliers.")]), _vm._v(" "), _c('p', [_vm._v("If fallout occurs, shake screen (and perhaps buzz phone in mobile app version), and show a random appropriate fallout, with option to choose another. Also potential fallout splitting/combining.")])])])]
       }
     }])
   })

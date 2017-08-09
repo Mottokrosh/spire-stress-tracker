@@ -302,15 +302,25 @@ button.has-icon svg {
   background-color: #900;
 }
 
-.roller .close {
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
+.roller header {
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.roller h2 {
+  color: #9ac1d6;
+}
+
+.roller h2 small {
+  color: #e4e6e7;
+  display: block;
 }
 
 .roller .roller-content {
   margin: 0;
-  padding: 2rem;
+  padding: 0 2rem 2rem 2rem;
   overflow: auto;
 }
 
@@ -326,6 +336,11 @@ button.has-icon svg {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  font-size: 2rem;
 }
 
 .roller .dice .one {

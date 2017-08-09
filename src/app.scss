@@ -338,18 +338,25 @@ button {
     background-color: #900;
   }
 
-  &.open {
+  header {
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
   }
 
-  .close {
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
+  h2 {
+    color: lighten($primary, 50%);
+
+    small {
+      color: $grey;
+      display: block;
+    }
   }
 
   .roller-content {
     margin: 0;
-    padding: 2rem;
+    padding: 0 2rem 2rem 2rem;
     overflow: auto;
   }
 
@@ -364,6 +371,11 @@ button {
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #000;
+      font-size: 2rem;
     }
 
     .one {

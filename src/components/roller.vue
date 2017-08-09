@@ -2,15 +2,16 @@
   <motion :value="offset" spring="wobbly">
     <template scope="props">
       <div :style="{ transform: `translateX(${props.value}%)` }" :class="classes">
-        <btn @click.native="$emit('close')" class="close has-icon"><x-icon></x-icon></btn>
+        <header>
+          <h2>Roll {{ resistance }} Stress <small>For {{ name }}</small></h2>
+          <btn @click.native="$emit('close')" class="close has-icon"><x-icon></x-icon></btn>
+        </header>
         <div class="roller-content">
-          <p><strong>{{ name }} / {{ resistance }}</strong></p>
-
           <div class="dice">
-            <div class="one"></div>
-            <div class="d3"></div>
-            <div class="d6"></div>
-            <div class="d8"></div>
+            <div class="one">1</div>
+            <div class="d3">d3</div>
+            <div class="d6">d6</div>
+            <div class="d8">d8</div>
           </div>
 
           <p>Multiple dice rollers here (1, d3, d6, d8).</p>
