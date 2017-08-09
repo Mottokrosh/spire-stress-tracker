@@ -3,7 +3,7 @@
 
     <header>
       <h2>{{ c.name }}</h2>
-      <btn class="secondary" aria-label="Delete" @click.native="deleteCharacter">&times;</btn>
+      <btn class="backgroundless has-icon" aria-label="Delete" @click.native="deleteCharacter"><x-icon></x-icon></btn>
     </header>
 
     <div class="resistances">
@@ -13,7 +13,7 @@
           <span>Stress</span>
           <strong>{{ c[r].stress }}</strong>
         </div>
-        <btn @click.native="addStress(r)" class="shadowless">+</btn>
+        <btn @click.native="addStress(r)" class="shadowless has-icon"><plus-icon></plus-icon></btn>
       </div>
     </div>
 
@@ -21,9 +21,16 @@
 </template>
 
 <script>
+  import { PlusIcon, XIcon } from 'vue-feather-icons';
+
   export default {
     props: {
       c: Object,
+    },
+
+    components: {
+      PlusIcon,
+      XIcon,
     },
 
     data() {

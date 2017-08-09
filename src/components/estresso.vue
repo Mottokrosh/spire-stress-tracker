@@ -9,12 +9,11 @@
       </div>
     </header>
 
-    <!-- <btn @click.native="showRoller = true">Open</btn> -->
-    <ul class="characters">
-      <li v-for="c in characters">
+    <transition-group name="fade" tag="ul" class="characters">
+      <li v-for="(c, index) in characters" :key="index">
         <character :c="c" @stress="addStress" @delete="deleteCharacter"></character>
       </li>
-    </ul>
+    </transition-group>
 
     <form class="new-character">
       <div class="column">

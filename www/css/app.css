@@ -161,6 +161,33 @@ button.shadowless:active {
   transform: none;
 }
 
+button.backgroundless {
+  box-shadow: none;
+  color: #8fa5b0;
+  background-color: transparent;
+}
+
+button.backgroundless:hover {
+  box-shadow: none;
+  transform: none;
+  background-color: rgba(143, 165, 176, 0.1);
+}
+
+button.backgroundless:active {
+  background-color: rgba(143, 165, 176, 0.1);
+  transform: none;
+  color: #adbdc5;
+}
+
+button.has-icon {
+  padding: 0.25rem;
+  display: flex;
+}
+
+button.has-icon svg {
+  width: 1.25rem;
+}
+
 .button-group button:first-of-type {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -201,6 +228,15 @@ button.shadowless:active {
 .input-row input:focus {
   outline: 0;
   box-shadow: inset 0.125rem 0.125rem 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 500ms linear;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 
 .icon {

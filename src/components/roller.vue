@@ -2,7 +2,7 @@
   <motion :value="offset" spring="wobbly">
     <template scope="props">
       <div :style="{ transform: `translateX(${props.value}%)` }" :class="classes">
-        <btn @click.native="$emit('close')" class="close">&times;</btn>
+        <btn @click.native="$emit('close')" class="close has-icon"><x-icon></x-icon></btn>
         <div class="roller-content">
           <p><strong>{{ name }} / {{ resistance }}</strong></p>
 
@@ -24,14 +24,14 @@
 
 <script>
   import { Motion } from 'vue-motion';
-  import Icon from './icon.vue';
+  import { XIcon } from 'vue-feather-icons';
 
   export default {
     props: ['show'],
 
     components: {
       motion: Motion,
-      Icon,
+      XIcon,
     },
 
     data() {

@@ -1,13 +1,14 @@
 <template>
   <div class="button-group counter-control">
-    <btn @click.native="decrement" class="secondary shadowless">-</btn>
+    <btn @click.native="decrement" class="secondary shadowless has-icon"><minus-icon></minus-icon></btn>
     <input type="text" pattern="[0-9]" v-model="localValue">
-    <btn @click.native="increment" class="secondary shadowless">+</btn>
+    <btn @click.native="increment" class="secondary shadowless has-icon"><plus-icon></plus-icon></btn>
   </div>
 </template>
 
 <script>
   import Btn from './btn.vue';
+  import { MinusIcon, PlusIcon } from 'vue-feather-icons';
 
   export default {
     props: {
@@ -23,6 +24,8 @@
 
     components: {
       Btn,
+      MinusIcon,
+      PlusIcon,
     },
 
     methods: {

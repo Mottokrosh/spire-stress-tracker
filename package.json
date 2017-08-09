@@ -30,6 +30,7 @@
         "cross-env": "^3.2.4",
         "laravel-mix": "^1.2.0",
         "vue": "^2.3.0",
+        "vue-feather-icons": "^0.1.1",
         "vue-motion": "^0.2.0"
     },
     "cordova": {
