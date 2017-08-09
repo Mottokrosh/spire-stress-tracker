@@ -93,6 +93,14 @@ h4 {
   padding: 2rem;
 }
 
+.flex-container {
+  display: flex;
+}
+
+.flex-container > * {
+  margin: 0;
+}
+
 button {
   font-family: inherit;
   background-color: #214050;
@@ -279,6 +287,9 @@ button.has-icon svg {
   overflow: visible;
   z-index: 10;
   color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 .roller:before {
@@ -302,11 +313,8 @@ button.has-icon svg {
   background-color: #900;
 }
 
-.roller header {
-  padding: 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+.roller nav {
+  padding: 2rem 0 0 1rem;
 }
 
 .roller h2 {
@@ -320,42 +328,62 @@ button.has-icon svg {
 
 .roller .roller-content {
   margin: 0;
-  padding: 0 2rem 2rem 2rem;
+  padding: 2rem 2rem 2rem 1rem;
   overflow: auto;
+  width: 100%;
 }
 
 .roller .dice {
   display: flex;
   justify-content: space-around;
+  margin-top: 2rem;
 }
 
-.roller .dice > div {
-  margin: 0;
-  width: 4rem;
-  height: 4rem;
+.roller .dice .die {
+  perspective: 1000px;
+  transform-style: preserve-3d;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 4rem;
+  height: 4rem;
+  transition: transform 750ms ease;
+}
+
+.roller .dice .die.flipped {
+  transform: rotateY(720deg);
+}
+
+.roller .dice > div {
+  margin: 0;
+  width: 4rem;
+}
+
+.roller .dice button {
   color: #000;
   font-size: 2rem;
 }
 
-.roller .dice .one {
+.roller .dice button:active {
+  transform: scale(0.9, 0.9);
+}
+
+.roller .dice .d1 .die {
   background-image: url(../images/one.svg);
 }
 
-.roller .dice .d3 {
+.roller .dice .d3 .die {
   background-image: url(../images/d3.svg);
 }
 
-.roller .dice .d6 {
+.roller .dice .d6 .die {
   background-image: url(../images/d6.svg);
 }
 
-.roller .dice .d8 {
+.roller .dice .d8 .die {
   background-image: url(../images/d8.svg);
 }
 

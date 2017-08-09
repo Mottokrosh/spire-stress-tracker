@@ -12342,8 +12342,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   components: {
-    PlusIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["b" /* PlusIcon */],
-    XIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["c" /* XIcon */]
+    PlusIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["c" /* PlusIcon */],
+    XIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["d" /* XIcon */]
   },
 
   data: function data() {
@@ -12485,8 +12485,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   components: {
     Btn: __WEBPACK_IMPORTED_MODULE_0__btn_vue___default.a,
-    MinusIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["a" /* MinusIcon */],
-    PlusIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["b" /* PlusIcon */]
+    MinusIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["b" /* MinusIcon */],
+    PlusIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["c" /* PlusIcon */]
   },
 
   methods: {
@@ -12686,6 +12686,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -12694,13 +12708,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   props: ['show'],
 
   components: {
+    ChevronLeftIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["a" /* ChevronLeftIcon */],
     motion: __WEBPACK_IMPORTED_MODULE_0_vue_motion__["Motion"],
-    XIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["c" /* XIcon */]
+    XIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["d" /* XIcon */]
   },
 
   data: function data() {
     return {
-      offset: 100
+      offset: 100,
+      d1: { flipped: false },
+      d3: { flipped: false },
+      d6: { flipped: false },
+      d8: { flipped: false }
     };
   },
 
@@ -12720,6 +12739,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         roller: true,
         open: this.show
       };
+    },
+    d1Classes: function d1Classes() {
+      return {
+        die: true,
+        flipped: this.d1.flipped
+      };
+    },
+    d3Classes: function d3Classes() {
+      return {
+        die: true,
+        flipped: this.d3.flipped
+      };
+    },
+    d6Classes: function d6Classes() {
+      return {
+        die: true,
+        flipped: this.d6.flipped
+      };
+    },
+    d8Classes: function d8Classes() {
+      return {
+        die: true,
+        flipped: this.d8.flipped
+      };
+    }
+  },
+
+  methods: {
+    roll: function roll(die) {
+      this['d' + die].flipped = !this['d' + die].flipped;
     }
   },
 
@@ -13125,26 +13174,62 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           style: ({
             transform: ("translateX(" + (props.value) + "%)")
           })
-        }, [_c('header', [_c('h2', [_vm._v("Roll " + _vm._s(_vm.resistance) + " Stress "), _c('small', [_vm._v("For " + _vm._s(_vm.name))])]), _vm._v(" "), _c('btn', {
-          staticClass: "close has-icon",
+        }, [_c('nav', [_c('btn', {
+          staticClass: "close has-icon backgroundless",
           nativeOn: {
             "click": function($event) {
               _vm.$emit('close')
             }
           }
-        }, [_c('x-icon')], 1)], 1), _vm._v(" "), _c('div', {
+        }, [_c('chevron-left-icon')], 1)], 1), _vm._v(" "), _c('div', {
           staticClass: "roller-content"
-        }, [_c('div', {
+        }, [_c('h2', [_vm._v("Roll " + _vm._s(_vm.resistance) + " Stress "), _c('small', [_vm._v("For " + _vm._s(_vm.name))])]), _vm._v(" "), _c('div', {
           staticClass: "dice"
         }, [_c('div', {
-          staticClass: "one"
-        }, [_vm._v("1")]), _vm._v(" "), _c('div', {
+          staticClass: "d1"
+        }, [_c('div', {
+          class: _vm.d1Classes
+        }, [_c('btn', {
+          staticClass: "backgroundless",
+          nativeOn: {
+            "click": function($event) {
+              _vm.roll(1)
+            }
+          }
+        }, [_vm._v("1")])], 1)]), _vm._v(" "), _c('div', {
           staticClass: "d3"
-        }, [_vm._v("d3")]), _vm._v(" "), _c('div', {
+        }, [_c('div', {
+          class: _vm.d3Classes
+        }, [_c('btn', {
+          staticClass: "backgroundless",
+          nativeOn: {
+            "click": function($event) {
+              _vm.roll(3)
+            }
+          }
+        }, [_vm._v("d3")])], 1)]), _vm._v(" "), _c('div', {
           staticClass: "d6"
-        }, [_vm._v("d6")]), _vm._v(" "), _c('div', {
+        }, [_c('div', {
+          class: _vm.d6Classes
+        }, [_c('btn', {
+          staticClass: "backgroundless",
+          nativeOn: {
+            "click": function($event) {
+              _vm.roll(6)
+            }
+          }
+        }, [_vm._v("d6")])], 1)]), _vm._v(" "), _c('div', {
           staticClass: "d8"
-        }, [_vm._v("d8")])]), _vm._v(" "), _c('p', [_vm._v("Multiple dice rollers here (1, d3, d6, d8).")]), _vm._v(" "), _c('p', [_vm._v("Underneath each roller a \"Brutal × 0\" button perhaps, which you can click before rolling to add Brutal multipliers.")]), _vm._v(" "), _c('p', [_vm._v("If fallout occurs, shake screen (and perhaps buzz phone in mobile app version), and show a random appropriate fallout, with option to choose another. Also potential fallout splitting/combining.")])])])]
+        }, [_c('div', {
+          class: _vm.d8Classes
+        }, [_c('btn', {
+          staticClass: "backgroundless",
+          nativeOn: {
+            "click": function($event) {
+              _vm.roll(8)
+            }
+          }
+        }, [_vm._v("d8")])], 1)])])])])]
       }
     }])
   })
@@ -13398,7 +13483,7 @@ if (false) {
 /* unused harmony export CheckSquareIcon */
 /* unused harmony export CheckIcon */
 /* unused harmony export ChevronDownIcon */
-/* unused harmony export ChevronLeftIcon */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChevronLeftIcon; });
 /* unused harmony export ChevronRightIcon */
 /* unused harmony export ChevronUpIcon */
 /* unused harmony export ChevronsDownIcon */
@@ -13491,7 +13576,7 @@ if (false) {
 /* unused harmony export MinimizeIcon */
 /* unused harmony export MinusCircleIcon */
 /* unused harmony export MinusSquareIcon */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MinusIcon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return MinusIcon; });
 /* unused harmony export MonitorIcon */
 /* unused harmony export MoonIcon */
 /* unused harmony export MoreHorizontalIcon */
@@ -13518,7 +13603,7 @@ if (false) {
 /* unused harmony export PlayIcon */
 /* unused harmony export PlusCircleIcon */
 /* unused harmony export PlusSquareIcon */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return PlusIcon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return PlusIcon; });
 /* unused harmony export PocketIcon */
 /* unused harmony export PowerIcon */
 /* unused harmony export PrinterIcon */
@@ -13593,7 +13678,7 @@ if (false) {
 /* unused harmony export WindIcon */
 /* unused harmony export XCircleIcon */
 /* unused harmony export XSquareIcon */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return XIcon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return XIcon; });
 /* unused harmony export ZapIcon */
 /* unused harmony export ZoomInIcon */
 /* unused harmony export ZoomOutIcon */

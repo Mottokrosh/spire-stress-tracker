@@ -114,6 +114,14 @@ h4 { font-size: 1rem; }
   padding: 2rem;
 }
 
+.flex-container {
+  display: flex;
+
+  & > * {
+    margin: 0;
+  }
+}
+
 //
 // --- Buttons ---
 //
@@ -316,6 +324,9 @@ button {
   overflow: visible;
   z-index: 10;
   color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 
   &:before {
     content: '';
@@ -338,11 +349,8 @@ button {
     background-color: #900;
   }
 
-  header {
-    padding: 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+  nav {
+    padding: 2rem 0 0 1rem;
   }
 
   h2 {
@@ -356,41 +364,61 @@ button {
 
   .roller-content {
     margin: 0;
-    padding: 0 2rem 2rem 2rem;
+    padding: 2rem 2rem 2rem 1rem;
     overflow: auto;
+    width: 100%;
   }
 
   .dice {
     display: flex;
     justify-content: space-around;
+    margin-top: 2rem;
 
-    & > div {
-      margin: 0;
-      width: 4rem;
-      height: 4rem;
+    .die {
+      perspective: 1000px;
+      transform-style: preserve-3d;
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
       display: flex;
       justify-content: center;
       align-items: center;
-      color: #000;
-      font-size: 2rem;
+      width: 4rem;
+      height: 4rem;
+      transition: transform 750ms ease;
+
+      &.flipped {
+        transform: rotateY(720deg);
+      }
     }
 
-    .one {
+    & > div {
+      margin: 0;
+      width: 4rem;
+    }
+
+    button {
+      color: #000;
+      font-size: 2rem;
+
+      &:active {
+        transform: scale(0.9, 0.9);
+      }
+    }
+
+    .d1 .die {
       background-image: url(../images/one.svg);
     }
 
-    .d3 {
+    .d3 .die {
       background-image: url(../images/d3.svg);
     }
 
-    .d6 {
+    .d6 .die {
       background-image: url(../images/d6.svg);
     }
 
-    .d8 {
+    .d8 .die {
       background-image: url(../images/d8.svg);
     }
   }

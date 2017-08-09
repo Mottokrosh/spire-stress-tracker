@@ -2,21 +2,35 @@
   <motion :value="offset" spring="wobbly">
     <template scope="props">
       <div :style="{ transform: `translateX(${props.value}%)` }" :class="classes">
-        <header>
-          <h2>Roll {{ resistance }} Stress <small>For {{ name }}</small></h2>
-          <btn @click.native="$emit('close')" class="close has-icon"><x-icon></x-icon></btn>
-        </header>
+        <nav>
+          <btn @click.native="$emit('close')" class="close has-icon backgroundless">
+            <chevron-left-icon></chevron-left-icon>
+          </btn>
+        </nav>
         <div class="roller-content">
+          <h2>Roll {{ resistance }} Stress <small>For {{ name }}</small></h2>
           <div class="dice">
-            <div class="one">1</div>
-            <div class="d3">d3</div>
-            <div class="d6">d6</div>
-            <div class="d8">d8</div>
+            <div class="d1">
+              <div :class="d1Classes">
+                <btn class="backgroundless" @click.native="roll(1)">1</btn>
+              </div>
+            </div>
+            <div class="d3">
+              <div :class="d3Classes">
+                <btn class="backgroundless" @click.native="roll(3)">d3</btn>
+              </div>
+            </div>
+            <div class="d6">
+              <div :class="d6Classes">
+                <btn class="backgroundless" @click.native="roll(6)">d6</btn>
+              </div>
+            </div>
+            <div class="d8">
+              <div :class="d8Classes">
+                <btn class="backgroundless" @click.native="roll(8)">d8</btn>
+              </div>
+            </div>
           </div>
-
-          <p>Multiple dice rollers here (1, d3, d6, d8).</p>
-          <p>Underneath each roller a "Brutal &times; 0" button perhaps, which you can click before rolling to add Brutal multipliers.</p>
-          <p>If fallout occurs, shake screen (and perhaps buzz phone in mobile app version), and show a random appropriate fallout, with option to choose another. Also potential fallout splitting/combining.</p>
         </div>
       </div>
     </template>
@@ -25,12 +39,13 @@
 
 <script>
   import { Motion } from 'vue-motion';
-  import { XIcon } from 'vue-feather-icons';
+  import { ChevronLeftIcon, XIcon } from 'vue-feather-icons';
 
   export default {
     props: ['show'],
 
     components: {
+      ChevronLeftIcon,
       motion: Motion,
       XIcon,
     },
@@ -38,6 +53,10 @@
     data() {
       return {
         offset: 100,
+        d1: { flipped: false },
+        d3: { flipped: false },
+        d6: { flipped: false },
+        d8: { flipped: false },
       };
     },
 
@@ -59,6 +78,40 @@
           roller: true,
           open: this.show,
         };
+      },
+
+      d1Classes() {
+        return {
+          die: true,
+          flipped: this.d1.flipped,
+        };
+      },
+
+      d3Classes() {
+        return {
+          die: true,
+          flipped: this.d3.flipped,
+        };
+      },
+
+      d6Classes() {
+        return {
+          die: true,
+          flipped: this.d6.flipped,
+        };
+      },
+
+      d8Classes() {
+        return {
+          die: true,
+          flipped: this.d8.flipped,
+        };
+      },
+    },
+
+    methods: {
+      roll(die) {
+        this['d' + die].flipped = !this['d' + die].flipped;
       },
     },
 
