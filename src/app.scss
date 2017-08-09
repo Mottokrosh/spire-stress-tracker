@@ -317,20 +317,29 @@ button {
     display: flex;
     justify-content: space-around;
 
-    & > * {
+    & > div {
       margin: 0;
       width: 4rem;
       height: 4rem;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
     }
 
     .one {
-      background-color: #fff;
-      border-radius: 50%;
+      background-image: url(../images/one.svg);
+    }
+
+    .d3 {
+      background-image: url(../images/d3.svg);
     }
 
     .d6 {
-      background-color: #fff;
-      border-radius: 0.5rem;
+      background-image: url(../images/d6.svg);
+    }
+
+    .d8 {
+      background-image: url(../images/d8.svg);
     }
   }
 }

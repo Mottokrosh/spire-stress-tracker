@@ -8,9 +8,9 @@
 
           <div class="dice">
             <div class="one"></div>
-            <icon id="d3"></icon>
+            <div class="d3"></div>
             <div class="d6"></div>
-            <icon id="d8"></icon>
+            <div class="d8"></div>
           </div>
 
           <p>Multiple dice rollers here (1, d3, d6, d8).</p>

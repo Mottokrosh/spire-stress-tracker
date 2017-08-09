@@ -283,20 +283,29 @@ button.shadowless:active {
   justify-content: space-around;
 }
 
-.roller .dice > * {
+.roller .dice > div {
   margin: 0;
   width: 4rem;
   height: 4rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .roller .dice .one {
-  background-color: #fff;
-  border-radius: 50%;
+  background-image: url(../images/one.svg);
+}
+
+.roller .dice .d3 {
+  background-image: url(../images/d3.svg);
 }
 
 .roller .dice .d6 {
-  background-color: #fff;
-  border-radius: 0.5rem;
+  background-image: url(../images/d6.svg);
+}
+
+.roller .dice .d8 {
+  background-image: url(../images/d8.svg);
 }
 
 .counter-control {
