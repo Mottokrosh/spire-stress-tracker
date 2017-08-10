@@ -127,9 +127,9 @@
       this.store.load();
       this.characters = this.store.data.characters;
 
-      Axios.get('data/drow_names.json')
+      Axios.get('data/names.json')
         .then(response => {
-          this.names = response.data.female;
+          this.names = response.data;
         });
     }
   };
