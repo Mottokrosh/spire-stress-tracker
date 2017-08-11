@@ -2,13 +2,16 @@
   <motion :value="offset" spring="wobbly">
     <template scope="props">
       <div :style="{ transform: `translateX(${props.value}%)` }" :class="classes">
+
         <nav>
           <btn @click.native="close" class="close has-icon backgroundless">
             <chevron-left-icon></chevron-left-icon>
           </btn>
         </nav>
+
         <div class="roller-content">
           <h2>Roll {{ resistance }} Stress <small>For {{ name }}</small></h2>
+
           <div class="dice">
             <div class="d1">
               <div :class="d1Classes">
@@ -31,7 +34,17 @@
               </div>
             </div>
           </div>
+
+          <transition name="fade">
+            <div class="fallout-roll-result" v-if="falloutRollResult">
+              <div>Fallout Roll Result: {{ falloutRollResult }} <span v-if="falloutOccurred">Fallout!</span></div>
+              <div v-if="falloutOccurred">&lt;</div>
+              <div v-else>&gt;=</div>
+              <div>{{ stress - freeSlots }} <span>Threshold</span> ({{ stress }} <span>Stress</span> &minus; {{ freeSlots }} <span>Free Slots</span>)</div>
+            </div>
+          </transition>
         </div>
+
       </div>
     </template>
   </motion>
@@ -57,16 +70,27 @@
         d3: { flipped: false, result: null },
         d6: { flipped: false, result: null },
         d8: { flipped: false, result: null },
+        result: null,
+        falloutRollResult: null,
+        falloutOccurred: null,
       };
     },
 
     computed: {
       character() {
-        return this.show && this.show.character ? this.show.character : '';
+        return this.show && this.show.character ? this.show.character : {};
       },
 
       resistance() {
         return this.show && this.show.resistance ? this.show.resistance : '';
+      },
+
+      stress() {
+        return this.character ? this.character[this.resistance].stress : 0;
+      },
+
+      freeSlots() {
+        return this.character ? this.character[this.resistance].freeSlots : 0;
       },
 
       name() {
@@ -111,15 +135,18 @@
 
     methods: {
       close() {
-        setTimeout(this.resetDice, 250);
+        setTimeout(this.reset, 250);
         this.$emit('close');
       },
 
-      resetDice() {
+      reset() {
         this.d1 = { flipped: false, result: null };
         this.d3 = { flipped: false, result: null };
         this.d6 = { flipped: false, result: null };
         this.d8 = { flipped: false, result: null };
+        this.result = null;
+        this.falloutRollResult = null;
+        this.falloutOccurred = null;
       },
 
       roll(die) {
@@ -129,7 +156,20 @@
 
         setTimeout(() => {
           this[name].result = this.getRandomIntInclusive(1, die);
-        }, 250);
+          this.result = this[name].result;
+        }, 375);
+
+        setTimeout(this.checkForFallout, 750);
+      },
+
+      checkForFallout() {
+        this.falloutRollResult = this.getRandomIntInclusive(1, 10);
+        console.log('freeSlots', this.freeSlots, 'stress', this.stress, 'falloutRollResult', this.falloutRollResult);
+
+        if (this.falloutRollResult < this.stress - this.freeSlots) {
+          this.falloutOccurred = true;
+          console.log('FALLOUT!');
+        }
       },
 
       getRandomIntInclusive(min, max) {

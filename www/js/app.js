@@ -20688,6 +20688,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -20707,17 +20720,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       d1: { flipped: false, result: null },
       d3: { flipped: false, result: null },
       d6: { flipped: false, result: null },
-      d8: { flipped: false, result: null }
+      d8: { flipped: false, result: null },
+      result: null,
+      falloutRollResult: null,
+      falloutOccurred: null
     };
   },
 
 
   computed: {
     character: function character() {
-      return this.show && this.show.character ? this.show.character : '';
+      return this.show && this.show.character ? this.show.character : {};
     },
     resistance: function resistance() {
       return this.show && this.show.resistance ? this.show.resistance : '';
+    },
+    stress: function stress() {
+      return this.character ? this.character[this.resistance].stress : 0;
+    },
+    freeSlots: function freeSlots() {
+      return this.character ? this.character[this.resistance].freeSlots : 0;
     },
     name: function name() {
       return this.character ? this.character.name : '';
@@ -20756,14 +20778,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     close: function close() {
-      setTimeout(this.resetDice, 250);
+      setTimeout(this.reset, 250);
       this.$emit('close');
     },
-    resetDice: function resetDice() {
+    reset: function reset() {
       this.d1 = { flipped: false, result: null };
       this.d3 = { flipped: false, result: null };
       this.d6 = { flipped: false, result: null };
       this.d8 = { flipped: false, result: null };
+      this.result = null;
+      this.falloutRollResult = null;
+      this.falloutOccurred = null;
     },
     roll: function roll(die) {
       var _this = this;
@@ -20774,7 +20799,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       setTimeout(function () {
         _this[name].result = _this.getRandomIntInclusive(1, die);
-      }, 250);
+        _this.result = _this[name].result;
+      }, 375);
+
+      setTimeout(this.checkForFallout, 750);
+    },
+    checkForFallout: function checkForFallout() {
+      this.falloutRollResult = this.getRandomIntInclusive(1, 10);
+      console.log('freeSlots', this.freeSlots, 'stress', this.stress, 'falloutRollResult', this.falloutRollResult);
+
+      if (this.falloutRollResult < this.stress - this.freeSlots) {
+        this.falloutOccurred = true;
+        console.log('FALLOUT!');
+      }
     },
     getRandomIntInclusive: function getRandomIntInclusive(min, max) {
       var randomBuffer = new Uint32Array(1);
@@ -21243,7 +21280,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.roll(8)
             }
           }
-        }, [_vm._v(_vm._s(_vm.d8.result === null ? 'd8' : _vm.d8.result))])], 1)])])])])]
+        }, [_vm._v(_vm._s(_vm.d8.result === null ? 'd8' : _vm.d8.result))])], 1)])]), _vm._v(" "), _c('transition', {
+          attrs: {
+            "name": "fade"
+          }
+        }, [(_vm.falloutRollResult) ? _c('div', {
+          staticClass: "fallout-roll-result"
+        }, [_c('div', [_vm._v("Fallout Roll Result: " + _vm._s(_vm.falloutRollResult) + " "), (_vm.falloutOccurred) ? _c('span', [_vm._v("Fallout!")]) : _vm._e()]), _vm._v(" "), (_vm.falloutOccurred) ? _c('div', [_vm._v("<")]) : _c('div', [_vm._v(">=")]), _vm._v(" "), _c('div', [_vm._v(_vm._s(_vm.stress - _vm.freeSlots) + " "), _c('span', [_vm._v("Threshold")]), _vm._v(" (" + _vm._s(_vm.stress) + " "), _c('span', [_vm._v("Stress")]), _vm._v(" − " + _vm._s(_vm.freeSlots) + " "), _c('span', [_vm._v("Free Slots")]), _vm._v(")")])]) : _vm._e()])], 1)])]
       }
     }])
   })
@@ -21262,7 +21305,7 @@ if (false) {
 
 "use strict";
 var store = {
-  json: '{"characters":[{"name":"Nadege","blood":{"freeSlots":2,"stress":3},"mind":{"freeSlots":1,"stress":0},"shadow":{"freeSlots":0,"stress":0},"silver":{"freeSlots":0,"stress":0},"reputation":{"freeSlots":1,"stress":0}}]}', // some dummy starting data
+  json: '{"characters":[{"name":"Nadege","blood":{"freeSlots":2,"stress":3},"mind":{"freeSlots":1,"stress":4},"shadow":{"freeSlots":0,"stress":0},"silver":{"freeSlots":0,"stress":0},"reputation":{"freeSlots":1,"stress":0}}]}', // some dummy starting data
   data: {},
 
   load: function load() {
