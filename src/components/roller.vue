@@ -169,6 +169,8 @@
         if (this.falloutRollResult < this.stress - this.freeSlots) {
           this.falloutOccurred = true;
           console.log('FALLOUT!');
+        } else {
+          this.falloutOccurred = false;
         }
       },
 

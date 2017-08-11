@@ -20811,6 +20811,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (this.falloutRollResult < this.stress - this.freeSlots) {
         this.falloutOccurred = true;
         console.log('FALLOUT!');
+      } else {
+        this.falloutOccurred = false;
       }
     },
     getRandomIntInclusive: function getRandomIntInclusive(min, max) {
