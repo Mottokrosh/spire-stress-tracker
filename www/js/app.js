@@ -20704,10 +20704,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       offset: 100,
-      d1: { flipped: false },
-      d3: { flipped: false },
-      d6: { flipped: false },
-      d8: { flipped: false }
+      d1: { flipped: false, result: null },
+      d3: { flipped: false, result: null },
+      d6: { flipped: false, result: null },
+      d8: { flipped: false, result: null }
     };
   },
 
@@ -20755,8 +20755,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
+    close: function close() {
+      setTimeout(this.resetDice, 250);
+      this.$emit('close');
+    },
+    resetDice: function resetDice() {
+      this.d1 = { flipped: false, result: null };
+      this.d3 = { flipped: false, result: null };
+      this.d6 = { flipped: false, result: null };
+      this.d8 = { flipped: false, result: null };
+    },
     roll: function roll(die) {
-      this['d' + die].flipped = !this['d' + die].flipped;
+      var _this = this;
+
+      var name = 'd' + die;
+
+      this[name].flipped = !this[name].flipped;
+
+      setTimeout(function () {
+        _this[name].result = _this.getRandomIntInclusive(1, die);
+      }, 250);
+    },
+    getRandomIntInclusive: function getRandomIntInclusive(min, max) {
+      var randomBuffer = new Uint32Array(1);
+
+      window.crypto.getRandomValues(randomBuffer);
+
+      var randomNumber = randomBuffer[0] / (0xffffffff + 1);
+
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(randomNumber * (max - min + 1)) + min;
     }
   },
 
@@ -21163,7 +21192,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           staticClass: "close has-icon backgroundless",
           nativeOn: {
             "click": function($event) {
-              _vm.$emit('close')
+              _vm.close($event)
             }
           }
         }, [_c('chevron-left-icon')], 1)], 1), _vm._v(" "), _c('div', {
@@ -21181,7 +21210,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.roll(1)
             }
           }
-        }, [_vm._v("1")])], 1)]), _vm._v(" "), _c('div', {
+        }, [_vm._v(_vm._s(_vm.d1.result === null ? '1' : _vm.d1.result))])], 1)]), _vm._v(" "), _c('div', {
           staticClass: "d3"
         }, [_c('div', {
           class: _vm.d3Classes
@@ -21192,7 +21221,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.roll(3)
             }
           }
-        }, [_vm._v("d3")])], 1)]), _vm._v(" "), _c('div', {
+        }, [_vm._v(_vm._s(_vm.d3.result === null ? 'd3' : _vm.d3.result))])], 1)]), _vm._v(" "), _c('div', {
           staticClass: "d6"
         }, [_c('div', {
           class: _vm.d6Classes
@@ -21203,7 +21232,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.roll(6)
             }
           }
-        }, [_vm._v("d6")])], 1)]), _vm._v(" "), _c('div', {
+        }, [_vm._v(_vm._s(_vm.d6.result === null ? 'd6' : _vm.d6.result))])], 1)]), _vm._v(" "), _c('div', {
           staticClass: "d8"
         }, [_c('div', {
           class: _vm.d8Classes
@@ -21214,7 +21243,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.roll(8)
             }
           }
-        }, [_vm._v("d8")])], 1)])])])])]
+        }, [_vm._v(_vm._s(_vm.d8.result === null ? 'd8' : _vm.d8.result))])], 1)])])])])]
       }
     }])
   })
