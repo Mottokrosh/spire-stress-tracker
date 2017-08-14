@@ -36,6 +36,12 @@
           </div>
 
           <transition name="fade">
+            <div class="fallout" v-if="falloutOccurred">
+              <h3 class="shake shake-constant"><icon id="fallout"></icon>Fallout<icon id="fallout"></icon></h3>
+            </div>
+          </transition>
+
+          <transition name="fade">
             <div class="fallout-roll-result" v-if="falloutRollResult">
               <div>Fallout Roll Result: {{ falloutRollResult }} <span v-if="falloutOccurred">Fallout!</span></div>
               <div v-if="falloutOccurred">&lt;</div>
@@ -53,12 +59,14 @@
 <script>
   import { Motion } from 'vue-motion';
   import { ChevronLeftIcon, XIcon } from 'vue-feather-icons';
+  import Icon from './icon.vue';
 
   export default {
     props: ['show'],
 
     components: {
       ChevronLeftIcon,
+      Icon,
       motion: Motion,
       XIcon,
     },

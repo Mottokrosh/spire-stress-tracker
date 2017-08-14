@@ -4,7 +4,15 @@ import Btn from './components/btn.vue';
 
 Vue.component('btn', Btn);
 
-var app = {
+Array.prototype.shuffle = function () {
+  let x = this.slice(), y = [];
+  while(x.length) {
+    y.push(x.splice(Math.floor(Math.random()*x.length), 1)[0]);
+  }
+  return y;
+}
+
+const app = {
   isWebView() {
     return document.location.protocol === 'file:';
   },
