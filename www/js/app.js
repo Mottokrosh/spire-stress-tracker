@@ -20759,6 +20759,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       result: null,
       falloutRollResult: null,
       falloutOccurred: null,
+      falloutLevel: null,
       rolling: null
     };
   },
@@ -20829,6 +20830,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.result = null;
       this.falloutRollResult = null;
       this.falloutOccurred = null;
+      this.falloutLevel = null;
       this.rolling = false;
     },
     roll: function roll(die) {
@@ -20848,10 +20850,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     checkForFallout: function checkForFallout() {
       this.falloutRollResult = this.getRandomIntInclusive(1, 10);
+      var applicableStress = this.stress - this.freeSlots;
 
-      if (this.falloutRollResult < this.stress - this.freeSlots) {
-        this.falloutOccurred = true;
+      if (this.falloutRollResult < applicableStress) {
         document.body.classList.add('shake', 'shake-constant');
+        this.falloutOccurred = true;
+
+        if (applicableStress >= 2 && applicableStress <= 4) {
+          this.falloutLevel = 'minor';
+        } else if (applicableStress >= 5 && applicableStress <= 8) {
+          this.falloutLevel = 'major';
+        } else if (applicableStress >= 9) {
+          this.falloutLevel = 'severe';
+        }
 
         setTimeout(function () {
           document.body.classList.remove('shake', 'shake-constant');
@@ -21457,7 +21468,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         })], 1), _vm._v(" "), _c('div', {
           staticClass: "fallout-roll-result"
-        }, [_c('p', [_c('span', [_vm._v("Threshold: " + _vm._s(_vm.stress - _vm.freeSlots))]), _vm._v(" = "), _c('span', [_vm._v("Stress: " + _vm._s(_vm.stress))]), _vm._v(" − "), _c('span', [_vm._v("Free Slots: " + _vm._s(_vm.freeSlots))])]), _vm._v(" "), _c('p', [_c('span', [_vm._v("Fallout Roll Result: " + _vm._s(_vm.falloutRollResult))])])])]) : _vm._e()]), _vm._v(" "), _c('nav', {
+        }, [_c('p', [_c('span', [_vm._v("Threshold: " + _vm._s(_vm.stress - _vm.freeSlots))]), _vm._v(" = "), _c('span', [_vm._v("Stress: " + _vm._s(_vm.stress))]), _vm._v(" − "), _c('span', [_vm._v("Free Slots: " + _vm._s(_vm.freeSlots))])]), _vm._v(" "), _c('p', [_c('span', [_vm._v("Fallout Roll Result: " + _vm._s(_vm.falloutRollResult))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.falloutLevel))])])])]) : _vm._e()]), _vm._v(" "), _c('nav', {
           staticClass: "actions"
         }, [_c('btn', {
           staticClass: "secondary",

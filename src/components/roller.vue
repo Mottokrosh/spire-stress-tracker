@@ -54,7 +54,7 @@
 
                 <div class="fallout-roll-result">
                   <p><span>Threshold: {{ stress - freeSlots }}</span> = <span>Stress: {{ stress }}</span> &minus; <span>Free Slots: {{ freeSlots }}</span></p>
-                  <p><span>Fallout Roll Result: {{ falloutRollResult }}</span></p>
+                  <p><span>Fallout Roll Result: {{ falloutRollResult }}</span> <span>{{ falloutLevel }}</span></p>
                 </div>
               </div>
             </transition>
@@ -97,6 +97,7 @@
         result: null,
         falloutRollResult: null,
         falloutOccurred: null,
+        falloutLevel: null,
         rolling: null,
       };
     },
@@ -176,6 +177,7 @@
         this.result = null;
         this.falloutRollResult = null;
         this.falloutOccurred = null;
+        this.falloutLevel = null;
         this.rolling = false;
       },
 
@@ -195,10 +197,19 @@
 
       checkForFallout() {
         this.falloutRollResult = this.getRandomIntInclusive(1, 10);
+        const applicableStress = this.stress - this.freeSlots;
 
-        if (this.falloutRollResult < this.stress - this.freeSlots) {
-          this.falloutOccurred = true;
+        if (this.falloutRollResult < applicableStress) {
           document.body.classList.add('shake', 'shake-constant');
+          this.falloutOccurred = true;
+
+          if (applicableStress >= 2 && applicableStress <= 4) {
+            this.falloutLevel = 'minor';
+          } else if (applicableStress >= 5 && applicableStress <= 8) {
+            this.falloutLevel = 'major';
+          } else if (applicableStress >= 9) {
+            this.falloutLevel = 'severe';
+          }
 
           setTimeout(() => {
             document.body.classList.remove('shake', 'shake-constant');
