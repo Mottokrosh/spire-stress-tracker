@@ -20871,6 +20871,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.falloutOccurred = false;
       }
     },
+    apply: function apply() {
+      // adjust stress
+      // on fallout, remove some stress (3/5/7)
+      // close
+      window.alert('WIP');
+    },
     getRandomIntInclusive: function getRandomIntInclusive(min, max) {
       var randomBuffer = new Uint32Array(1);
 
@@ -21483,6 +21489,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }, [_vm._v("Reset")]), _vm._v(" "), _c('btn', {
           attrs: {
             "disabled": !_vm.result
+          },
+          nativeOn: {
+            "click": function($event) {
+              _vm.apply($event)
+            }
           }
         }, [_vm._v("Apply Results")])], 1)], 1) : _vm._e()])], 1)]
       }

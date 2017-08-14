@@ -61,7 +61,7 @@
 
             <nav class="actions">
               <btn class="secondary" :disabled="!result" @click.native="reset">Reset</btn>
-              <btn :disabled="!result">Apply Results</btn>
+              <btn :disabled="!result" @click.native="apply">Apply Results</btn>
             </nav>
 
           </div>
@@ -218,6 +218,13 @@
         } else {
           this.falloutOccurred = false;
         }
+      },
+
+      apply() {
+        // adjust stress
+        // on fallout, remove some stress (3/5/7)
+        // close
+        window.alert('WIP');
       },
 
       getRandomIntInclusive(min, max) {
