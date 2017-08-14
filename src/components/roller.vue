@@ -59,6 +59,8 @@
               </div>
             </transition>
 
+            <code style="margin-top: 10px;"><pre style="overflow-x: auto;">{{ falloutChoices }}</pre></code>
+
             <nav class="actions">
               <btn class="secondary" :disabled="!result" @click.native="reset">Reset</btn>
               <btn :disabled="!result" @click.native="apply">Apply Results</btn>
@@ -98,6 +100,7 @@
         falloutRollResult: null,
         falloutOccurred: null,
         falloutLevel: null,
+        falloutChoices: null,
         rolling: null,
       };
     },
@@ -178,6 +181,7 @@
         this.falloutRollResult = null;
         this.falloutOccurred = null;
         this.falloutLevel = null;
+        this.falloutChoices = null;
         this.rolling = false;
       },
 
@@ -205,10 +209,19 @@
 
           if (applicableStress >= 2 && applicableStress <= 4) {
             this.falloutLevel = 'minor';
+            this.falloutChoices = this.fallout.filter((f) => {
+              return f.level === 'minor' && f.resistance === this.resistance;
+            });
           } else if (applicableStress >= 5 && applicableStress <= 8) {
             this.falloutLevel = 'major';
+            this.falloutChoices = this.fallout.filter((f) => {
+              return f.level === 'major' && f.resistance === this.resistance;
+            });
           } else if (applicableStress >= 9) {
             this.falloutLevel = 'severe';
+            this.falloutChoices = this.fallout.filter((f) => {
+              return f.level === 'severe' && f.resistance === this.resistance;
+            });
           }
 
           setTimeout(() => {

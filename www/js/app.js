@@ -20739,6 +20739,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -20765,6 +20767,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       falloutRollResult: null,
       falloutOccurred: null,
       falloutLevel: null,
+      falloutChoices: null,
       rolling: null
     };
   },
@@ -20836,6 +20839,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.falloutRollResult = null;
       this.falloutOccurred = null;
       this.falloutLevel = null;
+      this.falloutChoices = null;
       this.rolling = false;
     },
     roll: function roll(die) {
@@ -20854,6 +20858,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       setTimeout(this.checkForFallout, 750);
     },
     checkForFallout: function checkForFallout() {
+      var _this2 = this;
+
       this.falloutRollResult = this.getRandomIntInclusive(1, 10);
       var applicableStress = this.stress - this.freeSlots;
 
@@ -20863,10 +20869,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         if (applicableStress >= 2 && applicableStress <= 4) {
           this.falloutLevel = 'minor';
+          this.falloutChoices = this.fallout.filter(function (f) {
+            return f.level === 'minor' && f.resistance === _this2.resistance;
+          });
         } else if (applicableStress >= 5 && applicableStress <= 8) {
           this.falloutLevel = 'major';
+          this.falloutChoices = this.fallout.filter(function (f) {
+            return f.level === 'major' && f.resistance === _this2.resistance;
+          });
         } else if (applicableStress >= 9) {
           this.falloutLevel = 'severe';
+          this.falloutChoices = this.fallout.filter(function (f) {
+            return f.level === 'severe' && f.resistance === _this2.resistance;
+          });
         }
 
         setTimeout(function () {
@@ -21479,7 +21494,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         })], 1), _vm._v(" "), _c('div', {
           staticClass: "fallout-roll-result"
-        }, [_c('p', [_c('span', [_vm._v("Threshold: " + _vm._s(_vm.stress - _vm.freeSlots))]), _vm._v(" = "), _c('span', [_vm._v("Stress: " + _vm._s(_vm.stress))]), _vm._v(" − "), _c('span', [_vm._v("Free Slots: " + _vm._s(_vm.freeSlots))])]), _vm._v(" "), _c('p', [_c('span', [_vm._v("Fallout Roll Result: " + _vm._s(_vm.falloutRollResult))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.falloutLevel))])])])]) : _vm._e()]), _vm._v(" "), _c('nav', {
+        }, [_c('p', [_c('span', [_vm._v("Threshold: " + _vm._s(_vm.stress - _vm.freeSlots))]), _vm._v(" = "), _c('span', [_vm._v("Stress: " + _vm._s(_vm.stress))]), _vm._v(" − "), _c('span', [_vm._v("Free Slots: " + _vm._s(_vm.freeSlots))])]), _vm._v(" "), _c('p', [_c('span', [_vm._v("Fallout Roll Result: " + _vm._s(_vm.falloutRollResult))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.falloutLevel))])])])]) : _vm._e()]), _vm._v(" "), _c('code', {
+          staticStyle: {
+            "margin-top": "10px"
+          }
+        }, [_c('pre', {
+          staticStyle: {
+            "overflow-x": "auto"
+          }
+        }, [_vm._v(_vm._s(_vm.falloutChoices))])]), _vm._v(" "), _c('nav', {
           staticClass: "actions"
         }, [_c('btn', {
           staticClass: "secondary",
@@ -21519,7 +21542,7 @@ if (false) {
 
 "use strict";
 var store = {
-  json: '{"characters":[{"name":"Nadege","blood":{"freeSlots":2,"stress":3},"mind":{"freeSlots":1,"stress":4},"shadow":{"freeSlots":0,"stress":0},"silver":{"freeSlots":0,"stress":0},"reputation":{"freeSlots":1,"stress":0}}]}', // some dummy starting data
+  json: '{"characters":[{"name":"Nadege","blood":{"freeSlots":2,"stress":3},"mind":{"freeSlots":1,"stress":4},"shadow":{"freeSlots":0,"stress":0},"silver":{"freeSlots":0,"stress":7},"reputation":{"freeSlots":1,"stress":0}}]}', // some dummy starting data
   data: {},
 
   load: function load() {

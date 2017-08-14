@@ -1,5 +1,5 @@
 const store = {
-  json: '{"characters":[{"name":"Nadege","blood":{"freeSlots":2,"stress":3},"mind":{"freeSlots":1,"stress":4},"shadow":{"freeSlots":0,"stress":0},"silver":{"freeSlots":0,"stress":0},"reputation":{"freeSlots":1,"stress":0}}]}', // some dummy starting data
+  json: '{"characters":[{"name":"Nadege","blood":{"freeSlots":2,"stress":3},"mind":{"freeSlots":1,"stress":4},"shadow":{"freeSlots":0,"stress":0},"silver":{"freeSlots":0,"stress":7},"reputation":{"freeSlots":1,"stress":0}}]}', // some dummy starting data
   data: {},
 
   load() {
