@@ -16,22 +16,30 @@
             <div class="dice">
               <div class="d1">
                 <div :class="d1Classes">
-                  <btn class="backgroundless" @click.native="roll(1)">{{ d1.result === null ? '1' : d1.result }}</btn>
+                  <btn class="backgroundless" @click.native="roll(1)" :disabled="rolling && rolling !== 'd1'">
+                    {{ d1.result === null ? '1' : d1.result }}
+                  </btn>
                 </div>
               </div>
               <div class="d3">
                 <div :class="d3Classes">
-                  <btn class="backgroundless" @click.native="roll(3)">{{ d3.result === null ? 'd3' : d3.result }}</btn>
+                  <btn class="backgroundless" @click.native="roll(3)" :disabled="rolling && rolling !== 'd3'">
+                    {{ d3.result === null ? 'd3' : d3.result }}
+                  </btn>
                 </div>
               </div>
               <div class="d6">
                 <div :class="d6Classes">
-                  <btn class="backgroundless" @click.native="roll(6)">{{ d6.result === null ? 'd6' : d6.result }}</btn>
+                  <btn class="backgroundless" @click.native="roll(6)" :disabled="rolling && rolling !== 'd6'">
+                    {{ d6.result === null ? 'd6' : d6.result }}
+                  </btn>
                 </div>
               </div>
               <div class="d8">
                 <div :class="d8Classes">
-                  <btn class="backgroundless" @click.native="roll(8)">{{ d8.result === null ? 'd8' : d8.result }}</btn>
+                  <btn class="backgroundless" @click.native="roll(8)" :disabled="rolling && rolling !== 'd8'">
+                    {{ d8.result === null ? 'd8' : d8.result }}
+                  </btn>
                 </div>
               </div>
             </div>
@@ -50,6 +58,11 @@
                 </div>
               </div>
             </transition>
+
+            <nav class="actions">
+              <btn class="secondary" :disabled="!result" @click.native="reset">Reset</btn>
+              <btn :disabled="!result">Apply Results</btn>
+            </nav>
 
           </div>
         </transition>
@@ -84,6 +97,7 @@
         result: null,
         falloutRollResult: null,
         falloutOccurred: null,
+        rolling: null,
       };
     },
 
@@ -119,6 +133,7 @@
         return {
           die: true,
           flipped: this.d1.flipped,
+          disabled: this.rolling && this.rolling !== 'd1',
         };
       },
 
@@ -126,6 +141,7 @@
         return {
           die: true,
           flipped: this.d3.flipped,
+          disabled: this.rolling && this.rolling !== 'd3',
         };
       },
 
@@ -133,6 +149,7 @@
         return {
           die: true,
           flipped: this.d6.flipped,
+          disabled: this.rolling && this.rolling !== 'd6',
         };
       },
 
@@ -140,6 +157,7 @@
         return {
           die: true,
           flipped: this.d8.flipped,
+          disabled: this.rolling && this.rolling !== 'd8',
         };
       },
     },
@@ -158,12 +176,14 @@
         this.result = null;
         this.falloutRollResult = null;
         this.falloutOccurred = null;
+        this.rolling = false;
       },
 
       roll(die) {
         const name = 'd' + die;
 
         this[name].flipped = !this[name].flipped;
+        this.rolling = name;
 
         setTimeout(() => {
           this[name].result = this.getRandomIntInclusive(1, die);

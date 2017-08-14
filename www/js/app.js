@@ -20721,6 +20721,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -20745,7 +20758,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       d8: { flipped: false, result: null },
       result: null,
       falloutRollResult: null,
-      falloutOccurred: null
+      falloutOccurred: null,
+      rolling: null
     };
   },
 
@@ -20775,25 +20789,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     d1Classes: function d1Classes() {
       return {
         die: true,
-        flipped: this.d1.flipped
+        flipped: this.d1.flipped,
+        disabled: this.rolling && this.rolling !== 'd1'
       };
     },
     d3Classes: function d3Classes() {
       return {
         die: true,
-        flipped: this.d3.flipped
+        flipped: this.d3.flipped,
+        disabled: this.rolling && this.rolling !== 'd3'
       };
     },
     d6Classes: function d6Classes() {
       return {
         die: true,
-        flipped: this.d6.flipped
+        flipped: this.d6.flipped,
+        disabled: this.rolling && this.rolling !== 'd6'
       };
     },
     d8Classes: function d8Classes() {
       return {
         die: true,
-        flipped: this.d8.flipped
+        flipped: this.d8.flipped,
+        disabled: this.rolling && this.rolling !== 'd8'
       };
     }
   },
@@ -20811,6 +20829,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.result = null;
       this.falloutRollResult = null;
       this.falloutOccurred = null;
+      this.rolling = false;
     },
     roll: function roll(die) {
       var _this = this;
@@ -20818,6 +20837,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var name = 'd' + die;
 
       this[name].flipped = !this[name].flipped;
+      this.rolling = name;
 
       setTimeout(function () {
         _this[name].result = _this.getRandomIntInclusive(1, die);
@@ -21370,45 +21390,57 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           class: _vm.d1Classes
         }, [_c('btn', {
           staticClass: "backgroundless",
+          attrs: {
+            "disabled": _vm.rolling && _vm.rolling !== 'd1'
+          },
           nativeOn: {
             "click": function($event) {
               _vm.roll(1)
             }
           }
-        }, [_vm._v(_vm._s(_vm.d1.result === null ? '1' : _vm.d1.result))])], 1)]), _vm._v(" "), _c('div', {
+        }, [_vm._v("\n                  " + _vm._s(_vm.d1.result === null ? '1' : _vm.d1.result) + "\n                ")])], 1)]), _vm._v(" "), _c('div', {
           staticClass: "d3"
         }, [_c('div', {
           class: _vm.d3Classes
         }, [_c('btn', {
           staticClass: "backgroundless",
+          attrs: {
+            "disabled": _vm.rolling && _vm.rolling !== 'd3'
+          },
           nativeOn: {
             "click": function($event) {
               _vm.roll(3)
             }
           }
-        }, [_vm._v(_vm._s(_vm.d3.result === null ? 'd3' : _vm.d3.result))])], 1)]), _vm._v(" "), _c('div', {
+        }, [_vm._v("\n                  " + _vm._s(_vm.d3.result === null ? 'd3' : _vm.d3.result) + "\n                ")])], 1)]), _vm._v(" "), _c('div', {
           staticClass: "d6"
         }, [_c('div', {
           class: _vm.d6Classes
         }, [_c('btn', {
           staticClass: "backgroundless",
+          attrs: {
+            "disabled": _vm.rolling && _vm.rolling !== 'd6'
+          },
           nativeOn: {
             "click": function($event) {
               _vm.roll(6)
             }
           }
-        }, [_vm._v(_vm._s(_vm.d6.result === null ? 'd6' : _vm.d6.result))])], 1)]), _vm._v(" "), _c('div', {
+        }, [_vm._v("\n                  " + _vm._s(_vm.d6.result === null ? 'd6' : _vm.d6.result) + "\n                ")])], 1)]), _vm._v(" "), _c('div', {
           staticClass: "d8"
         }, [_c('div', {
           class: _vm.d8Classes
         }, [_c('btn', {
           staticClass: "backgroundless",
+          attrs: {
+            "disabled": _vm.rolling && _vm.rolling !== 'd8'
+          },
           nativeOn: {
             "click": function($event) {
               _vm.roll(8)
             }
           }
-        }, [_vm._v(_vm._s(_vm.d8.result === null ? 'd8' : _vm.d8.result))])], 1)])]), _vm._v(" "), _c('transition', {
+        }, [_vm._v("\n                  " + _vm._s(_vm.d8.result === null ? 'd8' : _vm.d8.result) + "\n                ")])], 1)])]), _vm._v(" "), _c('transition', {
           attrs: {
             "name": "fade"
           }
@@ -21425,7 +21457,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         })], 1), _vm._v(" "), _c('div', {
           staticClass: "fallout-roll-result"
-        }, [_c('p', [_c('span', [_vm._v("Threshold: " + _vm._s(_vm.stress - _vm.freeSlots))]), _vm._v(" = "), _c('span', [_vm._v("Stress: " + _vm._s(_vm.stress))]), _vm._v(" − "), _c('span', [_vm._v("Free Slots: " + _vm._s(_vm.freeSlots))])]), _vm._v(" "), _c('p', [_c('span', [_vm._v("Fallout Roll Result: " + _vm._s(_vm.falloutRollResult))])])])]) : _vm._e()])], 1) : _vm._e()])], 1)]
+        }, [_c('p', [_c('span', [_vm._v("Threshold: " + _vm._s(_vm.stress - _vm.freeSlots))]), _vm._v(" = "), _c('span', [_vm._v("Stress: " + _vm._s(_vm.stress))]), _vm._v(" − "), _c('span', [_vm._v("Free Slots: " + _vm._s(_vm.freeSlots))])]), _vm._v(" "), _c('p', [_c('span', [_vm._v("Fallout Roll Result: " + _vm._s(_vm.falloutRollResult))])])])]) : _vm._e()]), _vm._v(" "), _c('nav', {
+          staticClass: "actions"
+        }, [_c('btn', {
+          staticClass: "secondary",
+          attrs: {
+            "disabled": !_vm.result
+          },
+          nativeOn: {
+            "click": function($event) {
+              _vm.reset($event)
+            }
+          }
+        }, [_vm._v("Reset")]), _vm._v(" "), _c('btn', {
+          attrs: {
+            "disabled": !_vm.result
+          }
+        }, [_vm._v("Apply Results")])], 1)], 1) : _vm._e()])], 1)]
       }
     }])
   })

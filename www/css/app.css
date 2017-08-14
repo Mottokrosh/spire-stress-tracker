@@ -153,6 +153,17 @@ button:active {
   transform: translate(0.125rem, 0.125rem);
 }
 
+button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button[disabled]:hover {
+  box-shadow: none;
+  transform: none;
+  background-color: #214050;
+}
+
 button.shadowless {
   box-shadow: none;
 }
@@ -546,6 +557,10 @@ button.has-icon svg {
   transform: rotateY(720deg);
 }
 
+.roller .dice .die.disabled {
+  opacity: 0.5;
+}
+
 .roller .dice > div {
   margin: 0;
   width: 4rem;
@@ -632,6 +647,16 @@ button.has-icon svg {
   text-transform: uppercase;
   font-size: 0.75rem;
   font-weight: normal;
+}
+
+.roller .actions {
+  padding: 0;
+  text-align: right;
+  margin: 2rem 0 0 0;
+}
+
+.roller .actions .secondary {
+  background-color: #252f34;
 }
 
 .counter-control {

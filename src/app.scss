@@ -180,6 +180,17 @@ button {
     transform: translate(0.125rem, 0.125rem);
   }
 
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:hover {
+      box-shadow: none;
+      transform: none;
+      background-color: $primary;
+    }
+  }
+
   &.shadowless {
     box-shadow: none;
 
@@ -526,6 +537,10 @@ button {
       &.flipped {
         transform: rotateY(720deg);
       }
+
+      &.disabled {
+        opacity: 0.5;
+      }
     }
 
     & > div {
@@ -605,6 +620,16 @@ button {
       text-transform: uppercase;
       font-size: 0.75rem;
       font-weight: normal;
+    }
+  }
+
+  .actions {
+    padding: 0;
+    text-align: right;
+    margin: 2rem 0 0 0;
+
+    .secondary {
+      background-color: darken($secondary, 45%);
     }
   }
 }
