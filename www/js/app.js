@@ -8780,7 +8780,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/mottokrosh/Projects/spire-stress-tracker/src/components/btn.vue"
+Component.options.__file = "/Users/mottokrosh/Documents/Projects/spire-stress-tracker/src/components/btn.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] btn.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -18992,7 +18992,7 @@ var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(15),
   /* template */
-  __webpack_require__(49),
+  __webpack_require__(52),
   /* styles */
   null,
   /* scopeId */
@@ -19000,7 +19000,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/mottokrosh/Projects/spire-stress-tracker/src/components/estresso.vue"
+Component.options.__file = "/Users/mottokrosh/Documents/Projects/spire-stress-tracker/src/components/estresso.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] estresso.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -19037,7 +19037,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__counter_control_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__counter_control_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__roller_vue__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__roller_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__roller_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store__ = __webpack_require__(51);
 //
 //
 //
@@ -20222,7 +20222,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/mottokrosh/Projects/spire-stress-tracker/src/components/character.vue"
+Component.options.__file = "/Users/mottokrosh/Documents/Projects/spire-stress-tracker/src/components/character.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] character.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -20423,7 +20423,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/mottokrosh/Projects/spire-stress-tracker/src/components/counter-control.vue"
+Component.options.__file = "/Users/mottokrosh/Documents/Projects/spire-stress-tracker/src/components/counter-control.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] counter-control.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -20618,7 +20618,7 @@ var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(45),
   /* template */
-  __webpack_require__(47),
+  __webpack_require__(50),
   /* styles */
   null,
   /* scopeId */
@@ -20626,7 +20626,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/mottokrosh/Projects/spire-stress-tracker/src/components/roller.vue"
+Component.options.__file = "/Users/mottokrosh/Documents/Projects/spire-stress-tracker/src/components/roller.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] roller.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -20658,8 +20658,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_motion__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_motion___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_motion__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__icon_vue__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__icon_vue__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__icon_vue__);
+//
+//
+//
 //
 //
 //
@@ -20755,10 +20758,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       return this.show && this.show.resistance ? this.show.resistance : '';
     },
     stress: function stress() {
-      return this.character ? this.character[this.resistance].stress : 0;
+      return this.character && this.character[this.resistance] ? this.character[this.resistance].stress : 0;
     },
     freeSlots: function freeSlots() {
-      return this.character ? this.character[this.resistance].freeSlots : 0;
+      return this.character && this.character[this.resistance] ? this.character[this.resistance].freeSlots : 0;
     },
     name: function name() {
       return this.character ? this.character.name : '';
@@ -20825,11 +20828,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     checkForFallout: function checkForFallout() {
       this.falloutRollResult = this.getRandomIntInclusive(1, 10);
-      console.log('freeSlots', this.freeSlots, 'stress', this.stress, 'falloutRollResult', this.falloutRollResult);
 
       if (this.falloutRollResult < this.stress - this.freeSlots) {
         this.falloutOccurred = true;
-        console.log('FALLOUT!');
+        document.body.classList.add('shake', 'shake-constant');
+
+        setTimeout(function () {
+          document.body.classList.remove('shake', 'shake-constant');
+        }, 900);
       } else {
         this.falloutOccurred = false;
       }
@@ -21232,6 +21238,103 @@ Object.defineProperty(exports, '__esModule', { value: true });
 /* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(48),
+  /* template */
+  __webpack_require__(49),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/mottokrosh/Documents/Projects/spire-stress-tracker/src/components/icon.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] icon.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-594ddb1a", Component.options)
+  } else {
+    hotAPI.reload("data-v-594ddb1a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 48 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    id: String,
+    button: Boolean,
+    reversed: Boolean
+  },
+
+  computed: {
+    iconId: function iconId() {
+      return '#icon-' + this.id;
+    },
+    classes: function classes() {
+      var _ref;
+
+      return _ref = {
+        'icon': true
+      }, _defineProperty(_ref, 'icon-' + this.id, true), _defineProperty(_ref, 'icon-button', this.button), _defineProperty(_ref, 'reversed', this.reversed), _ref;
+    }
+  }
+});
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('svg', {
+    class: _vm.classes
+  }, [_c('use', {
+    attrs: {
+      "xlink:href": _vm.iconId
+    }
+  })])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-594ddb1a", module.exports)
+  }
+}
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('motion', {
     attrs: {
@@ -21253,7 +21356,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.close($event)
             }
           }
-        }, [_c('chevron-left-icon')], 1)], 1), _vm._v(" "), _c('div', {
+        }, [_c('chevron-left-icon')], 1)], 1), _vm._v(" "), _c('transition', {
+          attrs: {
+            "name": "fade"
+          }
+        }, [(_vm.show && _vm.show.character) ? _c('div', {
           staticClass: "roller-content"
         }, [_c('h2', [_vm._v("Roll " + _vm._s(_vm.resistance) + " Stress "), _c('small', [_vm._v("For " + _vm._s(_vm.name))])]), _vm._v(" "), _c('div', {
           staticClass: "dice"
@@ -21307,23 +21414,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }, [(_vm.falloutOccurred) ? _c('div', {
           staticClass: "fallout"
-        }, [_c('h3', {
-          staticClass: "shake shake-constant"
-        }, [_c('icon', {
+        }, [_c('h3', [_c('icon', {
           attrs: {
             "id": "fallout"
           }
-        }), _vm._v("Fallout"), _c('icon', {
+        }), _vm._v(" "), _c('span', [_vm._v("Fallout")]), _vm._v(" "), _c('icon', {
           attrs: {
-            "id": "fallout"
+            "id": "fallout",
+            "reversed": ""
           }
-        })], 1)]) : _vm._e()]), _vm._v(" "), _c('transition', {
-          attrs: {
-            "name": "fade"
-          }
-        }, [(_vm.falloutRollResult) ? _c('div', {
+        })], 1), _vm._v(" "), _c('div', {
           staticClass: "fallout-roll-result"
-        }, [_c('div', [_vm._v("Fallout Roll Result: " + _vm._s(_vm.falloutRollResult) + " "), (_vm.falloutOccurred) ? _c('span', [_vm._v("Fallout!")]) : _vm._e()]), _vm._v(" "), (_vm.falloutOccurred) ? _c('div', [_vm._v("<")]) : _c('div', [_vm._v(">=")]), _vm._v(" "), _c('div', [_vm._v(_vm._s(_vm.stress - _vm.freeSlots) + " "), _c('span', [_vm._v("Threshold")]), _vm._v(" (" + _vm._s(_vm.stress) + " "), _c('span', [_vm._v("Stress")]), _vm._v(" − " + _vm._s(_vm.freeSlots) + " "), _c('span', [_vm._v("Free Slots")]), _vm._v(")")])]) : _vm._e()])], 1)])]
+        }, [_c('p', [_c('span', [_vm._v("Threshold: " + _vm._s(_vm.stress - _vm.freeSlots))]), _vm._v(" = "), _c('span', [_vm._v("Stress: " + _vm._s(_vm.stress))]), _vm._v(" − "), _c('span', [_vm._v("Free Slots: " + _vm._s(_vm.freeSlots))])]), _vm._v(" "), _c('p', [_c('span', [_vm._v("Fallout Roll Result: " + _vm._s(_vm.falloutRollResult))])])])]) : _vm._e()])], 1) : _vm._e()])], 1)]
       }
     }])
   })
@@ -21337,7 +21439,7 @@ if (false) {
 }
 
 /***/ }),
-/* 48 */
+/* 51 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21362,7 +21464,7 @@ var store = {
 /* harmony default export */ __webpack_exports__["a"] = (store);
 
 /***/ }),
-/* 49 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -21528,102 +21630,6 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-78c207b0", module.exports)
-  }
-}
-
-/***/ }),
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(51),
-  /* template */
-  __webpack_require__(52),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
-)
-Component.options.__file = "/Users/mottokrosh/Projects/spire-stress-tracker/src/components/icon.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] icon.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-594ddb1a", Component.options)
-  } else {
-    hotAPI.reload("data-v-594ddb1a", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 51 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: {
-        id: String,
-        button: Boolean
-    },
-
-    computed: {
-        iconId: function iconId() {
-            return '#icon-' + this.id;
-        },
-        classes: function classes() {
-            var _ref;
-
-            return _ref = {
-                'icon': true
-            }, _defineProperty(_ref, 'icon-' + this.id, true), _defineProperty(_ref, 'icon-button', this.button), _ref;
-        }
-    }
-});
-
-/***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('svg', {
-    class: _vm.classes
-  }, [_c('use', {
-    attrs: {
-      "xlink:href": _vm.iconId
-    }
-  })])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-594ddb1a", module.exports)
   }
 }
 

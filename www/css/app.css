@@ -247,8 +247,7 @@ button.has-icon svg {
   opacity: 0;
 }
 
-/*! * * * * * * * * * * * * * * * * * * * *\  
-  CSShake :: shake
+/*! * * * * * * * * * * * * * * * * * * * *  CSShake :: shake
   v1.5.0
   CSS classes to move your DOM
   (c) 2015 @elrumordelaluz
@@ -442,6 +441,10 @@ button.has-icon svg {
   fill: currentColor;
 }
 
+.icon.reversed {
+  transform: rotateY(180deg);
+}
+
 .new-character {
   flex: 1;
   margin: 0;
@@ -496,7 +499,7 @@ button.has-icon svg {
   right: -800px;
   width: 800px;
   height: 100%;
-  background-color: #900;
+  background-color: #ad302a;
 }
 
 .roller nav {
@@ -557,6 +560,10 @@ button.has-icon svg {
   transform: scale(0.9, 0.9);
 }
 
+.roller .dice button:hover {
+  background-color: transparent;
+}
+
 .roller .dice .d1 .die {
   background-image: url(../images/one.svg);
 }
@@ -573,18 +580,47 @@ button.has-icon svg {
   background-image: url(../images/d8.svg);
 }
 
-.roller .fallout-roll-result {
-  border-top: 2px solid #9a9a92;
-  margin-top: 2rem;
-  display: flex;
-  justify-content: center;
+.roller .fallout {
+  margin: 2rem -2rem 0 0;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
   padding: 1rem;
-  font-weight: bold;
 }
 
-.roller .fallout-roll-result > * {
-  margin-top: 0;
-  padding: 0 0.25rem;
+.roller .fallout h3 {
+  color: #ad302a;
+  font-size: 2.5rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.roller .fallout h3 > * {
+  margin: 0;
+}
+
+.roller .fallout h3 span {
+  margin: 0 0.25rem;
+}
+
+.roller .fallout h3 svg {
+  fill: #ad302a;
+  height: 2rem;
+  width: 2rem;
+}
+
+.roller .fallout-roll-result {
+  font-weight: bold;
+  color: #b1b1a0;
+  margin-top: 0.5rem;
+}
+
+.roller .fallout-roll-result p {
+  margin: 0;
+}
+
+.roller .fallout-roll-result p + p {
+  margin: 0.5rem 0 0 0;
 }
 
 .roller .fallout-roll-result span {

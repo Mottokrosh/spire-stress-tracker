@@ -21,6 +21,7 @@ $primary: #214050;
 $secondary: #8fa5b0;
 $beigeDark: #9a9a92;
 $beigeLight: #f6f6f4;
+$red: #ad302a;
 
 $mainColumnWidth: 480px;
 
@@ -280,7 +281,7 @@ button {
   opacity: 0;
 }
 
-/*! * * * * * * * * * * * * * * * * * * * *\  
+/*! * * * * * * * * * * * * * * * * * * * *\
   CSShake :: shake
   v1.5.0
   CSS classes to move your DOM
@@ -422,6 +423,10 @@ button {
   stroke-width: 0;
   stroke: currentColor;
   fill: currentColor;
+
+  &.reversed {
+    transform: rotateY(180deg);
+  }
 }
 
 .new-character {
@@ -477,7 +482,7 @@ button {
     right: -800px;
     width: 800px;
     height: 100%;
-    background-color: #900;
+    background-color: $red;
   }
 
   nav {
@@ -535,6 +540,10 @@ button {
       &:active {
         transform: scale(0.9, 0.9);
       }
+
+      &:hover {
+        background-color: transparent;
+      }
     }
 
     .d1 .die {
@@ -554,18 +563,38 @@ button {
     }
   }
 
-  .fallout-roll-result {
-    border-top: 2px solid $beigeDark;
-    margin-top: 2rem;
-    display: flex;
-    justify-content: center;
+  .fallout {
+    margin: 2rem -2rem 0 0;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
     padding: 1rem;
-    font-weight: bold;
 
-    & > * {
-      margin-top: 0;
-      padding: 0 0.25rem;
+    h3 {
+      color: $red;
+      font-size: 2.5rem;
+      display: flex;
+      justify-content: flex-start;
+
+      & > * { margin: 0; }
+
+      span { margin: 0 0.25rem; }
+
+      svg {
+        fill: $red;
+        height: 2rem;
+        width: 2rem;
+      }
     }
+  }
+
+  .fallout-roll-result {
+    font-weight: bold;
+    color: darken($beigeLight, 30%);
+    margin-top: 0.5rem;
+
+    p { margin: 0; }
+    p + p { margin: 0.5rem 0 0 0; }
 
     span {
       border: 1px solid darken($beigeDark, 30%);

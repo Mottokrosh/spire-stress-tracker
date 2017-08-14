@@ -9,47 +9,50 @@
           </btn>
         </nav>
 
-        <div class="roller-content">
-          <h2>Roll {{ resistance }} Stress <small>For {{ name }}</small></h2>
+        <transition name="fade">
+          <div v-if="show && show.character" class="roller-content">
+            <h2>Roll {{ resistance }} Stress <small>For {{ name }}</small></h2>
 
-          <div class="dice">
-            <div class="d1">
-              <div :class="d1Classes">
-                <btn class="backgroundless" @click.native="roll(1)">{{ d1.result === null ? '1' : d1.result }}</btn>
+            <div class="dice">
+              <div class="d1">
+                <div :class="d1Classes">
+                  <btn class="backgroundless" @click.native="roll(1)">{{ d1.result === null ? '1' : d1.result }}</btn>
+                </div>
+              </div>
+              <div class="d3">
+                <div :class="d3Classes">
+                  <btn class="backgroundless" @click.native="roll(3)">{{ d3.result === null ? 'd3' : d3.result }}</btn>
+                </div>
+              </div>
+              <div class="d6">
+                <div :class="d6Classes">
+                  <btn class="backgroundless" @click.native="roll(6)">{{ d6.result === null ? 'd6' : d6.result }}</btn>
+                </div>
+              </div>
+              <div class="d8">
+                <div :class="d8Classes">
+                  <btn class="backgroundless" @click.native="roll(8)">{{ d8.result === null ? 'd8' : d8.result }}</btn>
+                </div>
               </div>
             </div>
-            <div class="d3">
-              <div :class="d3Classes">
-                <btn class="backgroundless" @click.native="roll(3)">{{ d3.result === null ? 'd3' : d3.result }}</btn>
+
+            <transition name="fade">
+              <div class="fallout" v-if="falloutOccurred">
+                <h3>
+                  <icon id="fallout"></icon>
+                  <span>Fallout</span>
+                  <icon id="fallout" reversed></icon>
+                </h3>
+
+                <div class="fallout-roll-result">
+                  <p><span>Threshold: {{ stress - freeSlots }}</span> = <span>Stress: {{ stress }}</span> &minus; <span>Free Slots: {{ freeSlots }}</span></p>
+                  <p><span>Fallout Roll Result: {{ falloutRollResult }}</span></p>
+                </div>
               </div>
-            </div>
-            <div class="d6">
-              <div :class="d6Classes">
-                <btn class="backgroundless" @click.native="roll(6)">{{ d6.result === null ? 'd6' : d6.result }}</btn>
-              </div>
-            </div>
-            <div class="d8">
-              <div :class="d8Classes">
-                <btn class="backgroundless" @click.native="roll(8)">{{ d8.result === null ? 'd8' : d8.result }}</btn>
-              </div>
-            </div>
+            </transition>
+
           </div>
-
-          <transition name="fade">
-            <div class="fallout" v-if="falloutOccurred">
-              <h3 class="shake shake-constant"><icon id="fallout"></icon>Fallout<icon id="fallout"></icon></h3>
-            </div>
-          </transition>
-
-          <transition name="fade">
-            <div class="fallout-roll-result" v-if="falloutRollResult">
-              <div>Fallout Roll Result: {{ falloutRollResult }} <span v-if="falloutOccurred">Fallout!</span></div>
-              <div v-if="falloutOccurred">&lt;</div>
-              <div v-else>&gt;=</div>
-              <div>{{ stress - freeSlots }} <span>Threshold</span> ({{ stress }} <span>Stress</span> &minus; {{ freeSlots }} <span>Free Slots</span>)</div>
-            </div>
-          </transition>
-        </div>
+        </transition>
 
       </div>
     </template>
@@ -94,11 +97,11 @@
       },
 
       stress() {
-        return this.character ? this.character[this.resistance].stress : 0;
+        return this.character && this.character[this.resistance] ? this.character[this.resistance].stress : 0;
       },
 
       freeSlots() {
-        return this.character ? this.character[this.resistance].freeSlots : 0;
+        return this.character && this.character[this.resistance] ? this.character[this.resistance].freeSlots : 0;
       },
 
       name() {
@@ -172,11 +175,15 @@
 
       checkForFallout() {
         this.falloutRollResult = this.getRandomIntInclusive(1, 10);
-        console.log('freeSlots', this.freeSlots, 'stress', this.stress, 'falloutRollResult', this.falloutRollResult);
 
         if (this.falloutRollResult < this.stress - this.freeSlots) {
           this.falloutOccurred = true;
-          console.log('FALLOUT!');
+          document.body.classList.add('shake', 'shake-constant');
+
+          setTimeout(() => {
+            document.body.classList.remove('shake', 'shake-constant');
+          }, 900);
+
         } else {
           this.falloutOccurred = false;
         }
