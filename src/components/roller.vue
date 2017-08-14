@@ -78,7 +78,7 @@
   import Icon from './icon.vue';
 
   export default {
-    props: ['show'],
+    props: ['show', 'fallout'],
 
     components: {
       ChevronLeftIcon,

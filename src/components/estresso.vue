@@ -1,7 +1,7 @@
 <template>
   <div class="estresso">
 
-    <roller :show="showRoller" @close="showRoller = null"></roller>
+    <roller :show="showRoller" :fallout="fallout" @close="showRoller = null"></roller>
 
     <header>
       <div class="column">
@@ -85,6 +85,7 @@
         showRoller: false,
         newCharacter: Object.assign({}, characterSchema),
         names: null,
+        fallout: null,
       };
     },
 
@@ -130,6 +131,11 @@
       Axios.get('data/names.json')
         .then(response => {
           this.names = response.data;
+        });
+
+      Axios.get('data/fallout.json')
+        .then(response => {
+          this.fallout = response.data;
         });
     }
   };

@@ -19124,7 +19124,8 @@ var characterSchema = {
       characters: [],
       showRoller: false,
       newCharacter: Object.assign({}, characterSchema),
-      names: null
+      names: null,
+      fallout: null
     };
   },
 
@@ -19170,6 +19171,10 @@ var characterSchema = {
 
     __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('data/names.json').then(function (response) {
       _this.names = response.data;
+    });
+
+    __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('data/fallout.json').then(function (response) {
+      _this.fallout = response.data;
     });
   }
 });
@@ -20740,7 +20745,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['show'],
+  props: ['show', 'fallout'],
 
   components: {
     ChevronLeftIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["a" /* ChevronLeftIcon */],
@@ -21542,7 +21547,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "estresso"
   }, [_c('roller', {
     attrs: {
-      "show": _vm.showRoller
+      "show": _vm.showRoller,
+      "fallout": _vm.fallout
     },
     on: {
       "close": function($event) {
