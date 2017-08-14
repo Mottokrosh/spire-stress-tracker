@@ -20741,6 +20741,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -20861,7 +20862,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this2 = this;
 
       this.falloutRollResult = this.getRandomIntInclusive(1, 10);
-      var applicableStress = this.stress - this.freeSlots;
+      var applicableStress = this.stress - this.freeSlots + this.result;
 
       if (this.falloutRollResult < applicableStress) {
         document.body.classList.add('shake', 'shake-constant');
@@ -21494,7 +21495,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         })], 1), _vm._v(" "), _c('div', {
           staticClass: "fallout-roll-result"
-        }, [_c('p', [_c('span', [_vm._v("Threshold: " + _vm._s(_vm.stress - _vm.freeSlots))]), _vm._v(" = "), _c('span', [_vm._v("Stress: " + _vm._s(_vm.stress))]), _vm._v(" − "), _c('span', [_vm._v("Free Slots: " + _vm._s(_vm.freeSlots))])]), _vm._v(" "), _c('p', [_c('span', [_vm._v("Fallout Roll Result: " + _vm._s(_vm.falloutRollResult))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.falloutLevel))])])])]) : _vm._e()]), _vm._v(" "), _c('code', {
+        }, [_c('p', [_c('span', [_vm._v("Threshold: " + _vm._s(_vm.stress - _vm.freeSlots + _vm.result))])]), _vm._v(" "), _c('p', [_vm._v("= "), _c('span', [_vm._v("Stress: " + _vm._s(_vm.stress))]), _vm._v(" − "), _c('span', [_vm._v("Free Slots: " + _vm._s(_vm.freeSlots))]), _vm._v(" + "), _c('span', [_vm._v("New Stress: " + _vm._s(_vm.result))])]), _vm._v(" "), _c('p', [_c('span', [_vm._v("Fallout Roll Result: " + _vm._s(_vm.falloutRollResult))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.falloutLevel))])])])]) : _vm._e()]), _vm._v(" "), _c('code', {
           staticStyle: {
             "margin-top": "10px"
           }

@@ -53,7 +53,8 @@
                 </h3>
 
                 <div class="fallout-roll-result">
-                  <p><span>Threshold: {{ stress - freeSlots }}</span> = <span>Stress: {{ stress }}</span> &minus; <span>Free Slots: {{ freeSlots }}</span></p>
+                  <p><span>Threshold: {{ stress - freeSlots + result }}</span></p>
+                  <p>= <span>Stress: {{ stress }}</span> &minus; <span>Free Slots: {{ freeSlots }}</span> + <span>New Stress: {{ result }}</span></p>
                   <p><span>Fallout Roll Result: {{ falloutRollResult }}</span> <span>{{ falloutLevel }}</span></p>
                 </div>
               </div>
@@ -201,7 +202,7 @@
 
       checkForFallout() {
         this.falloutRollResult = this.getRandomIntInclusive(1, 10);
-        const applicableStress = this.stress - this.freeSlots;
+        const applicableStress = (this.stress - this.freeSlots) + this.result;
 
         if (this.falloutRollResult < applicableStress) {
           document.body.classList.add('shake', 'shake-constant');
