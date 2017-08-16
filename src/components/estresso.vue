@@ -97,14 +97,19 @@
 
     methods: {
       addCharacter() {
-        this.characters.push(this.newCharacter);
+        const char = this.clone(this.newCharacter);
         this.newCharacter = Object.assign({}, characterSchema);
+        this.characters.push(char);
         this.store.save();
       },
 
       deleteCharacter(character) {
         this.characters.splice(this.characters.indexOf(character), 1);
         this.store.save();
+      },
+
+      clone(obj) {
+        return JSON.parse(JSON.stringify(obj));
       },
 
       getRandomInt(min, max) {

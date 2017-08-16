@@ -197,11 +197,12 @@
 
         setTimeout(() => {
           let results = [];
+
           for (let i = 0; i <= this[name].brutal; i++) {
             let r = this.getRandomIntInclusive(1, die);
-            console.log(r);
             results.push(r);
           }
+
           this[name].result = Math.max.apply(Math, results);
           this.result = this[name].result;
         }, 375);

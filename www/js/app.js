@@ -19138,13 +19138,17 @@ var characterSchema = {
 
   methods: {
     addCharacter: function addCharacter() {
-      this.characters.push(this.newCharacter);
+      var char = this.clone(this.newCharacter);
       this.newCharacter = Object.assign({}, characterSchema);
+      this.characters.push(char);
       this.store.save();
     },
     deleteCharacter: function deleteCharacter(character) {
       this.characters.splice(this.characters.indexOf(character), 1);
       this.store.save();
+    },
+    clone: function clone(obj) {
+      return JSON.parse(JSON.stringify(obj));
     },
     getRandomInt: function getRandomInt(min, max) {
       min = Math.ceil(min);
@@ -20858,11 +20862,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       setTimeout(function () {
         var results = [];
+
         for (var i = 0; i <= _this[name].brutal; i++) {
           var r = _this.getRandomIntInclusive(1, die);
-          console.log(r);
           results.push(r);
         }
+
         _this[name].result = Math.max.apply(Math, results);
         _this.result = _this[name].result;
       }, 375);
