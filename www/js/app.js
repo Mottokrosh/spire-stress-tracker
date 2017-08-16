@@ -8780,7 +8780,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/mottokrosh/Documents/Projects/spire-stress-tracker/src/components/btn.vue"
+Component.options.__file = "/Users/mottokrosh/Projects/spire-stress-tracker/src/components/btn.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] btn.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -18992,7 +18992,7 @@ var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(15),
   /* template */
-  __webpack_require__(52),
+  __webpack_require__(49),
   /* styles */
   null,
   /* scopeId */
@@ -19000,7 +19000,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/mottokrosh/Documents/Projects/spire-stress-tracker/src/components/estresso.vue"
+Component.options.__file = "/Users/mottokrosh/Projects/spire-stress-tracker/src/components/estresso.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] estresso.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -19037,7 +19037,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__counter_control_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__counter_control_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__roller_vue__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__roller_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__roller_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store__ = __webpack_require__(48);
 //
 //
 //
@@ -20227,7 +20227,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/mottokrosh/Documents/Projects/spire-stress-tracker/src/components/character.vue"
+Component.options.__file = "/Users/mottokrosh/Projects/spire-stress-tracker/src/components/character.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] character.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -20428,7 +20428,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/mottokrosh/Documents/Projects/spire-stress-tracker/src/components/counter-control.vue"
+Component.options.__file = "/Users/mottokrosh/Projects/spire-stress-tracker/src/components/counter-control.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] counter-control.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -20623,7 +20623,7 @@ var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(45),
   /* template */
-  __webpack_require__(50),
+  __webpack_require__(47),
   /* styles */
   null,
   /* scopeId */
@@ -20631,7 +20631,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/mottokrosh/Documents/Projects/spire-stress-tracker/src/components/roller.vue"
+Component.options.__file = "/Users/mottokrosh/Projects/spire-stress-tracker/src/components/roller.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] roller.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -20663,13 +20663,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_motion__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_motion___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_motion__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__icon_vue__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__icon_vue__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__icon_vue__);
-//
-//
-//
-//
-//
 //
 //
 //
@@ -20760,6 +20755,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       offset: 100,
+      falloutOffset: 100,
       d1: { flipped: false, result: null },
       d3: { flipped: false, result: null },
       d6: { flipped: false, result: null },
@@ -20841,6 +20837,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.falloutOccurred = null;
       this.falloutLevel = null;
       this.falloutChoices = null;
+      this.falloutOffset = 100;
       this.rolling = false;
     },
     roll: function roll(die) {
@@ -20867,6 +20864,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (this.falloutRollResult < applicableStress) {
         document.body.classList.add('shake', 'shake-constant');
         this.falloutOccurred = true;
+        this.falloutOffset = 0;
 
         if (applicableStress >= 2 && applicableStress <= 4) {
           this.falloutLevel = 'minor';
@@ -21296,103 +21294,6 @@ Object.defineProperty(exports, '__esModule', { value: true });
 /* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var disposed = false
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(48),
-  /* template */
-  __webpack_require__(49),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
-)
-Component.options.__file = "/Users/mottokrosh/Documents/Projects/spire-stress-tracker/src/components/icon.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] icon.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-594ddb1a", Component.options)
-  } else {
-    hotAPI.reload("data-v-594ddb1a", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 48 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    id: String,
-    button: Boolean,
-    reversed: Boolean
-  },
-
-  computed: {
-    iconId: function iconId() {
-      return '#icon-' + this.id;
-    },
-    classes: function classes() {
-      var _ref;
-
-      return _ref = {
-        'icon': true
-      }, _defineProperty(_ref, 'icon-' + this.id, true), _defineProperty(_ref, 'icon-button', this.button), _defineProperty(_ref, 'reversed', this.reversed), _ref;
-    }
-  }
-});
-
-/***/ }),
-/* 49 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('svg', {
-    class: _vm.classes
-  }, [_c('use', {
-    attrs: {
-      "xlink:href": _vm.iconId
-    }
-  })])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-594ddb1a", module.exports)
-  }
-}
-
-/***/ }),
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
-
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('motion', {
     attrs: {
@@ -21414,11 +21315,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.close($event)
             }
           }
-        }, [_c('chevron-left-icon')], 1)], 1), _vm._v(" "), _c('transition', {
-          attrs: {
-            "name": "fade"
-          }
-        }, [(_vm.show && _vm.show.character) ? _c('div', {
+        }, [_c('chevron-left-icon')], 1)], 1), _vm._v(" "), (_vm.show && _vm.show.character) ? _c('div', {
           staticClass: "roller-content"
         }, [_c('h2', [_vm._v("Roll " + _vm._s(_vm.resistance) + " Stress "), _c('small', [_vm._v("For " + _vm._s(_vm.name))])]), _vm._v(" "), _c('div', {
           staticClass: "dice"
@@ -21436,7 +21333,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.roll(1)
             }
           }
-        }, [_vm._v("\n                  " + _vm._s(_vm.d1.result === null ? '1' : _vm.d1.result) + "\n                ")])], 1)]), _vm._v(" "), _c('div', {
+        }, [_vm._v("\n                " + _vm._s(_vm.d1.result === null ? '1' : _vm.d1.result) + "\n              ")])], 1)]), _vm._v(" "), _c('div', {
           staticClass: "d3"
         }, [_c('div', {
           class: _vm.d3Classes
@@ -21450,7 +21347,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.roll(3)
             }
           }
-        }, [_vm._v("\n                  " + _vm._s(_vm.d3.result === null ? 'd3' : _vm.d3.result) + "\n                ")])], 1)]), _vm._v(" "), _c('div', {
+        }, [_vm._v("\n                " + _vm._s(_vm.d3.result === null ? 'd3' : _vm.d3.result) + "\n              ")])], 1)]), _vm._v(" "), _c('div', {
           staticClass: "d6"
         }, [_c('div', {
           class: _vm.d6Classes
@@ -21464,7 +21361,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.roll(6)
             }
           }
-        }, [_vm._v("\n                  " + _vm._s(_vm.d6.result === null ? 'd6' : _vm.d6.result) + "\n                ")])], 1)]), _vm._v(" "), _c('div', {
+        }, [_vm._v("\n                " + _vm._s(_vm.d6.result === null ? 'd6' : _vm.d6.result) + "\n              ")])], 1)]), _vm._v(" "), _c('div', {
           staticClass: "d8"
         }, [_c('div', {
           class: _vm.d8Classes
@@ -21478,26 +21375,32 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.roll(8)
             }
           }
-        }, [_vm._v("\n                  " + _vm._s(_vm.d8.result === null ? 'd8' : _vm.d8.result) + "\n                ")])], 1)])]), _vm._v(" "), _c('transition', {
-          attrs: {
-            "name": "fade"
+        }, [_vm._v("\n                " + _vm._s(_vm.d8.result === null ? 'd8' : _vm.d8.result) + "\n              ")])], 1)])]), _vm._v(" "), _c('div', {
+          class: {
+            'fallout-rolling': true, 'show': _vm.falloutRollResult
           }
-        }, [(_vm.falloutOccurred) ? _c('div', {
-          staticClass: "fallout"
-        }, [_c('h3', [_c('icon', {
+        }, [_c('span', {
+          staticClass: "d10"
+        }, [_vm._v(_vm._s(_vm.falloutRollResult))]), _vm._v(" Fallout Roll Result. Effective Stress: " + _vm._s(_vm.stress - _vm.freeSlots + _vm.result) + ".\n        ")]), _vm._v(" "), _c('motion', {
           attrs: {
-            "id": "fallout"
-          }
-        }), _vm._v(" "), _c('span', [_vm._v("Fallout")]), _vm._v(" "), _c('icon', {
-          attrs: {
-            "id": "fallout",
-            "reversed": ""
-          }
-        })], 1), _vm._v(" "), _c('div', {
-          staticClass: "fallout-roll-result"
-        }, [_c('p', [_c('span', [_vm._v("Threshold: " + _vm._s(_vm.stress - _vm.freeSlots + _vm.result))])]), _vm._v(" "), _c('p', [_vm._v("= "), _c('span', [_vm._v("Stress: " + _vm._s(_vm.stress))]), _vm._v(" − "), _c('span', [_vm._v("Free Slots: " + _vm._s(_vm.freeSlots))]), _vm._v(" + "), _c('span', [_vm._v("New Stress: " + _vm._s(_vm.result))])]), _vm._v(" "), _c('p', [_c('span', [_vm._v("Fallout Roll Result: " + _vm._s(_vm.falloutRollResult))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.falloutLevel))])])])]) : _vm._e()]), _vm._v(" "), _c('code', {
+            "value": _vm.falloutOffset,
+            "spring": "wobbly"
+          },
+          scopedSlots: _vm._u([{
+            key: "default",
+            fn: function(props) {
+              return [_c('div', {
+                staticClass: "fallout",
+                style: ({
+                  transform: ("translateX(" + (props.value) + "%)")
+                })
+              }, [_c('h3', [_vm._v("Fallout")]), _vm._v(" "), _c('h4', [_vm._v(_vm._s(_vm.falloutLevel))])])]
+            }
+          }])
+        }), _vm._v(" "), _c('code', {
           staticStyle: {
-            "margin-top": "10px"
+            "margin-top": "1rem",
+            "display": "block"
           }
         }, [_c('pre', {
           staticStyle: {
@@ -21524,7 +21427,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.apply($event)
             }
           }
-        }, [_vm._v("Apply Results")])], 1)], 1) : _vm._e()])], 1)]
+        }, [_vm._v("Apply Results")])], 1)], 1) : _vm._e()])]
       }
     }])
   })
@@ -21538,7 +21441,7 @@ if (false) {
 }
 
 /***/ }),
-/* 51 */
+/* 48 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21563,7 +21466,7 @@ var store = {
 /* harmony default export */ __webpack_exports__["a"] = (store);
 
 /***/ }),
-/* 52 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -21730,6 +21633,103 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-78c207b0", module.exports)
+  }
+}
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(51),
+  /* template */
+  __webpack_require__(52),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/mottokrosh/Projects/spire-stress-tracker/src/components/icon.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] icon.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-594ddb1a", Component.options)
+  } else {
+    hotAPI.reload("data-v-594ddb1a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 51 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    id: String,
+    button: Boolean,
+    reversed: Boolean
+  },
+
+  computed: {
+    iconId: function iconId() {
+      return '#icon-' + this.id;
+    },
+    classes: function classes() {
+      var _ref;
+
+      return _ref = {
+        'icon': true
+      }, _defineProperty(_ref, 'icon-' + this.id, true), _defineProperty(_ref, 'icon-button', this.button), _defineProperty(_ref, 'reversed', this.reversed), _ref;
+    }
+  }
+});
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('svg', {
+    class: _vm.classes
+  }, [_c('use', {
+    attrs: {
+      "xlink:href": _vm.iconId
+    }
+  })])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-594ddb1a", module.exports)
   }
 }
 

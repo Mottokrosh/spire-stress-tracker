@@ -9,66 +9,61 @@
           </btn>
         </nav>
 
-        <transition name="fade">
-          <div v-if="show && show.character" class="roller-content">
-            <h2>Roll {{ resistance }} Stress <small>For {{ name }}</small></h2>
+        <div v-if="show && show.character" class="roller-content">
+          <h2>Roll {{ resistance }} Stress <small>For {{ name }}</small></h2>
 
-            <div class="dice">
-              <div class="d1">
-                <div :class="d1Classes">
-                  <btn class="backgroundless" @click.native="roll(1)" :disabled="rolling && rolling !== 'd1'">
-                    {{ d1.result === null ? '1' : d1.result }}
-                  </btn>
-                </div>
-              </div>
-              <div class="d3">
-                <div :class="d3Classes">
-                  <btn class="backgroundless" @click.native="roll(3)" :disabled="rolling && rolling !== 'd3'">
-                    {{ d3.result === null ? 'd3' : d3.result }}
-                  </btn>
-                </div>
-              </div>
-              <div class="d6">
-                <div :class="d6Classes">
-                  <btn class="backgroundless" @click.native="roll(6)" :disabled="rolling && rolling !== 'd6'">
-                    {{ d6.result === null ? 'd6' : d6.result }}
-                  </btn>
-                </div>
-              </div>
-              <div class="d8">
-                <div :class="d8Classes">
-                  <btn class="backgroundless" @click.native="roll(8)" :disabled="rolling && rolling !== 'd8'">
-                    {{ d8.result === null ? 'd8' : d8.result }}
-                  </btn>
-                </div>
+          <div class="dice">
+            <div class="d1">
+              <div :class="d1Classes">
+                <btn class="backgroundless" @click.native="roll(1)" :disabled="rolling && rolling !== 'd1'">
+                  {{ d1.result === null ? '1' : d1.result }}
+                </btn>
               </div>
             </div>
-
-            <transition name="fade">
-              <div class="fallout" v-if="falloutOccurred">
-                <h3>
-                  <icon id="fallout"></icon>
-                  <span>Fallout</span>
-                  <icon id="fallout" reversed></icon>
-                </h3>
-
-                <div class="fallout-roll-result">
-                  <p><span>Threshold: {{ stress - freeSlots + result }}</span></p>
-                  <p>= <span>Stress: {{ stress }}</span> &minus; <span>Free Slots: {{ freeSlots }}</span> + <span>New Stress: {{ result }}</span></p>
-                  <p><span>Fallout Roll Result: {{ falloutRollResult }}</span> <span>{{ falloutLevel }}</span></p>
-                </div>
+            <div class="d3">
+              <div :class="d3Classes">
+                <btn class="backgroundless" @click.native="roll(3)" :disabled="rolling && rolling !== 'd3'">
+                  {{ d3.result === null ? 'd3' : d3.result }}
+                </btn>
               </div>
-            </transition>
-
-            <code style="margin-top: 10px;"><pre style="overflow-x: auto;">{{ falloutChoices }}</pre></code>
-
-            <nav class="actions">
-              <btn class="secondary" :disabled="!result" @click.native="reset">Reset</btn>
-              <btn :disabled="!result" @click.native="apply">Apply Results</btn>
-            </nav>
-
+            </div>
+            <div class="d6">
+              <div :class="d6Classes">
+                <btn class="backgroundless" @click.native="roll(6)" :disabled="rolling && rolling !== 'd6'">
+                  {{ d6.result === null ? 'd6' : d6.result }}
+                </btn>
+              </div>
+            </div>
+            <div class="d8">
+              <div :class="d8Classes">
+                <btn class="backgroundless" @click.native="roll(8)" :disabled="rolling && rolling !== 'd8'">
+                  {{ d8.result === null ? 'd8' : d8.result }}
+                </btn>
+              </div>
+            </div>
           </div>
-        </transition>
+
+          <div :class="{ 'fallout-rolling': true, 'show': falloutRollResult }">
+            <span class="d10">{{ falloutRollResult }}</span> Fallout Roll Result. Effective Stress: {{ stress - freeSlots + result }}.
+          </div>
+
+          <motion :value="falloutOffset" spring="wobbly">
+            <template scope="props">
+              <div class="fallout" :style="{ transform: `translateX(${props.value}%)` }">
+                <h3>Fallout</h3>
+                <h4>{{ falloutLevel }}</h4>
+              </div>
+            </template>
+          </motion>
+
+          <code style="margin-top: 1rem; display: block;"><pre style="overflow-x: auto;">{{ falloutChoices }}</pre></code>
+
+          <nav class="actions">
+            <btn class="secondary" :disabled="!result" @click.native="reset">Reset</btn>
+            <btn :disabled="!result" @click.native="apply">Apply Results</btn>
+          </nav>
+
+        </div>
 
       </div>
     </template>
@@ -93,6 +88,7 @@
     data() {
       return {
         offset: 100,
+        falloutOffset: 100,
         d1: { flipped: false, result: null },
         d3: { flipped: false, result: null },
         d6: { flipped: false, result: null },
@@ -183,6 +179,7 @@
         this.falloutOccurred = null;
         this.falloutLevel = null;
         this.falloutChoices = null;
+        this.falloutOffset = 100;
         this.rolling = false;
       },
 
@@ -207,6 +204,7 @@
         if (this.falloutRollResult < applicableStress) {
           document.body.classList.add('shake', 'shake-constant');
           this.falloutOccurred = true;
+          this.falloutOffset = 0;
 
           if (applicableStress >= 2 && applicableStress <= 4) {
             this.falloutLevel = 'minor';

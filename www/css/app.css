@@ -536,7 +536,7 @@ button.has-icon svg {
 .roller .dice {
   display: flex;
   justify-content: space-around;
-  margin-top: 2rem;
+  margin: 2rem 0;
 }
 
 .roller .dice .die {
@@ -568,7 +568,9 @@ button.has-icon svg {
 
 .roller .dice button {
   color: #000;
-  font-size: 2rem;
+  font-size: 1.5rem;
+  font-family: Mahalo, sans-serif;
+  padding-top: 12px;
 }
 
 .roller .dice button:active {
@@ -595,58 +597,74 @@ button.has-icon svg {
   background-image: url(../images/d8.svg);
 }
 
+.roller .fallout-rolling {
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  background-color: #fff;
+  color: #000;
+  display: flex;
+  align-items: center;
+  padding: 0.25rem;
+  border-radius: 0.125rem;
+  margin-top: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.roller .fallout-rolling.show {
+  opacity: 1;
+}
+
+.roller .fallout-rolling .d10 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  background-image: url(../images/d10-black.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #fff;
+  text-align: center;
+  font-size: 1rem;
+  margin-right: 0.25rem;
+  font-family: Mahalo, sans-serif;
+  padding: 3px 0 0 1px;
+}
+
 .roller .fallout {
+  position: relative;
   margin: 2rem -2rem 0 0;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-top-left-radius: 0.25rem;
-  border-bottom-left-radius: 0.25rem;
-  padding: 1rem;
+  overflow: hidden;
+  background-image: url(../images/texture-red-512x512.jpg);
+  background-size: 256px;
+  padding: 1rem 1rem 0.75rem 3.5rem;
+  color: #fff;
+}
+
+.roller .fallout:before {
+  content: '';
+  background-image: url(../images/fallout.svg);
+  background-repeat: no-repeat;
+  background-size: 110px;
+  width: 110px;
+  height: 100%;
+  position: absolute;
+  top: -2px;
+  left: -4px;
+  opacity: 0.15;
 }
 
 .roller .fallout h3 {
-  color: #ad302a;
+  color: #fff;
   font-size: 2.5rem;
-  display: flex;
-  justify-content: flex-start;
 }
 
-.roller .fallout h3 > * {
-  margin: 0;
-}
-
-.roller .fallout h3 span {
-  margin: 0 0.25rem;
-}
-
-.roller .fallout h3 svg {
-  fill: #ad302a;
-  height: 2rem;
-  width: 2rem;
-}
-
-.roller .fallout-roll-result {
-  font-weight: bold;
-  color: #b1b1a0;
-  margin-top: 0.5rem;
-}
-
-.roller .fallout-roll-result p {
-  margin: 0;
-}
-
-.roller .fallout-roll-result p + p {
-  margin: 0.5rem 0 0 0;
-}
-
-.roller .fallout-roll-result span {
-  border: 1px solid #4c4c47;
-  border-radius: 0.25rem;
-  color: #b1b1a0;
-  background-color: #32322e;
-  padding: 0.125rem 0.25rem;
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  font-weight: normal;
+.roller .fallout h4 {
+  color: #fff;
+  font-size: 1.5rem;
+  margin-top: 0.25rem;
 }
 
 .roller .actions {

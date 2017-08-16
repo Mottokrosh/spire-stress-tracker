@@ -519,7 +519,7 @@ button {
   .dice {
     display: flex;
     justify-content: space-around;
-    margin-top: 2rem;
+    margin: 2rem 0;
 
     .die {
       perspective: 1000px;
@@ -550,7 +550,9 @@ button {
 
     button {
       color: #000;
-      font-size: 2rem;
+      font-size: 1.5rem;
+      font-family: Mahalo, sans-serif;
+      padding-top: 12px;
 
       &:active {
         transform: scale(0.9, 0.9);
@@ -578,48 +580,73 @@ button {
     }
   }
 
-  .fallout {
-    margin: 2rem -2rem 0 0;
-    background-color: rgba(255, 255, 255, 0.05);
-    border-top-left-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
-    padding: 1rem;
+  .fallout-rolling {
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    background-color: #fff;
+    color: #000;
+    display: flex;
+    align-items: center;
+    padding: 0.25rem;
+    border-radius: 0.125rem;
+    margin-top: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
 
-    h3 {
-      color: $red;
-      font-size: 2.5rem;
+    &.show {
+      opacity: 1;
+    }
+
+    .d10 {
       display: flex;
-      justify-content: flex-start;
-
-      & > * { margin: 0; }
-
-      span { margin: 0 0.25rem; }
-
-      svg {
-        fill: $red;
-        height: 2rem;
-        width: 2rem;
-      }
+      justify-content: center;
+      align-items: center;
+      width: 1.75rem;
+      height: 1.75rem;
+      background-image: url(../images/d10-black.svg);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      color: #fff;
+      text-align: center;
+      font-size: 1rem;
+      margin-right: 0.25rem;
+      font-family: Mahalo, sans-serif;
+      padding: 3px 0 0 1px;
     }
   }
 
-  .fallout-roll-result {
-    font-weight: bold;
-    color: darken($beigeLight, 30%);
-    margin-top: 0.5rem;
+  .fallout {
+    position: relative;
+    margin: 2rem -2rem 0 0;
+    overflow: hidden;
+    background-image: url(../images/texture-red-512x512.jpg);
+    background-size: 256px;
+    padding: 1rem 1rem 0.75rem 3.5rem;
+    color: #fff;
 
-    p { margin: 0; }
-    p + p { margin: 0.5rem 0 0 0; }
+    &:before {
+      content: '';
+      background-image: url(../images/fallout.svg);
+      background-repeat: no-repeat;
+      background-size: 110px;
+      width: 110px;
+      height: 100%;
+      position: absolute;
+      top: -2px;
+      left: -4px;
+      opacity: 0.15;
+    }
 
-    span {
-      border: 1px solid darken($beigeDark, 30%);
-      border-radius: 0.25rem;
-      color: darken($beigeLight, 30%);
-      background-color: darken($beigeDark, 40%);
-      padding: 0.125rem 0.25rem;
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      font-weight: normal;
+    h3 {
+      color: #fff;
+      font-size: 2.5rem;
+    }
+
+    h4 {
+      color: #fff;
+      font-size: 1.5rem;
+      margin-top: 0.25rem;
     }
   }
 
