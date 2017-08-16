@@ -19147,6 +19147,12 @@ var characterSchema = {
       this.characters.splice(this.characters.indexOf(character), 1);
       this.store.save();
     },
+    updateCharacter: function updateCharacter(result) {
+      var c = this.characters[this.characters.indexOf(result.character)];
+      c[result.resistance].stress = result.stress;
+      c.fallout = result.fallout;
+      this.store.save();
+    },
     clone: function clone(obj) {
       return JSON.parse(JSON.stringify(obj));
     },
@@ -20777,6 +20783,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       falloutOccurred: null,
       falloutLevel: null,
       falloutChoices: null,
+      falloutChosen: null,
       rolling: null
     };
   },
@@ -20850,6 +20857,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.falloutLevel = null;
       this.falloutChoices = null;
       this.falloutOffset = 100;
+      this.falloutChosen = null;
       this.rolling = false;
     },
     roll: function roll(die) {
@@ -20910,10 +20918,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     apply: function apply() {
-      // adjust stress
-      // on fallout, remove some stress (3/5/7)
-      // close
-      window.alert('WIP');
+      var newStress = this.stress + this.result;
+
+      if (this.falloutOccurred) {
+        if (this.falloutLevel === 'minor') {
+          newStress = newStress - 3;
+        } else if (this.falloutLevel === 'major') {
+          newStress = newStress - 5;
+        } else if (this.falloutLevel === 'severe') {
+          newStress = newStress - 7;
+        }
+      }
+
+      this.$emit('update', {
+        character: this.character,
+        resistance: this.resistance,
+        stress: newStress,
+        fallout: this.falloutChosen
+      });
+
+      this.close();
     },
     getRandomIntInclusive: function getRandomIntInclusive(min, max) {
       var randomBuffer = new Uint32Array(1);
@@ -21525,7 +21549,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "close": function($event) {
         _vm.showRoller = null
-      }
+      },
+      "update": _vm.updateCharacter
     }
   }), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('transition-group', {
     staticClass: "characters",

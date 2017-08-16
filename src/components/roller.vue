@@ -104,6 +104,7 @@
         falloutOccurred: null,
         falloutLevel: null,
         falloutChoices: null,
+        falloutChosen: null,
         rolling: null,
       };
     },
@@ -186,6 +187,7 @@
         this.falloutLevel = null;
         this.falloutChoices = null;
         this.falloutOffset = 100;
+        this.falloutChosen = null;
         this.rolling = false;
       },
 
@@ -246,10 +248,26 @@
       },
 
       apply() {
-        // adjust stress
-        // on fallout, remove some stress (3/5/7)
-        // close
-        window.alert('WIP');
+        let newStress = this.stress + this.result;
+
+        if (this.falloutOccurred) {
+          if (this.falloutLevel === 'minor') {
+            newStress = newStress - 3;
+          } else if (this.falloutLevel === 'major') {
+            newStress = newStress - 5;
+          } else if (this.falloutLevel === 'severe') {
+            newStress = newStress - 7;
+          }
+        }
+
+        this.$emit('update', {
+          character: this.character,
+          resistance: this.resistance,
+          stress: newStress,
+          fallout: this.falloutChosen,
+        });
+
+        this.close();
       },
 
       getRandomIntInclusive(min, max) {

@@ -1,7 +1,7 @@
 <template>
   <div class="estresso">
 
-    <roller :show="showRoller" :fallout="fallout" @close="showRoller = null"></roller>
+    <roller :show="showRoller" :fallout="fallout" @close="showRoller = null" @update="updateCharacter"></roller>
 
     <header>
       <div class="column">
@@ -105,6 +105,13 @@
 
       deleteCharacter(character) {
         this.characters.splice(this.characters.indexOf(character), 1);
+        this.store.save();
+      },
+
+      updateCharacter(result) {
+        const c = this.characters[this.characters.indexOf(result.character)];
+        c[result.resistance].stress = result.stress;
+        c.fallout = result.fallout;
         this.store.save();
       },
 
