@@ -145,6 +145,10 @@ button {
     background-color: $secondary;
   }
 
+  &.small {
+    padding: 0.25rem 0.5rem;
+  }
+
   &.tilded {
     &:before, &:after {
       content: '\2020';
@@ -276,6 +280,25 @@ button {
       outline: 0;
       box-shadow: inset 0.125rem 0.125rem 0.5rem rgba(0, 0, 0, 0.2);
     }
+  }
+}
+
+select {
+  background-color: $primary;
+  color: #fff;
+  font-family: inherit;
+  background-color: $primary;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  margin: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+
+  &.small {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.72rem;
   }
 }
 
@@ -548,7 +571,7 @@ button {
       width: 4rem;
     }
 
-    button {
+    .die button {
       color: #000;
       font-size: 1.5rem;
       font-family: Mahalo, sans-serif;
@@ -578,6 +601,13 @@ button {
     .d8 .die {
       background-image: url(../images/d8.svg);
     }
+  }
+
+  .brutal-placeholder {
+    width: 64px;
+    height: 22px;
+    background-color: $primary;
+    border-radius: 0.25rem;
   }
 
   .fallout-rolling {
@@ -621,6 +651,8 @@ button {
     margin: 2rem -2rem 0 0;
     overflow: hidden;
     background-image: url(../images/texture-red-512x512.jpg);
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
     background-size: 256px;
     padding: 1rem 1rem 0.75rem 3.5rem;
     color: #fff;
@@ -629,11 +661,11 @@ button {
       content: '';
       background-image: url(../images/fallout.svg);
       background-repeat: no-repeat;
-      background-size: 110px;
+      background-size: 104px;
       width: 110px;
-      height: 100%;
+      height: 105%;
       position: absolute;
-      top: -2px;
+      top: -4px;
       left: -4px;
       opacity: 0.15;
     }

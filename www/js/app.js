@@ -20663,8 +20663,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_motion__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_motion___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_motion__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__icon_vue__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__icon_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__brutal_vue__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__brutal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__brutal_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__icon_vue__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__icon_vue__);
 //
 //
 //
@@ -20737,6 +20739,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+
 
 
 
@@ -20746,8 +20753,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   props: ['show', 'fallout'],
 
   components: {
+    Brutal: __WEBPACK_IMPORTED_MODULE_2__brutal_vue___default.a,
     ChevronLeftIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["a" /* ChevronLeftIcon */],
-    Icon: __WEBPACK_IMPORTED_MODULE_2__icon_vue___default.a,
+    Icon: __WEBPACK_IMPORTED_MODULE_3__icon_vue___default.a,
     motion: __WEBPACK_IMPORTED_MODULE_0_vue_motion__["Motion"],
     XIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["d" /* XIcon */]
   },
@@ -20756,10 +20764,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       offset: 100,
       falloutOffset: 100,
-      d1: { flipped: false, result: null },
-      d3: { flipped: false, result: null },
-      d6: { flipped: false, result: null },
-      d8: { flipped: false, result: null },
+      d1: { flipped: false, result: null, brutal: 0 },
+      d3: { flipped: false, result: null, brutal: 0 },
+      d6: { flipped: false, result: null, brutal: 0 },
+      d8: { flipped: false, result: null, brutal: 0 },
       result: null,
       falloutRollResult: null,
       falloutOccurred: null,
@@ -20828,10 +20836,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.$emit('close');
     },
     reset: function reset() {
-      this.d1 = { flipped: false, result: null };
-      this.d3 = { flipped: false, result: null };
-      this.d6 = { flipped: false, result: null };
-      this.d8 = { flipped: false, result: null };
+      this.d1 = { flipped: false, result: null, brutal: 0 };
+      this.d3 = { flipped: false, result: null, brutal: 0 };
+      this.d6 = { flipped: false, result: null, brutal: 0 };
+      this.d8 = { flipped: false, result: null, brutal: 0 };
       this.result = null;
       this.falloutRollResult = null;
       this.falloutOccurred = null;
@@ -20849,7 +20857,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.rolling = name;
 
       setTimeout(function () {
-        _this[name].result = _this.getRandomIntInclusive(1, die);
+        var results = [];
+        for (var i = 0; i <= _this[name].brutal; i++) {
+          var r = _this.getRandomIntInclusive(1, die);
+          console.log(r);
+          results.push(r);
+        }
+        _this[name].result = Math.max.apply(Math, results);
         _this.result = _this[name].result;
       }, 375);
 
@@ -21322,6 +21336,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }, [_c('div', {
           staticClass: "d1"
         }, [_c('div', {
+          staticClass: "brutal-placeholder"
+        }), _vm._v(" "), _c('div', {
           class: _vm.d1Classes
         }, [_c('btn', {
           staticClass: "backgroundless",
@@ -21335,7 +21351,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }, [_vm._v("\n                " + _vm._s(_vm.d1.result === null ? '1' : _vm.d1.result) + "\n              ")])], 1)]), _vm._v(" "), _c('div', {
           staticClass: "d3"
-        }, [_c('div', {
+        }, [_c('brutal', {
+          model: {
+            value: (_vm.d3.brutal),
+            callback: function($$v) {
+              _vm.d3.brutal = $$v
+            },
+            expression: "d3.brutal"
+          }
+        }), _vm._v(" "), _c('div', {
           class: _vm.d3Classes
         }, [_c('btn', {
           staticClass: "backgroundless",
@@ -21347,9 +21371,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.roll(3)
             }
           }
-        }, [_vm._v("\n                " + _vm._s(_vm.d3.result === null ? 'd3' : _vm.d3.result) + "\n              ")])], 1)]), _vm._v(" "), _c('div', {
+        }, [_vm._v("\n                " + _vm._s(_vm.d3.result === null ? 'd3' : _vm.d3.result) + "\n              ")])], 1)], 1), _vm._v(" "), _c('div', {
           staticClass: "d6"
-        }, [_c('div', {
+        }, [_c('brutal', {
+          model: {
+            value: (_vm.d6.brutal),
+            callback: function($$v) {
+              _vm.d6.brutal = $$v
+            },
+            expression: "d6.brutal"
+          }
+        }), _vm._v(" "), _c('div', {
           class: _vm.d6Classes
         }, [_c('btn', {
           staticClass: "backgroundless",
@@ -21361,9 +21393,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.roll(6)
             }
           }
-        }, [_vm._v("\n                " + _vm._s(_vm.d6.result === null ? 'd6' : _vm.d6.result) + "\n              ")])], 1)]), _vm._v(" "), _c('div', {
+        }, [_vm._v("\n                " + _vm._s(_vm.d6.result === null ? 'd6' : _vm.d6.result) + "\n              ")])], 1)], 1), _vm._v(" "), _c('div', {
           staticClass: "d8"
-        }, [_c('div', {
+        }, [_c('brutal', {
+          model: {
+            value: (_vm.d8.brutal),
+            callback: function($$v) {
+              _vm.d8.brutal = $$v
+            },
+            expression: "d8.brutal"
+          }
+        }), _vm._v(" "), _c('div', {
           class: _vm.d8Classes
         }, [_c('btn', {
           staticClass: "backgroundless",
@@ -21375,7 +21415,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.roll(8)
             }
           }
-        }, [_vm._v("\n                " + _vm._s(_vm.d8.result === null ? 'd8' : _vm.d8.result) + "\n              ")])], 1)])]), _vm._v(" "), _c('div', {
+        }, [_vm._v("\n                " + _vm._s(_vm.d8.result === null ? 'd8' : _vm.d8.result) + "\n              ")])], 1)], 1)]), _vm._v(" "), _c('div', {
           class: {
             'fallout-rolling': true, 'show': _vm.falloutRollResult
           }
@@ -21730,6 +21770,142 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-594ddb1a", module.exports)
+  }
+}
+
+/***/ }),
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(57),
+  /* template */
+  __webpack_require__(58),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/mottokrosh/Projects/spire-stress-tracker/src/components/brutal.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] brutal.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-66656054", Component.options)
+  } else {
+    hotAPI.reload("data-v-66656054", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 57 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['value'],
+
+  data: function data() {
+    return {
+      selected: 0
+    };
+  },
+
+
+  watch: {
+    selected: function selected(val) {
+      this.$emit('input', val);
+    }
+  }
+});
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.selected),
+      expression: "selected"
+    }],
+    staticClass: "small",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.selected = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": "0"
+    }
+  }, [_vm._v("Brutal × 0")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "1"
+    }
+  }, [_vm._v("Brutal × 1")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "2"
+    }
+  }, [_vm._v("Brutal × 2")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "3"
+    }
+  }, [_vm._v("Brutal × 3")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "4"
+    }
+  }, [_vm._v("Brutal × 4")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "5"
+    }
+  }, [_vm._v("Brutal × 5")])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-66656054", module.exports)
   }
 }
 

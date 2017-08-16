@@ -14,6 +14,7 @@
 
           <div class="dice">
             <div class="d1">
+              <div class="brutal-placeholder"></div>
               <div :class="d1Classes">
                 <btn class="backgroundless" @click.native="roll(1)" :disabled="rolling && rolling !== 'd1'">
                   {{ d1.result === null ? '1' : d1.result }}
@@ -21,6 +22,7 @@
               </div>
             </div>
             <div class="d3">
+              <brutal v-model="d3.brutal"></brutal>
               <div :class="d3Classes">
                 <btn class="backgroundless" @click.native="roll(3)" :disabled="rolling && rolling !== 'd3'">
                   {{ d3.result === null ? 'd3' : d3.result }}
@@ -28,6 +30,7 @@
               </div>
             </div>
             <div class="d6">
+              <brutal v-model="d6.brutal"></brutal>
               <div :class="d6Classes">
                 <btn class="backgroundless" @click.native="roll(6)" :disabled="rolling && rolling !== 'd6'">
                   {{ d6.result === null ? 'd6' : d6.result }}
@@ -35,6 +38,7 @@
               </div>
             </div>
             <div class="d8">
+              <brutal v-model="d8.brutal"></brutal>
               <div :class="d8Classes">
                 <btn class="backgroundless" @click.native="roll(8)" :disabled="rolling && rolling !== 'd8'">
                   {{ d8.result === null ? 'd8' : d8.result }}
@@ -73,12 +77,14 @@
 <script>
   import { Motion } from 'vue-motion';
   import { ChevronLeftIcon, XIcon } from 'vue-feather-icons';
+  import Brutal from './brutal.vue';
   import Icon from './icon.vue';
 
   export default {
     props: ['show', 'fallout'],
 
     components: {
+      Brutal,
       ChevronLeftIcon,
       Icon,
       motion: Motion,
@@ -89,10 +95,10 @@
       return {
         offset: 100,
         falloutOffset: 100,
-        d1: { flipped: false, result: null },
-        d3: { flipped: false, result: null },
-        d6: { flipped: false, result: null },
-        d8: { flipped: false, result: null },
+        d1: { flipped: false, result: null, brutal: 0 },
+        d3: { flipped: false, result: null, brutal: 0 },
+        d6: { flipped: false, result: null, brutal: 0 },
+        d8: { flipped: false, result: null, brutal: 0 },
         result: null,
         falloutRollResult: null,
         falloutOccurred: null,
@@ -170,10 +176,10 @@
       },
 
       reset() {
-        this.d1 = { flipped: false, result: null };
-        this.d3 = { flipped: false, result: null };
-        this.d6 = { flipped: false, result: null };
-        this.d8 = { flipped: false, result: null };
+        this.d1 = { flipped: false, result: null, brutal: 0 };
+        this.d3 = { flipped: false, result: null, brutal: 0 };
+        this.d6 = { flipped: false, result: null, brutal: 0 };
+        this.d8 = { flipped: false, result: null, brutal: 0 };
         this.result = null;
         this.falloutRollResult = null;
         this.falloutOccurred = null;
@@ -190,7 +196,13 @@
         this.rolling = name;
 
         setTimeout(() => {
-          this[name].result = this.getRandomIntInclusive(1, die);
+          let results = [];
+          for (let i = 0; i <= this[name].brutal; i++) {
+            let r = this.getRandomIntInclusive(1, die);
+            console.log(r);
+            results.push(r);
+          }
+          this[name].result = Math.max.apply(Math, results);
           this.result = this[name].result;
         }, 375);
 

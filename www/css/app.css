@@ -120,6 +120,10 @@ button.secondary {
   background-color: #8fa5b0;
 }
 
+button.small {
+  padding: 0.25rem 0.5rem;
+}
+
 button.tilded:before, button.tilded:after {
   content: '\2020';
   color: rgba(255, 255, 255, 0.5);
@@ -247,6 +251,25 @@ button.has-icon svg {
 .input-row input:focus {
   outline: 0;
   box-shadow: inset 0.125rem 0.125rem 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+select {
+  background-color: #214050;
+  color: #fff;
+  font-family: inherit;
+  background-color: #214050;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  margin: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+select.small {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.72rem;
 }
 
 .fade-enter-active,
@@ -566,18 +589,18 @@ button.has-icon svg {
   width: 4rem;
 }
 
-.roller .dice button {
+.roller .dice .die button {
   color: #000;
   font-size: 1.5rem;
   font-family: Mahalo, sans-serif;
   padding-top: 12px;
 }
 
-.roller .dice button:active {
+.roller .dice .die button:active {
   transform: scale(0.9, 0.9);
 }
 
-.roller .dice button:hover {
+.roller .dice .die button:hover {
   background-color: transparent;
 }
 
@@ -595,6 +618,13 @@ button.has-icon svg {
 
 .roller .dice .d8 .die {
   background-image: url(../images/d8.svg);
+}
+
+.roller .brutal-placeholder {
+  width: 64px;
+  height: 22px;
+  background-color: #214050;
+  border-radius: 0.25rem;
 }
 
 .roller .fallout-rolling {
@@ -638,6 +668,8 @@ button.has-icon svg {
   margin: 2rem -2rem 0 0;
   overflow: hidden;
   background-image: url(../images/texture-red-512x512.jpg);
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
   background-size: 256px;
   padding: 1rem 1rem 0.75rem 3.5rem;
   color: #fff;
@@ -647,11 +679,11 @@ button.has-icon svg {
   content: '';
   background-image: url(../images/fallout.svg);
   background-repeat: no-repeat;
-  background-size: 110px;
+  background-size: 104px;
   width: 110px;
-  height: 100%;
+  height: 105%;
   position: absolute;
-  top: -2px;
+  top: -4px;
   left: -4px;
   opacity: 0.15;
 }
