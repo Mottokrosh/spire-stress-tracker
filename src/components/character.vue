@@ -8,7 +8,7 @@
 
     <div class="resistances">
       <div class="resistance" v-for="r in resistances">
-        <h3>{{ ucfirst(r) }}<small v-if="freeSlot(r)"> + {{ freeSlot(r) }}</small></h3>
+        <h3>{{ ucfirst(r) }}<small v-if="freeSlots(r)"> + {{ freeSlots(r) }}</small></h3>
         <div>
           <span>Stress</span>
           <strong>{{ c[r].stress }}</strong>
@@ -22,6 +22,7 @@
 
 <script>
   import { PlusIcon, XIcon } from 'vue-feather-icons';
+  import Store from '../store';
 
   export default {
     props: {
@@ -35,7 +36,7 @@
 
     data() {
       return {
-        resistances: ['blood', 'mind', 'shadow', 'silver', 'reputation'],
+        resistances: Store.resistances,
       };
     },
 
@@ -44,7 +45,7 @@
         return string.charAt(0).toUpperCase() + string.slice(1);
       },
 
-      freeSlot(resistance) {
+      freeSlots(resistance) {
         return this.c[resistance].freeSlots || null;
       },
 

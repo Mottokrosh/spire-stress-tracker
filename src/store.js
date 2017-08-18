@@ -15,6 +15,8 @@ const store = {
 
     return this.data;
   },
+
+  resistances: ['blood', 'mind', 'shadow', 'silver', 'reputation'],
 };
 
 export default store;

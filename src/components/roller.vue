@@ -9,7 +9,7 @@
           </btn>
         </nav>
 
-        <div v-if="show && show.character" class="roller-content">
+        <div v-if="options" class="roller-content">
           <h2>Roll {{ resistance }} Stress <small>For {{ name }}</small></h2>
 
           <div class="dice">
@@ -48,7 +48,7 @@
           </div>
 
           <div :class="{ 'fallout-rolling': true, 'show': falloutRollResult }">
-            <span class="d10">{{ falloutRollResult }}</span> Fallout Roll Result. Effective Stress: {{ stress - freeSlots + result }}.
+            <span class="d10">{{ falloutRollResult }}</span> Fallout Roll Result. Total Stress: {{ totalStress }}.
           </div>
 
           <motion :value="falloutOffset" spring="wobbly">
@@ -77,11 +77,13 @@
 <script>
   import { Motion } from 'vue-motion';
   import { ChevronLeftIcon, XIcon } from 'vue-feather-icons';
+  import Store from '../store';
+  import Helpers from '../helpers.mixin';
   import Brutal from './brutal.vue';
   import Icon from './icon.vue';
 
   export default {
-    props: ['show', 'fallout'],
+    props: ['options', 'fallout'],
 
     components: {
       Brutal,
@@ -91,8 +93,11 @@
       XIcon,
     },
 
+    mixins: [Helpers],
+
     data() {
       return {
+        resistances: Store.resistances,
         offset: 100,
         falloutOffset: 100,
         d1: { flipped: false, result: null, brutal: 0 },
@@ -106,16 +111,26 @@
         falloutChoices: null,
         falloutChosen: null,
         rolling: null,
+        totalStress: 0,
+        characterCopy: null,
       };
     },
 
     computed: {
       character() {
-        return this.show && this.show.character ? this.show.character : {};
+        if (!this.options) {
+          return {};
+        }
+
+        if (!this.characterCopy) {
+          this.characterCopy = this.clone(this.options.character);
+        }
+
+        return this.characterCopy;
       },
 
       resistance() {
-        return this.show && this.show.resistance ? this.show.resistance : '';
+        return this.options ? this.options.resistance : '';
       },
 
       stress() {
@@ -133,7 +148,7 @@
       classes() {
         return {
           roller: true,
-          open: this.show,
+          open: this.options,
         };
       },
 
@@ -189,9 +204,13 @@
         this.falloutOffset = 100;
         this.falloutChosen = null;
         this.rolling = false;
+        this.totalStress = 0;
+        this.characterCopy = this.options ? this.clone(this.options.character) : null;
       },
 
       roll(die) {
+        if (this.result) return;
+
         const name = 'd' + die;
 
         this[name].flipped = !this[name].flipped;
@@ -214,27 +233,37 @@
 
       checkForFallout() {
         this.falloutRollResult = this.getRandomIntInclusive(1, 10);
-        const applicableStress = (this.stress - this.freeSlots) + this.result;
 
-        if (this.falloutRollResult < applicableStress) {
+        let stressedResistances = [];
+
+        this.character[this.resistance].stress += this.result;
+
+        this.resistances.forEach((res) => {
+          if (this.character[res].stress > 0) {
+            this.totalStress += this.character[res].stress;
+            stressedResistances.push(res);
+          }
+        });
+
+        if (this.falloutRollResult < this.totalStress) {
           document.body.classList.add('shake', 'shake-constant');
           this.falloutOccurred = true;
           this.falloutOffset = 0;
 
-          if (applicableStress >= 2 && applicableStress <= 4) {
+          if (this.totalStress >= 2 && this.totalStress <= 4) {
             this.falloutLevel = 'minor';
             this.falloutChoices = this.fallout.filter((f) => {
-              return f.level === 'minor' && f.resistance === this.resistance;
+              return f.level === 'minor' && stressedResistances.indexOf(f.resistance) !== -1;
             });
-          } else if (applicableStress >= 5 && applicableStress <= 8) {
+          } else if (this.totalStress >= 5 && this.totalStress <= 8) {
             this.falloutLevel = 'major';
             this.falloutChoices = this.fallout.filter((f) => {
-              return f.level === 'major' && f.resistance === this.resistance;
+              return f.level === 'major' && stressedResistances.indexOf(f.resistance) !== -1;
             });
-          } else if (applicableStress >= 9) {
+          } else if (this.totalStress >= 9) {
             this.falloutLevel = 'severe';
             this.falloutChoices = this.fallout.filter((f) => {
-              return f.level === 'severe' && f.resistance === this.resistance;
+              return f.level === 'severe' && stressedResistances.indexOf(f.resistance) !== -1;
             });
           }
 
@@ -248,7 +277,7 @@
       },
 
       apply() {
-        let newStress = this.stress + this.result;
+        /*let newStress = this.stress + this.result;
 
         if (this.falloutOccurred) {
           if (this.falloutLevel === 'minor') {
@@ -258,12 +287,12 @@
           } else if (this.falloutLevel === 'severe') {
             newStress = newStress - 7;
           }
-        }
+        }*/
 
         this.$emit('update', {
-          character: this.character,
+          character: this.options.character,
           resistance: this.resistance,
-          stress: newStress,
+          stress: this.stress,
           fallout: this.falloutChosen,
         });
 
@@ -284,8 +313,8 @@
     },
 
     watch: {
-      show(active) {
-        if (active) {
+      options(value) {
+        if (value) {
           document.body.classList.add('roller-open');
           this.offset = 0;
         } else {

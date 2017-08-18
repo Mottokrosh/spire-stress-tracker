@@ -1,7 +1,7 @@
 <template>
   <div class="estresso">
 
-    <roller :show="showRoller" :fallout="fallout" @close="showRoller = null" @update="updateCharacter"></roller>
+    <roller :options="rollerOptions" :fallout="fallout" @close="rollerOptions = null" @update="updateCharacter"></roller>
 
     <header>
       <div class="column">
@@ -63,6 +63,7 @@
 
 <script>
   import Axios from 'axios';
+  import Helpers from '../helpers.mixin';
   import Character from './character.vue';
   import CounterControl from './counter-control.vue';
   import Roller from './roller.vue';
@@ -78,11 +79,14 @@
   };
 
   export default {
+    mixins: [Helpers],
+
     data() {
       return {
         store: Store,
+        resistances: Store.resistances,
         characters: [],
-        showRoller: false,
+        rollerOptions: null,
         newCharacter: Object.assign({}, characterSchema),
         names: null,
         fallout: null,
@@ -98,6 +102,11 @@
     methods: {
       addCharacter() {
         const char = this.clone(this.newCharacter);
+        this.resistances.forEach((res) => {
+          if (char[res].freeSlots) {
+            char[res].stress -= char[res].freeSlots;
+          }
+        });
         this.newCharacter = Object.assign({}, characterSchema);
         this.characters.push(char);
         this.store.save();
@@ -115,10 +124,6 @@
         this.store.save();
       },
 
-      clone(obj) {
-        return JSON.parse(JSON.stringify(obj));
-      },
-
       getRandomInt(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
@@ -132,7 +137,7 @@
 
       addStress(options) {
         const {character, resistance} = options;
-        this.showRoller = options;
+        this.rollerOptions = options;
       }
     },
 

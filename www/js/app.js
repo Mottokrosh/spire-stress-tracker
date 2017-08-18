@@ -19031,13 +19031,14 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__character_vue__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__character_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__character_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__counter_control_vue__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__counter_control_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__counter_control_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__roller_vue__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__roller_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__roller_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_mixin__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__character_vue__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__character_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__character_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__counter_control_vue__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__counter_control_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__counter_control_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__roller_vue__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__roller_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__roller_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__store__ = __webpack_require__(48);
 //
 //
 //
@@ -19101,6 +19102,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -19118,11 +19120,14 @@ var characterSchema = {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [__WEBPACK_IMPORTED_MODULE_1__helpers_mixin__["a" /* default */]],
+
   data: function data() {
     return {
-      store: __WEBPACK_IMPORTED_MODULE_4__store__["a" /* default */],
+      store: __WEBPACK_IMPORTED_MODULE_5__store__["a" /* default */],
+      resistances: __WEBPACK_IMPORTED_MODULE_5__store__["a" /* default */].resistances,
       characters: [],
-      showRoller: false,
+      rollerOptions: null,
       newCharacter: Object.assign({}, characterSchema),
       names: null,
       fallout: null
@@ -19131,14 +19136,19 @@ var characterSchema = {
 
 
   components: {
-    Character: __WEBPACK_IMPORTED_MODULE_1__character_vue___default.a,
-    CounterControl: __WEBPACK_IMPORTED_MODULE_2__counter_control_vue___default.a,
-    Roller: __WEBPACK_IMPORTED_MODULE_3__roller_vue___default.a
+    Character: __WEBPACK_IMPORTED_MODULE_2__character_vue___default.a,
+    CounterControl: __WEBPACK_IMPORTED_MODULE_3__counter_control_vue___default.a,
+    Roller: __WEBPACK_IMPORTED_MODULE_4__roller_vue___default.a
   },
 
   methods: {
     addCharacter: function addCharacter() {
       var char = this.clone(this.newCharacter);
+      this.resistances.forEach(function (res) {
+        if (char[res].freeSlots) {
+          char[res].stress -= char[res].freeSlots;
+        }
+      });
       this.newCharacter = Object.assign({}, characterSchema);
       this.characters.push(char);
       this.store.save();
@@ -19153,9 +19163,6 @@ var characterSchema = {
       c.fallout = result.fallout;
       this.store.save();
     },
-    clone: function clone(obj) {
-      return JSON.parse(JSON.stringify(obj));
-    },
     getRandomInt: function getRandomInt(min, max) {
       min = Math.ceil(min);
       max = Math.floor(max);
@@ -19169,7 +19176,7 @@ var characterSchema = {
       var character = options.character,
           resistance = options.resistance;
 
-      this.showRoller = options;
+      this.rollerOptions = options;
     }
   },
 
@@ -20267,6 +20274,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store__ = __webpack_require__(48);
 //
 //
 //
@@ -20289,6 +20297,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -20304,7 +20313,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   data: function data() {
     return {
-      resistances: ['blood', 'mind', 'shadow', 'silver', 'reputation']
+      resistances: __WEBPACK_IMPORTED_MODULE_1__store__["a" /* default */].resistances
     };
   },
 
@@ -20313,7 +20322,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     ucfirst: function ucfirst(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
     },
-    freeSlot: function freeSlot(resistance) {
+    freeSlots: function freeSlots(resistance) {
       return this.c[resistance].freeSlots || null;
     },
     addStress: function addStress(resistance) {
@@ -20403,7 +20412,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, _vm._l((_vm.resistances), function(r) {
     return _c('div', {
       staticClass: "resistance"
-    }, [_c('h3', [_vm._v(_vm._s(_vm.ucfirst(r))), (_vm.freeSlot(r)) ? _c('small', [_vm._v(" + " + _vm._s(_vm.freeSlot(r)))]) : _vm._e()]), _vm._v(" "), _c('div', [_c('span', [_vm._v("Stress")]), _vm._v(" "), _c('strong', [_vm._v(_vm._s(_vm.c[r].stress))])]), _vm._v(" "), _c('btn', {
+    }, [_c('h3', [_vm._v(_vm._s(_vm.ucfirst(r))), (_vm.freeSlots(r)) ? _c('small', [_vm._v(" + " + _vm._s(_vm.freeSlots(r)))]) : _vm._e()]), _vm._v(" "), _c('div', [_c('span', [_vm._v("Stress")]), _vm._v(" "), _c('strong', [_vm._v(_vm._s(_vm.c[r].stress))])]), _vm._v(" "), _c('btn', {
       staticClass: "shadowless has-icon",
       nativeOn: {
         "click": function($event) {
@@ -20673,10 +20682,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_motion__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_motion___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_motion__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__brutal_vue__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__brutal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__brutal_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__icon_vue__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__icon_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_mixin__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__brutal_vue__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__brutal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__brutal_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__icon_vue__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__icon_vue__);
 //
 //
 //
@@ -20753,6 +20764,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
 
 
 
@@ -20760,18 +20773,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['show', 'fallout'],
+  props: ['options', 'fallout'],
 
   components: {
-    Brutal: __WEBPACK_IMPORTED_MODULE_2__brutal_vue___default.a,
+    Brutal: __WEBPACK_IMPORTED_MODULE_4__brutal_vue___default.a,
     ChevronLeftIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["a" /* ChevronLeftIcon */],
-    Icon: __WEBPACK_IMPORTED_MODULE_3__icon_vue___default.a,
+    Icon: __WEBPACK_IMPORTED_MODULE_5__icon_vue___default.a,
     motion: __WEBPACK_IMPORTED_MODULE_0_vue_motion__["Motion"],
     XIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["d" /* XIcon */]
   },
 
+  mixins: [__WEBPACK_IMPORTED_MODULE_3__helpers_mixin__["a" /* default */]],
+
   data: function data() {
     return {
+      resistances: __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].resistances,
       offset: 100,
       falloutOffset: 100,
       d1: { flipped: false, result: null, brutal: 0 },
@@ -20784,17 +20800,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       falloutLevel: null,
       falloutChoices: null,
       falloutChosen: null,
-      rolling: null
+      rolling: null,
+      totalStress: 0,
+      characterCopy: null
     };
   },
 
 
   computed: {
     character: function character() {
-      return this.show && this.show.character ? this.show.character : {};
+      if (!this.options) {
+        return {};
+      }
+
+      if (!this.characterCopy) {
+        this.characterCopy = this.clone(this.options.character);
+      }
+
+      return this.characterCopy;
     },
     resistance: function resistance() {
-      return this.show && this.show.resistance ? this.show.resistance : '';
+      return this.options ? this.options.resistance : '';
     },
     stress: function stress() {
       return this.character && this.character[this.resistance] ? this.character[this.resistance].stress : 0;
@@ -20808,7 +20834,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     classes: function classes() {
       return {
         roller: true,
-        open: this.show
+        open: this.options
       };
     },
     d1Classes: function d1Classes() {
@@ -20859,9 +20885,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.falloutOffset = 100;
       this.falloutChosen = null;
       this.rolling = false;
+      this.totalStress = 0;
+      this.characterCopy = this.options ? this.clone(this.options.character) : null;
     },
     roll: function roll(die) {
       var _this = this;
+
+      if (this.result) return;
 
       var name = 'd' + die;
 
@@ -20886,27 +20916,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this2 = this;
 
       this.falloutRollResult = this.getRandomIntInclusive(1, 10);
-      var applicableStress = this.stress - this.freeSlots + this.result;
 
-      if (this.falloutRollResult < applicableStress) {
+      var stressedResistances = [];
+
+      this.character[this.resistance].stress += this.result;
+
+      this.resistances.forEach(function (res) {
+        if (_this2.character[res].stress > 0) {
+          _this2.totalStress += _this2.character[res].stress;
+          stressedResistances.push(res);
+        }
+      });
+
+      if (this.falloutRollResult < this.totalStress) {
         document.body.classList.add('shake', 'shake-constant');
         this.falloutOccurred = true;
         this.falloutOffset = 0;
 
-        if (applicableStress >= 2 && applicableStress <= 4) {
+        if (this.totalStress >= 2 && this.totalStress <= 4) {
           this.falloutLevel = 'minor';
           this.falloutChoices = this.fallout.filter(function (f) {
-            return f.level === 'minor' && f.resistance === _this2.resistance;
+            return f.level === 'minor' && stressedResistances.indexOf(f.resistance) !== -1;
           });
-        } else if (applicableStress >= 5 && applicableStress <= 8) {
+        } else if (this.totalStress >= 5 && this.totalStress <= 8) {
           this.falloutLevel = 'major';
           this.falloutChoices = this.fallout.filter(function (f) {
-            return f.level === 'major' && f.resistance === _this2.resistance;
+            return f.level === 'major' && stressedResistances.indexOf(f.resistance) !== -1;
           });
-        } else if (applicableStress >= 9) {
+        } else if (this.totalStress >= 9) {
           this.falloutLevel = 'severe';
           this.falloutChoices = this.fallout.filter(function (f) {
-            return f.level === 'severe' && f.resistance === _this2.resistance;
+            return f.level === 'severe' && stressedResistances.indexOf(f.resistance) !== -1;
           });
         }
 
@@ -20918,9 +20958,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     apply: function apply() {
-      var newStress = this.stress + this.result;
-
-      if (this.falloutOccurred) {
+      /*let newStress = this.stress + this.result;
+       if (this.falloutOccurred) {
         if (this.falloutLevel === 'minor') {
           newStress = newStress - 3;
         } else if (this.falloutLevel === 'major') {
@@ -20928,12 +20967,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         } else if (this.falloutLevel === 'severe') {
           newStress = newStress - 7;
         }
-      }
+      }*/
 
       this.$emit('update', {
-        character: this.character,
+        character: this.options.character,
         resistance: this.resistance,
-        stress: newStress,
+        stress: this.stress,
         fallout: this.falloutChosen
       });
 
@@ -20953,8 +20992,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   watch: {
-    show: function show(active) {
-      if (active) {
+    options: function options(value) {
+      if (value) {
         document.body.classList.add('roller-open');
         this.offset = 0;
       } else {
@@ -21358,7 +21397,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.close($event)
             }
           }
-        }, [_c('chevron-left-icon')], 1)], 1), _vm._v(" "), (_vm.show && _vm.show.character) ? _c('div', {
+        }, [_c('chevron-left-icon')], 1)], 1), _vm._v(" "), (_vm.options) ? _c('div', {
           staticClass: "roller-content"
         }, [_c('h2', [_vm._v("Roll " + _vm._s(_vm.resistance) + " Stress "), _c('small', [_vm._v("For " + _vm._s(_vm.name))])]), _vm._v(" "), _c('div', {
           staticClass: "dice"
@@ -21450,7 +21489,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }, [_c('span', {
           staticClass: "d10"
-        }, [_vm._v(_vm._s(_vm.falloutRollResult))]), _vm._v(" Fallout Roll Result. Effective Stress: " + _vm._s(_vm.stress - _vm.freeSlots + _vm.result) + ".\n        ")]), _vm._v(" "), _c('motion', {
+        }, [_vm._v(_vm._s(_vm.falloutRollResult))]), _vm._v(" Fallout Roll Result. Total Stress: " + _vm._s(_vm.totalStress) + ".\n        ")]), _vm._v(" "), _c('motion', {
           attrs: {
             "value": _vm.falloutOffset,
             "spring": "wobbly"
@@ -21529,7 +21568,10 @@ var store = {
     localStorage.setItem('estresso', this.json);
 
     return this.data;
-  }
+  },
+
+
+  resistances: ['blood', 'mind', 'shadow', 'silver', 'reputation']
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (store);
@@ -21543,12 +21585,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "estresso"
   }, [_c('roller', {
     attrs: {
-      "show": _vm.showRoller,
+      "options": _vm.rollerOptions,
       "fallout": _vm.fallout
     },
     on: {
       "close": function($event) {
-        _vm.showRoller = null
+        _vm.rollerOptions = null
       },
       "update": _vm.updateCharacter
     }
@@ -21938,6 +21980,19 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-66656054", module.exports)
   }
 }
+
+/***/ }),
+/* 59 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+  methods: {
+    clone: function clone(obj) {
+      return JSON.parse(JSON.stringify(obj));
+    }
+  }
+});
 
 /***/ })
 /******/ ]);
