@@ -1,5 +1,5 @@
 <template>
-  <select v-model="selected" class="brutal">
+  <select v-model="selected" class="brutal" aria-label="Brutal">
     <option value="0">&times; 0</option>
     <option value="1">&times; 1</option>
     <option value="2">&times; 2</option>

@@ -21937,6 +21937,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "selected"
     }],
     staticClass: "brutal",
+    attrs: {
+      "aria-label": "Brutal"
+    },
     on: {
       "change": function($event) {
         var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
