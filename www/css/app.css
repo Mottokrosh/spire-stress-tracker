@@ -719,6 +719,10 @@ select.small {
   background-color: #252f34;
 }
 
+.roller .fallout-items {
+  margin-top: 2rem;
+}
+
 .counter-control {
   display: flex;
 }
@@ -806,5 +810,54 @@ select.small {
 }
 
 .character .resistance + .resistance {
+  margin-top: -1px;
+}
+
+.fallout-item {
+  display: flex;
+  background-color: #000;
+  border: 1px solid #214050;
+  color: #9a9a92;
+}
+
+.fallout-item .details {
+  flex: 1;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.fallout-item .details > * {
+  margin: 0;
+}
+
+.fallout-item:first-of-type {
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
+
+.fallout-item:last-of-type {
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.fallout-item button {
+  border-radius: 0;
+}
+
+.fallout-item label {
+  padding-left: 0.5rem;
+}
+
+.fallout-item .severity {
+  display: flex;
+  margin-left: auto;
+}
+
+.fallout-item .severity > * {
+  margin: 0;
+}
+
+.fallout-item + .fallout-item {
   margin-top: -1px;
 }

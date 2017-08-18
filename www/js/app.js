@@ -20688,6 +20688,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__brutal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__brutal_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__icon_vue__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__icon_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__fallout_vue__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__fallout_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__fallout_vue__);
 //
 //
 //
@@ -20764,6 +20766,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+
 
 
 
@@ -20778,8 +20783,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   components: {
     Brutal: __WEBPACK_IMPORTED_MODULE_4__brutal_vue___default.a,
     ChevronLeftIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["a" /* ChevronLeftIcon */],
+    Fallout: __WEBPACK_IMPORTED_MODULE_6__fallout_vue___default.a,
     Icon: __WEBPACK_IMPORTED_MODULE_5__icon_vue___default.a,
-    motion: __WEBPACK_IMPORTED_MODULE_0_vue_motion__["Motion"],
+    Motion: __WEBPACK_IMPORTED_MODULE_0_vue_motion__["Motion"],
     XIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["d" /* XIcon */]
   },
 
@@ -20941,12 +20947,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         } else if (this.totalStress >= 5 && this.totalStress <= 8) {
           this.falloutLevel = 'major';
           this.falloutChoices = this.fallout.filter(function (f) {
-            return f.level === 'major' && stressedResistances.indexOf(f.resistance) !== -1;
+            return (f.level === 'minor' || f.level === 'major') && stressedResistances.indexOf(f.resistance) !== -1;
           });
         } else if (this.totalStress >= 9) {
           this.falloutLevel = 'severe';
           this.falloutChoices = this.fallout.filter(function (f) {
-            return f.level === 'severe' && stressedResistances.indexOf(f.resistance) !== -1;
+            return (f.level === 'major' || f.level === 'severe') && stressedResistances.indexOf(f.resistance) !== -1;
           });
         }
 
@@ -21505,16 +21511,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               }, [_c('h3', [_vm._v("Fallout")]), _vm._v(" "), _c('h4', [_vm._v(_vm._s(_vm.falloutLevel))])])]
             }
           }])
-        }), _vm._v(" "), _c('code', {
-          staticStyle: {
-            "margin-top": "1rem",
-            "display": "block"
-          }
-        }, [_c('pre', {
-          staticStyle: {
-            "overflow-x": "auto"
-          }
-        }, [_vm._v(_vm._s(_vm.falloutChoices))])]), _vm._v(" "), _c('nav', {
+        }), _vm._v(" "), (_vm.falloutOccurred) ? _c('div', {
+          staticClass: "fallout-items"
+        }, _vm._l((_vm.falloutChoices), function(f, index) {
+          return _c('fallout', {
+            key: index,
+            attrs: {
+              "details": f,
+              "character": _vm.character
+            }
+          })
+        })) : _vm._e(), _vm._v(" "), _c('nav', {
           staticClass: "actions"
         }, [_c('btn', {
           staticClass: "secondary",
@@ -21994,9 +22001,174 @@ if (false) {
   methods: {
     clone: function clone(obj) {
       return JSON.parse(JSON.stringify(obj));
+    },
+    slugify: function slugify(value) {
+      value = value.replace(/^\s+|\s+$/g, ''); // trim
+      value = value.toLowerCase();
+
+      // remove accents, swap ñ for n, etc
+      var from = "ãàáäâẽèéëêìíïîõòóöôùúüûñç·/_,:;";
+      var to = "aaaaaeeeeeiiiiooooouuuunc------";
+      for (var i = 0, l = from.length; i < l; i++) {
+        value = value.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+      }
+
+      value = value.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+      .replace(/\s+/g, '-') // collapse whitespace and replace by -
+      .replace(/-+/g, '-'); // collapse dashes
+
+      return value;
     }
   }
 });
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(61),
+  /* template */
+  __webpack_require__(62),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/mottokrosh/Projects/spire-stress-tracker/src/components/fallout.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] fallout.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-033437e9", Component.options)
+  } else {
+    hotAPI.reload("data-v-033437e9", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 61 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_mixin__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__btn_vue__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__btn_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__btn_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__icon_vue__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__icon_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    character: Object,
+    details: Object
+  },
+
+  components: {
+    Btn: __WEBPACK_IMPORTED_MODULE_1__btn_vue___default.a,
+    Icon: __WEBPACK_IMPORTED_MODULE_2__icon_vue___default.a
+  },
+
+  data: function data() {
+    return {
+      fallout: this.details
+    };
+  },
+
+
+  computed: {
+    slug: function slug() {
+      return this.slugify(this.fallout.id + '-' + this.fallout.name);
+    },
+    severity: function severity() {
+      if (this.fallout.level === 'minor') {
+        return 1;
+      } else if (this.fallout.level === 'major') {
+        return 2;
+      } else {
+        return 3;
+      }
+    }
+  },
+
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__helpers_mixin__["a" /* default */]]
+});
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "fallout-item"
+  }, [_c('div', {
+    staticClass: "details"
+  }, [_c('input', {
+    attrs: {
+      "type": "checkbox",
+      "id": _vm.slug
+    }
+  }), _vm._v(" "), _c('label', {
+    attrs: {
+      "for": _vm.slug
+    }
+  }, [_vm._v(_vm._s(_vm.fallout.name))]), _vm._v(" "), _c('div', {
+    staticClass: "severity"
+  }, _vm._l((_vm.severity), function(i) {
+    return _c('icon', {
+      key: i,
+      attrs: {
+        "id": "drop"
+      }
+    })
+  }))]), _vm._v(" "), _c('btn', {
+    staticClass: "shadowless has-icon"
+  }, [_c('icon', {
+    attrs: {
+      "id": "eye"
+    }
+  })], 1)], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-033437e9", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

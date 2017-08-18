@@ -701,6 +701,10 @@ select {
       background-color: darken($secondary, 45%);
     }
   }
+
+  .fallout-items {
+    margin-top: 2rem;
+  }
 }
 
 .counter-control {
@@ -789,4 +793,53 @@ select {
   .resistance + .resistance {
     margin-top: -1px;
   }
+}
+
+.fallout-item {
+  display: flex;
+  background-color: #000;
+  border: 1px solid $primary;
+  color: $beigeDark;
+
+  .details {
+    flex: 1;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+
+    & > * {
+      margin: 0;
+    }
+  }
+
+  &:first-of-type {
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+  }
+
+  &:last-of-type {
+    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+  }
+
+  button {
+    border-radius: 0;
+  }
+
+  label {
+    padding-left: 0.5rem;
+  }
+
+  .severity {
+    display: flex;
+    margin-left: auto;
+
+    & > * {
+      margin: 0;
+    }
+  }
+}
+
+.fallout-item + .fallout-item {
+  margin-top: -1px;
 }

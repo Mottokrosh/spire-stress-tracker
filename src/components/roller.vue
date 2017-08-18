@@ -60,7 +60,9 @@
             </template>
           </motion>
 
-          <code style="margin-top: 1rem; display: block;"><pre style="overflow-x: auto;">{{ falloutChoices }}</pre></code>
+          <div v-if="falloutOccurred" class="fallout-items">
+            <fallout v-for="(f, index) in falloutChoices" :key="index" :details="f" :character="character"></fallout>
+          </div>
 
           <nav class="actions">
             <btn class="secondary" :disabled="!result" @click.native="reset">Reset</btn>
@@ -81,6 +83,7 @@
   import Helpers from '../helpers.mixin';
   import Brutal from './brutal.vue';
   import Icon from './icon.vue';
+  import Fallout from './fallout.vue';
 
   export default {
     props: ['options', 'fallout'],
@@ -88,8 +91,9 @@
     components: {
       Brutal,
       ChevronLeftIcon,
+      Fallout,
       Icon,
-      motion: Motion,
+      Motion,
       XIcon,
     },
 
@@ -253,17 +257,22 @@
           if (this.totalStress >= 2 && this.totalStress <= 4) {
             this.falloutLevel = 'minor';
             this.falloutChoices = this.fallout.filter((f) => {
-              return f.level === 'minor' && stressedResistances.indexOf(f.resistance) !== -1;
+              return f.level === 'minor'
+                && stressedResistances.indexOf(f.resistance) !== -1;
             });
+
           } else if (this.totalStress >= 5 && this.totalStress <= 8) {
             this.falloutLevel = 'major';
             this.falloutChoices = this.fallout.filter((f) => {
-              return f.level === 'major' && stressedResistances.indexOf(f.resistance) !== -1;
+              return (f.level === 'minor' || f.level === 'major')
+                && stressedResistances.indexOf(f.resistance) !== -1;
             });
+
           } else if (this.totalStress >= 9) {
             this.falloutLevel = 'severe';
             this.falloutChoices = this.fallout.filter((f) => {
-              return f.level === 'severe' && stressedResistances.indexOf(f.resistance) !== -1;
+              return (f.level === 'major' || f.level === 'severe')
+                && stressedResistances.indexOf(f.resistance) !== -1;
             });
           }
 
