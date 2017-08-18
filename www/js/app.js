@@ -21906,6 +21906,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['value'],
 
@@ -21935,7 +21936,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       value: (_vm.selected),
       expression: "selected"
     }],
-    staticClass: "small",
+    staticClass: "brutal",
     on: {
       "change": function($event) {
         var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
@@ -21951,27 +21952,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "value": "0"
     }
-  }, [_vm._v("Brutal × 0")]), _vm._v(" "), _c('option', {
+  }, [_vm._v("× 0")]), _vm._v(" "), _c('option', {
     attrs: {
       "value": "1"
     }
-  }, [_vm._v("Brutal × 1")]), _vm._v(" "), _c('option', {
+  }, [_vm._v("× 1")]), _vm._v(" "), _c('option', {
     attrs: {
       "value": "2"
     }
-  }, [_vm._v("Brutal × 2")]), _vm._v(" "), _c('option', {
+  }, [_vm._v("× 2")]), _vm._v(" "), _c('option', {
     attrs: {
       "value": "3"
     }
-  }, [_vm._v("Brutal × 3")]), _vm._v(" "), _c('option', {
+  }, [_vm._v("× 3")]), _vm._v(" "), _c('option', {
     attrs: {
       "value": "4"
     }
-  }, [_vm._v("Brutal × 4")]), _vm._v(" "), _c('option', {
+  }, [_vm._v("× 4")]), _vm._v(" "), _c('option', {
     attrs: {
       "value": "5"
     }
-  }, [_vm._v("Brutal × 5")])])
+  }, [_vm._v("× 5")])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
