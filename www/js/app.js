@@ -22145,7 +22145,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "for": _vm.slug
     }
-  }, [_vm._v(_vm._s(_vm.fallout.name))]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.fallout.name) + " "), _c('small', [_vm._v(_vm._s(_vm.fallout.resistance))])]), _vm._v(" "), _c('div', {
     staticClass: "severity"
   }, _vm._l((_vm.severity), function(i) {
     return _c('icon', {
@@ -22158,7 +22158,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "shadowless has-icon"
   }, [_c('icon', {
     attrs: {
-      "id": "eye"
+      "id": "eyeball"
     }
   })], 1)], 1)
 },staticRenderFns: []}

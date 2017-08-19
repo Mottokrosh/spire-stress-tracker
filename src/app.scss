@@ -826,13 +826,38 @@ select {
     border-radius: 0;
   }
 
+  input {
+    position: absolute;
+    width: 0.1px;
+    height: 0.1px;
+    left: -9999px;
+  }
+
   label {
-    padding-left: 0.5rem;
+    padding-left: 2rem;
+    color: $beigeLight;
+    font-weight: bold;
+    background-image: url(../images/checkbox.svg);
+    background-repeat: no-repeat;
+    background-size: 18px;
+    background-position: 0.25rem center;
+    transition: all 200ms ease-in-out;
+
+    small {
+      text-transform: uppercase;
+      color: $beigeDark;
+      font-weight: normal;
+    }
+  }
+
+  input:checked + label {
+    background-image: url(../images/checkbox-ticked.svg);
   }
 
   .severity {
     display: flex;
     margin-left: auto;
+    padding-left: 0.5rem;
 
     & > * {
       margin: 0;

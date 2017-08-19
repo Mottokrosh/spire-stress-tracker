@@ -2,12 +2,12 @@
   <div class="fallout-item">
     <div class="details">
       <input type="checkbox" :id="slug">
-      <label :for="slug">{{ fallout.name }}</label>
+      <label :for="slug">{{ fallout.name }} <small>{{ fallout.resistance }}</small></label>
       <div class="severity">
         <icon id="drop" v-for="i in severity" :key="i"></icon>
       </div>
     </div>
-    <btn class="shadowless has-icon"><icon id="eye"></icon></btn>
+    <btn class="shadowless has-icon"><icon id="eyeball"></icon></btn>
   </div>
 </template>
 

@@ -845,13 +845,38 @@ select.small {
   border-radius: 0;
 }
 
+.fallout-item input {
+  position: absolute;
+  width: 0.1px;
+  height: 0.1px;
+  left: -9999px;
+}
+
 .fallout-item label {
-  padding-left: 0.5rem;
+  padding-left: 2rem;
+  color: #f6f6f4;
+  font-weight: bold;
+  background-image: url(../images/checkbox.svg);
+  background-repeat: no-repeat;
+  background-size: 18px;
+  background-position: 0.25rem center;
+  transition: all 200ms ease-in-out;
+}
+
+.fallout-item label small {
+  text-transform: uppercase;
+  color: #9a9a92;
+  font-weight: normal;
+}
+
+.fallout-item input:checked + label {
+  background-image: url(../images/checkbox-ticked.svg);
 }
 
 .fallout-item .severity {
   display: flex;
   margin-left: auto;
+  padding-left: 0.5rem;
 }
 
 .fallout-item .severity > * {
