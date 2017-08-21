@@ -79,6 +79,7 @@
 <script>
   import { Motion } from 'vue-motion';
   import { ChevronLeftIcon, XIcon } from 'vue-feather-icons';
+  import firstBy from 'thenby';
   import Store from '../store';
   import Helpers from '../helpers.mixin';
   import Brutal from './brutal.vue';
@@ -275,6 +276,26 @@
                 && stressedResistances.indexOf(f.resistance) !== -1;
             });
           }
+
+          // sort fallout by severity, descending
+          this.falloutChoices.sort(
+            firstBy('severity', -1)
+              .thenBy('resistance')
+              .thenBy('name')
+          );
+
+          // restrict suggestion to this level
+          const falloutSuggestions = this.falloutChoices.filter(f => f.level === this.falloutLevel);
+          falloutSuggestions.shuffle();
+
+          // randomly highlight suggestions
+          let i = 1;
+          falloutSuggestions.shuffle().forEach((s) => {
+            setTimeout(() => {
+              document.querySelector('.fallout-id-' + s.id).classList.add('suggested');
+            }, 200 * i);
+            i++;
+          });
 
           setTimeout(() => {
             document.body.classList.remove('shake', 'shake-constant');

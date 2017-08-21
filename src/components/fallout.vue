@@ -1,10 +1,10 @@
 <template>
-  <div class="fallout-item">
+  <div :class="classes">
     <div class="details">
-      <input type="checkbox" :id="slug">
+      <input type="checkbox" :id="slug" :checked="characterHasThis">
       <label :for="slug">{{ fallout.name }} <small>{{ fallout.resistance }}</small></label>
       <div class="severity">
-        <icon id="drop" v-for="i in severity" :key="i"></icon>
+        <icon id="drop" v-for="i in fallout.severity" :key="i"></icon>
       </div>
     </div>
     <btn class="shadowless has-icon"><icon id="eyeball"></icon></btn>
@@ -34,18 +34,21 @@
     },
 
     computed: {
+      classes() {
+        return {
+          'fallout-item': true,
+          ['fallout-id-' + this.fallout.id]: true,
+          'possessed': this.characterHasThis,
+        };
+      },
+
       slug() {
         return this.slugify(this.fallout.id + '-' + this.fallout.name);
       },
 
-      severity() {
-        if (this.fallout.level === 'minor') {
-          return 1;
-        } else if (this.fallout.level === 'major') {
-          return 2;
-        } else {
-          return 3;
-        }
+      characterHasThis() {
+        return this.character.fallout
+          && this.character.fallout.indexOf(this.fallout.id) !== -1;
       },
     },
 

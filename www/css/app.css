@@ -465,6 +465,18 @@ select.small {
   animation-iteration-count: infinite;
 }
 
+@keyframes lightUp {
+  0% {
+    background-color: #000;
+  }
+  10% {
+    background-color: #ad302a;
+  }
+  100% {
+    background-color: #000;
+  }
+}
+
 .icon {
   display: inline-block;
   width: 1em;
@@ -829,6 +841,17 @@ select.small {
 
 .fallout-item .details > * {
   margin: 0;
+}
+
+.fallout-item.possessed .details {
+  background-color: #1a2226;
+}
+
+.fallout-item.suggested {
+  animation-name: lightUp;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 2s;
 }
 
 .fallout-item:first-of-type {

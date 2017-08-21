@@ -20682,14 +20682,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_motion__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_motion___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_motion__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_mixin__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__brutal_vue__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__brutal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__brutal_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__icon_vue__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__icon_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__fallout_vue__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__fallout_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__fallout_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_thenby__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_thenby___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_thenby__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helpers_mixin__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__brutal_vue__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__brutal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__brutal_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__icon_vue__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__icon_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__fallout_vue__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__fallout_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__fallout_vue__);
 //
 //
 //
@@ -20768,6 +20770,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -20781,19 +20784,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   props: ['options', 'fallout'],
 
   components: {
-    Brutal: __WEBPACK_IMPORTED_MODULE_4__brutal_vue___default.a,
+    Brutal: __WEBPACK_IMPORTED_MODULE_5__brutal_vue___default.a,
     ChevronLeftIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["a" /* ChevronLeftIcon */],
-    Fallout: __WEBPACK_IMPORTED_MODULE_6__fallout_vue___default.a,
-    Icon: __WEBPACK_IMPORTED_MODULE_5__icon_vue___default.a,
+    Fallout: __WEBPACK_IMPORTED_MODULE_7__fallout_vue___default.a,
+    Icon: __WEBPACK_IMPORTED_MODULE_6__icon_vue___default.a,
     Motion: __WEBPACK_IMPORTED_MODULE_0_vue_motion__["Motion"],
     XIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["d" /* XIcon */]
   },
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_3__helpers_mixin__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_4__helpers_mixin__["a" /* default */]],
 
   data: function data() {
     return {
-      resistances: __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].resistances,
+      resistances: __WEBPACK_IMPORTED_MODULE_3__store__["a" /* default */].resistances,
       offset: 100,
       falloutOffset: 100,
       d1: { flipped: false, result: null, brutal: 0 },
@@ -20955,6 +20958,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return (f.level === 'major' || f.level === 'severe') && stressedResistances.indexOf(f.resistance) !== -1;
           });
         }
+
+        // sort fallout by severity, descending
+        this.falloutChoices.sort(__WEBPACK_IMPORTED_MODULE_2_thenby___default()('severity', -1).thenBy('resistance').thenBy('name'));
+
+        // restrict suggestion to this level
+        var falloutSuggestions = this.falloutChoices.filter(function (f) {
+          return f.level === _this2.falloutLevel;
+        });
+        falloutSuggestions.shuffle();
+
+        // randomly highlight suggestions
+        var i = 1;
+        falloutSuggestions.shuffle().forEach(function (s) {
+          setTimeout(function () {
+            document.querySelector('.fallout-id-' + s.id).classList.add('suggested');
+          }, 200 * i);
+          i++;
+        });
 
         setTimeout(function () {
           document.body.classList.remove('shake', 'shake-constant');
@@ -22073,6 +22094,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__btn_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__btn_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__icon_vue__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__icon_vue__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -22110,17 +22133,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
   computed: {
+    classes: function classes() {
+      var _ref;
+
+      return _ref = {
+        'fallout-item': true
+      }, _defineProperty(_ref, 'fallout-id-' + this.fallout.id, true), _defineProperty(_ref, 'possessed', this.characterHasThis), _ref;
+    },
     slug: function slug() {
       return this.slugify(this.fallout.id + '-' + this.fallout.name);
     },
-    severity: function severity() {
-      if (this.fallout.level === 'minor') {
-        return 1;
-      } else if (this.fallout.level === 'major') {
-        return 2;
-      } else {
-        return 3;
-      }
+    characterHasThis: function characterHasThis() {
+      return this.character.fallout && this.character.fallout.indexOf(this.fallout.id) !== -1;
     }
   },
 
@@ -22133,13 +22157,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "fallout-item"
+    class: _vm.classes
   }, [_c('div', {
     staticClass: "details"
   }, [_c('input', {
     attrs: {
       "type": "checkbox",
       "id": _vm.slug
+    },
+    domProps: {
+      "checked": _vm.characterHasThis
     }
   }), _vm._v(" "), _c('label', {
     attrs: {
@@ -22147,7 +22174,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v(_vm._s(_vm.fallout.name) + " "), _c('small', [_vm._v(_vm._s(_vm.fallout.resistance))])]), _vm._v(" "), _c('div', {
     staticClass: "severity"
-  }, _vm._l((_vm.severity), function(i) {
+  }, _vm._l((_vm.fallout.severity), function(i) {
     return _c('icon', {
       key: i,
       attrs: {
@@ -22169,6 +22196,65 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-033437e9", module.exports)
   }
 }
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports) {
+
+/***
+   Copyright 2013 Teun Duynstee
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+module.exports = (function() {
+
+    function identity(v){return v;}
+
+    function ignoreCase(v){return typeof(v)==="string" ? v.toLowerCase() : v;}
+
+    function makeCompareFunction(f, opt){
+        opt = typeof(opt)==="number" ? {direction:opt} : opt||{};
+        if(typeof(f)!="function"){
+            var prop = f;
+            // make unary function
+            f = function(v1){return !!v1[prop] ? v1[prop] : "";}
+        }
+        if(f.length === 1) {
+            // f is a unary function mapping a single item to its sort score
+            var uf = f;
+            var preprocess = opt.ignoreCase?ignoreCase:identity;
+            f = function(v1,v2) {return preprocess(uf(v1)) < preprocess(uf(v2)) ? -1 : preprocess(uf(v1)) > preprocess(uf(v2)) ? 1 : 0;}
+        }
+        if(opt.direction === -1) return function(v1,v2){return -f(v1,v2)};
+        return f;
+    }
+
+    /* adds a secondary compare function to the target function (`this` context)
+       which is applied in case the first one returns 0 (equal)
+       returns a new compare function, which has a `thenBy` method as well */
+    function tb(func, opt) {
+        var x = typeof(this) == "function" ? this : false;
+        var y = makeCompareFunction(func, opt);
+        var f = x ? function(a, b) {
+                        return x(a,b) || y(a,b);
+                    }
+                  : y;
+        f.thenBy = tb;
+        return f;
+    }
+    return tb;
+})();
+
 
 /***/ })
 /******/ ]);

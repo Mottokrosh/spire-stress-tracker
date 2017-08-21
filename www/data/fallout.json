@@ -2,6 +2,7 @@
   {
     "id": 101,
     "level": "minor",
+    "severity": 1,
     "resistance": "blood",
     "name": "Bleeding",
     "description": "You're leaking. Until you get proper medical care, each time you make an action, mark 1 stress against blood but don't roll for fallout."
@@ -9,6 +10,7 @@
   {
     "id": 102,
     "level": "minor",
+    "severity": 1,
     "resistance": "blood",
     "name": "Stunned",
     "description": "You take a blow to the head, or are winded, giving your enemies opportunity to act. If they want to get away from you, they can do so while you stagger about and gather your senses; otherwise, you can't use Fight for the remainder of the situation."
@@ -16,6 +18,7 @@
   {
     "id": 103,
     "level": "minor",
+    "severity": 1,
     "resistance": "blood",
     "name": "Instinctive",
     "description": "Your hands shake and you fight with instinct, not skill. You can't use any positive weapon tags for the rest of the situation."
@@ -23,6 +26,7 @@
   {
     "id": 104,
     "level": "minor",
+    "severity": 1,
     "resistance": "blood",
     "name": "Tired",
     "description": "Your limbs are shaky and you struggle to stay awake. You can't use Fight, Pursue or Sneak skills until you rest."
@@ -30,6 +34,7 @@
   {
     "id": 105,
     "level": "minor",
+    "severity": 1,
     "resistance": "mind",
     "name": "Panicked",
     "description": "You can't handle this. You flee the current situation, and take no further part in it."
@@ -37,6 +42,7 @@
   {
     "id": 106,
     "level": "minor",
+    "severity": 1,
     "resistance": "mind",
     "name": "Shaken",
     "description": "You can't focus on what you're doing. You can't use Investigate or Fix skills, or the Academic, Technology, Religion or Occult domains until you take time to calm down."
@@ -44,6 +50,7 @@
   {
     "id": 107,
     "level": "minor",
+    "severity": 1,
     "resistance": "mind",
     "name": "Weird",
     "description": "There's just something... off about you. All social actions you undertake increase their difficulty by 1 until you manage to get your head back together again."
@@ -51,6 +58,7 @@
   {
     "id": 108,
     "level": "minor",
+    "severity": 1,
     "resistance": "reputation",
     "name": "Vendetta",
     "description": "During the next session, an NPC from this session will return with a vendetta against you."
@@ -58,6 +66,7 @@
   {
     "id": 109,
     "level": "minor",
+    "severity": 1,
     "resistance": "reputation",
     "name": "Lash Out",
     "description": "You're pissed off. You immediately lash out at the source of stress, no matter whether or not this is a sensible idea."
@@ -65,6 +74,7 @@
   {
     "id": 110,
     "level": "minor",
+    "severity": 1,
     "resistance": "reputation",
     "name": "Lie",
     "description": "Trying to justify your actions, you tell a lie that will cause a problem this or next session."
@@ -72,6 +82,7 @@
   {
     "id": 111,
     "level": "minor",
+    "severity": 1,
     "resistance": "shadow",
     "name": "Compromised",
     "description": "A friendly NPC asks you to justify your strange behaviour."
@@ -79,6 +90,7 @@
   {
     "id": 112,
     "level": "minor",
+    "severity": 1,
     "resistance": "shadow",
     "name": "Questioning",
     "description": "An authority figure pulls you in for questioning with regards to your recent actions."
@@ -86,6 +98,7 @@
   {
     "id": 113,
     "level": "minor",
+    "severity": 1,
     "resistance": "silver",
     "name": "Debtor",
     "description": "During the next session, an NPC who lent you money will call in a favour."
@@ -93,6 +106,7 @@
   {
     "id": 114,
     "level": "minor",
+    "severity": 1,
     "resistance": "silver",
     "name": "Pawned",
     "description": "Until the end of the next session, you lose the use of one valuable piece of equipment."
@@ -100,6 +114,7 @@
   {
     "id": 201,
     "level": "major",
+    "severity": 2,
     "resistance": "blood",
     "name": "Broken Limb",
     "description": "Your arm or leg is broken, and you can't use it properly until it heals (which will take months unless you use magic)."
@@ -107,6 +122,7 @@
   {
     "id": 202,
     "level": "major",
+    "severity": 2,
     "resistance": "blood",
     "name": "Knocked Out",
     "description": "You fall unconscious for several hours."
@@ -114,6 +130,7 @@
   {
     "id": 203,
     "level": "major",
+    "severity": 2,
     "resistance": "mind",
     "name": "Freak Out",
     "description": "You lose it, and attempt to kill (or at least drive off) whatever caused your mental break. You won't calm down unless you're restrained, it's destroyed or flees the scene, or you're knocked unconscious."
@@ -121,6 +138,7 @@
   {
     "id": 204,
     "level": "major",
+    "severity": 2,
     "resistance": "mind",
     "name": "Memory Holes",
     "description": "You did things that you can't quite recall. Every player aside from you, and the GM, works together to determine what you did that you blocked out from your mind while you step outside of the room, or during downtime. These are generally pretty awful things, and they can have happened up to a year ago in game time or immediately upon suffering fallout. Your character has zero memory of the events, but everyone else involved knows what happened."
@@ -128,6 +146,7 @@
   {
     "id": 205,
     "level": "major",
+    "severity": 2,
     "resistance": "mind",
     "name": "Phobia",
     "description": "You acquire a phobia of something related to the stress you suffered - a person, an item, a place, a situation, or something even more abstract. You will avoid the subject of your phobia whenever possible, and if you have to interact with it, difficulties are increased by 2."
@@ -135,6 +154,7 @@
   {
     "id": 206,
     "level": "major",
+    "severity": 2,
     "resistance": "reputation",
     "name": "Humiliated",
     "description": "You make a total fool of yourself. You can't make use of any allies associated with the actions that pushed you into fallout until you prove yourself once more in their eyes."
@@ -142,6 +162,7 @@
   {
     "id": 207,
     "level": "major",
+    "severity": 2,
     "resistance": "shadow",
     "name": "Arrested",
     "description": "You are caught and arrested by the guard and put in a jail cell, awaiting proper questioning for your crimes."
@@ -149,6 +170,7 @@
   {
     "id": 208,
     "level": "major",
+    "severity": 2,
     "resistance": "shadow",
     "name": "Criminal",
     "description": "You are accused of criminal acts, whether true or not, and wanted posters featuring your face and name are put up throughout the district in which you committed the crime."
@@ -156,6 +178,7 @@
   {
     "id": 209,
     "level": "major",
+    "severity": 2,
     "resistance": "shadow",
     "name": "Tail",
     "description": "You've picked up a tail who will watch the next thing you do, if at all possible. You aren't aware of this. What they do with that information is up to the GM."
@@ -163,6 +186,7 @@
   {
     "id": 210,
     "level": "major",
+    "severity": 2,
     "resistance": "silver",
     "name": "Sold",
     "description": "You're forced to sell off something valuable to pay your debtors."
@@ -170,6 +194,7 @@
   {
     "id": 301,
     "level": "severe",
+    "severity": 3,
     "resistance": "blood",
     "name": "Chosen",
     "description": "You pass out and awaken in a half-dream state before your god (and if you haven't devoted your life to a god, someone else's god) and you can strike a bargain with them in exchange for your life. If you accept their terms, you return to consciousness (changed, always changed) and if you don't, you slip away into death."
@@ -177,6 +202,7 @@
   {
     "id": 302,
     "level": "severe",
+    "severity": 3,
     "resistance": "blood",
     "name": "Dead",
     "description": "You die. You get a chance to do something useful before you die, though."
@@ -184,6 +210,7 @@
   {
     "id": 303,
     "level": "severe",
+    "severity": 3,
     "resistance": "mind",
     "name": "Obsessed",
     "description": "Your mind splinters and shards until it is razor-sharp and barbed, focused on a single goal. You are now permanently WEIRD (as above), but when you attempt to achieve your goal you roll with mastery. Each session, the penalty for WEIRD increases by one step - if it reaches 5, you are declared unfit to serve and eliminated. Once you achieve your goal, your mind gives under the strain, and you are forcibly retired."
@@ -191,6 +218,7 @@
   {
     "id": 304,
     "level": "severe",
+    "severity": 3,
     "resistance": "mind",
     "name": "Renegade",
     "description": "Your mind shattered by the stress of your actions, you turn against the ministry and all it stands for. (The precise reasons why are up to you and the GM.) You and your assets become a faction in and of themselves, and will work against the player group at every turn to undermine their actions. This isn't immediate, but it will probably happen within the next session or two."
@@ -198,6 +226,7 @@
   {
     "id": 305,
     "level": "severe",
+    "severity": 3,
     "resistance": "reputation",
     "name": "Reviled",
     "description": "You are expelled from somewhere precious to you, and you can no longer return on pain of death (or, in more civilised society, arrest). People in the district will spread stories of how utterly reprehensible you are throughout the city."
@@ -205,6 +234,7 @@
   {
     "id": 306,
     "level": "severe",
+    "severity": 3,
     "resistance": "shadow",
     "name": "Burned",
     "description": "The Ministry decides that you are no longer worth the risk of employing, and after feeding you some false information, sells you out to your enemies. Good luck."
@@ -212,6 +242,7 @@
   {
     "id": 307,
     "level": "severe",
+    "severity": 3,
     "resistance": "shadow",
     "name": "Wrath of the Sun Gods",
     "description": "Your operations are uncovered by the Solar Guard, the grand inquisitors of the aelfir church, and you are hunted. Your allies are dragged out into the street and shot. Your friends dare not speak your name."
@@ -219,6 +250,7 @@
   {
     "id": 308,
     "level": "severe",
+    "severity": 3,
     "resistance": "silver",
     "name": "Destitute",
     "description": "You are utterly without material resource, and deep in debt to several bad people. You have one last chance to gather up a vast sum of money or resources to pay back your creditors, or you'll end up dead, mauled beyond recognition by loan sharks, or sold off into some Red Row sweatshop."
@@ -226,6 +258,7 @@
   {
     "id": 309,
     "level": "severe",
+    "severity": 3,
     "resistance": "silver",
     "name": "Turned",
     "description": "You have sold out your allies in exchange for massive bribes to get you out of debt, or to lessen your own punishment. You are now working for one of your enemies as well as the Ministry, and you may be asked at any time to perform favours or shop your team-mates. The only way out of this is to come clean (and be killed by the Ministry), completely eliminate the enemy forces who have leverage on you, or take the next skywhale out of Spire and never look back."
@@ -233,6 +266,7 @@
   {
     "id": 310,
     "level": "severe",
+    "severity": 3,
     "resistance": "shadow",
     "name": "Turned",
     "description": "You have sold out your allies in exchange for massive bribes to get you out of debt, or to lessen your own punishment. You are now working for one of your enemies as well as the Ministry, and you may be asked at any time to perform favours or shop your team-mates. The only way out of this is to come clean (and be killed by the Ministry), completely eliminate the enemy forces who have leverage on you, or take the next skywhale out of Spire and never look back."
