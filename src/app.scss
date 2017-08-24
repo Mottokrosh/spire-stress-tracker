@@ -854,6 +854,12 @@ select {
     animation-iteration-count: 2s;
   }
 
+  &.final-suggestion {
+    transition: all 200ms ease-in;
+    background-image: url(../images/texture-red-512x512.jpg);
+    background-size: 256px;
+  }
+
   &:first-of-type {
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;

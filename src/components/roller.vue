@@ -306,16 +306,15 @@
           );
 
           // restrict suggestion to this level
-          const falloutSuggestions = this.falloutChoices.filter(f => f.level === this.falloutLevel);
-          falloutSuggestions.shuffle();
+          const falloutSuggestions = this.falloutChoices.filter(
+            f => f.level === this.falloutLevel &&
+            f.resistance === this.resistance
+          );
 
-          // randomly highlight suggestions
-          let i = 1;
-          falloutSuggestions.shuffle().forEach((s) => {
-            setTimeout(() => {
-              document.querySelector('.fallout-id-' + s.id).classList.add('suggested');
-            }, 200 * i);
-            i++;
+          // pick one
+          const falloutSuggestion = falloutSuggestions[this.getRandomIntInclusive(0, falloutSuggestions.length - 1)];
+          this.$nextTick(() => {
+            document.querySelector('.fallout-id-' + falloutSuggestion.id).classList.add('final-suggestion');                
           });
 
           setTimeout(() => {

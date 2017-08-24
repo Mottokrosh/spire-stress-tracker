@@ -21453,17 +21453,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         // restrict suggestion to this level
         var falloutSuggestions = this.falloutChoices.filter(function (f) {
-          return f.level === _this2.falloutLevel;
+          return f.level === _this2.falloutLevel && f.resistance === _this2.resistance;
         });
-        falloutSuggestions.shuffle();
 
-        // randomly highlight suggestions
-        var i = 1;
-        falloutSuggestions.shuffle().forEach(function (s) {
-          setTimeout(function () {
-            document.querySelector('.fallout-id-' + s.id).classList.add('suggested');
-          }, 200 * i);
-          i++;
+        // pick one
+        var falloutSuggestion = falloutSuggestions[this.getRandomIntInclusive(0, falloutSuggestions.length - 1)];
+        this.$nextTick(function () {
+          document.querySelector('.fallout-id-' + falloutSuggestion.id).classList.add('final-suggestion');
         });
 
         setTimeout(function () {
