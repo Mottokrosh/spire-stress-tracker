@@ -21256,6 +21256,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -21297,9 +21299,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       falloutOccurred: null,
       falloutLevel: null,
       falloutChoices: null,
-      falloutChosen: null,
       rolling: null,
       totalStress: 0,
+      newFallout: [],
       characterCopy: null
     };
   },
@@ -21381,9 +21383,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.falloutLevel = null;
       this.falloutChoices = null;
       this.falloutOffset = 100;
-      this.falloutChosen = null;
       this.rolling = false;
       this.totalStress = 0;
+      this.newFallout = this.character.fallout || [];
       this.characterCopy = this.options ? this.clone(this.options.character) : null;
     },
     roll: function roll(die) {
@@ -21469,6 +21471,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.falloutOccurred = false;
       }
     },
+    newFalloutAdd: function newFalloutAdd(f) {
+      if (this.newFallout.indexOf(f.id) === -1) {
+        this.newFallout.push(f.id);
+      }
+    },
+    newFalloutRemove: function newFalloutRemove(f) {
+      var index = this.newFallout.indexOf(f.id);
+      if (index !== -1) {
+        this.newFallout.splice(index, 1);
+      }
+    },
     apply: function apply() {
       /*let newStress = this.stress + this.result;
        if (this.falloutOccurred) {
@@ -21485,7 +21498,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         character: this.options.character,
         resistance: this.resistance,
         stress: this.stress,
-        fallout: this.falloutChosen
+        fallout: this.newFallout
       });
 
       this.close();
@@ -21502,6 +21515,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       return Math.floor(randomNumber * (max - min + 1)) + min;
     }
   },
+
+  created: function created() {
+    var _this3 = this;
+
+    this.$watch('character.fallout', function (val) {
+      _this3.newFallout = val || [];
+    });
+  },
+
 
   watch: {
     options: function options(value) {
@@ -21874,7 +21896,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__helpers_mixin__["a" /* default */]]
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__helpers_mixin__["a" /* default */]],
+
+  methods: {
+    onChange: function onChange($event) {
+      if ($event.target.checked) {
+        this.$emit('tick');
+      } else {
+        this.$emit('untick');
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -21892,7 +21924,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "id": _vm.slug
     },
     domProps: {
+      "value": _vm.fallout.id,
       "checked": _vm.characterHasThis
+    },
+    on: {
+      "change": function($event) {
+        _vm.onChange($event)
+      }
     }
   }), _vm._v(" "), _c('label', {
     attrs: {
@@ -22704,6 +22742,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             on: {
               "show-details": function($event) {
                 _vm.showModal = f
+              },
+              "tick": function($event) {
+                _vm.newFalloutAdd(f)
+              },
+              "untick": function($event) {
+                _vm.newFalloutRemove(f)
               }
             }
           })

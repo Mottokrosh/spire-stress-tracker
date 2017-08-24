@@ -1,7 +1,7 @@
 <template>
   <div :class="classes">
     <div class="details">
-      <input type="checkbox" :id="slug" :checked="characterHasThis">
+      <input type="checkbox" :id="slug" :value="fallout.id" :checked="characterHasThis" @change="onChange($event)">
       <label :for="slug">{{ fallout.name }} <small>{{ fallout.resistance }}</small></label>
       <div class="severity">
         <icon id="drop" v-for="i in fallout.severity" :key="i"></icon>
@@ -53,5 +53,15 @@
     },
 
     mixins: [Helpers],
+
+    methods: {
+      onChange($event) {
+        if ($event.target.checked) {
+          this.$emit('tick');
+        } else {
+          this.$emit('untick');
+        }
+      },
+    },
   };
 </script>

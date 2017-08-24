@@ -65,6 +65,8 @@
               :details="f"
               :character="character"
               @show-details="showModal = f"
+              @tick="newFalloutAdd(f)"
+              @untick="newFalloutRemove(f)"
             ></fallout>
           </div>
 
@@ -135,9 +137,9 @@
         falloutOccurred: null,
         falloutLevel: null,
         falloutChoices: null,
-        falloutChosen: null,
         rolling: null,
         totalStress: 0,
+        newFallout: [],
         characterCopy: null,
       };
     },
@@ -228,9 +230,9 @@
         this.falloutLevel = null;
         this.falloutChoices = null;
         this.falloutOffset = 100;
-        this.falloutChosen = null;
         this.rolling = false;
         this.totalStress = 0;
+        this.newFallout = this.character.fallout || [];
         this.characterCopy = this.options ? this.clone(this.options.character) : null;
       },
 
@@ -326,6 +328,19 @@
         }
       },
 
+      newFalloutAdd(f) {
+        if (this.newFallout.indexOf(f.id) === -1) {
+          this.newFallout.push(f.id);
+        }
+      },
+
+      newFalloutRemove(f) {
+        const index = this.newFallout.indexOf(f.id);
+        if (index !== -1) {
+          this.newFallout.splice(index, 1);
+        }
+      },
+
       apply() {
         /*let newStress = this.stress + this.result;
 
@@ -343,7 +358,7 @@
           character: this.options.character,
           resistance: this.resistance,
           stress: this.stress,
-          fallout: this.falloutChosen,
+          fallout: this.newFallout,
         });
 
         this.close();
@@ -362,6 +377,12 @@
       },
     },
 
+    created() {
+      this.$watch('character.fallout', (val) => {
+        this.newFallout = val || [];
+      });
+    },
+
     watch: {
       options(value) {
         if (value) {
@@ -371,7 +392,7 @@
           document.body.classList.remove('roller-open');
           this.offset = 100;
         }
-      }
+      },
     },
   };
 </script>
