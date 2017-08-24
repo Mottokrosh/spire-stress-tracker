@@ -1,21 +1,37 @@
 <template>
-  <transition name="fade">
-    <div v-if="show" :class="classes" role="document" @click.self="close">
-      <header>
-        <h2>{{ title }}</h2>
-      </header>
-      <div class="main">
-        <slot></slot>
-      </div>
-      <footer>
-        <btn v-for="b in buttons" @click.native="$emit(slugify(b))">{{ b }}</btn>
-      </footer>
+  <div :class="classes">
+    <div class="modal-backdrop" @click.self="close"></div>
+    <div class="modal-content-wrapper">
+
+      <motion :value="offset" spring="wobbly">
+        <template scope="props">
+          <div class="modal-body" :style="{ transform: `translateY(${props.value}%)` }">
+
+            <div class="modal-content">
+              <header ref="header">
+                <h2>{{ title }}</h2>
+                <x-icon @click.native.self="close"></x-icon>
+              </header>
+              <div class="main">
+                <slot></slot>
+              </div>
+              <footer ref="footer">
+                <btn v-for="(b, index) in buttons" :key="index" @click.native="$emit(slugify(b))">{{ b }}</btn>
+              </footer>
+            </div>
+
+          </div>
+        </template>
+      </motion>
+
     </div>
-  </transition>
+  </div>
 </template>
 
 <script>
   import focusTrap from 'focus-trap';
+  import { Motion } from 'vue-motion';
+  import { XIcon } from 'vue-feather-icons';
   import Helpers from '../helpers.mixin';
 
   export default {
@@ -27,12 +43,18 @@
       buttons: Array,
     },
 
+    components: {
+      Motion,
+      XIcon,
+    },
+
     mixins: [Helpers],
 
     data() {
       return {
-        header: this.$el.querySelector('header'),
-        footer: this.$el.querySelector('footer'),
+        offset: -100,
+        header: this.$refs.header,
+        footer: this.$refs.footer,
         trap: null,
       };
     },
@@ -74,7 +96,7 @@
 
       startFocusTrap() {
         this.trap = focusTrap(this.$el, {
-          initialFocus: this.footer.querySelector('button'),
+          //initialFocus: this.footer.querySelector('button'),
         });
 
         this.trap.activate();
@@ -102,9 +124,12 @@
 
               this.startFocusTrap();
             });
+
+            this.offset = 0;
           } else {
             document.body.style.overflow = 'auto';
             this.stopFocusTrap();
+            this.offset = -100;
           }
         },
         deep: true,

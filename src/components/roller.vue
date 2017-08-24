@@ -65,11 +65,16 @@
           </div>
 
           <nav class="actions">
+            <btn class="secondary" @click.native="showModal = true">Modal</btn>
             <btn class="secondary" :disabled="!result" @click.native="reset">Reset</btn>
             <btn :disabled="!result" @click.native="apply">Apply Results</btn>
           </nav>
 
         </div>
+
+        <modal :show="showModal">
+          Test
+        </modal>
 
       </div>
     </template>
@@ -85,6 +90,7 @@
   import Brutal from './brutal.vue';
   import Icon from './icon.vue';
   import Fallout from './fallout.vue';
+  import Modal from './modal.vue';
 
   export default {
     props: ['options', 'fallout'],
@@ -94,6 +100,7 @@
       ChevronLeftIcon,
       Fallout,
       Icon,
+      Modal,
       Motion,
       XIcon,
     },
@@ -104,6 +111,7 @@
       return {
         resistances: Store.resistances,
         offset: 100,
+        showModal: false,
         falloutOffset: 100,
         d1: { flipped: false, result: null, brutal: 0 },
         d3: { flipped: false, result: null, brutal: 0 },

@@ -909,3 +909,80 @@ select.small {
 .fallout-item + .fallout-item {
   margin-top: -1px;
 }
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+.modal .modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 200ms linear;
+}
+
+.modal.modal-open {
+  pointer-events: all;
+}
+
+.modal.modal-open .modal-backdrop {
+  opacity: 1;
+}
+
+.modal .modal-content-wrapper {
+  flex: 1;
+  max-width: 256px;
+  height: 100vh;
+  margin: 0;
+  overflow: visible;
+  display: flex;
+}
+
+.modal .modal-content-wrapper span {
+  width: 100%;
+}
+
+.modal .modal-content {
+  background-image: url(../images/texture-red-512x512.jpg);
+  background-size: 256px;
+  position: relative;
+  padding: 1rem;
+  height: 100vh;
+}
+
+.modal .modal-content:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -23px;
+  width: 24px;
+  height: 100%;
+  background-image: url(../images/tear-red-left-48x512.png);
+  background-size: 24px;
+  background-repeat: repeat-y;
+}
+
+.modal .modal-content:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -23px;
+  width: 24px;
+  height: 100%;
+  background-image: url(../images/tear-red-right-48x512.png);
+  background-size: 24px;
+  background-repeat: repeat-y;
+}
