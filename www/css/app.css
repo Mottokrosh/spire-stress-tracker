@@ -797,12 +797,19 @@ select.small {
 }
 
 .character .resistance {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   border: 1px solid #214050;
   margin: 0;
   background-color: #fff;
+}
+
+.character .resistance > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.character .resistance > div:first-child > div {
+  margin: 0 0.5rem 0 auto;
 }
 
 .character .resistance:hover {
@@ -817,10 +824,6 @@ select.small {
 
 .character .resistance h3 small {
   font-size: 0.8rem;
-}
-
-.character .resistance > div {
-  margin: 0 0.5rem 0 auto;
 }
 
 .character .resistance button {
@@ -840,6 +843,13 @@ select.small {
 
 .character .resistance + .resistance {
   margin-top: -1px;
+}
+
+.character .any-fallout {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0 0.5rem 0 0.5rem;
 }
 
 .fallout-item {
@@ -1034,4 +1044,31 @@ select.small {
   .modal .modal-content-wrapper {
     max-width: 256px;
   }
+}
+
+.tag {
+  border: 1px solid #ad302a;
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.25rem;
+  color: #ad302a;
+  display: flex;
+  align-items: center;
+  margin: 0 0.5rem 0.5rem 0;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.tag > * {
+  margin-top: 0;
+}
+
+.tag button {
+  color: #ad302a;
+  padding: 0;
+  margin-left: 0.25rem;
+}
+
+.tag button svg {
+  width: 0.8rem;
+  height: 0.8rem;
 }

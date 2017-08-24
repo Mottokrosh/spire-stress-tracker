@@ -1,7 +1,7 @@
 <template>
   <div class="estresso">
 
-    <roller :options="rollerOptions" :fallout="fallout" @close="rollerOptions = null" @update="updateCharacter"></roller>
+    <roller :options="rollerOptions" :fallout="allFallout" @close="rollerOptions = null" @update="updateCharacter"></roller>
 
     <header>
       <div class="column">
@@ -11,7 +11,7 @@
 
     <transition-group name="fade" tag="ul" class="characters">
       <li v-for="(c, index) in characters" :key="index">
-        <character :c="c" @stress="addStress" @delete="deleteCharacter"></character>
+        <character :c="c" :all-fallout="allFallout" @stress="addStress" @delete="deleteCharacter"></character>
       </li>
     </transition-group>
 
@@ -89,7 +89,7 @@
         rollerOptions: null,
         newCharacter: Object.assign({}, characterSchema),
         names: null,
-        fallout: null,
+        allFallout: null,
       };
     },
 
@@ -152,7 +152,7 @@
 
       Axios.get('data/fallout.json')
         .then(response => {
-          this.fallout = response.data;
+          this.allFallout = response.data;
         });
     }
   };

@@ -780,12 +780,19 @@ select {
   }
 
   .resistance {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     border: 1px solid $primary;
     margin: 0;
     background-color: #fff;
+
+    & > div:first-child {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      & > div {
+        margin: 0 0.5rem 0 auto;
+      }
+    }
 
     &:hover {
       background-color: $beigeLight;
@@ -797,10 +804,6 @@ select {
       transform: translateY(2px); // Because of the weird font baseline
 
       small { font-size: 0.8rem; }
-    }
-
-    & > div {
-      margin: 0 0.5rem 0 auto;
     }
 
     button {
@@ -821,6 +824,13 @@ select {
 
   .resistance + .resistance {
     margin-top: -1px;
+  }
+
+  .any-fallout {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0 0.5rem 0 0.5rem;
   }
 }
 
@@ -1016,6 +1026,33 @@ select {
   @media (max-width: 630px) {
     .modal-content-wrapper {
       max-width: 256px;
+    }
+  }
+}
+
+.tag {
+  border: 1px solid $red;
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.25rem;
+  color: $red;
+  display: flex;
+  align-items: center;
+  margin: 0 0.5rem 0.5rem 0;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+
+  & > * {
+    margin-top: 0;
+  }
+
+  button {
+    color: $red;
+    padding: 0;
+    margin-left: 0.25rem;
+
+    svg {
+      width: 0.8rem;
+      height: 0.8rem;
     }
   }
 }

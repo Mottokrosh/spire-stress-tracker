@@ -19596,7 +19596,7 @@ var characterSchema = {
       rollerOptions: null,
       newCharacter: Object.assign({}, characterSchema),
       names: null,
-      fallout: null
+      allFallout: null
     };
   },
 
@@ -19657,7 +19657,7 @@ var characterSchema = {
     });
 
     __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('data/fallout.json').then(function (response) {
-      _this.fallout = response.data;
+      _this.allFallout = response.data;
     });
   }
 });
@@ -20740,7 +20740,9 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fallout_badge_vue__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fallout_badge_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__fallout_badge_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store__ = __webpack_require__(5);
 //
 //
 //
@@ -20763,23 +20765,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    c: Object
+    c: Object,
+    allFallout: Array
   },
 
   components: {
+    FalloutBadge: __WEBPACK_IMPORTED_MODULE_1__fallout_badge_vue___default.a,
     PlusIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["c" /* PlusIcon */],
     XIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["d" /* XIcon */]
   },
 
   data: function data() {
     return {
-      resistances: __WEBPACK_IMPORTED_MODULE_1__store__["a" /* default */].resistances
+      resistances: __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].resistances
     };
   },
 
@@ -20796,6 +20811,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     deleteCharacter: function deleteCharacter() {
       this.$emit('delete', this.c);
+    },
+    removeFallout: function removeFallout(falloutId) {
+      var fallout = this.allFallout.find(function (f) {
+        return f.id === falloutId;
+      });
+      if (window.confirm('Remove ' + fallout.name + '?')) {
+        this.$emit('removeFallout', falloutId);
+      }
     }
   }
 });
@@ -20878,14 +20901,30 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, _vm._l((_vm.resistances), function(r) {
     return _c('div', {
       staticClass: "resistance"
-    }, [_c('h3', [_vm._v(_vm._s(_vm.ucfirst(r))), (_vm.freeSlots(r)) ? _c('small', [_vm._v(" + " + _vm._s(_vm.freeSlots(r)))]) : _vm._e()]), _vm._v(" "), _c('div', [_c('span', [_vm._v("Stress")]), _vm._v(" "), _c('strong', [_vm._v(_vm._s(_vm.c[r].stress))])]), _vm._v(" "), _c('btn', {
+    }, [_c('div', [_c('h3', [_vm._v(_vm._s(_vm.ucfirst(r))), (_vm.freeSlots(r)) ? _c('small', [_vm._v(" + " + _vm._s(_vm.freeSlots(r)))]) : _vm._e()]), _vm._v(" "), _c('div', [_c('span', [_vm._v("Stress")]), _vm._v(" "), _c('strong', [_vm._v(_vm._s(_vm.c[r].stress))])]), _vm._v(" "), _c('btn', {
       staticClass: "shadowless has-icon",
       nativeOn: {
         "click": function($event) {
           _vm.addStress(r)
         }
       }
-    }, [_c('plus-icon')], 1)], 1)
+    }, [_c('plus-icon')], 1)], 1), _vm._v(" "), _c('div', {
+      staticClass: "any-fallout"
+    }, _vm._l((_vm.c.fallout), function(falloutId) {
+      return _c('fallout-badge', {
+        key: falloutId,
+        attrs: {
+          "all-fallout": _vm.allFallout,
+          "fallout-id": falloutId,
+          "resistance": r
+        },
+        on: {
+          "remove": function($event) {
+            _vm.removeFallout(falloutId)
+          }
+        }
+      })
+    }))])
   }))])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
@@ -22822,7 +22861,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('roller', {
     attrs: {
       "options": _vm.rollerOptions,
-      "fallout": _vm.fallout
+      "fallout": _vm.allFallout
     },
     on: {
       "close": function($event) {
@@ -22841,7 +22880,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       key: index
     }, [_c('character', {
       attrs: {
-        "c": c
+        "c": c,
+        "all-fallout": _vm.allFallout
       },
       on: {
         "stress": _vm.addStress,
@@ -22981,6 +23021,214 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-78c207b0", module.exports)
+  }
+}
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(67),
+  /* template */
+  __webpack_require__(68),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/mottokrosh/Projects/spire-stress-tracker/src/components/fallout-badge.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] fallout-badge.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-41c42bbf", Component.options)
+  } else {
+    hotAPI.reload("data-v-41c42bbf", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 67 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__tag_vue__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__tag_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__tag_vue__);
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    allFallout: Array,
+    falloutId: Number,
+    resistance: String
+  },
+
+  components: {
+    Tag: __WEBPACK_IMPORTED_MODULE_0__tag_vue___default.a
+  },
+
+  data: function data() {
+    return {
+      //
+    };
+  },
+
+
+  computed: {
+    fallout: function fallout() {
+      var _this = this;
+
+      return this.allFallout && this.allFallout.find(function (f) {
+        return f.id === _this.falloutId;
+      });
+    },
+    value: function value() {
+      return this.fallout && this.fallout.resistance === this.resistance ? this.fallout.name : null;
+    }
+  }
+});
+
+/***/ }),
+/* 68 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return (_vm.value) ? _c('tag', {
+    on: {
+      "remove": function($event) {
+        _vm.$emit('remove')
+      }
+    }
+  }, [_vm._v(_vm._s(_vm.value))]) : _vm._e()
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-41c42bbf", module.exports)
+  }
+}
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(70),
+  /* template */
+  __webpack_require__(71),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/mottokrosh/Projects/spire-stress-tracker/src/components/tag.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] tag.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-59438910", Component.options)
+  } else {
+    hotAPI.reload("data-v-59438910", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 70 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__ = __webpack_require__(3);
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    XIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["d" /* XIcon */]
+  },
+
+  computed: {
+    classes: function classes() {
+      return {
+        tag: true
+      };
+    }
+  }
+});
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('span', {
+    class: _vm.classes
+  }, [_c('span', {
+    staticClass: "text"
+  }, [_vm._t("default")], 2), _vm._v(" "), _c('btn', {
+    staticClass: "backgroundless has-icon",
+    attrs: {
+      "aria-label": "Remove tag"
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.$emit('remove')
+      }
+    }
+  }, [_c('x-icon')], 1)], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-59438910", module.exports)
   }
 }
 
