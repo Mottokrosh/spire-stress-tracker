@@ -21243,6 +21243,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -21899,7 +21912,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     })
   }))]), _vm._v(" "), _c('btn', {
-    staticClass: "shadowless has-icon"
+    staticClass: "shadowless has-icon",
+    nativeOn: {
+      "click": function($event) {
+        _vm.$emit('show-details')
+      }
+    }
   }, [_c('icon', {
     attrs: {
       "id": "eyeball"
@@ -21996,6 +22014,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -22008,6 +22028,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       required: true
     },
     title: String,
+    subTitle: String,
     buttons: Array
   },
 
@@ -22052,8 +22073,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     close: function close() {
+      var _this = this;
+
       document.body.style.overflow = 'auto';
-      this.$emit('close');
+      this.stopFocusTrap();
+      this.offset = -100;
+      setTimeout(function () {
+        _this.$emit('close');
+      }, 250);
     },
     onKeyup: function onKeyup($event) {
       if ($event.keyCode === 27 && this.show) {
@@ -22062,7 +22089,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     startFocusTrap: function startFocusTrap() {
       this.trap = __WEBPACK_IMPORTED_MODULE_0_focus_trap___default()(this.$el, {
-        //initialFocus: this.footer.querySelector('button'),
+        fallbackFocus: this.$refs.closeButton
       });
 
       this.trap.activate();
@@ -22072,35 +22099,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.trap.deactivate();
       this.trap = null;
+    },
+    onButton: function onButton(name) {
+      var slugifiedName = this.slugify(name);
+      if (slugifiedName === 'close') {
+        this.close();
+      } else {
+        this.$emit(slugifiedName);
+      }
     }
   },
 
   watch: {
     show: {
       handler: function handler(active) {
-        var _this = this;
+        var _this2 = this;
 
         if (active) {
           document.body.style.overflow = 'hidden';
 
           this.$nextTick(function () {
-            if (_this.$el) {
-              _this.$el.onscroll = _this.handleScroll;
-              _this.handleScroll();
+            if (_this2.$el) {
+              _this2.$el.onscroll = _this2.handleScroll;
+              _this2.handleScroll();
             }
 
-            _this.startFocusTrap();
+            _this2.startFocusTrap();
           });
 
           this.offset = 0;
         } else {
           document.body.style.overflow = 'auto';
-          this.stopFocusTrap();
-          this.offset = -100;
         }
-      },
-
-      deep: true
+      }
     }
   },
 
@@ -22493,23 +22524,29 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           staticClass: "modal-content"
         }, [_c('header', {
           ref: "header"
-        }, [_c('h2', [_vm._v(_vm._s(_vm.title))]), _vm._v(" "), _c('x-icon', {
+        }, [_c('h2', [_vm._v(_vm._s(_vm.title) + " "), (_vm.subTitle) ? _c('small', [_vm._v(_vm._s(_vm.subTitle))]) : _vm._e()]), _vm._v(" "), _c('btn', {
+          ref: "closeButton",
+          staticClass: "backgroundless has-icon",
+          attrs: {
+            "aria-label": "Close modal"
+          },
           nativeOn: {
             "click": function($event) {
-              if ($event.target !== $event.currentTarget) { return null; }
               _vm.close($event)
             }
           }
-        })], 1), _vm._v(" "), _c('div', {
+        }, [_c('x-icon')], 1)], 1), _vm._v(" "), _c('div', {
           staticClass: "main"
-        }, [_vm._t("default")], 2), _vm._v(" "), _c('footer', {
+        }, [_vm._t("default", null, {
+          body: ""
+        })], 2), _vm._v(" "), _c('footer', {
           ref: "footer"
         }, _vm._l((_vm.buttons), function(b, index) {
           return _c('btn', {
             key: index,
             nativeOn: {
               "click": function($event) {
-                _vm.$emit(_vm.slugify(b))
+                _vm.onButton(b)
               }
             }
           }, [_vm._v(_vm._s(b))])
@@ -22667,18 +22704,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             attrs: {
               "details": f,
               "character": _vm.character
+            },
+            on: {
+              "show-details": function($event) {
+                _vm.showModal = f
+              }
             }
           })
         })) : _vm._e(), _vm._v(" "), _c('nav', {
           staticClass: "actions"
         }, [_c('btn', {
-          staticClass: "secondary",
-          nativeOn: {
-            "click": function($event) {
-              _vm.showModal = true
-            }
-          }
-        }, [_vm._v("Modal")]), _vm._v(" "), _c('btn', {
           staticClass: "secondary",
           attrs: {
             "disabled": !_vm.result
@@ -22699,9 +22734,32 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         }, [_vm._v("Apply Results")])], 1)], 1) : _vm._e(), _vm._v(" "), _c('modal', {
           attrs: {
-            "show": _vm.showModal
-          }
-        }, [_vm._v("\n        Test\n      ")])], 1)]
+            "show": _vm.showModal,
+            "title": _vm.showModal.name,
+            "sub-title": _vm.showModal.resistance,
+            "buttons": ['Close']
+          },
+          on: {
+            "close": function($event) {
+              _vm.showModal = false
+            }
+          },
+          scopedSlots: _vm._u([{
+            key: "default",
+            fn: function(body) {
+              return [_c('p', [_vm._v(_vm._s(_vm.showModal.description))]), _vm._v(" "), _c('div', {
+                staticClass: "fallout-level"
+              }, [_vm._l((_vm.showModal.severity), function(i) {
+                return _c('icon', {
+                  key: i,
+                  attrs: {
+                    "id": "drop"
+                  }
+                })
+              }), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.showModal.level))])], 2)]
+            }
+          }])
+        })], 1)]
       }
     }])
   })

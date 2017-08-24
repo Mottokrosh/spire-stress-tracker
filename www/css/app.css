@@ -735,6 +735,23 @@ select.small {
   margin-top: 2rem;
 }
 
+.roller .fallout-level {
+  text-transform: uppercase;
+  color: #cf413b;
+  display: flex;
+  align-items: center;
+}
+
+.roller .fallout-level > * {
+  margin: 0;
+  filter: drop-shadow(0 0 0.25rem #000);
+}
+
+.roller .fallout-level > *:last-child {
+  margin-left: 0.5rem;
+  font-weight: bold;
+}
+
 .counter-control {
   display: flex;
 }
@@ -929,9 +946,9 @@ select.small {
   right: 0;
   left: 0;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(173, 48, 42, 0.9);
   opacity: 0;
-  transition: opacity 200ms linear;
+  transition: opacity 250ms linear;
 }
 
 .modal.modal-open {
@@ -944,7 +961,7 @@ select.small {
 
 .modal .modal-content-wrapper {
   flex: 1;
-  max-width: 256px;
+  max-width: 512px;
   height: 100vh;
   margin: 0;
   overflow: visible;
@@ -985,4 +1002,30 @@ select.small {
   background-image: url(../images/tear-red-right-48x512.png);
   background-size: 24px;
   background-repeat: repeat-y;
+}
+
+.modal .modal-content header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.5rem;
+}
+
+.modal .modal-content header > * {
+  margin: 0;
+}
+
+.modal .modal-content header > *:last-child {
+  margin-left: 0.5rem;
+}
+
+.modal .modal-content footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 630px) {
+  .modal .modal-content-wrapper {
+    max-width: 256px;
+  }
 }

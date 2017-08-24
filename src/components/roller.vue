@@ -61,19 +61,32 @@
           </motion>
 
           <div v-if="falloutOccurred" class="fallout-items">
-            <fallout v-for="(f, index) in falloutChoices" :key="index" :details="f" :character="character"></fallout>
+            <fallout v-for="(f, index) in falloutChoices" :key="index"
+              :details="f"
+              :character="character"
+              @show-details="showModal = f"
+            ></fallout>
           </div>
 
           <nav class="actions">
-            <btn class="secondary" @click.native="showModal = true">Modal</btn>
             <btn class="secondary" :disabled="!result" @click.native="reset">Reset</btn>
             <btn :disabled="!result" @click.native="apply">Apply Results</btn>
           </nav>
 
         </div>
 
-        <modal :show="showModal">
-          Test
+        <modal :show="showModal" @close="showModal = false"
+          :title="showModal.name"
+          :sub-title="showModal.resistance"
+          :buttons="['Close']"
+        >
+          <template scope="body">
+            <p>{{ showModal.description }}</p>
+            <div class="fallout-level">
+              <icon id="drop" v-for="i in showModal.severity" :key="i"></icon>
+              <span>{{ showModal.level }}</span>
+            </div>
+          </template>
         </modal>
 
       </div>

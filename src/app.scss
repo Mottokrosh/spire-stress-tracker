@@ -717,6 +717,23 @@ select {
   .fallout-items {
     margin-top: 2rem;
   }
+
+  .fallout-level {
+    text-transform: uppercase;
+    color: lighten($red, 10%);
+    display: flex;
+    align-items: center;
+
+    & > * {
+      margin: 0;
+      filter: drop-shadow(0 0 0.25rem #000);
+
+      &:last-child {
+        margin-left: 0.5rem;
+        font-weight: bold;
+      }
+    }
+  }
 }
 
 .counter-control {
@@ -912,9 +929,9 @@ select {
     right: 0;
     left: 0;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: transparentize($red, 0.1);
     opacity: 0;
-    transition: opacity 200ms linear;
+    transition: opacity 250ms linear;
   }
 
   &.modal-open {
@@ -927,7 +944,7 @@ select {
 
   .modal-content-wrapper {
     flex: 1;
-    max-width: 256px; // should always be multiple of this so tears can align
+    max-width: 512px; // should always be multiple of 256 so tears can align
     height: 100vh;
     margin: 0;
     overflow: visible;
@@ -967,6 +984,32 @@ select {
       background-image: url(../images/tear-red-right-48x512.png);
       background-size: 24px;
       background-repeat: repeat-y;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 0.5rem;
+
+      & > * {
+        margin: 0;
+
+        &:last-child {
+          margin-left: 0.5rem;
+        }
+      }
+    }
+
+    footer {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  @media (max-width: 630px) {
+    .modal-content-wrapper {
+      max-width: 256px;
     }
   }
 }

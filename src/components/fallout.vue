@@ -7,7 +7,7 @@
         <icon id="drop" v-for="i in fallout.severity" :key="i"></icon>
       </div>
     </div>
-    <btn class="shadowless has-icon"><icon id="eyeball"></icon></btn>
+    <btn class="shadowless has-icon" @click.native="$emit('show-details')"><icon id="eyeball"></icon></btn>
   </div>
 </template>
 

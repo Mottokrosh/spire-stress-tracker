@@ -9,14 +9,16 @@
 
             <div class="modal-content">
               <header ref="header">
-                <h2>{{ title }}</h2>
-                <x-icon @click.native.self="close"></x-icon>
+                <h2>{{ title }} <small v-if="subTitle">{{ subTitle }}</small></h2>
+                <btn class="backgroundless has-icon" @click.native="close" ref="closeButton" aria-label="Close modal">
+                  <x-icon></x-icon>
+                </btn>
               </header>
               <div class="main">
-                <slot></slot>
+                <slot body></slot>
               </div>
               <footer ref="footer">
-                <btn v-for="(b, index) in buttons" :key="index" @click.native="$emit(slugify(b))">{{ b }}</btn>
+                <btn v-for="(b, index) in buttons" :key="index" @click.native="onButton(b)">{{ b }}</btn>
               </footer>
             </div>
 
@@ -40,6 +42,7 @@
         required: true,
       },
       title: String,
+      subTitle: String,
       buttons: Array,
     },
 
@@ -85,7 +88,9 @@
 
       close() {
         document.body.style.overflow = 'auto';
-        this.$emit('close');
+        this.stopFocusTrap();
+        this.offset = -100;
+        setTimeout(() => { this.$emit('close'); }, 250);
       },
 
       onKeyup($event) {
@@ -96,7 +101,7 @@
 
       startFocusTrap() {
         this.trap = focusTrap(this.$el, {
-          //initialFocus: this.footer.querySelector('button'),
+          fallbackFocus: this.$refs.closeButton,
         });
 
         this.trap.activate();
@@ -108,6 +113,15 @@
         this.trap.deactivate();
         this.trap = null;
       },
+
+      onButton(name) {
+        const slugifiedName = this.slugify(name);
+        if (slugifiedName === 'close') {
+          this.close();
+        } else {
+          this.$emit(slugifiedName);
+        }
+      }
     },
 
     watch: {
@@ -128,11 +142,8 @@
             this.offset = 0;
           } else {
             document.body.style.overflow = 'auto';
-            this.stopFocusTrap();
-            this.offset = -100;
           }
         },
-        deep: true,
       },
     },
 
