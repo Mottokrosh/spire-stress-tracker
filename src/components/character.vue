@@ -67,13 +67,16 @@
       },
 
       deleteCharacter() {
-        this.$emit('delete', this.c);
+        if (window.confirm(`Delete ${this.c.name}?`)) {
+          this.$emit('delete', this.c);
+        }
       },
 
       removeFallout(falloutId) {
         const fallout = this.allFallout.find(f => f.id === falloutId);
         if (window.confirm(`Remove ${fallout.name}?`)) {
-          this.$emit('removeFallout', falloutId);
+          console.log('emitting');
+          this.$emit('remove-fallout', this.c, falloutId);
         }
       }
     },

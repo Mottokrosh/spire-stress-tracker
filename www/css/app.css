@@ -849,7 +849,7 @@ select.small {
   display: flex;
   flex-wrap: wrap;
   margin: 0;
-  padding: 0 0.5rem 0 0.5rem;
+  padding: 0 2rem 0 0.5rem;
 }
 
 .fallout-item {
@@ -1047,10 +1047,11 @@ select.small {
 }
 
 .tag {
-  border: 1px solid #ad302a;
+  background-image: url(../images/texture-red-512x512.jpg);
+  background-size: 256px;
   border-radius: 0.25rem;
   padding: 0.125rem 0.25rem;
-  color: #ad302a;
+  color: #fff;
   display: flex;
   align-items: center;
   margin: 0 0.5rem 0.5rem 0;
@@ -1063,9 +1064,14 @@ select.small {
 }
 
 .tag button {
-  color: #ad302a;
+  color: rgba(255, 255, 255, 0.75);
   padding: 0;
   margin-left: 0.25rem;
+  transition: all 100ms linear;
+}
+
+.tag button:hover {
+  color: #fff;
 }
 
 .tag button svg {

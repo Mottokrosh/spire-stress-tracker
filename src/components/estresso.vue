@@ -11,7 +11,13 @@
 
     <transition-group name="fade" tag="ul" class="characters">
       <li v-for="(c, index) in characters" :key="index">
-        <character :c="c" :all-fallout="allFallout" @stress="addStress" @delete="deleteCharacter"></character>
+        <character
+          :c="c"
+          :all-fallout="allFallout"
+          @stress="addStress"
+          @delete="deleteCharacter"
+          @remove-fallout="removeFallout"
+        ></character>
       </li>
     </transition-group>
 
@@ -138,7 +144,15 @@
       addStress(options) {
         const {character, resistance} = options;
         this.rollerOptions = options;
-      }
+      },
+
+      removeFallout(character, falloutId) {
+        const index = character.fallout.indexOf(falloutId);
+        if (index !== -1) {
+          character.fallout.splice(index, 1);
+          this.store.save();
+        }
+      },
     },
 
     created() {

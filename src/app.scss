@@ -830,7 +830,7 @@ select {
     display: flex;
     flex-wrap: wrap;
     margin: 0;
-    padding: 0 0.5rem 0 0.5rem;
+    padding: 0 2rem 0 0.5rem;
   }
 }
 
@@ -1031,10 +1031,11 @@ select {
 }
 
 .tag {
-  border: 1px solid $red;
+  background-image: url(../images/texture-red-512x512.jpg);
+  background-size: 256px;
   border-radius: 0.25rem;
   padding: 0.125rem 0.25rem;
-  color: $red;
+  color: #fff;
   display: flex;
   align-items: center;
   margin: 0 0.5rem 0.5rem 0;
@@ -1046,9 +1047,14 @@ select {
   }
 
   button {
-    color: $red;
+    color: transparentize(#fff, 0.25);
     padding: 0;
     margin-left: 0.25rem;
+    transition: all 100ms linear;
+
+    &:hover {
+      color: #fff;
+    }
 
     svg {
       width: 0.8rem;

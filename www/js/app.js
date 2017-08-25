@@ -19568,6 +19568,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -19643,6 +19649,13 @@ var characterSchema = {
           resistance = options.resistance;
 
       this.rollerOptions = options;
+    },
+    removeFallout: function removeFallout(character, falloutId) {
+      var index = character.fallout.indexOf(falloutId);
+      if (index !== -1) {
+        character.fallout.splice(index, 1);
+        this.store.save();
+      }
     }
   },
 
@@ -20810,14 +20823,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.$emit('stress', { character: this.c, resistance: resistance });
     },
     deleteCharacter: function deleteCharacter() {
-      this.$emit('delete', this.c);
+      if (window.confirm('Delete ' + this.c.name + '?')) {
+        this.$emit('delete', this.c);
+      }
     },
     removeFallout: function removeFallout(falloutId) {
       var fallout = this.allFallout.find(function (f) {
         return f.id === falloutId;
       });
       if (window.confirm('Remove ' + fallout.name + '?')) {
-        this.$emit('removeFallout', falloutId);
+        console.log('emitting');
+        this.$emit('remove-fallout', this.c, falloutId);
       }
     }
   }
@@ -22885,7 +22901,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       on: {
         "stress": _vm.addStress,
-        "delete": _vm.deleteCharacter
+        "delete": _vm.deleteCharacter,
+        "remove-fallout": _vm.removeFallout
       }
     })], 1)
   })), _vm._v(" "), _c('form', {
