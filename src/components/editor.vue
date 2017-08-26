@@ -24,7 +24,7 @@
                 >
               </div>
 
-              <h3>Stress &amp; Free Slots</h3>
+              <h3>Stress</h3>
 
               <table>
                 <thead>
@@ -65,6 +65,14 @@
 
               <h3>Fallout</h3>
 
+              <div class="fallout">
+                <fallout-badge v-for="falloutId in char.fallout" :key="falloutId"
+                  :all-fallout="fallout"
+                  :fallout-id="falloutId"
+                  @remove="removeFallout(falloutId)"
+                ></fallout-badge>
+              </div>
+
             </div>
           </form>
 
@@ -86,16 +94,19 @@
   import Store from '../store';
   import Helpers from '../helpers.mixin';
   import CounterControl from './counter-control.vue';
+  import FalloutBadge from './fallout-badge.vue';
   import Icon from './icon.vue';
 
   export default {
     props: {
       character: Object,
+      fallout: Array,
     },
 
     components: {
       ChevronRightIcon,
       CounterControl,
+      FalloutBadge,
       Icon,
       Motion,
       XIcon,
@@ -139,6 +150,10 @@
 
       reset() {
         this.characterCopy = this.clone(this.character);
+      },
+
+      removeFallout(falloutId) {
+        console.log(falloutId);
       },
 
       getRandomIntInclusive(min, max) {

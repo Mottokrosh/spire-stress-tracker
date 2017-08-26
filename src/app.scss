@@ -609,7 +609,7 @@ select {
 
   .roller-content {
     margin: 0;
-    padding: 2rem 2rem 2rem 1rem;
+    padding: 2rem 2rem 4rem 1rem;
     overflow: auto;
     width: 100%;
   }
@@ -1171,7 +1171,7 @@ select {
 
   .editor-content {
     margin: 0;
-    padding: 2rem;
+    padding: 2rem 2rem 4rem 2rem;
     overflow: auto;
     width: 100%;
   }
@@ -1180,8 +1180,10 @@ select {
     padding: 0;
   }
 
-  table tbody td:not(:first-of-type) {
-    text-align: center;
+  .actions {
+    padding: 0;
+    text-align: right;
+    margin: 2rem 0 0 0;
   }
 }
 

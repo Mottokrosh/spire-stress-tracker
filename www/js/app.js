@@ -22913,7 +22913,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('editor', {
     attrs: {
-      "character": _vm.characterToEdit
+      "character": _vm.characterToEdit,
+      "fallout": _vm.allFallout
     },
     on: {
       "close": function($event) {
@@ -23159,6 +23160,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     value: function value() {
+      if (!this.resistance) {
+        return this.fallout && this.fallout.name;
+      }
+
       return this.fallout && this.fallout.resistance === this.resistance ? this.fallout.name : null;
     }
   }
@@ -23341,8 +23346,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_mixin__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__counter_control_vue__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__counter_control_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__counter_control_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__icon_vue__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__icon_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__fallout_badge_vue__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__fallout_badge_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__fallout_badge_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__icon_vue__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__icon_vue__);
 //
 //
 //
@@ -23425,6 +23432,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -23435,13 +23451,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    character: Object
+    character: Object,
+    fallout: Array
   },
 
   components: {
     ChevronRightIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["b" /* ChevronRightIcon */],
     CounterControl: __WEBPACK_IMPORTED_MODULE_4__counter_control_vue___default.a,
-    Icon: __WEBPACK_IMPORTED_MODULE_5__icon_vue___default.a,
+    FalloutBadge: __WEBPACK_IMPORTED_MODULE_5__fallout_badge_vue___default.a,
+    Icon: __WEBPACK_IMPORTED_MODULE_6__icon_vue___default.a,
     Motion: __WEBPACK_IMPORTED_MODULE_0_vue_motion__["Motion"],
     XIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["f" /* XIcon */]
   },
@@ -23483,6 +23501,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     reset: function reset() {
       this.characterCopy = this.clone(this.character);
+    },
+    removeFallout: function removeFallout(falloutId) {
+      console.log(falloutId);
     },
     getRandomIntInclusive: function getRandomIntInclusive(min, max) {
       var randomBuffer = new Uint32Array(1);
@@ -23574,7 +23595,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.char.name = $event.target.value
             }
           }
-        })]), _vm._v(" "), _c('h3', [_vm._v("Stress & Free Slots")]), _vm._v(" "), _c('table', [_c('thead', [_c('tr', [_c('th', [_vm._v("Resistance")]), _vm._v(" "), _c('th', [_vm._v("Free Slots")]), _vm._v(" "), _c('th', [_vm._v("Stress")])])]), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', [_vm._v("Blood")]), _vm._v(" "), _c('td', [_c('counter-control', {
+        })]), _vm._v(" "), _c('h3', [_vm._v("Stress")]), _vm._v(" "), _c('table', [_c('thead', [_c('tr', [_c('th', [_vm._v("Resistance")]), _vm._v(" "), _c('th', [_vm._v("Free Slots")]), _vm._v(" "), _c('th', [_vm._v("Stress")])])]), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', [_vm._v("Blood")]), _vm._v(" "), _c('td', [_c('counter-control', {
           attrs: {
             "value": _vm.char.blood.freeSlots
           },
@@ -23664,7 +23685,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.char.reputation.stress = $event
             }
           }
-        })], 1)])])]), _vm._v(" "), _c('h3', [_vm._v("Fallout")])])]), _vm._v(" "), _c('nav', {
+        })], 1)])])]), _vm._v(" "), _c('h3', [_vm._v("Fallout")]), _vm._v(" "), _c('div', {
+          staticClass: "fallout"
+        }, _vm._l((_vm.char.fallout), function(falloutId) {
+          return _c('fallout-badge', {
+            key: falloutId,
+            attrs: {
+              "all-fallout": _vm.fallout,
+              "fallout-id": falloutId
+            },
+            on: {
+              "remove": function($event) {
+                _vm.removeFallout(falloutId)
+              }
+            }
+          })
+        }))])]), _vm._v(" "), _c('nav', {
           staticClass: "actions"
         }, [_c('btn', {
           staticClass: "secondary"

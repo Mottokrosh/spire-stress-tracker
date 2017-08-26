@@ -3,7 +3,7 @@
 
     <roller :options="rollerOptions" :fallout="allFallout" @close="rollerOptions = null" @update="updateCharacter"></roller>
 
-    <editor :character="characterToEdit" @close="characterToEdit = null"></editor>
+    <editor :character="characterToEdit" :fallout="allFallout" @close="characterToEdit = null"></editor>
 
     <header>
       <div class="column">

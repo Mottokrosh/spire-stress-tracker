@@ -28,6 +28,10 @@
       },
 
       value() {
+        if (!this.resistance) {
+          return this.fallout && this.fallout.name;
+        }
+
         return this.fallout && this.fallout.resistance === this.resistance
           ? this.fallout.name
           : null;

@@ -618,7 +618,7 @@ select.small {
 
 .roller .roller-content {
   margin: 0;
-  padding: 2rem 2rem 2rem 1rem;
+  padding: 2rem 2rem 4rem 1rem;
   overflow: auto;
   width: 100%;
 }
@@ -1180,7 +1180,7 @@ select.small {
 
 .editor .editor-content {
   margin: 0;
-  padding: 2rem;
+  padding: 2rem 2rem 4rem 2rem;
   overflow: auto;
   width: 100%;
 }
@@ -1189,8 +1189,10 @@ select.small {
   padding: 0;
 }
 
-.editor table tbody td:not(:first-of-type) {
-  text-align: center;
+.editor .actions {
+  padding: 0;
+  text-align: right;
+  margin: 2rem 0 0 0;
 }
 
 .editor-open .estresso, .roller-open .estresso {
