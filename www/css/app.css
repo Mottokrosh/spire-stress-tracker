@@ -90,7 +90,7 @@ h4 {
   max-width: 480px;
   width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2rem 3rem;
 }
 
 .flex-container {
@@ -503,7 +503,7 @@ select.small {
 
 .new-character .input-row {
   justify-content: space-between;
-  padding: 0 1rem 0 0.5rem;
+  padding: 0 0.5rem 0 0.5rem;
 }
 
 .new-character .new-character-name {
@@ -781,7 +781,7 @@ select.small {
 }
 
 .character {
-  padding: 1.5rem 3rem 2rem 2rem;
+  padding: 1.5rem 3rem 2rem 3rem;
   max-width: 480px;
   margin: 0 auto;
 }
@@ -820,6 +820,7 @@ select.small {
   font-size: 1rem;
   padding-left: 0.5rem;
   transform: translateY(2px);
+  margin: 0;
 }
 
 .character .resistance h3 small {
@@ -849,7 +850,7 @@ select.small {
   display: flex;
   flex-wrap: wrap;
   margin: 0;
-  padding: 0 2rem 0 0.5rem;
+  padding: 0 2.25rem 0 2.25rem;
 }
 
 .fallout-item {
@@ -1077,4 +1078,62 @@ select.small {
 .tag button svg {
   width: 0.8rem;
   height: 0.8rem;
+}
+
+.adjuster {
+  background-image: url(../images/texture-512x512.jpg);
+  background-size: 256px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: visible;
+  z-index: 9;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.adjuster:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -800px;
+  width: 800px;
+  height: 100%;
+  background-color: #ad302a;
+}
+
+.adjuster:after {
+  content: '';
+  position: absolute;
+  right: -23px;
+  width: 24px;
+  height: 100%;
+  background-image: url(../images/tear-right-48x512.png);
+  background-size: 24px;
+  background-repeat: repeat-y;
+}
+
+.adjuster nav {
+  padding: 2rem 1rem 0 0;
+  margin-top: 0;
+}
+
+.adjuster h2 {
+  color: #9ac1d6;
+}
+
+.adjuster h2 small {
+  color: #e4e6e7;
+  display: block;
+}
+
+.adjuster .adjuster-content {
+  margin: 0;
+  padding: 2rem 1rem 2rem 2rem;
+  overflow: auto;
+  width: 100%;
 }

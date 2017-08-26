@@ -9,6 +9,7 @@
     <div class="resistances">
       <div class="resistance" v-for="r in resistances">
         <div>
+          <btn @click.native="adjust(r)" class="shadowless has-icon"><minus-icon></minus-icon></btn>
           <h3>{{ ucfirst(r) }}<small v-if="freeSlots(r)"> + {{ freeSlots(r) }}</small></h3>
           <div>
             <span>Stress</span>
@@ -31,7 +32,7 @@
 </template>
 
 <script>
-  import { PlusIcon, XIcon } from 'vue-feather-icons';
+  import { MinusIcon, PlusIcon, XIcon } from 'vue-feather-icons';
   import FalloutBadge from './fallout-badge.vue';
   import Store from '../store';
 
@@ -43,6 +44,7 @@
 
     components: {
       FalloutBadge,
+      MinusIcon,
       PlusIcon,
       XIcon,
     },
@@ -64,6 +66,10 @@
 
       addStress(resistance) {
         this.$emit('stress', { character: this.c, resistance: resistance });
+      },
+
+      adjust(resistance) {
+        this.$emit('adjust', { character: this.c, resistance: resistance });
       },
 
       deleteCharacter() {

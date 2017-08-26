@@ -3,6 +3,8 @@
 
     <roller :options="rollerOptions" :fallout="allFallout" @close="rollerOptions = null" @update="updateCharacter"></roller>
 
+    <adjuster :options="adjusterOptions" @close="adjusterOptions = null"></adjuster>
+
     <header>
       <div class="column">
         <h1>Spire Stress Tracker</h1>
@@ -15,6 +17,7 @@
           :c="c"
           :all-fallout="allFallout"
           @stress="addStress"
+          @adjust="adjust"
           @delete="deleteCharacter"
           @remove-fallout="removeFallout"
         ></character>
@@ -73,6 +76,7 @@
   import Character from './character.vue';
   import CounterControl from './counter-control.vue';
   import Roller from './roller.vue';
+  import Adjuster from './adjuster.vue';
   import Store from '../store';
 
   const characterSchema = {
@@ -93,6 +97,7 @@
         resistances: Store.resistances,
         characters: [],
         rollerOptions: null,
+        adjusterOptions: null,
         newCharacter: Object.assign({}, characterSchema),
         names: null,
         allFallout: null,
@@ -100,6 +105,7 @@
     },
 
     components: {
+      Adjuster,
       Character,
       CounterControl,
       Roller,
@@ -144,6 +150,11 @@
       addStress(options) {
         const {character, resistance} = options;
         this.rollerOptions = options;
+      },
+
+      adjust(options) {
+        const {character, resistance} = options;
+        this.adjusterOptions = options;
       },
 
       removeFallout(character, falloutId) {
