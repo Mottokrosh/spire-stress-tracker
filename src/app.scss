@@ -106,13 +106,17 @@ h4 { font-size: 1rem; }
     background-size: cover;
     background-position: 0;
   }
+
+  & > span {
+    margin-top: 0;
+  }
 }
 
 .column {
   max-width: $mainColumnWidth;
   width: 100%;
   margin: 0 auto;
-  padding: 2rem 3rem;
+  padding: 2rem 3rem 2rem 2rem;
 }
 
 .flex-container {
@@ -765,17 +769,20 @@ select {
 }
 
 .character {
-  padding: 1.5rem 3rem 2rem 3rem;
+  padding: 1.5rem 3rem 2rem 2rem;
   max-width: $mainColumnWidth;
   margin: 0 auto;
 
   header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
 
     * {
       margin-top: 0;
+    }
+
+    h2 {
+      flex: 1;
     }
   }
 
@@ -831,7 +838,7 @@ select {
     display: flex;
     flex-wrap: wrap;
     margin: 0;
-    padding: 0 2.25rem 0 2.25rem;
+    padding: 0 2.25rem 0 0.5rem;
   }
 }
 
@@ -1064,17 +1071,16 @@ select {
   }
 }
 
-.adjuster {
-  background-image: url(../images/texture-512x512.jpg);
-  background-size: 256px;
+.editor {
+  background-image: url(../images/dots.png);
+  background-size: 600px;
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   overflow: visible;
-  z-index: 9;
-  color: #fff;
+  z-index: 11;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -1089,32 +1095,12 @@ select {
     background-color: $red;
   }
 
-  &:after {
-    content: '';
-    position: absolute;
-    right: -23px;
-    width: 24px;
-    height: 100%;
-    background-image: url(../images/tear-right-48x512.png);
-    background-size: 24px;
-    background-repeat: repeat-y;
-  }
-
   nav {
     padding: 2rem 1rem 0 0;
     margin-top: 0;
   }
 
-  h2 {
-    color: lighten($primary, 50%);
-
-    small {
-      color: $grey;
-      display: block;
-    }
-  }
-
-  .adjuster-content {
+  .editor-content {
     margin: 0;
     padding: 2rem 1rem 2rem 2rem;
     overflow: auto;

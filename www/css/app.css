@@ -86,11 +86,15 @@ h4 {
   background-position: 0;
 }
 
+.estresso > span {
+  margin-top: 0;
+}
+
 .column {
   max-width: 480px;
   width: 100%;
   margin: 0 auto;
-  padding: 2rem 3rem;
+  padding: 2rem 3rem 2rem 2rem;
 }
 
 .flex-container {
@@ -781,19 +785,22 @@ select.small {
 }
 
 .character {
-  padding: 1.5rem 3rem 2rem 3rem;
+  padding: 1.5rem 3rem 2rem 2rem;
   max-width: 480px;
   margin: 0 auto;
 }
 
 .character header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
 .character header * {
   margin-top: 0;
+}
+
+.character header h2 {
+  flex: 1;
 }
 
 .character .resistance {
@@ -850,7 +857,7 @@ select.small {
   display: flex;
   flex-wrap: wrap;
   margin: 0;
-  padding: 0 2.25rem 0 2.25rem;
+  padding: 0 2.25rem 0 0.5rem;
 }
 
 .fallout-item {
@@ -1080,23 +1087,22 @@ select.small {
   height: 0.8rem;
 }
 
-.adjuster {
-  background-image: url(../images/texture-512x512.jpg);
-  background-size: 256px;
+.editor {
+  background-image: url(../images/dots.png);
+  background-size: 600px;
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   overflow: visible;
-  z-index: 9;
-  color: #fff;
+  z-index: 11;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
 }
 
-.adjuster:before {
+.editor:before {
   content: '';
   position: absolute;
   top: 0;
@@ -1106,32 +1112,12 @@ select.small {
   background-color: #ad302a;
 }
 
-.adjuster:after {
-  content: '';
-  position: absolute;
-  right: -23px;
-  width: 24px;
-  height: 100%;
-  background-image: url(../images/tear-right-48x512.png);
-  background-size: 24px;
-  background-repeat: repeat-y;
-}
-
-.adjuster nav {
+.editor nav {
   padding: 2rem 1rem 0 0;
   margin-top: 0;
 }
 
-.adjuster h2 {
-  color: #9ac1d6;
-}
-
-.adjuster h2 small {
-  color: #e4e6e7;
-  display: block;
-}
-
-.adjuster .adjuster-content {
+.editor .editor-content {
   margin: 0;
   padding: 2rem 1rem 2rem 2rem;
   overflow: auto;

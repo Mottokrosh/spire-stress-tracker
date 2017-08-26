@@ -580,7 +580,7 @@ module.exports = function normalizeComponent (
 /* unused harmony export DownloadCloudIcon */
 /* unused harmony export DownloadIcon */
 /* unused harmony export DropletIcon */
-/* unused harmony export Edit2Icon */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return Edit2Icon; });
 /* unused harmony export Edit3Icon */
 /* unused harmony export EditIcon */
 /* unused harmony export ExternalLinkIcon */
@@ -635,7 +635,7 @@ module.exports = function normalizeComponent (
 /* unused harmony export MinimizeIcon */
 /* unused harmony export MinusCircleIcon */
 /* unused harmony export MinusSquareIcon */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return MinusIcon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return MinusIcon; });
 /* unused harmony export MonitorIcon */
 /* unused harmony export MoonIcon */
 /* unused harmony export MoreHorizontalIcon */
@@ -662,7 +662,7 @@ module.exports = function normalizeComponent (
 /* unused harmony export PlayIcon */
 /* unused harmony export PlusCircleIcon */
 /* unused harmony export PlusSquareIcon */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return PlusIcon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return PlusIcon; });
 /* unused harmony export PocketIcon */
 /* unused harmony export PowerIcon */
 /* unused harmony export PrinterIcon */
@@ -737,7 +737,7 @@ module.exports = function normalizeComponent (
 /* unused harmony export WindIcon */
 /* unused harmony export XCircleIcon */
 /* unused harmony export XSquareIcon */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return XIcon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return XIcon; });
 /* unused harmony export ZapIcon */
 /* unused harmony export ZoomInIcon */
 /* unused harmony export ZoomOutIcon */
@@ -19504,8 +19504,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__counter_control_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__counter_control_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__roller_vue__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__roller_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__roller_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__adjuster_vue__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__adjuster_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__adjuster_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__editor_vue__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__editor_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__editor_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__store__ = __webpack_require__(5);
 //
 //
@@ -19606,7 +19606,7 @@ var characterSchema = {
       resistances: __WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */].resistances,
       characters: [],
       rollerOptions: null,
-      adjusterOptions: null,
+      characterToEdit: null,
       newCharacter: Object.assign({}, characterSchema),
       names: null,
       allFallout: null
@@ -19615,9 +19615,9 @@ var characterSchema = {
 
 
   components: {
-    Adjuster: __WEBPACK_IMPORTED_MODULE_5__adjuster_vue___default.a,
     Character: __WEBPACK_IMPORTED_MODULE_2__character_vue___default.a,
     CounterControl: __WEBPACK_IMPORTED_MODULE_3__counter_control_vue___default.a,
+    Editor: __WEBPACK_IMPORTED_MODULE_5__editor_vue___default.a,
     Roller: __WEBPACK_IMPORTED_MODULE_4__roller_vue___default.a
   },
 
@@ -19658,11 +19658,8 @@ var characterSchema = {
 
       this.rollerOptions = options;
     },
-    adjust: function adjust(options) {
-      var character = options.character,
-          resistance = options.resistance;
-
-      this.adjusterOptions = options;
+    editCharacter: function editCharacter(c) {
+      this.characterToEdit = c;
     },
     removeFallout: function removeFallout(character, falloutId) {
       var index = character.fallout.indexOf(falloutId);
@@ -20815,10 +20812,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   components: {
+    Edit2Icon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["c" /* Edit2Icon */],
     FalloutBadge: __WEBPACK_IMPORTED_MODULE_1__fallout_badge_vue___default.a,
-    MinusIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["c" /* MinusIcon */],
-    PlusIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["d" /* PlusIcon */],
-    XIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["e" /* XIcon */]
+    PlusIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["e" /* PlusIcon */],
+    XIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["f" /* XIcon */]
   },
 
   data: function data() {
@@ -20838,8 +20835,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     addStress: function addStress(resistance) {
       this.$emit('stress', { character: this.c, resistance: resistance });
     },
-    adjust: function adjust(resistance) {
-      this.$emit('adjust', { character: this.c, resistance: resistance });
+    editCharacter: function editCharacter() {
+      this.$emit('edit', this.c);
     },
     deleteCharacter: function deleteCharacter() {
       if (window.confirm('Delete ' + this.c.name + '?')) {
@@ -20924,6 +20921,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('header', [_c('h2', [_vm._v(_vm._s(_vm.c.name))]), _vm._v(" "), _c('btn', {
     staticClass: "backgroundless has-icon",
     attrs: {
+      "aria-label": "Edit"
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.editCharacter($event)
+      }
+    }
+  }, [_c('edit-2-icon')], 1), _vm._v(" "), _c('btn', {
+    staticClass: "backgroundless has-icon",
+    attrs: {
       "aria-label": "Delete"
     },
     nativeOn: {
@@ -20936,14 +20943,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, _vm._l((_vm.resistances), function(r) {
     return _c('div', {
       staticClass: "resistance"
-    }, [_c('div', [_c('btn', {
-      staticClass: "shadowless has-icon",
-      nativeOn: {
-        "click": function($event) {
-          _vm.adjust(r)
-        }
-      }
-    }, [_c('minus-icon')], 1), _vm._v(" "), _c('h3', [_vm._v(_vm._s(_vm.ucfirst(r))), (_vm.freeSlots(r)) ? _c('small', [_vm._v(" + " + _vm._s(_vm.freeSlots(r)))]) : _vm._e()]), _vm._v(" "), _c('div', [_c('span', [_vm._v("Stress")]), _vm._v(" "), _c('strong', [_vm._v(_vm._s(_vm.c[r].stress))])]), _vm._v(" "), _c('btn', {
+    }, [_c('div', [_c('h3', [_vm._v(_vm._s(_vm.ucfirst(r))), (_vm.freeSlots(r)) ? _c('small', [_vm._v(" + " + _vm._s(_vm.freeSlots(r)))]) : _vm._e()]), _vm._v(" "), _c('div', [_c('span', [_vm._v("Stress")]), _vm._v(" "), _c('strong', [_vm._v(_vm._s(_vm.c[r].stress))])]), _vm._v(" "), _c('btn', {
       staticClass: "shadowless has-icon",
       nativeOn: {
         "click": function($event) {
@@ -21053,8 +21053,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   components: {
     Btn: __WEBPACK_IMPORTED_MODULE_0__btn_vue___default.a,
-    MinusIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["c" /* MinusIcon */],
-    PlusIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["d" /* PlusIcon */]
+    MinusIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["d" /* MinusIcon */],
+    PlusIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["e" /* PlusIcon */]
   },
 
   methods: {
@@ -21360,7 +21360,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     Icon: __WEBPACK_IMPORTED_MODULE_6__icon_vue___default.a,
     Modal: __WEBPACK_IMPORTED_MODULE_8__modal_vue___default.a,
     Motion: __WEBPACK_IMPORTED_MODULE_0_vue_motion__["Motion"],
-    XIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["e" /* XIcon */]
+    XIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["f" /* XIcon */]
   },
 
   mixins: [__WEBPACK_IMPORTED_MODULE_4__helpers_mixin__["a" /* default */]],
@@ -22149,7 +22149,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   components: {
     Motion: __WEBPACK_IMPORTED_MODULE_1_vue_motion__["Motion"],
-    XIcon: __WEBPACK_IMPORTED_MODULE_2_vue_feather_icons__["e" /* XIcon */]
+    XIcon: __WEBPACK_IMPORTED_MODULE_2_vue_feather_icons__["f" /* XIcon */]
   },
 
   mixins: [__WEBPACK_IMPORTED_MODULE_3__helpers_mixin__["a" /* default */]],
@@ -22911,13 +22911,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       "update": _vm.updateCharacter
     }
-  }), _vm._v(" "), _c('adjuster', {
+  }), _vm._v(" "), _c('editor', {
     attrs: {
-      "options": _vm.adjusterOptions
+      "character": _vm.characterToEdit
     },
     on: {
       "close": function($event) {
-        _vm.adjusterOptions = null
+        _vm.characterToEdit = null
       }
     }
   }), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('transition-group', {
@@ -22936,7 +22936,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       on: {
         "stress": _vm.addStress,
-        "adjust": _vm.adjust,
+        "edit": _vm.editCharacter,
         "delete": _vm.deleteCharacter,
         "remove-fallout": _vm.removeFallout
       }
@@ -23244,7 +23244,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    XIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["e" /* XIcon */]
+    XIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["f" /* XIcon */]
   },
 
   computed: {
@@ -23286,15 +23286,18 @@ if (false) {
 }
 
 /***/ }),
-/* 72 */
+/* 72 */,
+/* 73 */,
+/* 74 */,
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(73),
+  __webpack_require__(76),
   /* template */
-  __webpack_require__(74),
+  __webpack_require__(77),
   /* styles */
   null,
   /* scopeId */
@@ -23302,9 +23305,9 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/mottokrosh/Projects/spire-stress-tracker/src/components/adjuster.vue"
+Component.options.__file = "/Users/mottokrosh/Projects/spire-stress-tracker/src/components/editor.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] adjuster.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] editor.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -23313,9 +23316,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-c3fe1014", Component.options)
+    hotAPI.createRecord("data-v-612dece7", Component.options)
   } else {
-    hotAPI.reload("data-v-c3fe1014", Component.options)
+    hotAPI.reload("data-v-612dece7", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -23326,7 +23329,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 73 */
+/* 76 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23336,8 +23339,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_mixin__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__icon_vue__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__icon_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__counter_control_vue__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__counter_control_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__counter_control_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__icon_vue__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__icon_vue__);
 //
 //
 //
@@ -23364,6 +23369,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -23372,13 +23403,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['options'],
+  props: {
+    character: Object
+  },
 
   components: {
     ChevronRightIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["b" /* ChevronRightIcon */],
-    Icon: __WEBPACK_IMPORTED_MODULE_4__icon_vue___default.a,
+    CounterControl: __WEBPACK_IMPORTED_MODULE_4__counter_control_vue___default.a,
+    Icon: __WEBPACK_IMPORTED_MODULE_5__icon_vue___default.a,
     Motion: __WEBPACK_IMPORTED_MODULE_0_vue_motion__["Motion"],
-    XIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["e" /* XIcon */]
+    XIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["f" /* XIcon */]
   },
 
   mixins: [__WEBPACK_IMPORTED_MODULE_3__helpers_mixin__["a" /* default */]],
@@ -23386,7 +23420,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       resistances: __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].resistances,
-      offset: -100
+      offset: -100,
+      characterCopy: null
     };
   },
 
@@ -23394,8 +23429,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   computed: {
     classes: function classes() {
       return {
-        'adjuster': true
+        'editor': true
       };
+    },
+    char: function char() {
+      if (!this.character) {
+        return null;
+      }
+
+      if (!this.characterCopy) {
+        this.characterCopy = this.clone(this.character);
+      }
+
+      return this.characterCopy;
     }
   },
 
@@ -23405,7 +23451,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.$emit('close');
     },
     reset: function reset() {
-      //
+      this.characterCopy = this.clone(this.character);
     },
     getRandomIntInclusive: function getRandomIntInclusive(min, max) {
       var randomBuffer = new Uint32Array(1);
@@ -23421,12 +23467,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   watch: {
-    options: function options(value) {
+    character: function character(value) {
       if (value) {
-        document.body.classList.add('adjuster-open');
+        document.body.classList.add('editor-open');
         this.offset = 0;
       } else {
-        document.body.classList.remove('adjuster-open');
+        document.body.classList.remove('editor-open');
         this.offset = -100;
       }
     }
@@ -23435,7 +23481,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 74 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -23452,13 +23498,59 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           style: ({
             transform: ("translateX(" + (props.value) + "%)")
           })
+        }, [(_vm.char) ? _c('div', {
+          staticClass: "editor-content"
+        }, [_c('h2', [_vm._v("Edit " + _vm._s(_vm.char.name))]), _vm._v(" "), _c('form', [_c('div', {
+          staticClass: "column"
         }, [_c('div', {
-          staticClass: "adjuster-content"
-        }, [_c('h2', [_vm._v("Adjuster "), _c('small', [_vm._v("For Name")])]), _vm._v(" "), _c('nav', {
+          staticClass: "input-row"
+        }, [_c('label', {
+          attrs: {
+            "for": "character-name"
+          }
+        }, [_vm._v("Name")]), _vm._v(" "), _c('input', {
+          directives: [{
+            name: "model",
+            rawName: "v-model",
+            value: (_vm.char.name),
+            expression: "char.name"
+          }],
+          staticClass: "character-name",
+          attrs: {
+            "type": "text",
+            "name": "character-name",
+            "id": "character-name"
+          },
+          domProps: {
+            "value": (_vm.char.name)
+          },
+          on: {
+            "input": function($event) {
+              if ($event.target.composing) { return; }
+              _vm.char.name = $event.target.value
+            }
+          }
+        })]), _vm._v(" "), _c('h3', [_vm._v("Stress & Free Slots")]), _vm._v(" "), _c('div', {
+          staticClass: "input-row"
+        }, [_c('label', {
+          attrs: {
+            "for": "resistance-blood"
+          }
+        }, [_vm._v("Blood")]), _vm._v(" "), _c('counter-control', {
+          attrs: {
+            "id": "resistance-blood",
+            "value": _vm.char.blood.freeSlots
+          },
+          on: {
+            "update:value": function($event) {
+              _vm.char.blood.freeSlots = $event
+            }
+          }
+        })], 1), _vm._v(" "), _c('h3', [_vm._v("Fallout")])])]), _vm._v(" "), _c('nav', {
           staticClass: "actions"
         }, [_c('btn', {
           staticClass: "secondary"
-        }, [_vm._v("Button")]), _vm._v(" "), _c('btn', [_vm._v("Button")])], 1)]), _vm._v(" "), _c('nav', [_c('btn', {
+        }, [_vm._v("Button")]), _vm._v(" "), _c('btn', [_vm._v("Button")])], 1)]) : _vm._e(), _vm._v(" "), _c('nav', [_c('btn', {
           staticClass: "close has-icon backgroundless",
           nativeOn: {
             "click": function($event) {
@@ -23474,7 +23566,7 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-c3fe1014", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-612dece7", module.exports)
   }
 }
 

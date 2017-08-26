@@ -3,8 +3,33 @@
     <template scope="props">
       <div :style="{ transform: `translateX(${props.value}%)` }" :class="classes">
 
-        <div class="adjuster-content">
-          <h2>Adjuster <small>For Name</small></h2>
+        <div v-if="char" class="editor-content">
+          <h2>Edit {{ char.name }}</h2>
+
+          <form>
+            <div class="column">
+
+              <div class="input-row">
+                <label for="character-name">Name</label>
+                <input type="text"
+                  name="character-name"
+                  id="character-name"
+                  class="character-name"
+                  v-model="char.name"
+                >
+              </div>
+
+              <h3>Stress &amp; Free Slots</h3>
+
+              <div class="input-row">
+                <label for="resistance-blood">Blood</label>
+                <counter-control id="resistance-blood" :value.sync="char.blood.freeSlots"></counter-control>
+              </div>
+
+              <h3>Fallout</h3>
+
+            </div>
+          </form>
 
           <nav class="actions">
             <btn class="secondary">Button</btn>
@@ -29,13 +54,17 @@
   import { ChevronRightIcon, XIcon } from 'vue-feather-icons';
   import Store from '../store';
   import Helpers from '../helpers.mixin';
+  import CounterControl from './counter-control.vue';
   import Icon from './icon.vue';
 
   export default {
-    props: ['options'],
+    props: {
+      character: Object,
+    },
 
     components: {
       ChevronRightIcon,
+      CounterControl,
       Icon,
       Motion,
       XIcon,
@@ -47,14 +76,27 @@
       return {
         resistances: Store.resistances,
         offset: -100,
+        characterCopy: null,
       };
     },
 
     computed: {
       classes() {
         return {
-          'adjuster': true,
+          'editor': true,
         };
+      },
+
+      char() {
+        if (!this.character) {
+          return null;
+        }
+
+        if (!this.characterCopy) {
+          this.characterCopy = this.clone(this.character);
+        }
+
+        return this.characterCopy;
       },
     },
 
@@ -65,7 +107,7 @@
       },
 
       reset() {
-        //
+        this.characterCopy = this.clone(this.character);
       },
 
       getRandomIntInclusive(min, max) {
@@ -82,12 +124,12 @@
     },
 
     watch: {
-      options(value) {
+      character(value) {
         if (value) {
-          document.body.classList.add('adjuster-open');
+          document.body.classList.add('editor-open');
           this.offset = 0;
         } else {
-          document.body.classList.remove('adjuster-open');
+          document.body.classList.remove('editor-open');
           this.offset = -100;
         }
       },
