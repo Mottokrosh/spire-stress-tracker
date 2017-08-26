@@ -4,7 +4,12 @@
       <div :style="{ transform: `translateX(${props.value}%)` }" :class="classes">
 
         <div v-if="char" class="editor-content">
-          <h2>Edit {{ char.name }}</h2>
+          <header class="flex-container">
+            <h2>Edit {{ char.name }}</h2>
+            <btn class="backgroundless has-icon" @click.native="close" ref="closeButton" aria-label="Close editor">
+              <x-icon></x-icon>
+            </btn>
+          </header>
 
           <form>
             <div class="column">
@@ -21,10 +26,42 @@
 
               <h3>Stress &amp; Free Slots</h3>
 
-              <div class="input-row">
-                <label for="resistance-blood">Blood</label>
-                <counter-control id="resistance-blood" :value.sync="char.blood.freeSlots"></counter-control>
-              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Resistance</th>
+                    <th>Free Slots</th>
+                    <th>Stress</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Blood</td>
+                    <td><counter-control :value.sync="char.blood.freeSlots"></counter-control></td>
+                    <td><counter-control :value.sync="char.blood.stress"></counter-control></td>
+                  </tr>
+                  <tr>
+                    <td>Mind</td>
+                    <td><counter-control :value.sync="char.mind.freeSlots"></counter-control></td>
+                    <td><counter-control :value.sync="char.mind.stress"></counter-control></td>
+                  </tr>
+                  <tr>
+                    <td>Shadow</td>
+                    <td><counter-control :value.sync="char.shadow.freeSlots"></counter-control></td>
+                    <td><counter-control :value.sync="char.shadow.stress"></counter-control></td>
+                  </tr>
+                  <tr>
+                    <td>Silver</td>
+                    <td><counter-control :value.sync="char.silver.freeSlots"></counter-control></td>
+                    <td><counter-control :value.sync="char.silver.stress"></counter-control></td>
+                  </tr>
+                  <tr>
+                    <td>Reputation</td>
+                    <td><counter-control :value.sync="char.reputation.freeSlots"></counter-control></td>
+                    <td><counter-control :value.sync="char.reputation.stress"></counter-control></td>
+                  </tr>
+                </tbody>
+              </table>
 
               <h3>Fallout</h3>
 
@@ -37,12 +74,6 @@
           </nav>
 
         </div>
-
-        <nav>
-          <btn @click.native="close" class="close has-icon backgroundless">
-            <chevron-right-icon></chevron-right-icon>
-          </btn>
-        </nav>
 
       </div>
     </template>

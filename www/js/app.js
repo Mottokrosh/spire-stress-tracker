@@ -23394,6 +23394,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -23500,7 +23531,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           })
         }, [(_vm.char) ? _c('div', {
           staticClass: "editor-content"
-        }, [_c('h2', [_vm._v("Edit " + _vm._s(_vm.char.name))]), _vm._v(" "), _c('form', [_c('div', {
+        }, [_c('header', {
+          staticClass: "flex-container"
+        }, [_c('h2', [_vm._v("Edit " + _vm._s(_vm.char.name))]), _vm._v(" "), _c('btn', {
+          ref: "closeButton",
+          staticClass: "backgroundless has-icon",
+          attrs: {
+            "aria-label": "Close editor"
+          },
+          nativeOn: {
+            "click": function($event) {
+              _vm.close($event)
+            }
+          }
+        }, [_c('x-icon')], 1)], 1), _vm._v(" "), _c('form', [_c('div', {
           staticClass: "column"
         }, [_c('div', {
           staticClass: "input-row"
@@ -23530,15 +23574,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.char.name = $event.target.value
             }
           }
-        })]), _vm._v(" "), _c('h3', [_vm._v("Stress & Free Slots")]), _vm._v(" "), _c('div', {
-          staticClass: "input-row"
-        }, [_c('label', {
+        })]), _vm._v(" "), _c('h3', [_vm._v("Stress & Free Slots")]), _vm._v(" "), _c('table', [_c('thead', [_c('tr', [_c('th', [_vm._v("Resistance")]), _vm._v(" "), _c('th', [_vm._v("Free Slots")]), _vm._v(" "), _c('th', [_vm._v("Stress")])])]), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', [_vm._v("Blood")]), _vm._v(" "), _c('td', [_c('counter-control', {
           attrs: {
-            "for": "resistance-blood"
-          }
-        }, [_vm._v("Blood")]), _vm._v(" "), _c('counter-control', {
-          attrs: {
-            "id": "resistance-blood",
             "value": _vm.char.blood.freeSlots
           },
           on: {
@@ -23546,18 +23583,92 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.char.blood.freeSlots = $event
             }
           }
-        })], 1), _vm._v(" "), _c('h3', [_vm._v("Fallout")])])]), _vm._v(" "), _c('nav', {
+        })], 1), _vm._v(" "), _c('td', [_c('counter-control', {
+          attrs: {
+            "value": _vm.char.blood.stress
+          },
+          on: {
+            "update:value": function($event) {
+              _vm.char.blood.stress = $event
+            }
+          }
+        })], 1)]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("Mind")]), _vm._v(" "), _c('td', [_c('counter-control', {
+          attrs: {
+            "value": _vm.char.mind.freeSlots
+          },
+          on: {
+            "update:value": function($event) {
+              _vm.char.mind.freeSlots = $event
+            }
+          }
+        })], 1), _vm._v(" "), _c('td', [_c('counter-control', {
+          attrs: {
+            "value": _vm.char.mind.stress
+          },
+          on: {
+            "update:value": function($event) {
+              _vm.char.mind.stress = $event
+            }
+          }
+        })], 1)]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("Shadow")]), _vm._v(" "), _c('td', [_c('counter-control', {
+          attrs: {
+            "value": _vm.char.shadow.freeSlots
+          },
+          on: {
+            "update:value": function($event) {
+              _vm.char.shadow.freeSlots = $event
+            }
+          }
+        })], 1), _vm._v(" "), _c('td', [_c('counter-control', {
+          attrs: {
+            "value": _vm.char.shadow.stress
+          },
+          on: {
+            "update:value": function($event) {
+              _vm.char.shadow.stress = $event
+            }
+          }
+        })], 1)]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("Silver")]), _vm._v(" "), _c('td', [_c('counter-control', {
+          attrs: {
+            "value": _vm.char.silver.freeSlots
+          },
+          on: {
+            "update:value": function($event) {
+              _vm.char.silver.freeSlots = $event
+            }
+          }
+        })], 1), _vm._v(" "), _c('td', [_c('counter-control', {
+          attrs: {
+            "value": _vm.char.silver.stress
+          },
+          on: {
+            "update:value": function($event) {
+              _vm.char.silver.stress = $event
+            }
+          }
+        })], 1)]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("Reputation")]), _vm._v(" "), _c('td', [_c('counter-control', {
+          attrs: {
+            "value": _vm.char.reputation.freeSlots
+          },
+          on: {
+            "update:value": function($event) {
+              _vm.char.reputation.freeSlots = $event
+            }
+          }
+        })], 1), _vm._v(" "), _c('td', [_c('counter-control', {
+          attrs: {
+            "value": _vm.char.reputation.stress
+          },
+          on: {
+            "update:value": function($event) {
+              _vm.char.reputation.stress = $event
+            }
+          }
+        })], 1)])])]), _vm._v(" "), _c('h3', [_vm._v("Fallout")])])]), _vm._v(" "), _c('nav', {
           staticClass: "actions"
         }, [_c('btn', {
           staticClass: "secondary"
-        }, [_vm._v("Button")]), _vm._v(" "), _c('btn', [_vm._v("Button")])], 1)]) : _vm._e(), _vm._v(" "), _c('nav', [_c('btn', {
-          staticClass: "close has-icon backgroundless",
-          nativeOn: {
-            "click": function($event) {
-              _vm.close($event)
-            }
-          }
-        }, [_c('chevron-right-icon')], 1)], 1)])]
+        }, [_vm._v("Button")]), _vm._v(" "), _c('btn', [_vm._v("Button")])], 1)]) : _vm._e()])]
       }
     }])
   })

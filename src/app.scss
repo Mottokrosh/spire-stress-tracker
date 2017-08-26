@@ -127,6 +127,66 @@ h4 { font-size: 1rem; }
   }
 }
 
+table {
+  width: 100%;
+  border-spacing: 0;
+  border-radius: 0.25rem;
+
+  thead {
+    th {
+      background-color: $primary;
+      text-align: center;
+      padding: 0.5rem;
+      color: #fff;
+      font-weight: bold;
+
+      &:first-of-type {
+        border-top-left-radius: 0.25rem;
+        text-align: left;
+      }
+
+      &:last-of-type {
+        border-top-right-radius: 0.25rem;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      background-color: #fff;
+
+      &:hover {
+        background-color: $beigeLight;
+      }
+
+      td {
+        border-bottom: 1px solid $primary;
+        padding: 0.5rem;
+
+        &:first-of-type {
+          border-left: 1px solid $primary;
+        }
+
+        &:last-of-type {
+          border-right: 1px solid $primary;
+        }
+      }
+
+      &:last-of-type {
+        td {
+          &:first-of-type {
+            border-bottom-left-radius: 0.25rem;
+          }
+
+          &:last-of-type {
+            border-bottom-right-radius: 0.25rem;
+          }
+        }
+      }
+    }
+  }
+}
+
 //
 // --- Buttons ---
 //
@@ -748,6 +808,10 @@ select {
   }
 
   input {
+    background-color: #e4e6e7;
+    border: none;
+    font-family: inherit;
+    font-size: 1rem;
     border-radius: 0;
     max-width: 1.5rem;
     padding: calc(0.5rem - 2px) 0.25rem;
@@ -1080,6 +1144,7 @@ select {
   bottom: 0;
   left: 0;
   overflow: visible;
+  border-right: 2px solid transparentize($beigeDark, 0.75);
   z-index: 11;
   display: flex;
   flex-direction: row;
@@ -1095,15 +1160,33 @@ select {
     background-color: $red;
   }
 
-  nav {
-    padding: 2rem 1rem 0 0;
-    margin-top: 0;
+  header {
+    align-items: center;
+    justify-content: space-between;
+
+    button {
+      transform: translateY(-2px);
+    }
   }
 
   .editor-content {
     margin: 0;
-    padding: 2rem 1rem 2rem 2rem;
+    padding: 2rem;
     overflow: auto;
     width: 100%;
+  }
+
+  .column {
+    padding: 0;
+  }
+
+  table tbody td:not(:first-of-type) {
+    text-align: center;
+  }
+}
+
+.editor-open, .roller-open {
+  .estresso {
+    overflow: hidden;
   }
 }
