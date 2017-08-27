@@ -19589,6 +19589,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -19618,6 +19619,7 @@ var characterSchema = {
       characters: [],
       rollerOptions: null,
       characterToEdit: null,
+      stressToClear: null,
       newCharacter: Object.assign({}, characterSchema),
       names: null,
       allFallout: null
@@ -19653,11 +19655,17 @@ var characterSchema = {
       c[result.resistance].stress = result.stress;
       c.fallout = result.fallout;
       this.store.save();
+
+      if (result.clear) {
+        this.stressToClear = result.clear;
+        this.characterToEdit = c;
+      }
     },
     replaceCharacter: function replaceCharacter(newCharacter, oldCharacter) {
       var index = this.characters.indexOf(oldCharacter);
       this.characters[index] = newCharacter;
       this.characterToEdit = null;
+      this.stressToClear = null;
       this.store.save();
     },
     getRandomInt: function getRandomInt(min, max) {
@@ -21585,22 +21593,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     apply: function apply() {
-      /*let newStress = this.stress + this.result;
-       if (this.falloutOccurred) {
+      var stressToClear = null;
+
+      if (this.falloutOccurred) {
         if (this.falloutLevel === 'minor') {
-          newStress = newStress - 3;
+          stressToClear = 3;
         } else if (this.falloutLevel === 'major') {
-          newStress = newStress - 5;
+          stressToClear = 5;
         } else if (this.falloutLevel === 'severe') {
-          newStress = newStress - 7;
+          stressToClear = 7;
         }
-      }*/
+      }
 
       this.$emit('update', {
         character: this.options.character,
         resistance: this.resistance,
         stress: this.stress,
-        fallout: this.newFallout
+        fallout: this.newFallout,
+        clear: stressToClear
       });
 
       this.close();
@@ -22934,6 +22944,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }), _vm._v(" "), _c('editor', {
     attrs: {
       "character": _vm.characterToEdit,
+      "clear": _vm.stressToClear,
       "fallout": _vm.allFallout
     },
     on: {
@@ -23467,6 +23478,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -23479,7 +23495,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     character: Object,
-    fallout: Array
+    fallout: Array,
+    clear: Number
   },
 
   components: {
@@ -23518,6 +23535,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
 
       return this.characterCopy;
+    },
+    startingStress: function startingStress() {
+      var _this = this;
+
+      var total = 0;
+
+      this.resistances.forEach(function (r) {
+        total += _this.character[r].stress;
+      });
+
+      return total;
+    },
+    currentStress: function currentStress() {
+      var _this2 = this;
+
+      var total = 0;
+
+      this.resistances.forEach(function (r) {
+        total += _this2.char[r].stress;
+      });
+
+      return total;
+    },
+    remainingToClear: function remainingToClear() {
+      var cleared = this.startingStress - this.currentStress;
+
+      if (cleared >= this.clear) {
+        return this.clear;
+      }
+
+      return cleared;
     }
   },
 
@@ -23598,7 +23646,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.close($event)
             }
           }
-        }, [_c('x-icon')], 1)], 1), _vm._v(" "), _c('form', [_c('div', {
+        }, [_c('x-icon')], 1)], 1), _vm._v(" "), (_vm.clear) ? _c('div', {
+          staticClass: "stress-clearing"
+        }, [_c('h4', [_vm._v("Clear " + _vm._s(_vm.clear) + " stress")]), _vm._v(" "), _c('p', [_vm._v("Cleared: " + _vm._s(_vm.remainingToClear) + " / " + _vm._s(_vm.clear))])]) : _vm._e(), _vm._v(" "), _c('form', [_c('div', {
           staticClass: "column"
         }, [_c('div', {
           staticClass: "input-row"

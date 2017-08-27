@@ -342,23 +342,24 @@
       },
 
       apply() {
-        /*let newStress = this.stress + this.result;
+        let stressToClear = null;
 
         if (this.falloutOccurred) {
           if (this.falloutLevel === 'minor') {
-            newStress = newStress - 3;
+            stressToClear = 3;
           } else if (this.falloutLevel === 'major') {
-            newStress = newStress - 5;
+            stressToClear = 5;
           } else if (this.falloutLevel === 'severe') {
-            newStress = newStress - 7;
+            stressToClear = 7;
           }
-        }*/
+        }
 
         this.$emit('update', {
           character: this.options.character,
           resistance: this.resistance,
           stress: this.stress,
           fallout: this.newFallout,
+          clear: stressToClear,
         });
 
         this.close();

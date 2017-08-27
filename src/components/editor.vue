@@ -11,6 +11,11 @@
             </btn>
           </header>
 
+          <div v-if="clear" class="stress-clearing">
+            <h4>Clear {{ clear }} stress</h4>
+            <p>Cleared: {{ remainingToClear }} / {{ clear }}</p>
+          </div>
+
           <form>
             <div class="column">
 
@@ -106,6 +111,7 @@
     props: {
       character: Object,
       fallout: Array,
+      clear: Number,
     },
 
     components: {
@@ -144,6 +150,36 @@
         }
 
         return this.characterCopy;
+      },
+
+      startingStress() {
+        let total = 0;
+
+        this.resistances.forEach((r) => {
+          total += this.character[r].stress;
+        });
+
+        return total;
+      },
+
+      currentStress() {
+        let total = 0;
+
+        this.resistances.forEach((r) => {
+          total += this.char[r].stress;
+        });
+
+        return total;
+      },
+
+      remainingToClear() {
+        const cleared = this.startingStress - this.currentStress;
+
+        if (cleared >= this.clear) {
+          return this.clear;
+        }
+
+        return cleared;
       },
     },
 

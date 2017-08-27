@@ -10,6 +10,7 @@
 
     <editor
       :character="characterToEdit"
+      :clear="stressToClear"
       :fallout="allFallout"
       @close="characterToEdit = null"
       @apply="replaceCharacter"
@@ -109,6 +110,7 @@
         characters: [],
         rollerOptions: null,
         characterToEdit: null,
+        stressToClear: null,
         newCharacter: Object.assign({}, characterSchema),
         names: null,
         allFallout: null,
@@ -145,12 +147,18 @@
         c[result.resistance].stress = result.stress;
         c.fallout = result.fallout;
         this.store.save();
+
+        if (result.clear) {
+          this.stressToClear = result.clear;
+          this.characterToEdit = c;
+        }
       },
 
       replaceCharacter(newCharacter, oldCharacter) {
         const index = this.characters.indexOf(oldCharacter);
         this.characters[index] = newCharacter;
         this.characterToEdit = null;
+        this.stressToClear = null;
         this.store.save();
       },
 

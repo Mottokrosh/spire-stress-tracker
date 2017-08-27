@@ -62,6 +62,7 @@ h3 {
 
 h4 {
   font-size: 1rem;
+  transform: translateY(2px);
 }
 
 .estresso {
@@ -530,6 +531,15 @@ select.small {
   }
   100% {
     background-color: #000;
+  }
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
   }
 }
 
@@ -1220,6 +1230,51 @@ select.small {
   padding: 0;
   text-align: right;
   margin: 2rem 0 0 0;
+}
+
+.editor .stress-clearing {
+  background-color: #b3dde6;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.125rem 0 rgba(33, 64, 80, 0.75);
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.editor .stress-clearing p {
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #214050;
+  opacity: 0.75;
+}
+
+.editor .stress-clearing:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url(../images/heart-bottle.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: right center;
+  opacity: 0.5;
+}
+
+.editor .stress-clearing:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  bottom: 0;
+  width: 100%;
+  transform: translateX(100%);
+  z-index: 1;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(128, 186, 232, 0) 99%, rgba(125, 185, 232, 0) 100%);
+  animation: shine 1.5s infinite;
 }
 
 .editor-open .estresso, .roller-open .estresso {
