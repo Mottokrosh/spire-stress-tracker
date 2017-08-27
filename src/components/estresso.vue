@@ -18,7 +18,7 @@
 
     <header>
       <div class="column">
-        <h1>Spire Stress Tracker</h1>
+        <h1>Estresso <small>Spire RPG Stress and Fallout Tracker</small></h1>
       </div>
     </header>
 

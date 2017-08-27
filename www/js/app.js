@@ -492,6 +492,17 @@ module.exports = function normalizeComponent (
       .replace(/-+/g, '-'); // collapse dashes
 
       return value;
+    },
+    getRandomIntInclusive: function getRandomIntInclusive(min, max) {
+      var randomBuffer = new Uint32Array(1);
+
+      window.crypto.getRandomValues(randomBuffer);
+
+      var randomNumber = randomBuffer[0] / (0xffffffff + 1);
+
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(randomNumber * (max - min + 1)) + min;
     }
   }
 });
@@ -21625,17 +21636,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
 
       this.close();
-    },
-    getRandomIntInclusive: function getRandomIntInclusive(min, max) {
-      var randomBuffer = new Uint32Array(1);
-
-      window.crypto.getRandomValues(randomBuffer);
-
-      var randomNumber = randomBuffer[0] / (0xffffffff + 1);
-
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(randomNumber * (max - min + 1)) + min;
     }
   },
 
@@ -23116,7 +23116,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('header', [_c('div', {
     staticClass: "column"
-  }, [_c('h1', [_vm._v("Spire Stress Tracker")])])])
+  }, [_c('h1', [_vm._v("Estresso "), _c('small', [_vm._v("Spire RPG Stress and Fallout Tracker")])])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -23397,10 +23397,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__btn_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__btn_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__counter_control_vue__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__counter_control_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__counter_control_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__fallout_badge_vue__ = __webpack_require__(66);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__fallout_badge_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__fallout_badge_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__icon_vue__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__icon_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__dice_vue__ = __webpack_require__(78);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__dice_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__dice_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__fallout_badge_vue__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__fallout_badge_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__fallout_badge_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__icon_vue__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__icon_vue__);
 //
 //
 //
@@ -23505,6 +23507,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+
 
 
 
@@ -23526,8 +23533,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     Btn: __WEBPACK_IMPORTED_MODULE_4__btn_vue___default.a,
     ChevronRightIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["b" /* ChevronRightIcon */],
     CounterControl: __WEBPACK_IMPORTED_MODULE_5__counter_control_vue___default.a,
-    FalloutBadge: __WEBPACK_IMPORTED_MODULE_6__fallout_badge_vue___default.a,
-    Icon: __WEBPACK_IMPORTED_MODULE_7__icon_vue___default.a,
+    Dice: __WEBPACK_IMPORTED_MODULE_6__dice_vue___default.a,
+    FalloutBadge: __WEBPACK_IMPORTED_MODULE_7__fallout_badge_vue___default.a,
+    Icon: __WEBPACK_IMPORTED_MODULE_8__icon_vue___default.a,
     Motion: __WEBPACK_IMPORTED_MODULE_0_vue_motion__["Motion"],
     XIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["h" /* XIcon */]
   },
@@ -23710,7 +23718,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             }
           }
         })]), _vm._v(" "), _c('h3', [_vm._v("Stress")]), _vm._v(" "), _c('div', {
-          staticClass: "clear-actions"
+          staticClass: "clear-actions flex-container"
         }, [_c('btn', {
           attrs: {
             "bright": ""
@@ -23720,7 +23728,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.layLow($event)
             }
           }
-        }, [_vm._v("Lay low")])], 1), _vm._v(" "), _c('table', [_c('thead', [_c('tr', [_c('th', [_vm._v("Resistance")]), _vm._v(" "), _c('th', [_vm._v("Free Slots")]), _vm._v(" "), _c('th', [_vm._v("Stress")])])]), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', [_vm._v("Blood")]), _vm._v(" "), _c('td', [_c('counter-control', {
+        }, [_vm._v("Lay low")]), _vm._v(" "), _c('dice', {
+          attrs: {
+            "sides": 3
+          }
+        }), _vm._v(" "), _c('dice', {
+          attrs: {
+            "sides": 6
+          }
+        }), _vm._v(" "), _c('dice', {
+          attrs: {
+            "sides": 8
+          }
+        })], 1), _vm._v(" "), _c('div', {
+          staticClass: "clear-key"
+        }, [_c('span', [_vm._v("Act/Refresh")])]), _vm._v(" "), _c('table', [_c('thead', [_c('tr', [_c('th', [_vm._v("Resistance")]), _vm._v(" "), _c('th', [_vm._v("Free Slots")]), _vm._v(" "), _c('th', [_vm._v("Stress")])])]), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', [_vm._v("Blood")]), _vm._v(" "), _c('td', [_c('counter-control', {
           model: {
             value: (_vm.char.blood.freeSlots),
             callback: function($$v) {
@@ -23856,6 +23878,174 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-612dece7", module.exports)
+  }
+}
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(79),
+  /* template */
+  __webpack_require__(80),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/mottokrosh/Projects/spire-stress-tracker/src/components/dice.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] dice.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1740cabe", Component.options)
+  } else {
+    hotAPI.reload("data-v-1740cabe", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 79 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_mixin__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__brutal_vue__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__brutal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__brutal_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__btn_vue__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__btn_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__btn_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    brutal: {
+      type: Number,
+      default: 0
+    },
+    sides: {
+      type: Number,
+      default: 6
+    }
+  },
+
+  components: {
+    Brutal: __WEBPACK_IMPORTED_MODULE_1__brutal_vue___default.a,
+    Btn: __WEBPACK_IMPORTED_MODULE_2__btn_vue___default.a
+  },
+
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__helpers_mixin__["a" /* default */]],
+
+  data: function data() {
+    return {
+      flipped: false,
+      disabled: false,
+      rolling: false,
+      result: null,
+      localBrutal: this.brutal
+    };
+  },
+
+
+  computed: {
+    classes: function classes() {
+      return {
+        die: true,
+        flipped: this.flipped,
+        disabled: this.rolling
+      };
+    }
+  },
+
+  methods: {
+    roll: function roll() {
+      var _this = this;
+
+      var name = 'd' + this.sides;
+
+      this.flipped = !this.flipped;
+      this.rolling = true;
+
+      setTimeout(function () {
+        var results = [];
+
+        for (var i = 0; i <= _this.brutal; i++) {
+          var r = _this.getRandomIntInclusive(1, _this.sides);
+          results.push(r);
+        }
+
+        _this.result = Math.max.apply(Math, results);
+        _this.rolling = false;
+      }, 375);
+    }
+  }
+});
+
+/***/ }),
+/* 80 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    class: 'die-container d' + _vm.sides
+  }, [(_vm.brutal) ? _c('brutal', {
+    model: {
+      value: (_vm.localBrutal),
+      callback: function($$v) {
+        _vm.localBrutal = $$v
+      },
+      expression: "localBrutal"
+    }
+  }) : _vm._e(), _vm._v(" "), _c('div', {
+    class: _vm.classes
+  }, [_c('btn', {
+    staticClass: "backgroundless",
+    attrs: {
+      "disabled": _vm.rolling
+    },
+    nativeOn: {
+      "click": function($event) {
+        _vm.roll($event)
+      }
+    }
+  }, [_vm._v("\n      " + _vm._s(_vm.result === null ? 'd' + this.sides : _vm.result) + "\n    ")])], 1)], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-1740cabe", module.exports)
   }
 }
 

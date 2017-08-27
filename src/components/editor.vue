@@ -31,9 +31,13 @@
 
               <h3>Stress</h3>
 
-              <div class="clear-actions">
+              <div class="clear-actions flex-container">
                 <btn bright @click.native="layLow">Lay low</btn>
+                <dice :sides="3"></dice>
+                <dice :sides="6"></dice>
+                <dice :sides="8"></dice>
               </div>
+              <div class="clear-key"><span>Act/Refresh</span></div>
 
               <table>
                 <thead>
@@ -109,6 +113,7 @@
   import Helpers from '../helpers.mixin';
   import Btn from './btn.vue';
   import CounterControl from './counter-control.vue';
+  import Dice from './dice.vue';
   import FalloutBadge from './fallout-badge.vue';
   import Icon from './icon.vue';
 
@@ -123,6 +128,7 @@
       Btn,
       ChevronRightIcon,
       CounterControl,
+      Dice,
       FalloutBadge,
       Icon,
       Motion,

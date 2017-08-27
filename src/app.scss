@@ -23,6 +23,7 @@ $beigeDark: #9a9a92;
 $beigeLight: #f6f6f4;
 $red: #ad302a;
 $bright: #abe1ed;
+$brightDark: #47a4b9;
 
 $mainColumnWidth: 480px;
 
@@ -82,6 +83,12 @@ h1 { font-size: 2rem; }
 h2 { font-size: 1.5rem; }
 h3 { font-size: 1.25rem; color: $beigeDark; margin-top: 1.5rem; }
 h4 { font-size: 1rem; transform: translateY(2px); }
+
+h1 small {
+  display: block;
+  color: $secondary;
+  font-size: 1.5rem;
+}
 
 //
 // --- Layout ---
@@ -226,7 +233,7 @@ button {
   }
 
   &.bright {
-    background-color: desaturate(darken($bright, 30%), 20%);
+    background-color: $brightDark;
   }
 
   &:hover {
@@ -622,82 +629,6 @@ select {
     display: flex;
     justify-content: space-around;
     margin: 2rem 0;
-
-    .die {
-      perspective: 1000px;
-      transform-style: preserve-3d;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 4rem;
-      height: 4rem;
-      transition: transform 750ms ease;
-
-      &.flipped {
-        transform: rotateY(720deg);
-      }
-
-      &.disabled {
-        opacity: 0.5;
-      }
-    }
-
-    & > div {
-      margin: 0;
-      width: 4rem;
-    }
-
-    .die button {
-      color: #000;
-      font-size: 1.5rem;
-      font-family: Mahalo, sans-serif;
-      padding-top: 12px;
-
-      &:active {
-        transform: scale(0.9, 0.9);
-      }
-
-      &:hover {
-        background-color: transparent;
-      }
-    }
-
-    .d1 .die {
-      background-image: url(../images/one.svg);
-    }
-
-    .d3 .die {
-      background-image: url(../images/d3.svg);
-    }
-
-    .d6 .die {
-      background-image: url(../images/d6.svg);
-    }
-
-    .d8 .die {
-      background-image: url(../images/d8.svg);
-    }
-  }
-
-  .brutal-placeholder {
-    width: 100%;
-    height: 28px;
-    background-color: $primary;
-    border-radius: 0.25rem;
-    opacity: 0.3;
-  }
-
-  .brutal {
-    padding: 0.25rem 0.5rem 0.25rem 2.1rem;
-    width: 100%;
-    height: 28px;
-    background-image: url(../images/brutal.svg);
-    background-repeat: no-repeat;
-    background-size: 20px;
-    background-position: 0.6rem 0.25rem;
   }
 
   .fallout-rolling {
@@ -802,6 +733,82 @@ select {
       }
     }
   }
+}
+
+.brutal-placeholder {
+  width: 100%;
+  height: 28px;
+  background-color: $primary;
+  border-radius: 0.25rem;
+  opacity: 0.3;
+}
+
+.brutal {
+  padding: 0.25rem 0.5rem 0.25rem 2.1rem;
+  width: 100%;
+  height: 28px;
+  background-image: url(../images/brutal.svg);
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-position: 0.6rem 0.25rem;
+}
+
+.die {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4rem;
+  height: 4rem;
+  transition: transform 750ms ease;
+
+  &.flipped {
+    transform: rotateY(720deg);
+  }
+
+  &.disabled {
+    opacity: 0.5;
+  }
+}
+
+.die-container > div {
+  margin: 0;
+  width: 4rem;
+}
+
+.die button {
+  color: #000;
+  font-size: 1.5rem;
+  font-family: Mahalo, sans-serif;
+  padding-top: 12px;
+
+  &:active {
+    transform: scale(0.9, 0.9);
+  }
+
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.d1 .die {
+  background-image: url(../images/one.svg);
+}
+
+.d3 .die {
+  background-image: url(../images/d3.svg);
+}
+
+.d6 .die {
+  background-image: url(../images/d6.svg);
+}
+
+.d8 .die {
+  background-image: url(../images/d8.svg);
 }
 
 .counter-control {
@@ -1268,7 +1275,55 @@ select {
   }
 
   .clear-actions {
-    margin-top: 1rem;
+    margin-top: 0;
+    justify-content: space-between;
+    align-items: center;
+
+    .die button {
+      color: #fff;
+    }
+
+    .d3 .die {
+      background-image: url(../images/d3-bright.svg);
+    }
+
+    .d6 .die {
+      background-image: url(../images/d6-bright.svg);
+    }
+
+    .d8 .die {
+      background-image: url(../images/d8-bright.svg);
+    }
+
+  }
+}
+
+.clear-key {
+  margin: 0 0 0 auto;
+  width: 69%;
+  color: $brightDark;
+  border-left: 1px solid $brightDark;
+  border-right: 1px solid $brightDark;
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: 1;
+  letter-spacing: 2px;
+  position: relative;
+
+  span {
+    background-color: #fff;
+    padding: 0 0.5rem;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: $brightDark;
+    z-index: -1;
   }
 }
 

@@ -65,6 +65,12 @@ h4 {
   transform: translateY(2px);
 }
 
+h1 small {
+  display: block;
+  color: #8fa5b0;
+  font-size: 1.5rem;
+}
+
 .estresso {
   padding: 0;
   overflow: auto;
@@ -639,82 +645,6 @@ select.small {
   margin: 2rem 0;
 }
 
-.roller .dice .die {
-  perspective: 1000px;
-  transform-style: preserve-3d;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 4rem;
-  height: 4rem;
-  transition: transform 750ms ease;
-}
-
-.roller .dice .die.flipped {
-  transform: rotateY(720deg);
-}
-
-.roller .dice .die.disabled {
-  opacity: 0.5;
-}
-
-.roller .dice > div {
-  margin: 0;
-  width: 4rem;
-}
-
-.roller .dice .die button {
-  color: #000;
-  font-size: 1.5rem;
-  font-family: Mahalo, sans-serif;
-  padding-top: 12px;
-}
-
-.roller .dice .die button:active {
-  transform: scale(0.9, 0.9);
-}
-
-.roller .dice .die button:hover {
-  background-color: transparent;
-}
-
-.roller .dice .d1 .die {
-  background-image: url(../images/one.svg);
-}
-
-.roller .dice .d3 .die {
-  background-image: url(../images/d3.svg);
-}
-
-.roller .dice .d6 .die {
-  background-image: url(../images/d6.svg);
-}
-
-.roller .dice .d8 .die {
-  background-image: url(../images/d8.svg);
-}
-
-.roller .brutal-placeholder {
-  width: 100%;
-  height: 28px;
-  background-color: #214050;
-  border-radius: 0.25rem;
-  opacity: 0.3;
-}
-
-.roller .brutal {
-  padding: 0.25rem 0.5rem 0.25rem 2.1rem;
-  width: 100%;
-  height: 28px;
-  background-image: url(../images/brutal.svg);
-  background-repeat: no-repeat;
-  background-size: 20px;
-  background-position: 0.6rem 0.25rem;
-}
-
 .roller .fallout-rolling {
   text-transform: uppercase;
   font-size: 0.7rem;
@@ -816,6 +746,82 @@ select.small {
 .roller .fallout-level > *:last-child {
   margin-left: 0.5rem;
   font-weight: bold;
+}
+
+.brutal-placeholder {
+  width: 100%;
+  height: 28px;
+  background-color: #214050;
+  border-radius: 0.25rem;
+  opacity: 0.3;
+}
+
+.brutal {
+  padding: 0.25rem 0.5rem 0.25rem 2.1rem;
+  width: 100%;
+  height: 28px;
+  background-image: url(../images/brutal.svg);
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-position: 0.6rem 0.25rem;
+}
+
+.die {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4rem;
+  height: 4rem;
+  transition: transform 750ms ease;
+}
+
+.die.flipped {
+  transform: rotateY(720deg);
+}
+
+.die.disabled {
+  opacity: 0.5;
+}
+
+.die-container > div {
+  margin: 0;
+  width: 4rem;
+}
+
+.die button {
+  color: #000;
+  font-size: 1.5rem;
+  font-family: Mahalo, sans-serif;
+  padding-top: 12px;
+}
+
+.die button:active {
+  transform: scale(0.9, 0.9);
+}
+
+.die button:hover {
+  background-color: transparent;
+}
+
+.d1 .die {
+  background-image: url(../images/one.svg);
+}
+
+.d3 .die {
+  background-image: url(../images/d3.svg);
+}
+
+.d6 .die {
+  background-image: url(../images/d6.svg);
+}
+
+.d8 .die {
+  background-image: url(../images/d8.svg);
 }
 
 .counter-control {
@@ -1278,7 +1284,54 @@ select.small {
 }
 
 .editor .clear-actions {
-  margin-top: 1rem;
+  margin-top: 0;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editor .clear-actions .die button {
+  color: #fff;
+}
+
+.editor .clear-actions .d3 .die {
+  background-image: url(../images/d3-bright.svg);
+}
+
+.editor .clear-actions .d6 .die {
+  background-image: url(../images/d6-bright.svg);
+}
+
+.editor .clear-actions .d8 .die {
+  background-image: url(../images/d8-bright.svg);
+}
+
+.clear-key {
+  margin: 0 0 0 auto;
+  width: 69%;
+  color: #47a4b9;
+  border-left: 1px solid #47a4b9;
+  border-right: 1px solid #47a4b9;
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: 1;
+  letter-spacing: 2px;
+  position: relative;
+}
+
+.clear-key span {
+  background-color: #fff;
+  padding: 0 0.5rem;
+}
+
+.clear-key:before {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: #47a4b9;
+  z-index: -1;
 }
 
 .editor-open .estresso, .roller-open .estresso {
