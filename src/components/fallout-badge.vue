@@ -1,5 +1,8 @@
 <template>
-  <tag v-if="value" @remove="$emit('remove')">{{ value }}</tag>
+  <tag v-if="value" @remove="$emit('remove')">
+    <span class="fallout">{{ value }}</span>
+    <span v-if="full" class="resistance">{{ fallout.resistance }}</span>
+  </tag>
 </template>
 
 <script>
@@ -10,16 +13,11 @@
       allFallout: Array,
       falloutId: Number,
       resistance: String,
+      full: Boolean,
     },
 
     components: {
       Tag,
-    },
-
-    data() {
-      return {
-        //
-      };
     },
 
     computed: {

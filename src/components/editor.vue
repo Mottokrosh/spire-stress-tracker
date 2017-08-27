@@ -65,12 +65,17 @@
 
               <h3>Fallout</h3>
 
-              <div class="fallout">
+              <div v-if="char.fallout.length" class="fallout">
                 <fallout-badge v-for="falloutId in char.fallout" :key="falloutId"
                   :all-fallout="fallout"
                   :fallout-id="falloutId"
+                  :full="true"
                   @remove="removeFallout(falloutId)"
                 ></fallout-badge>
+              </div>
+
+              <div v-else>
+                <em>No fallout.</em>
               </div>
 
             </div>
@@ -157,7 +162,10 @@
       },
 
       removeFallout(falloutId) {
-        console.log(falloutId);
+        const index = this.char.fallout.indexOf(falloutId);
+        if (index !== -1) {
+          this.char.fallout.splice(index, 1);
+        }
       },
 
       getRandomIntInclusive(min, max) {

@@ -96,6 +96,7 @@
     shadow: { freeSlots: 0, stress: 0 },
     silver: { freeSlots: 0, stress: 0 },
     reputation: { freeSlots: 0, stress: 0 },
+    fallout: [],
   };
 
   export default {

@@ -802,6 +802,7 @@ select {
 
 .counter-control {
   display: flex;
+  justify-content: center;
 
   & > * {
     margin: 0;
@@ -1106,7 +1107,7 @@ select {
   background-image: url(../images/texture-red-512x512.jpg);
   background-size: 256px;
   border-radius: 0.25rem;
-  padding: 0.125rem 0.25rem;
+  padding: 0 0.25rem;
   color: #fff;
   display: flex;
   align-items: center;
@@ -1114,8 +1115,20 @@ select {
   text-transform: uppercase;
   font-size: 0.8rem;
 
-  & > * {
+  & > *, .text > * {
     margin-top: 0;
+  }
+
+  .text {
+    display: flex;
+
+    span {
+      padding: 0.125rem 0;
+    }
+
+    span + span {
+      margin-left: 0.25rem;
+    }
   }
 
   button {
@@ -1132,6 +1145,15 @@ select {
       width: 0.8rem;
       height: 0.8rem;
     }
+  }
+
+  .resistance {
+    opacity: 0.8;
+    font-size: 0.7rem;
+    padding-left: 0.25rem !important;
+    padding-right: 0.25rem !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.8);
+    border-right: 1px solid rgba(255, 255, 255, 0.8);
   }
 }
 

@@ -19604,7 +19604,8 @@ var characterSchema = {
   mind: { freeSlots: 0, stress: 0 },
   shadow: { freeSlots: 0, stress: 0 },
   silver: { freeSlots: 0, stress: 0 },
-  reputation: { freeSlots: 0, stress: 0 }
+  reputation: { freeSlots: 0, stress: 0 },
+  fallout: []
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -23150,6 +23151,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -23157,19 +23161,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   props: {
     allFallout: Array,
     falloutId: Number,
-    resistance: String
+    resistance: String,
+    full: Boolean
   },
 
   components: {
     Tag: __WEBPACK_IMPORTED_MODULE_0__tag_vue___default.a
   },
-
-  data: function data() {
-    return {
-      //
-    };
-  },
-
 
   computed: {
     fallout: function fallout() {
@@ -23200,7 +23198,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.$emit('remove')
       }
     }
-  }, [_vm._v(_vm._s(_vm.value))]) : _vm._e()
+  }, [_c('span', {
+    staticClass: "fallout"
+  }, [_vm._v(_vm._s(_vm.value))]), _vm._v(" "), (_vm.full) ? _c('span', {
+    staticClass: "resistance"
+  }, [_vm._v(_vm._s(_vm.fallout.resistance))]) : _vm._e()]) : _vm._e()
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -23460,6 +23462,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -23526,7 +23533,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.$emit('apply', this.char, this.character);
     },
     removeFallout: function removeFallout(falloutId) {
-      console.log(falloutId);
+      var index = this.char.fallout.indexOf(falloutId);
+      if (index !== -1) {
+        this.char.fallout.splice(index, 1);
+      }
     },
     getRandomIntInclusive: function getRandomIntInclusive(min, max) {
       var randomBuffer = new Uint32Array(1);
@@ -23713,14 +23723,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.char.reputation.stress = $event
             }
           }
-        })], 1)])])]), _vm._v(" "), _c('h3', [_vm._v("Fallout")]), _vm._v(" "), _c('div', {
+        })], 1)])])]), _vm._v(" "), _c('h3', [_vm._v("Fallout")]), _vm._v(" "), (_vm.char.fallout.length) ? _c('div', {
           staticClass: "fallout"
         }, _vm._l((_vm.char.fallout), function(falloutId) {
           return _c('fallout-badge', {
             key: falloutId,
             attrs: {
               "all-fallout": _vm.fallout,
-              "fallout-id": falloutId
+              "fallout-id": falloutId,
+              "full": true
             },
             on: {
               "remove": function($event) {
@@ -23728,7 +23739,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               }
             }
           })
-        }))])]), _vm._v(" "), _c('nav', {
+        })) : _c('div', [_c('em', [_vm._v("No fallout.")])])])]), _vm._v(" "), _c('nav', {
           staticClass: "actions"
         }, [_c('btn', {
           staticClass: "secondary",
