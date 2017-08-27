@@ -1189,6 +1189,11 @@ select.small {
   padding: 0;
 }
 
+.editor .fallout {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .editor .actions {
   padding: 0;
   text-align: right;

@@ -12,6 +12,10 @@
 
   export default {
     props: {
+      min: {
+        type: Number,
+        default: 0,
+      },
       max: Number,
       value: Number,
     },
@@ -32,8 +36,8 @@
       decrement() {
         this.localValue--;
 
-        if (this.localValue < 0) {
-          this.localValue = 0;
+        if (this.localValue < this.min) {
+          this.localValue = this.min;
         }
 
         this.$emit('update:value', this.localValue);

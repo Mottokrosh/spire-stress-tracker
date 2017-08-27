@@ -38,27 +38,27 @@
                   <tr>
                     <td>Blood</td>
                     <td><counter-control :value.sync="char.blood.freeSlots"></counter-control></td>
-                    <td><counter-control :value.sync="char.blood.stress"></counter-control></td>
+                    <td><counter-control :value.sync="char.blood.stress" :min="-char.blood.freeSlots"></counter-control></td>
                   </tr>
                   <tr>
                     <td>Mind</td>
                     <td><counter-control :value.sync="char.mind.freeSlots"></counter-control></td>
-                    <td><counter-control :value.sync="char.mind.stress"></counter-control></td>
+                    <td><counter-control :value.sync="char.mind.stress" :min="-char.mind.freeSlots"></counter-control></td>
                   </tr>
                   <tr>
                     <td>Shadow</td>
                     <td><counter-control :value.sync="char.shadow.freeSlots"></counter-control></td>
-                    <td><counter-control :value.sync="char.shadow.stress"></counter-control></td>
+                    <td><counter-control :value.sync="char.shadow.stress" :min="-char.shadow.freeSlots"></counter-control></td>
                   </tr>
                   <tr>
                     <td>Silver</td>
                     <td><counter-control :value.sync="char.silver.freeSlots"></counter-control></td>
-                    <td><counter-control :value.sync="char.silver.stress"></counter-control></td>
+                    <td><counter-control :value.sync="char.silver.stress" :min="-char.silver.freeSlots"></counter-control></td>
                   </tr>
                   <tr>
                     <td>Reputation</td>
                     <td><counter-control :value.sync="char.reputation.freeSlots"></counter-control></td>
-                    <td><counter-control :value.sync="char.reputation.stress"></counter-control></td>
+                    <td><counter-control :value.sync="char.reputation.stress" :min="-char.reputation.freeSlots"></counter-control></td>
                   </tr>
                 </tbody>
               </table>

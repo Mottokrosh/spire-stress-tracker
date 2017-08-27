@@ -1180,6 +1180,11 @@ select {
     padding: 0;
   }
 
+  .fallout {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   .actions {
     padding: 0;
     text-align: right;

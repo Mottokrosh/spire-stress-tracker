@@ -21040,6 +21040,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
+    min: {
+      type: Number,
+      default: 0
+    },
     max: Number,
     value: Number
   },
@@ -21061,8 +21065,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     decrement: function decrement() {
       this.localValue--;
 
-      if (this.localValue < 0) {
-        this.localValue = 0;
+      if (this.localValue < this.min) {
+        this.localValue = this.min;
       }
 
       this.$emit('update:value', this.localValue);
@@ -23605,7 +23609,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         })], 1), _vm._v(" "), _c('td', [_c('counter-control', {
           attrs: {
-            "value": _vm.char.blood.stress
+            "value": _vm.char.blood.stress,
+            "min": -_vm.char.blood.freeSlots
           },
           on: {
             "update:value": function($event) {
@@ -23623,7 +23628,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         })], 1), _vm._v(" "), _c('td', [_c('counter-control', {
           attrs: {
-            "value": _vm.char.mind.stress
+            "value": _vm.char.mind.stress,
+            "min": -_vm.char.mind.freeSlots
           },
           on: {
             "update:value": function($event) {
@@ -23641,7 +23647,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         })], 1), _vm._v(" "), _c('td', [_c('counter-control', {
           attrs: {
-            "value": _vm.char.shadow.stress
+            "value": _vm.char.shadow.stress,
+            "min": -_vm.char.shadow.freeSlots
           },
           on: {
             "update:value": function($event) {
@@ -23659,7 +23666,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         })], 1), _vm._v(" "), _c('td', [_c('counter-control', {
           attrs: {
-            "value": _vm.char.silver.stress
+            "value": _vm.char.silver.stress,
+            "min": -_vm.char.silver.freeSlots
           },
           on: {
             "update:value": function($event) {
@@ -23677,7 +23685,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         })], 1), _vm._v(" "), _c('td', [_c('counter-control', {
           attrs: {
-            "value": _vm.char.reputation.stress
+            "value": _vm.char.reputation.stress,
+            "min": -_vm.char.reputation.freeSlots
           },
           on: {
             "update:value": function($event) {
