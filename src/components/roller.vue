@@ -12,7 +12,7 @@
         <div v-if="options" class="roller-content">
           <h2>Roll {{ resistance }} Stress <small>For {{ name }}</small></h2>
 
-          <div class="dice">
+          <div class="dice flex-container">
             <div class="d1">
               <div class="brutal-placeholder"></div>
               <div :class="d1Classes">

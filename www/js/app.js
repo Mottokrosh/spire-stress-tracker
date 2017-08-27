@@ -22747,7 +22747,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }, [_c('chevron-left-icon')], 1)], 1), _vm._v(" "), (_vm.options) ? _c('div', {
           staticClass: "roller-content"
         }, [_c('h2', [_vm._v("Roll " + _vm._s(_vm.resistance) + " Stress "), _c('small', [_vm._v("For " + _vm._s(_vm.name))])]), _vm._v(" "), _c('div', {
-          staticClass: "dice"
+          staticClass: "dice flex-container"
         }, [_c('div', {
           staticClass: "d1"
         }, [_c('div', {
