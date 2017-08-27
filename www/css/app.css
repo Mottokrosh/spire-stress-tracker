@@ -192,6 +192,10 @@ button.with-icon svg {
   stroke: #8fa5b0;
 }
 
+button.bright {
+  background-color: #47a4b9;
+}
+
 button:hover {
   box-shadow: none;
   transform: translate(0.125rem, 0.125rem);
@@ -1229,12 +1233,12 @@ select.small {
 }
 
 .editor .stress-clearing {
-  background-color: #b3dde6;
+  background-color: #abe1ed;
   padding: 1rem;
   border-radius: 0.25rem;
   box-shadow: 0 0.125rem 0 rgba(33, 64, 80, 0.75);
   position: relative;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
 }
 
 .editor .stress-clearing p {
@@ -1271,6 +1275,10 @@ select.small {
   z-index: 1;
   background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(128, 186, 232, 0) 99%, rgba(125, 185, 232, 0) 100%);
   animation: shine 1.5s infinite;
+}
+
+.editor .clear-actions {
+  margin-top: 1rem;
 }
 
 .editor-open .estresso, .roller-open .estresso {

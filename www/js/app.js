@@ -21097,7 +21097,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.localValue = this.min;
       }
 
-      this.$emit('update:value', this.localValue);
+      this.$emit('input', this.localValue);
     },
     increment: function increment() {
       this.localValue++;
@@ -21106,7 +21106,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.localValue = this.max;
       }
 
-      this.$emit('update:value', this.localValue);
+      this.$emit('input', this.localValue);
+    },
+    updateValue: function updateValue(val) {
+      this.localValue = parseInt(val, 10);
+      this.$emit('input', this.localValue);
     }
   }
 });
@@ -21125,6 +21129,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    bright: Boolean
+  },
+
   data: function data() {
     return {
       type: 'button'
@@ -21135,7 +21143,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   computed: {
     classes: function classes() {
       return {
-        btn: true
+        'btn': true,
+        'bright': this.bright
       };
     }
   }
@@ -21176,23 +21185,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }, [_c('minus-icon')], 1), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.localValue),
-      expression: "localValue"
-    }],
     attrs: {
       "type": "text",
       "pattern": "[0-9]"
     },
     domProps: {
-      "value": (_vm.localValue)
+      "value": _vm.localValue
     },
     on: {
       "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.localValue = $event.target.value
+        _vm.updateValue($event.target.value)
       }
     }
   }), _vm._v(" "), _c('btn', {
@@ -23018,13 +23020,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Blood")]), _vm._v(" "), _c('counter-control', {
     attrs: {
-      "id": "resistance-blood",
-      "value": _vm.newCharacter.blood.freeSlots
+      "id": "resistance-blood"
     },
-    on: {
-      "update:value": function($event) {
-        _vm.newCharacter.blood.freeSlots = $event
-      }
+    model: {
+      value: (_vm.newCharacter.blood.freeSlots),
+      callback: function($$v) {
+        _vm.newCharacter.blood.freeSlots = $$v
+      },
+      expression: "newCharacter.blood.freeSlots"
     }
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "input-row"
@@ -23034,13 +23037,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Mind")]), _vm._v(" "), _c('counter-control', {
     attrs: {
-      "id": "resistance-mind",
-      "value": _vm.newCharacter.mind.freeSlots
+      "id": "resistance-mind"
     },
-    on: {
-      "update:value": function($event) {
-        _vm.newCharacter.mind.freeSlots = $event
-      }
+    model: {
+      value: (_vm.newCharacter.mind.freeSlots),
+      callback: function($$v) {
+        _vm.newCharacter.mind.freeSlots = $$v
+      },
+      expression: "newCharacter.mind.freeSlots"
     }
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "input-row"
@@ -23050,13 +23054,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Shadow")]), _vm._v(" "), _c('counter-control', {
     attrs: {
-      "id": "resistance-shadow",
-      "value": _vm.newCharacter.shadow.freeSlots
+      "id": "resistance-shadow"
     },
-    on: {
-      "update:value": function($event) {
-        _vm.newCharacter.shadow.freeSlots = $event
-      }
+    model: {
+      value: (_vm.newCharacter.shadow.freeSlots),
+      callback: function($$v) {
+        _vm.newCharacter.shadow.freeSlots = $$v
+      },
+      expression: "newCharacter.shadow.freeSlots"
     }
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "input-row"
@@ -23066,13 +23071,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Silver")]), _vm._v(" "), _c('counter-control', {
     attrs: {
-      "id": "resistance-silver",
-      "value": _vm.newCharacter.silver.freeSlots
+      "id": "resistance-silver"
     },
-    on: {
-      "update:value": function($event) {
-        _vm.newCharacter.silver.freeSlots = $event
-      }
+    model: {
+      value: (_vm.newCharacter.silver.freeSlots),
+      callback: function($$v) {
+        _vm.newCharacter.silver.freeSlots = $$v
+      },
+      expression: "newCharacter.silver.freeSlots"
     }
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "input-row"
@@ -23082,13 +23088,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Reputation")]), _vm._v(" "), _c('counter-control', {
     attrs: {
-      "id": "resistance-reputation",
-      "value": _vm.newCharacter.reputation.freeSlots
+      "id": "resistance-reputation"
     },
-    on: {
-      "update:value": function($event) {
-        _vm.newCharacter.reputation.freeSlots = $event
-      }
+    model: {
+      value: (_vm.newCharacter.reputation.freeSlots),
+      callback: function($$v) {
+        _vm.newCharacter.reputation.freeSlots = $$v
+      },
+      expression: "newCharacter.reputation.freeSlots"
     }
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "input-row action-row"
@@ -23380,12 +23387,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_mixin__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__counter_control_vue__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__counter_control_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__counter_control_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__fallout_badge_vue__ = __webpack_require__(66);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__fallout_badge_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__fallout_badge_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__icon_vue__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__icon_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__btn_vue__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__btn_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__btn_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__counter_control_vue__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__counter_control_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__counter_control_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__fallout_badge_vue__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__fallout_badge_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__fallout_badge_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__icon_vue__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__icon_vue__);
 //
 //
 //
@@ -23486,6 +23495,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+
 
 
 
@@ -23503,10 +23517,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   components: {
+    Btn: __WEBPACK_IMPORTED_MODULE_4__btn_vue___default.a,
     ChevronRightIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["b" /* ChevronRightIcon */],
-    CounterControl: __WEBPACK_IMPORTED_MODULE_4__counter_control_vue___default.a,
-    FalloutBadge: __WEBPACK_IMPORTED_MODULE_5__fallout_badge_vue___default.a,
-    Icon: __WEBPACK_IMPORTED_MODULE_6__icon_vue___default.a,
+    CounterControl: __WEBPACK_IMPORTED_MODULE_5__counter_control_vue___default.a,
+    FalloutBadge: __WEBPACK_IMPORTED_MODULE_6__fallout_badge_vue___default.a,
+    Icon: __WEBPACK_IMPORTED_MODULE_7__icon_vue___default.a,
     Motion: __WEBPACK_IMPORTED_MODULE_0_vue_motion__["Motion"],
     XIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["h" /* XIcon */]
   },
@@ -23588,6 +23603,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (index !== -1) {
         this.char.fallout.splice(index, 1);
       }
+    },
+    layLow: function layLow() {
+      var _this3 = this;
+
+      this.resistances.forEach(function (r) {
+        _this3.char[r].stress = 0; // TODO
+      });
     },
     getRandomIntInclusive: function getRandomIntInclusive(min, max) {
       var randomBuffer = new Uint32Array(1);
@@ -23681,100 +23703,111 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.char.name = $event.target.value
             }
           }
-        })]), _vm._v(" "), _c('h3', [_vm._v("Stress")]), _vm._v(" "), _c('table', [_c('thead', [_c('tr', [_c('th', [_vm._v("Resistance")]), _vm._v(" "), _c('th', [_vm._v("Free Slots")]), _vm._v(" "), _c('th', [_vm._v("Stress")])])]), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', [_vm._v("Blood")]), _vm._v(" "), _c('td', [_c('counter-control', {
+        })]), _vm._v(" "), _c('h3', [_vm._v("Stress")]), _vm._v(" "), _c('div', {
+          staticClass: "clear-actions"
+        }, [_c('btn', {
           attrs: {
-            "value": _vm.char.blood.freeSlots
+            "bright": ""
           },
-          on: {
-            "update:value": function($event) {
-              _vm.char.blood.freeSlots = $event
+          nativeOn: {
+            "click": function($event) {
+              _vm.layLow($event)
             }
+          }
+        }, [_vm._v("Lay low")])], 1), _vm._v(" "), _c('table', [_c('thead', [_c('tr', [_c('th', [_vm._v("Resistance")]), _vm._v(" "), _c('th', [_vm._v("Free Slots")]), _vm._v(" "), _c('th', [_vm._v("Stress")])])]), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', [_vm._v("Blood")]), _vm._v(" "), _c('td', [_c('counter-control', {
+          model: {
+            value: (_vm.char.blood.freeSlots),
+            callback: function($$v) {
+              _vm.char.blood.freeSlots = $$v
+            },
+            expression: "char.blood.freeSlots"
           }
         })], 1), _vm._v(" "), _c('td', [_c('counter-control', {
           attrs: {
-            "value": _vm.char.blood.stress,
             "min": -_vm.char.blood.freeSlots
           },
-          on: {
-            "update:value": function($event) {
-              _vm.char.blood.stress = $event
-            }
+          model: {
+            value: (_vm.char.blood.stress),
+            callback: function($$v) {
+              _vm.char.blood.stress = $$v
+            },
+            expression: "char.blood.stress"
           }
         })], 1)]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("Mind")]), _vm._v(" "), _c('td', [_c('counter-control', {
-          attrs: {
-            "value": _vm.char.mind.freeSlots
-          },
-          on: {
-            "update:value": function($event) {
-              _vm.char.mind.freeSlots = $event
-            }
+          model: {
+            value: (_vm.char.mind.freeSlots),
+            callback: function($$v) {
+              _vm.char.mind.freeSlots = $$v
+            },
+            expression: "char.mind.freeSlots"
           }
         })], 1), _vm._v(" "), _c('td', [_c('counter-control', {
           attrs: {
-            "value": _vm.char.mind.stress,
             "min": -_vm.char.mind.freeSlots
           },
-          on: {
-            "update:value": function($event) {
-              _vm.char.mind.stress = $event
-            }
+          model: {
+            value: (_vm.char.mind.stress),
+            callback: function($$v) {
+              _vm.char.mind.stress = $$v
+            },
+            expression: "char.mind.stress"
           }
         })], 1)]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("Shadow")]), _vm._v(" "), _c('td', [_c('counter-control', {
-          attrs: {
-            "value": _vm.char.shadow.freeSlots
-          },
-          on: {
-            "update:value": function($event) {
-              _vm.char.shadow.freeSlots = $event
-            }
+          model: {
+            value: (_vm.char.shadow.freeSlots),
+            callback: function($$v) {
+              _vm.char.shadow.freeSlots = $$v
+            },
+            expression: "char.shadow.freeSlots"
           }
         })], 1), _vm._v(" "), _c('td', [_c('counter-control', {
           attrs: {
-            "value": _vm.char.shadow.stress,
             "min": -_vm.char.shadow.freeSlots
           },
-          on: {
-            "update:value": function($event) {
-              _vm.char.shadow.stress = $event
-            }
+          model: {
+            value: (_vm.char.shadow.stress),
+            callback: function($$v) {
+              _vm.char.shadow.stress = $$v
+            },
+            expression: "char.shadow.stress"
           }
         })], 1)]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("Silver")]), _vm._v(" "), _c('td', [_c('counter-control', {
-          attrs: {
-            "value": _vm.char.silver.freeSlots
-          },
-          on: {
-            "update:value": function($event) {
-              _vm.char.silver.freeSlots = $event
-            }
+          model: {
+            value: (_vm.char.silver.freeSlots),
+            callback: function($$v) {
+              _vm.char.silver.freeSlots = $$v
+            },
+            expression: "char.silver.freeSlots"
           }
         })], 1), _vm._v(" "), _c('td', [_c('counter-control', {
           attrs: {
-            "value": _vm.char.silver.stress,
             "min": -_vm.char.silver.freeSlots
           },
-          on: {
-            "update:value": function($event) {
-              _vm.char.silver.stress = $event
-            }
+          model: {
+            value: (_vm.char.silver.stress),
+            callback: function($$v) {
+              _vm.char.silver.stress = $$v
+            },
+            expression: "char.silver.stress"
           }
         })], 1)]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("Reputation")]), _vm._v(" "), _c('td', [_c('counter-control', {
-          attrs: {
-            "value": _vm.char.reputation.freeSlots
-          },
-          on: {
-            "update:value": function($event) {
-              _vm.char.reputation.freeSlots = $event
-            }
+          model: {
+            value: (_vm.char.reputation.freeSlots),
+            callback: function($$v) {
+              _vm.char.reputation.freeSlots = $$v
+            },
+            expression: "char.reputation.freeSlots"
           }
         })], 1), _vm._v(" "), _c('td', [_c('counter-control', {
           attrs: {
-            "value": _vm.char.reputation.stress,
             "min": -_vm.char.reputation.freeSlots
           },
-          on: {
-            "update:value": function($event) {
-              _vm.char.reputation.stress = $event
-            }
+          model: {
+            value: (_vm.char.reputation.stress),
+            callback: function($$v) {
+              _vm.char.reputation.stress = $$v
+            },
+            expression: "char.reputation.stress"
           }
         })], 1)])])]), _vm._v(" "), _c('h3', [_vm._v("Fallout")]), _vm._v(" "), (_vm.char.fallout.length) ? _c('div', {
           staticClass: "fallout"

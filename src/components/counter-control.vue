@@ -1,7 +1,7 @@
 <template>
   <div class="button-group counter-control">
     <btn @click.native="decrement" class="secondary shadowless has-icon"><minus-icon></minus-icon></btn>
-    <input type="text" pattern="[0-9]" v-model="localValue">
+    <input type="text" pattern="[0-9]" :value="localValue" @input="updateValue($event.target.value)">
     <btn @click.native="increment" class="secondary shadowless has-icon"><plus-icon></plus-icon></btn>
   </div>
 </template>
@@ -40,7 +40,7 @@
           this.localValue = this.min;
         }
 
-        this.$emit('update:value', this.localValue);
+        this.$emit('input', this.localValue);
       },
 
       increment() {
@@ -50,7 +50,12 @@
           this.localValue = this.max;
         }
 
-        this.$emit('update:value', this.localValue);
+        this.$emit('input', this.localValue);
+      },
+
+      updateValue(val) {
+        this.localValue = parseInt(val, 10);
+        this.$emit('input', this.localValue);
       },
     },
   };

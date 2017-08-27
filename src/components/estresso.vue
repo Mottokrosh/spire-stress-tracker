@@ -53,23 +53,23 @@
 
         <div class="input-row">
           <label for="resistance-blood">Blood</label>
-          <counter-control id="resistance-blood" :value.sync="newCharacter.blood.freeSlots"></counter-control>
+          <counter-control id="resistance-blood" v-model="newCharacter.blood.freeSlots"></counter-control>
         </div>
         <div class="input-row">
           <label for="resistance-mind">Mind</label>
-          <counter-control id="resistance-mind" :value.sync="newCharacter.mind.freeSlots"></counter-control>
+          <counter-control id="resistance-mind" v-model="newCharacter.mind.freeSlots"></counter-control>
         </div>
         <div class="input-row">
           <label for="resistance-shadow">Shadow</label>
-          <counter-control id="resistance-shadow" :value.sync="newCharacter.shadow.freeSlots"></counter-control>
+          <counter-control id="resistance-shadow" v-model="newCharacter.shadow.freeSlots"></counter-control>
         </div>
         <div class="input-row">
           <label for="resistance-silver">Silver</label>
-          <counter-control id="resistance-silver" :value.sync="newCharacter.silver.freeSlots"></counter-control>
+          <counter-control id="resistance-silver" v-model="newCharacter.silver.freeSlots"></counter-control>
         </div>
         <div class="input-row">
           <label for="resistance-reputation">Reputation</label>
-          <counter-control id="resistance-reputation" :value.sync="newCharacter.reputation.freeSlots"></counter-control>
+          <counter-control id="resistance-reputation" v-model="newCharacter.reputation.freeSlots"></counter-control>
         </div>
 
         <div class="input-row action-row">

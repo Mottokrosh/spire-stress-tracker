@@ -6,6 +6,10 @@
 
 <script>
   export default {
+    props: {
+      bright: Boolean,
+    },
+
     data() {
       return {
         type: 'button',
@@ -15,7 +19,8 @@
     computed: {
       classes() {
         return {
-          btn: true,
+          'btn': true,
+          'bright': this.bright,
         };
       },
     },

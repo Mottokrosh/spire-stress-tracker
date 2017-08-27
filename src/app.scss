@@ -22,7 +22,7 @@ $secondary: #8fa5b0;
 $beigeDark: #9a9a92;
 $beigeLight: #f6f6f4;
 $red: #ad302a;
-$bright: #b3dde6;
+$bright: #abe1ed;
 
 $mainColumnWidth: 480px;
 
@@ -223,6 +223,10 @@ button {
       margin-right: 0.5rem;
       stroke: $secondary;
     }
+  }
+
+  &.bright {
+    background-color: desaturate(darken($bright, 30%), 20%);
   }
 
   &:hover {
@@ -1219,7 +1223,7 @@ select {
     border-radius: 0.25rem;
     box-shadow: 0 0.125rem 0 transparentize($primary, 0.25);
     position: relative;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
 
     p {
       margin-top: 0.25rem;
@@ -1261,6 +1265,10 @@ select {
       );
       animation: shine 1.5s infinite;
     }
+  }
+
+  .clear-actions {
+    margin-top: 1rem;
   }
 }
 

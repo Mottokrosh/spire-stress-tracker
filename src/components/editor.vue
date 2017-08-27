@@ -31,6 +31,10 @@
 
               <h3>Stress</h3>
 
+              <div class="clear-actions">
+                <btn bright @click.native="layLow">Lay low</btn>
+              </div>
+
               <table>
                 <thead>
                   <tr>
@@ -42,28 +46,28 @@
                 <tbody>
                   <tr>
                     <td>Blood</td>
-                    <td><counter-control :value.sync="char.blood.freeSlots"></counter-control></td>
-                    <td><counter-control :value.sync="char.blood.stress" :min="-char.blood.freeSlots"></counter-control></td>
+                    <td><counter-control v-model="char.blood.freeSlots"></counter-control></td>
+                    <td><counter-control v-model="char.blood.stress" :min="-char.blood.freeSlots"></counter-control></td>
                   </tr>
                   <tr>
                     <td>Mind</td>
-                    <td><counter-control :value.sync="char.mind.freeSlots"></counter-control></td>
-                    <td><counter-control :value.sync="char.mind.stress" :min="-char.mind.freeSlots"></counter-control></td>
+                    <td><counter-control v-model="char.mind.freeSlots"></counter-control></td>
+                    <td><counter-control v-model="char.mind.stress" :min="-char.mind.freeSlots"></counter-control></td>
                   </tr>
                   <tr>
                     <td>Shadow</td>
-                    <td><counter-control :value.sync="char.shadow.freeSlots"></counter-control></td>
-                    <td><counter-control :value.sync="char.shadow.stress" :min="-char.shadow.freeSlots"></counter-control></td>
+                    <td><counter-control v-model="char.shadow.freeSlots"></counter-control></td>
+                    <td><counter-control v-model="char.shadow.stress" :min="-char.shadow.freeSlots"></counter-control></td>
                   </tr>
                   <tr>
                     <td>Silver</td>
-                    <td><counter-control :value.sync="char.silver.freeSlots"></counter-control></td>
-                    <td><counter-control :value.sync="char.silver.stress" :min="-char.silver.freeSlots"></counter-control></td>
+                    <td><counter-control v-model="char.silver.freeSlots"></counter-control></td>
+                    <td><counter-control v-model="char.silver.stress" :min="-char.silver.freeSlots"></counter-control></td>
                   </tr>
                   <tr>
                     <td>Reputation</td>
-                    <td><counter-control :value.sync="char.reputation.freeSlots"></counter-control></td>
-                    <td><counter-control :value.sync="char.reputation.stress" :min="-char.reputation.freeSlots"></counter-control></td>
+                    <td><counter-control v-model="char.reputation.freeSlots"></counter-control></td>
+                    <td><counter-control v-model="char.reputation.stress" :min="-char.reputation.freeSlots"></counter-control></td>
                   </tr>
                 </tbody>
               </table>
@@ -103,6 +107,7 @@
   import { ChevronRightIcon, XIcon } from 'vue-feather-icons';
   import Store from '../store';
   import Helpers from '../helpers.mixin';
+  import Btn from './btn.vue';
   import CounterControl from './counter-control.vue';
   import FalloutBadge from './fallout-badge.vue';
   import Icon from './icon.vue';
@@ -115,6 +120,7 @@
     },
 
     components: {
+      Btn,
       ChevronRightIcon,
       CounterControl,
       FalloutBadge,
@@ -202,6 +208,12 @@
         if (index !== -1) {
           this.char.fallout.splice(index, 1);
         }
+      },
+
+      layLow() {
+        this.resistances.forEach((r) => {
+          this.char[r].stress = 0;// TODO
+        });
       },
 
       getRandomIntInclusive(min, max) {
