@@ -7,11 +7,12 @@
         <icon id="drop" v-for="i in fallout.severity" :key="i"></icon>
       </div>
     </div>
-    <btn class="shadowless has-icon" @click.native="$emit('show-details')"><icon id="search"></icon></btn>
+    <btn class="shadowless has-icon" @click.native="$emit('show-details')"><info-icon></info-icon></btn>
   </div>
 </template>
 
 <script>
+  import { InfoIcon } from 'vue-feather-icons';
   import Helpers from '../helpers.mixin';
   import Btn from './btn.vue';
   import Icon from './icon.vue';
@@ -25,6 +26,7 @@
     components: {
       Btn,
       Icon,
+      InfoIcon,
     },
 
     data() {

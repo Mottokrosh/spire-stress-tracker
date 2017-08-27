@@ -608,7 +608,7 @@ module.exports = function normalizeComponent (
 /* unused harmony export HomeIcon */
 /* unused harmony export ImageIcon */
 /* unused harmony export InboxIcon */
-/* unused harmony export InfoIcon */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return InfoIcon; });
 /* unused harmony export InstagramIcon */
 /* unused harmony export ItalicIcon */
 /* unused harmony export LayersIcon */
@@ -635,7 +635,7 @@ module.exports = function normalizeComponent (
 /* unused harmony export MinimizeIcon */
 /* unused harmony export MinusCircleIcon */
 /* unused harmony export MinusSquareIcon */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return MinusIcon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return MinusIcon; });
 /* unused harmony export MonitorIcon */
 /* unused harmony export MoonIcon */
 /* unused harmony export MoreHorizontalIcon */
@@ -662,7 +662,7 @@ module.exports = function normalizeComponent (
 /* unused harmony export PlayIcon */
 /* unused harmony export PlusCircleIcon */
 /* unused harmony export PlusSquareIcon */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return PlusIcon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return PlusIcon; });
 /* unused harmony export PocketIcon */
 /* unused harmony export PowerIcon */
 /* unused harmony export PrinterIcon */
@@ -737,7 +737,7 @@ module.exports = function normalizeComponent (
 /* unused harmony export WindIcon */
 /* unused harmony export XCircleIcon */
 /* unused harmony export XSquareIcon */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return XIcon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return XIcon; });
 /* unused harmony export ZapIcon */
 /* unused harmony export ZoomInIcon */
 /* unused harmony export ZoomOutIcon */
@@ -20814,8 +20814,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   components: {
     Edit2Icon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["c" /* Edit2Icon */],
     FalloutBadge: __WEBPACK_IMPORTED_MODULE_1__fallout_badge_vue___default.a,
-    PlusIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["e" /* PlusIcon */],
-    XIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["f" /* XIcon */]
+    PlusIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["f" /* PlusIcon */],
+    XIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["g" /* XIcon */]
   },
 
   data: function data() {
@@ -21053,8 +21053,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   components: {
     Btn: __WEBPACK_IMPORTED_MODULE_0__btn_vue___default.a,
-    MinusIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["d" /* MinusIcon */],
-    PlusIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["e" /* PlusIcon */]
+    MinusIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["e" /* MinusIcon */],
+    PlusIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["f" /* PlusIcon */]
   },
 
   methods: {
@@ -21360,7 +21360,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     Icon: __WEBPACK_IMPORTED_MODULE_6__icon_vue___default.a,
     Modal: __WEBPACK_IMPORTED_MODULE_8__modal_vue___default.a,
     Motion: __WEBPACK_IMPORTED_MODULE_0_vue_motion__["Motion"],
-    XIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["f" /* XIcon */]
+    XIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["g" /* XIcon */]
   },
 
   mixins: [__WEBPACK_IMPORTED_MODULE_4__helpers_mixin__["a" /* default */]],
@@ -21918,11 +21918,12 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_mixin__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__btn_vue__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__btn_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__btn_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__icon_vue__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__icon_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_mixin__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__btn_vue__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__btn_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__btn_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__icon_vue__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__icon_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__icon_vue__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -21943,6 +21944,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     character: Object,
@@ -21950,8 +21952,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
 
   components: {
-    Btn: __WEBPACK_IMPORTED_MODULE_1__btn_vue___default.a,
-    Icon: __WEBPACK_IMPORTED_MODULE_2__icon_vue___default.a
+    Btn: __WEBPACK_IMPORTED_MODULE_2__btn_vue___default.a,
+    Icon: __WEBPACK_IMPORTED_MODULE_3__icon_vue___default.a,
+    InfoIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["d" /* InfoIcon */]
   },
 
   data: function data() {
@@ -21977,7 +21980,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__helpers_mixin__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_1__helpers_mixin__["a" /* default */]],
 
   methods: {
     onChange: function onChange($event) {
@@ -22033,11 +22036,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.$emit('show-details')
       }
     }
-  }, [_c('icon', {
-    attrs: {
-      "id": "search"
-    }
-  })], 1)], 1)
+  }, [_c('info-icon')], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -22149,7 +22148,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   components: {
     Motion: __WEBPACK_IMPORTED_MODULE_1_vue_motion__["Motion"],
-    XIcon: __WEBPACK_IMPORTED_MODULE_2_vue_feather_icons__["f" /* XIcon */]
+    XIcon: __WEBPACK_IMPORTED_MODULE_2_vue_feather_icons__["g" /* XIcon */]
   },
 
   mixins: [__WEBPACK_IMPORTED_MODULE_3__helpers_mixin__["a" /* default */]],
@@ -23249,7 +23248,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    XIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["f" /* XIcon */]
+    XIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["g" /* XIcon */]
   },
 
   computed: {
@@ -23461,7 +23460,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     FalloutBadge: __WEBPACK_IMPORTED_MODULE_5__fallout_badge_vue___default.a,
     Icon: __WEBPACK_IMPORTED_MODULE_6__icon_vue___default.a,
     Motion: __WEBPACK_IMPORTED_MODULE_0_vue_motion__["Motion"],
-    XIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["f" /* XIcon */]
+    XIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["g" /* XIcon */]
   },
 
   mixins: [__WEBPACK_IMPORTED_MODULE_3__helpers_mixin__["a" /* default */]],
