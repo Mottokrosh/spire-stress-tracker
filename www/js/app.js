@@ -21112,6 +21112,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.localValue = parseInt(val, 10);
       this.$emit('input', this.localValue);
     }
+  },
+
+  watch: {
+    value: function value(newVal) {
+      this.localValue = newVal;
+    }
   }
 });
 
@@ -23608,7 +23614,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this3 = this;
 
       this.resistances.forEach(function (r) {
-        _this3.char[r].stress = 0; // TODO
+        _this3.char[r].stress = -_this3.char[r].freeSlots || 0;
       });
     },
     getRandomIntInclusive: function getRandomIntInclusive(min, max) {

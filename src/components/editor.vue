@@ -212,7 +212,7 @@
 
       layLow() {
         this.resistances.forEach((r) => {
-          this.char[r].stress = 0;// TODO
+          this.char[r].stress = -this.char[r].freeSlots || 0;
         });
       },
 
