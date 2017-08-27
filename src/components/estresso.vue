@@ -1,9 +1,19 @@
 <template>
   <div class="estresso">
 
-    <roller :options="rollerOptions" :fallout="allFallout" @close="rollerOptions = null" @update="updateCharacter"></roller>
+    <roller
+      :options="rollerOptions"
+      :fallout="allFallout"
+      @close="rollerOptions = null"
+      @update="updateCharacter"
+    ></roller>
 
-    <editor :character="characterToEdit" :fallout="allFallout" @close="characterToEdit = null"></editor>
+    <editor
+      :character="characterToEdit"
+      :fallout="allFallout"
+      @close="characterToEdit = null"
+      @apply="replaceCharacter"
+    ></editor>
 
     <header>
       <div class="column">
@@ -133,6 +143,13 @@
         const c = this.characters[this.characters.indexOf(result.character)];
         c[result.resistance].stress = result.stress;
         c.fallout = result.fallout;
+        this.store.save();
+      },
+
+      replaceCharacter(newCharacter, oldCharacter) {
+        const index = this.characters.indexOf(oldCharacter);
+        this.characters[index] = newCharacter;
+        this.characterToEdit = null;
         this.store.save();
       },
 

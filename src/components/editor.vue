@@ -77,8 +77,8 @@
           </form>
 
           <nav class="actions">
-            <btn class="secondary">Button</btn>
-            <btn>Button</btn>
+            <btn class="secondary" @click.native="close">Cancel</btn>
+            <btn @click.native="apply">Apply</btn>
           </nav>
 
         </div>
@@ -150,6 +150,10 @@
 
       reset() {
         this.characterCopy = this.clone(this.character);
+      },
+
+      apply() {
+        this.$emit('apply', this.char, this.character);
       },
 
       removeFallout(falloutId) {

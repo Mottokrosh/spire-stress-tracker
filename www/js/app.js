@@ -19579,6 +19579,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -19641,6 +19651,12 @@ var characterSchema = {
       var c = this.characters[this.characters.indexOf(result.character)];
       c[result.resistance].stress = result.stress;
       c.fallout = result.fallout;
+      this.store.save();
+    },
+    replaceCharacter: function replaceCharacter(newCharacter, oldCharacter) {
+      var index = this.characters.indexOf(oldCharacter);
+      this.characters[index] = newCharacter;
+      this.characterToEdit = null;
       this.store.save();
     },
     getRandomInt: function getRandomInt(min, max) {
@@ -22922,7 +22938,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "close": function($event) {
         _vm.characterToEdit = null
-      }
+      },
+      "apply": _vm.replaceCharacter
     }
   }), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('transition-group', {
     staticClass: "characters",
@@ -23505,6 +23522,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     reset: function reset() {
       this.characterCopy = this.clone(this.character);
     },
+    apply: function apply() {
+      this.$emit('apply', this.char, this.character);
+    },
     removeFallout: function removeFallout(falloutId) {
       console.log(falloutId);
     },
@@ -23711,8 +23731,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }))])]), _vm._v(" "), _c('nav', {
           staticClass: "actions"
         }, [_c('btn', {
-          staticClass: "secondary"
-        }, [_vm._v("Button")]), _vm._v(" "), _c('btn', [_vm._v("Button")])], 1)]) : _vm._e()])]
+          staticClass: "secondary",
+          nativeOn: {
+            "click": function($event) {
+              _vm.close($event)
+            }
+          }
+        }, [_vm._v("Cancel")]), _vm._v(" "), _c('btn', {
+          nativeOn: {
+            "click": function($event) {
+              _vm.apply($event)
+            }
+          }
+        }, [_vm._v("Apply")])], 1)]) : _vm._e()])]
       }
     }])
   })
