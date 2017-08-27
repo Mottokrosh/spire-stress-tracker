@@ -73,7 +73,7 @@
         </div>
 
         <div class="input-row action-row">
-          <btn class="tilded" @click.native="addCharacter">Add</btn>
+          <btn class="with-icon" @click.native="addCharacter"><user-plus-icon></user-plus-icon> Add</btn>
         </div>
       </div>
     </form>
@@ -83,6 +83,7 @@
 
 <script>
   import Axios from 'axios';
+  import { UserPlusIcon } from 'vue-feather-icons';
   import Helpers from '../helpers.mixin';
   import Character from './character.vue';
   import CounterControl from './counter-control.vue';
@@ -122,6 +123,7 @@
       CounterControl,
       Editor,
       Roller,
+      UserPlusIcon,
     },
 
     methods: {

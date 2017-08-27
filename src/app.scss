@@ -214,21 +214,14 @@ button {
     padding: 0.25rem 0.5rem;
   }
 
-  &.tilded {
-    &:before, &:after {
-      content: '\2020';
-      color: rgba(255, 255, 255, 0.5);
-      font-weight: bold;
-      display: inline-block;
-      width: 1.75rem;
-    }
+  &.with-icon {
+    display: flex;
+    align-items: center;
+    padding-right: 0.85rem;
 
-    &:before {
-      transform: rotate(90deg);
-    }
-
-    &:after {
-      transform: rotate(-90deg);
+    svg {
+      margin-right: 0.5rem;
+      stroke: $secondary;
     }
   }
 
@@ -553,6 +546,7 @@ select {
   background-size: cover;
   background-position: 0;
   border-top: 2px solid transparentize($beigeDark, 0.75);
+  padding-bottom: 2rem;
 
   .input-row {
     justify-content: space-between;

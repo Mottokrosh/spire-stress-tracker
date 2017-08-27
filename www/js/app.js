@@ -720,7 +720,7 @@ module.exports = function normalizeComponent (
 /* unused harmony export UploadIcon */
 /* unused harmony export UserCheckIcon */
 /* unused harmony export UserMinusIcon */
-/* unused harmony export UserPlusIcon */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return UserPlusIcon; });
 /* unused harmony export UserXIcon */
 /* unused harmony export UserIcon */
 /* unused harmony export UsersIcon */
@@ -737,7 +737,7 @@ module.exports = function normalizeComponent (
 /* unused harmony export WindIcon */
 /* unused harmony export XCircleIcon */
 /* unused harmony export XSquareIcon */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return XIcon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return XIcon; });
 /* unused harmony export ZapIcon */
 /* unused harmony export ZoomInIcon */
 /* unused harmony export ZoomOutIcon */
@@ -19497,16 +19497,17 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_mixin__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__character_vue__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__character_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__character_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__counter_control_vue__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__counter_control_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__counter_control_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__roller_vue__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__roller_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__roller_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__editor_vue__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__editor_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__editor_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__store__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_mixin__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__character_vue__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__character_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__character_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__counter_control_vue__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__counter_control_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__counter_control_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__roller_vue__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__roller_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__roller_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__editor_vue__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__editor_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__editor_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__store__ = __webpack_require__(5);
 //
 //
 //
@@ -19590,6 +19591,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -19610,12 +19612,12 @@ var characterSchema = {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mixins: [__WEBPACK_IMPORTED_MODULE_1__helpers_mixin__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_2__helpers_mixin__["a" /* default */]],
 
   data: function data() {
     return {
-      store: __WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */],
-      resistances: __WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */].resistances,
+      store: __WEBPACK_IMPORTED_MODULE_7__store__["a" /* default */],
+      resistances: __WEBPACK_IMPORTED_MODULE_7__store__["a" /* default */].resistances,
       characters: [],
       rollerOptions: null,
       characterToEdit: null,
@@ -19628,10 +19630,11 @@ var characterSchema = {
 
 
   components: {
-    Character: __WEBPACK_IMPORTED_MODULE_2__character_vue___default.a,
-    CounterControl: __WEBPACK_IMPORTED_MODULE_3__counter_control_vue___default.a,
-    Editor: __WEBPACK_IMPORTED_MODULE_5__editor_vue___default.a,
-    Roller: __WEBPACK_IMPORTED_MODULE_4__roller_vue___default.a
+    Character: __WEBPACK_IMPORTED_MODULE_3__character_vue___default.a,
+    CounterControl: __WEBPACK_IMPORTED_MODULE_4__counter_control_vue___default.a,
+    Editor: __WEBPACK_IMPORTED_MODULE_6__editor_vue___default.a,
+    Roller: __WEBPACK_IMPORTED_MODULE_5__roller_vue___default.a,
+    UserPlusIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["g" /* UserPlusIcon */]
   },
 
   methods: {
@@ -20840,7 +20843,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     Edit2Icon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["c" /* Edit2Icon */],
     FalloutBadge: __WEBPACK_IMPORTED_MODULE_1__fallout_badge_vue___default.a,
     PlusIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["f" /* PlusIcon */],
-    XIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["g" /* XIcon */]
+    XIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["h" /* XIcon */]
   },
 
   data: function data() {
@@ -21389,7 +21392,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     Icon: __WEBPACK_IMPORTED_MODULE_6__icon_vue___default.a,
     Modal: __WEBPACK_IMPORTED_MODULE_8__modal_vue___default.a,
     Motion: __WEBPACK_IMPORTED_MODULE_0_vue_motion__["Motion"],
-    XIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["g" /* XIcon */]
+    XIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["h" /* XIcon */]
   },
 
   mixins: [__WEBPACK_IMPORTED_MODULE_4__helpers_mixin__["a" /* default */]],
@@ -22179,7 +22182,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   components: {
     Motion: __WEBPACK_IMPORTED_MODULE_1_vue_motion__["Motion"],
-    XIcon: __WEBPACK_IMPORTED_MODULE_2_vue_feather_icons__["g" /* XIcon */]
+    XIcon: __WEBPACK_IMPORTED_MODULE_2_vue_feather_icons__["h" /* XIcon */]
   },
 
   mixins: [__WEBPACK_IMPORTED_MODULE_3__helpers_mixin__["a" /* default */]],
@@ -23090,13 +23093,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "input-row action-row"
   }, [_c('btn', {
-    staticClass: "tilded",
+    staticClass: "with-icon",
     nativeOn: {
       "click": function($event) {
         _vm.addCharacter($event)
       }
     }
-  }, [_vm._v("Add")])], 1)])])], 1)
+  }, [_c('user-plus-icon'), _vm._v(" Add")], 1)], 1)])])], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('header', [_c('div', {
     staticClass: "column"
@@ -23282,7 +23285,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    XIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["g" /* XIcon */]
+    XIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["h" /* XIcon */]
   },
 
   computed: {
@@ -23505,7 +23508,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     FalloutBadge: __WEBPACK_IMPORTED_MODULE_5__fallout_badge_vue___default.a,
     Icon: __WEBPACK_IMPORTED_MODULE_6__icon_vue___default.a,
     Motion: __WEBPACK_IMPORTED_MODULE_0_vue_motion__["Motion"],
-    XIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["g" /* XIcon */]
+    XIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["h" /* XIcon */]
   },
 
   mixins: [__WEBPACK_IMPORTED_MODULE_3__helpers_mixin__["a" /* default */]],
