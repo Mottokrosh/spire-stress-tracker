@@ -23116,7 +23116,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('header', [_c('div', {
     staticClass: "column"
-  }, [_c('h1', [_vm._v("Estresso "), _c('small', [_vm._v("Spire RPG Stress and Fallout Tracker")])])])])
+  }, [_c('h1', [_vm._v("Spire Companion "), _c('small', [_vm._v("Stress and Fallout Tracker")])])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
