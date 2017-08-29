@@ -625,6 +625,9 @@ select {
     width: 800px;
     height: 100%;
     background-color: $red;
+    background-image: url(../images/quenelle.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
   }
 
   nav {
