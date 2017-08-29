@@ -21571,14 +21571,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return f.level === 'minor' && stressedResistances.indexOf(f.resistance) !== -1;
           });
         } else if (this.totalStress >= 5 && this.totalStress <= 8) {
-          this.falloutLevel = 'major';
+          this.falloutLevel = 'moderate';
           this.falloutChoices = this.fallout.filter(function (f) {
-            return (f.level === 'minor' || f.level === 'major') && stressedResistances.indexOf(f.resistance) !== -1;
+            return (f.level === 'minor' || f.level === 'moderate') && stressedResistances.indexOf(f.resistance) !== -1;
           });
         } else if (this.totalStress >= 9) {
           this.falloutLevel = 'severe';
           this.falloutChoices = this.fallout.filter(function (f) {
-            return (f.level === 'major' || f.level === 'severe') && stressedResistances.indexOf(f.resistance) !== -1;
+            return (f.level === 'moderate' || f.level === 'severe') && stressedResistances.indexOf(f.resistance) !== -1;
           });
         }
 
@@ -21620,7 +21620,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (this.falloutOccurred) {
         if (this.falloutLevel === 'minor') {
           stressToClear = 3;
-        } else if (this.falloutLevel === 'major') {
+        } else if (this.falloutLevel === 'moderate') {
           stressToClear = 5;
         } else if (this.falloutLevel === 'severe') {
           stressToClear = 7;

@@ -1,4 +1,17 @@
-@import url("https://fonts.googleapis.com/css?family=Zilla+Slab");
+@font-face {
+  font-family: 'Zilla Slab';
+  src: url("../fonts/ZillaSlab-Regular.woff2") format("woff2"), url("../fonts/ZillaSlab-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Zilla Slab';
+  src: url("../fonts/ZillaSlab-Bold.woff2") format("woff2"), url("../fonts/ZillaSlab-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
 @font-face {
   font-family: 'Mahalo';
   src: url("../fonts/Mahalo.woff2") format("woff2"), url("../fonts/Mahalo.woff") format("woff");

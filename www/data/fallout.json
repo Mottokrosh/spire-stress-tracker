@@ -113,7 +113,7 @@
   },
   {
     "id": 201,
-    "level": "major",
+    "level": "moderate",
     "severity": 2,
     "resistance": "blood",
     "name": "Broken Limb",
@@ -121,7 +121,7 @@
   },
   {
     "id": 202,
-    "level": "major",
+    "level": "moderate",
     "severity": 2,
     "resistance": "blood",
     "name": "Knocked Out",
@@ -129,7 +129,7 @@
   },
   {
     "id": 203,
-    "level": "major",
+    "level": "moderate",
     "severity": 2,
     "resistance": "mind",
     "name": "Freak Out",
@@ -137,7 +137,7 @@
   },
   {
     "id": 204,
-    "level": "major",
+    "level": "moderate",
     "severity": 2,
     "resistance": "mind",
     "name": "Memory Holes",
@@ -145,7 +145,7 @@
   },
   {
     "id": 205,
-    "level": "major",
+    "level": "moderate",
     "severity": 2,
     "resistance": "mind",
     "name": "Phobia",
@@ -153,7 +153,7 @@
   },
   {
     "id": 206,
-    "level": "major",
+    "level": "moderate",
     "severity": 2,
     "resistance": "reputation",
     "name": "Humiliated",
@@ -161,7 +161,7 @@
   },
   {
     "id": 207,
-    "level": "major",
+    "level": "moderate",
     "severity": 2,
     "resistance": "shadow",
     "name": "Arrested",
@@ -169,7 +169,7 @@
   },
   {
     "id": 208,
-    "level": "major",
+    "level": "moderate",
     "severity": 2,
     "resistance": "shadow",
     "name": "Criminal",
@@ -177,7 +177,7 @@
   },
   {
     "id": 209,
-    "level": "major",
+    "level": "moderate",
     "severity": 2,
     "resistance": "shadow",
     "name": "Tail",
@@ -185,7 +185,7 @@
   },
   {
     "id": 210,
-    "level": "major",
+    "level": "moderate",
     "severity": 2,
     "resistance": "silver",
     "name": "Sold",
