@@ -1258,6 +1258,7 @@ select.small {
   box-shadow: 0 0.125rem 0 rgba(33, 64, 80, 0.75);
   position: relative;
   margin-bottom: 1.75rem;
+  overflow: hidden;
 }
 
 .editor .stress-clearing p {

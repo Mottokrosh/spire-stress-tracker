@@ -1245,6 +1245,7 @@ select {
     box-shadow: 0 0.125rem 0 transparentize($primary, 0.25);
     position: relative;
     margin-bottom: 1.75rem;
+    overflow: hidden;
 
     p {
       margin-top: 0.25rem;
