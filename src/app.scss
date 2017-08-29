@@ -324,6 +324,10 @@ button {
       width: 1.25rem;
     }
   }
+
+  &.bottom-left-rounded {
+    border-bottom-left-radius: 0.25rem !important;
+  }
 }
 
 .button-group {

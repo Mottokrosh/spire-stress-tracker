@@ -15,7 +15,7 @@
             <span>Stress</span>
             <strong>{{ c[r].stress }}</strong>
           </div>
-          <btn @click.native="addStress(r)" class="shadowless has-icon"><plus-icon></plus-icon></btn>
+          <btn @click.native="addStress(r)" :class="stressButtonClasses(r)"><plus-icon></plus-icon></btn>
         </div>
         <div class="any-fallout">
           <fallout-badge v-for="falloutId in c.fallout" :key="falloutId"
@@ -81,10 +81,26 @@
       removeFallout(falloutId) {
         const fallout = this.allFallout.find(f => f.id === falloutId);
         if (window.confirm(`Remove ${fallout.name}?`)) {
-          console.log('emitting');
           this.$emit('remove-fallout', this.c, falloutId);
         }
-      }
+      },
+
+      hasFalloutIn(resistance) {
+        if (!this.allFallout) return;
+
+        return this.c.fallout.filter((falloutId) => {
+          const f = this.allFallout.find(af => af.id === falloutId && af.resistance === resistance);
+          return Boolean(f);
+        }).length;
+      },
+
+      stressButtonClasses(resistance) {
+        return {
+          'shadowless': true,
+          'has-icon': true,
+          'bottom-left-rounded': this.hasFalloutIn(resistance),
+        };
+      },
     },
   };
 </script>

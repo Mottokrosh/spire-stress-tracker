@@ -20887,9 +20887,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return f.id === falloutId;
       });
       if (window.confirm('Remove ' + fallout.name + '?')) {
-        console.log('emitting');
         this.$emit('remove-fallout', this.c, falloutId);
       }
+    },
+    hasFalloutIn: function hasFalloutIn(resistance) {
+      var _this = this;
+
+      if (!this.allFallout) return;
+
+      return this.c.fallout.filter(function (falloutId) {
+        var f = _this.allFallout.find(function (af) {
+          return af.id === falloutId && af.resistance === resistance;
+        });
+        return Boolean(f);
+      }).length;
+    },
+    stressButtonClasses: function stressButtonClasses(resistance) {
+      return {
+        'shadowless': true,
+        'has-icon': true,
+        'bottom-left-rounded': this.hasFalloutIn(resistance)
+      };
     }
   }
 });
@@ -20983,7 +21001,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('div', {
       staticClass: "resistance"
     }, [_c('div', [_c('h3', [_vm._v(_vm._s(_vm.ucfirst(r))), (_vm.freeSlots(r)) ? _c('small', [_vm._v(" + " + _vm._s(_vm.freeSlots(r)))]) : _vm._e()]), _vm._v(" "), _c('div', [_c('span', [_vm._v("Stress")]), _vm._v(" "), _c('strong', [_vm._v(_vm._s(_vm.c[r].stress))])]), _vm._v(" "), _c('btn', {
-      staticClass: "shadowless has-icon",
+      class: _vm.stressButtonClasses(r),
       nativeOn: {
         "click": function($event) {
           _vm.addStress(r)
