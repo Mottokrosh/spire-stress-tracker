@@ -8546,7 +8546,7 @@ module.exports = defaults;
 
 "use strict";
 var store = {
-  json: '{}',
+  json: '{"characters":[]}',
   data: {},
 
   load: function load() {

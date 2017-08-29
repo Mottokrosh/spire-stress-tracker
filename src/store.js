@@ -1,5 +1,5 @@
 const store = {
-  json: '{}',
+  json: '{"characters":[]}',
   data: {},
 
   load() {
