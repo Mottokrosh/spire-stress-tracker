@@ -36,6 +36,10 @@
   margin-top: 0;
 }
 
+html {
+  background-color: #ad302a;
+}
+
 body {
   margin: 0;
   padding: 0;
