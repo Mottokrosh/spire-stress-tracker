@@ -99,6 +99,7 @@
     silver: { freeSlots: 0, stress: 0 },
     reputation: { freeSlots: 0, stress: 0 },
     fallout: [],
+    armour: 0,
   };
 
   export default {

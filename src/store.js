@@ -3,7 +3,7 @@ const store = {
   data: {},
 
   load() {
-    const d = localStorage.getItem('estresso') || this.json;
+    const d = localStorage.getItem('spireapp') || this.json;
     this.data = JSON.parse(d);
 
     return this.data;
@@ -11,7 +11,7 @@ const store = {
 
   save() {
     this.json = JSON.stringify(this.data);
-    localStorage.setItem('estresso', this.json);
+    localStorage.setItem('spireapp', this.json);
 
     return this.data;
   },

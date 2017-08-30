@@ -8550,14 +8550,14 @@ var store = {
   data: {},
 
   load: function load() {
-    var d = localStorage.getItem('estresso') || this.json;
+    var d = localStorage.getItem('spireapp') || this.json;
     this.data = JSON.parse(d);
 
     return this.data;
   },
   save: function save() {
     this.json = JSON.stringify(this.data);
-    localStorage.setItem('estresso', this.json);
+    localStorage.setItem('spireapp', this.json);
 
     return this.data;
   },
@@ -19619,7 +19619,8 @@ var characterSchema = {
   shadow: { freeSlots: 0, stress: 0 },
   silver: { freeSlots: 0, stress: 0 },
   reputation: { freeSlots: 0, stress: 0 },
-  fallout: []
+  fallout: [],
+  armour: 0
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
