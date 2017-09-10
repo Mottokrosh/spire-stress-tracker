@@ -157,6 +157,47 @@ h1 small {
   flex-wrap: wrap;
 }
 
+.flex-vertical-center {
+  align-items: center;
+}
+
+.panel {
+  border-radius: 0.25rem;
+  border: 1px solid $primary;
+  overflow: hidden;
+
+  header {
+    background-color: $primary;
+    text-align: left;
+    padding: 0.5rem;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  .body {
+    margin-top: 0;
+    background-color: #fff;
+
+    & > div {
+      margin-top: 0;
+      padding: 0.5rem;
+      border-bottom: 1px solid $primary;
+
+      &:last-of-type {
+        border-bottom: none;
+      }
+
+      & > div {
+        width: 100%;
+      }
+
+      & > div:first-of-type {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
+
 table {
   width: 100%;
   border-spacing: 0;
@@ -165,14 +206,13 @@ table {
   thead {
     th {
       background-color: $primary;
-      text-align: center;
+      text-align: left;
       padding: 0.5rem;
       color: #fff;
       font-weight: bold;
 
       &:first-of-type {
         border-top-left-radius: 0.25rem;
-        text-align: left;
       }
 
       &:last-of-type {
@@ -1335,7 +1375,26 @@ select {
     .d8 .die {
       background-image: url(../images/d8-bright.svg);
     }
+  }
 
+  .editor-resistance {
+    .input-row {
+      .flex-container {
+        justify-content: flex-end;
+
+        & > * {
+          margin-left: 0.25rem;
+        }
+      }
+    }
+  }
+
+  .character-notes {
+    width: 100%;
+  }
+
+  .footer {
+    background-color: transparentize($secondary, 0.8);
   }
 }
 

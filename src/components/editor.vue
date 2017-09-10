@@ -29,6 +29,16 @@
                 >
               </div>
 
+              <div class="input-row">
+                <label for="character-notes">Notes</label>
+                <input type="text"
+                  name="character-notes"
+                  id="character-notes"
+                  class="character-notes"
+                  v-model="char.notes"
+                >
+              </div>
+
               <h3>Stress</h3>
 
               <div class="clear-actions flex-container">
@@ -39,42 +49,241 @@
               </div>
               <div class="clear-key"><span>Act/Refresh</span></div>
 
-              <table>
-                <thead>
-                  <tr>
-                    <th>Resistance</th>
-                    <th>Free Slots</th>
-                    <th>Stress</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Blood</td>
-                    <td><counter-control v-model="char.blood.freeSlots"></counter-control></td>
-                    <td><counter-control v-model="char.blood.stress" :min="-char.blood.freeSlots"></counter-control></td>
-                  </tr>
-                  <tr>
-                    <td>Mind</td>
-                    <td><counter-control v-model="char.mind.freeSlots"></counter-control></td>
-                    <td><counter-control v-model="char.mind.stress" :min="-char.mind.freeSlots"></counter-control></td>
-                  </tr>
-                  <tr>
-                    <td>Shadow</td>
-                    <td><counter-control v-model="char.shadow.freeSlots"></counter-control></td>
-                    <td><counter-control v-model="char.shadow.stress" :min="-char.shadow.freeSlots"></counter-control></td>
-                  </tr>
-                  <tr>
-                    <td>Silver</td>
-                    <td><counter-control v-model="char.silver.freeSlots"></counter-control></td>
-                    <td><counter-control v-model="char.silver.stress" :min="-char.silver.freeSlots"></counter-control></td>
-                  </tr>
-                  <tr>
-                    <td>Reputation</td>
-                    <td><counter-control v-model="char.reputation.freeSlots"></counter-control></td>
-                    <td><counter-control v-model="char.reputation.stress" :min="-char.reputation.freeSlots"></counter-control></td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="panel stress-in-resistance editor-resistance">
+                <header>Blood</header>
+                <div class="body">
+
+                  <div class="input-row">
+                    <div>Free Slots</div>
+                    <div class="flex-container flex-wrap flex-vertical-center">
+                      <btn class="shadowless has-icon secondary" @click.native="removeSlot('blood', 'slot')">
+                        <minus-icon></minus-icon>
+                      </btn>
+                      <circle-icon
+                        v-for="(s, index) in slots('blood', 'slot')" :key="index"
+                        :class="{ slot: true, 'free-slot': true, used: s.used }"
+                      ></circle-icon>
+                      <btn class="shadowless has-icon secondary" @click.native="addSlot('blood', 'slot')">
+                        <plus-icon></plus-icon>
+                      </btn>
+                    </div>
+                  </div>
+
+                  <div class="input-row">
+                    <div>Armour</div>
+                    <div class="flex-container flex-wrap flex-vertical-center">
+                      <btn class="shadowless has-icon secondary" @click.native="removeSlot('blood', 'armour')">
+                        <minus-icon></minus-icon>
+                      </btn>
+                      <shield-icon
+                        v-for="(s, index) in slots('blood', 'armour')" :key="index"
+                        :class="{ slot: true, 'armour-slot': true, used: s.used }"
+                      ></shield-icon>
+                      <btn class="shadowless has-icon secondary" @click.native="addSlot('blood', 'armour')">
+                        <plus-icon></plus-icon>
+                      </btn>
+                    </div>
+                  </div>
+
+                  <div class="input-row">
+                    <div>Stress</div>
+                    <div class="flex-container flex-wrap flex-vertical-center">
+                      <circle-icon
+                        v-for="(s, index) in slots('blood', 'stress')" :key="index"
+                        :class="{ slot: true, 'stress-slot': true, used: s.used }"
+                      ></circle-icon>
+                    </div>
+                  </div>
+
+                  <div class="input-row footer">
+                    <div>Adjust Stress</div>
+                    <div class="flex-container flex-wrap">
+                      <btn class="shadowless has-icon secondary" @click.native="removeStress(char, 'blood')">
+                        <minus-icon></minus-icon>
+                      </btn>
+                      <btn class="shadowless has-icon secondary" @click.native="addStress(char, 'blood')">
+                        <plus-icon></plus-icon>
+                      </btn>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel stress-in-resistance editor-resistance">
+                <header>Mind</header>
+                <div class="body">
+
+                  <div class="input-row">
+                    <div>Free Slots</div>
+                    <div class="flex-container flex-wrap flex-vertical-center">
+                      <btn class="shadowless has-icon secondary" @click.native="removeSlot('mind', 'slot')">
+                        <minus-icon></minus-icon>
+                      </btn>
+                      <circle-icon
+                        v-for="(s, index) in slots('mind', 'slot')" :key="index"
+                        :class="{ slot: true, 'free-slot': true, used: s.used }"
+                      ></circle-icon>
+                      <btn class="shadowless has-icon secondary" @click.native="addSlot('mind', 'slot')">
+                        <plus-icon></plus-icon>
+                      </btn>
+                    </div>
+                  </div>
+
+                  <div class="input-row">
+                    <div>Stress</div>
+                    <div class="flex-container flex-wrap flex-vertical-center">
+                      <circle-icon
+                        v-for="(s, index) in slots('mind', 'stress')" :key="index"
+                        :class="{ slot: true, 'stress-slot': true, used: s.used }"
+                      ></circle-icon>
+                    </div>
+                  </div>
+
+                  <div class="input-row footer">
+                    <div>Adjust Stress</div>
+                    <div class="flex-container flex-wrap">
+                      <btn class="shadowless has-icon secondary" @click.native="removeStress(char, 'mind')">
+                        <minus-icon></minus-icon>
+                      </btn>
+                      <btn class="shadowless has-icon secondary" @click.native="addStress(char, 'mind')">
+                        <plus-icon></plus-icon>
+                      </btn>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel stress-in-resistance editor-resistance">
+                <header>Shadow</header>
+                <div class="body">
+
+                  <div class="input-row">
+                    <div>Free Slots</div>
+                    <div class="flex-container flex-wrap flex-vertical-center">
+                      <btn class="shadowless has-icon secondary" @click.native="removeSlot('shadow', 'slot')">
+                        <minus-icon></minus-icon>
+                      </btn>
+                      <circle-icon
+                        v-for="(s, index) in slots('shadow', 'slot')" :key="index"
+                        :class="{ slot: true, 'free-slot': true, used: s.used }"
+                      ></circle-icon>
+                      <btn class="shadowless has-icon secondary" @click.native="addSlot('shadow', 'slot')">
+                        <plus-icon></plus-icon>
+                      </btn>
+                    </div>
+                  </div>
+
+                  <div class="input-row">
+                    <div>Stress</div>
+                    <div class="flex-container flex-wrap flex-vertical-center">
+                      <circle-icon
+                        v-for="(s, index) in slots('shadow', 'stress')" :key="index"
+                        :class="{ slot: true, 'stress-slot': true, used: s.used }"
+                      ></circle-icon>
+                    </div>
+                  </div>
+
+                  <div class="input-row footer">
+                    <div>Adjust Stress</div>
+                    <div class="flex-container flex-wrap">
+                      <btn class="shadowless has-icon secondary" @click.native="removeStress(char, 'shadow')">
+                        <minus-icon></minus-icon>
+                      </btn>
+                      <btn class="shadowless has-icon secondary" @click.native="addStress(char, 'shadow')">
+                        <plus-icon></plus-icon>
+                      </btn>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel stress-in-resistance editor-resistance">
+                <header>Silver</header>
+                <div class="body">
+
+                  <div class="input-row">
+                    <div>Free Slots</div>
+                    <div class="flex-container flex-wrap flex-vertical-center">
+                      <btn class="shadowless has-icon secondary" @click.native="removeSlot('silver', 'slot')">
+                        <minus-icon></minus-icon>
+                      </btn>
+                      <circle-icon
+                        v-for="(s, index) in slots('silver', 'slot')" :key="index"
+                        :class="{ slot: true, 'free-slot': true, used: s.used }"
+                      ></circle-icon>
+                      <btn class="shadowless has-icon secondary" @click.native="addSlot('silver', 'slot')">
+                        <plus-icon></plus-icon>
+                      </btn>
+                    </div>
+                  </div>
+
+                  <div class="input-row">
+                    <div>Stress</div>
+                    <div class="flex-container flex-wrap flex-vertical-center">
+                      <circle-icon
+                        v-for="(s, index) in slots('silver', 'stress')" :key="index"
+                        :class="{ slot: true, 'stress-slot': true, used: s.used }"
+                      ></circle-icon>
+                    </div>
+                  </div>
+
+                  <div class="input-row footer">
+                    <div>Adjust Stress</div>
+                    <div class="flex-container flex-wrap">
+                      <btn class="shadowless has-icon secondary" @click.native="removeStress(char, 'silver')">
+                        <minus-icon></minus-icon>
+                      </btn>
+                      <btn class="shadowless has-icon secondary" @click.native="addStress(char, 'silver')">
+                        <plus-icon></plus-icon>
+                      </btn>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel stress-in-resistance editor-resistance">
+                <header>Reputation</header>
+                <div class="body">
+
+                  <div class="input-row">
+                    <div>Free Slots</div>
+                    <div class="flex-container flex-wrap flex-vertical-center">
+                      <btn class="shadowless has-icon secondary" @click.native="removeSlot('reputation', 'slot')">
+                        <minus-icon></minus-icon>
+                      </btn>
+                      <circle-icon
+                        v-for="(s, index) in slots('reputation', 'slot')" :key="index"
+                        :class="{ slot: true, 'free-slot': true, used: s.used }"
+                      ></circle-icon>
+                      <btn class="shadowless has-icon secondary" @click.native="addSlot('reputation', 'slot')">
+                        <plus-icon></plus-icon>
+                      </btn>
+                    </div>
+                  </div>
+
+                  <div class="input-row">
+                    <div>Stress</div>
+                    <div class="flex-container flex-wrap flex-vertical-center">
+                      <circle-icon
+                        v-for="(s, index) in slots('reputation', 'stress')" :key="index"
+                        :class="{ slot: true, 'stress-slot': true, used: s.used }"
+                      ></circle-icon>
+                    </div>
+                  </div>
+
+                  <div class="input-row footer">
+                    <div>Adjust Stress</div>
+                    <div class="flex-container flex-wrap">
+                      <btn class="shadowless has-icon secondary" @click.native="removeStress(char, 'reputation')">
+                        <minus-icon></minus-icon>
+                      </btn>
+                      <btn class="shadowless has-icon secondary" @click.native="addStress(char, 'reputation')">
+                        <plus-icon></plus-icon>
+                      </btn>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
               <h3>Fallout</h3>
 
@@ -108,7 +317,7 @@
 
 <script>
   import { Motion } from 'vue-motion';
-  import { ChevronRightIcon, XIcon } from 'vue-feather-icons';
+  import { ChevronRightIcon, CircleIcon, MinusIcon, PlusIcon, ShieldIcon, XIcon } from 'vue-feather-icons';
   import Store from '../store';
   import Helpers from '../helpers.mixin';
   import Btn from './btn.vue';
@@ -127,11 +336,15 @@
     components: {
       Btn,
       ChevronRightIcon,
+      CircleIcon,
       CounterControl,
       Dice,
       FalloutBadge,
       Icon,
+      MinusIcon,
       Motion,
+      PlusIcon,
+      ShieldIcon,
       XIcon,
     },
 
@@ -165,23 +378,11 @@
       },
 
       startingStress() {
-        let total = 0;
-
-        this.resistances.forEach((r) => {
-          total += this.character[r].stress;
-        });
-
-        return total;
+        return this.calculateTotalStress(this.character);
       },
 
       currentStress() {
-        let total = 0;
-
-        this.resistances.forEach((r) => {
-          total += this.char[r].stress;
-        });
-
-        return total;
+        return this.calculateTotalStress(this.char);
       },
 
       remainingToClear() {
@@ -222,16 +423,31 @@
         });
       },
 
-      getRandomIntInclusive(min, max) {
-        const randomBuffer = new Uint32Array(1);
+      slots(resistance, slotType) {
+        if (!this.char) {
+          return [];
+        }
 
-        window.crypto.getRandomValues(randomBuffer);
+        return this.char.stress[resistance].filter(r => r.type === slotType);
+      },
 
-        let randomNumber = randomBuffer[0] / (0xffffffff + 1);
+      removeSlot(resistance, type) {
+        const objs = this.char.stress[resistance].filter(r => r.type === type);
 
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(randomNumber * (max - min + 1)) + min;
+        if (objs.length === 0) {
+          return;
+        }
+
+        const index = this.char.stress[resistance].indexOf(objs[0]);
+        this.char.stress[resistance].splice(index, 1);
+        this.char.slots[resistance]--;
+      },
+
+      addSlot(resistance, type) {
+        const group = this.char.stress[resistance].filter (r => r.type === type);
+        const index = this.char.stress[resistance].indexOf(group[group.length - 1]);
+        this.char.stress[resistance].splice(index + 1, 0, { type: type, used: false });
+        this.char.slots[resistance]++;
       },
     },
 

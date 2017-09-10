@@ -8435,6 +8435,60 @@ var ZoomOutIcon = {
       min = Math.ceil(min);
       max = Math.floor(max);
       return Math.floor(randomNumber * (max - min + 1)) + min;
+    },
+    addStress: function addStress(character, resistance) {
+      var unusedFreeSlots = character.stress[resistance].filter(function (r) {
+        return r.type === 'slot' && r.used === false;
+      });
+
+      var unusedArmour = resistance === 'blood' ? character.stress.blood.filter(function (r) {
+        return r.type === 'armour' && r.used === false;
+      }) : 0;
+
+      if (unusedFreeSlots.length) {
+        unusedFreeSlots[0].used = true;
+      } else if (unusedArmour.length) {
+        unusedArmour[0].used = true;
+      } else {
+        character.stress[resistance].push({ type: 'stress', used: true });
+      }
+    },
+    removeStress: function removeStress(character, resistance) {
+      var stressList = character.stress[resistance];
+
+      var stressSlots = stressList.filter(function (r) {
+        return r.type === 'stress';
+      });
+
+      var usedArmour = resistance === 'blood' ? character.stress.blood.filter(function (r) {
+        return r.type === 'armour' && r.used === true;
+      }) : 0;
+
+      var usedFreeSlots = stressList.filter(function (r) {
+        return r.type === 'slot' && r.used === true;
+      });
+
+      if (stressSlots.length) {
+        stressList.splice(stressList.length - 1, 1);
+      } else if (usedArmour.length) {
+        usedArmour[usedArmour.length - 1].used = false;
+      } else if (usedFreeSlots.length) {
+        usedFreeSlots[usedFreeSlots.length - 1].used = false;
+      }
+    },
+    calculateTotalStress: function calculateTotalStress(character) {
+      if (!character) {
+        return 0;
+      }
+
+      var total = 0;
+      Object.keys(character.stress).forEach(function (resistance) {
+        total += character.stress[resistance].filter(function (r) {
+          return r.type === 'stress';
+        }).length;
+      });
+
+      return total;
     }
   }
 });
@@ -21881,20 +21935,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       return this.options ? this.options.resistance : '';
     },
     totalStress: function totalStress() {
-      var _this = this;
-
-      if (!this.character) {
-        return 0;
-      }
-
-      var total = 0;
-      Object.keys(this.character.stress).forEach(function (resistance) {
-        total += _this.character.stress[resistance].filter(function (r) {
-          return r.type === 'stress';
-        }).length;
-      });
-
-      return total;
+      return this.calculateTotalStress(this.character);
     },
     name: function name() {
       return this.character ? this.character.name : '';
@@ -21956,7 +21997,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.characterCopy = this.options ? this.clone(this.options.character) : null;
     },
     roll: function roll(die) {
-      var _this2 = this;
+      var _this = this;
 
       if (this.result) return;
 
@@ -21968,32 +22009,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       setTimeout(function () {
         var results = [];
 
-        for (var i = 0; i <= _this2[name].brutal; i++) {
-          var r = _this2.getRandomIntInclusive(1, die);
+        for (var i = 0; i <= _this[name].brutal; i++) {
+          var r = _this.getRandomIntInclusive(1, die);
           results.push(r);
         }
 
-        _this2[name].result = Math.max.apply(Math, results);
-        _this2.result = _this2[name].result;
+        _this[name].result = Math.max.apply(Math, results);
+        _this.result = _this[name].result;
 
         // add stress to character
-        var remaining = _this2.result;
+        var remaining = _this.result;
         while (remaining) {
-          var unusedFreeSlots = _this2.character.stress[_this2.resistance].filter(function (r) {
-            return r.type === 'slot' && r.used === false;
-          });
-
-          var unusedArmour = _this2.resistance === 'blood' ? _this2.character.stress.blood.filter(function (r) {
-            return r.type === 'armour' && r.used === false;
-          }) : 0;
-
-          if (unusedFreeSlots.length) {
-            unusedFreeSlots[0].used = true;
-          } else if (unusedArmour.length) {
-            unusedArmour[0].used = true;
-          } else {
-            _this2.character.stress[_this2.resistance].push({ type: 'stress', used: true });
-          }
+          _this.addStress(_this.character, _this.resistance);
 
           remaining--;
         }
@@ -22002,14 +22029,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       setTimeout(this.checkForFallout, 750);
     },
     checkForFallout: function checkForFallout() {
-      var _this3 = this;
+      var _this2 = this;
 
       this.falloutRollResult = this.getRandomIntInclusive(1, 10);
 
       var stressedResistances = [];
 
       Object.keys(this.character.stress).forEach(function (resistance) {
-        if (_this3.character.stress[resistance].filter(function (r) {
+        if (_this2.character.stress[resistance].filter(function (r) {
           return r.type === 'stress';
         }).length) {
           stressedResistances.push(resistance);
@@ -22043,7 +22070,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         // restrict suggestion to this level
         var falloutSuggestions = this.falloutChoices.filter(function (f) {
-          return f.level === _this3.falloutLevel && f.resistance === _this3.resistance;
+          return f.level === _this2.falloutLevel && f.resistance === _this2.resistance;
         });
 
         // pick one
@@ -22096,10 +22123,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   created: function created() {
-    var _this4 = this;
+    var _this3 = this;
 
     this.$watch('character.fallout', function (val) {
-      _this4.newFallout = val || [];
+      _this3.newFallout = val || [];
     });
   },
 
@@ -23519,6 +23546,215 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -23540,11 +23776,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   components: {
     Btn: __WEBPACK_IMPORTED_MODULE_4__btn_vue___default.a,
     ChevronRightIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["b" /* ChevronRightIcon */],
+    CircleIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["c" /* CircleIcon */],
     CounterControl: __WEBPACK_IMPORTED_MODULE_5__counter_control_vue___default.a,
     Dice: __WEBPACK_IMPORTED_MODULE_6__dice_vue___default.a,
     FalloutBadge: __WEBPACK_IMPORTED_MODULE_7__fallout_badge_vue___default.a,
     Icon: __WEBPACK_IMPORTED_MODULE_8__icon_vue___default.a,
+    MinusIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["f" /* MinusIcon */],
     Motion: __WEBPACK_IMPORTED_MODULE_0_vue_motion__["Motion"],
+    PlusIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["g" /* PlusIcon */],
+    ShieldIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["h" /* ShieldIcon */],
     XIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["j" /* XIcon */]
   },
 
@@ -23577,26 +23817,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       return this.characterCopy;
     },
     startingStress: function startingStress() {
-      var _this = this;
-
-      var total = 0;
-
-      this.resistances.forEach(function (r) {
-        total += _this.character[r].stress;
-      });
-
-      return total;
+      return this.calculateTotalStress(this.character);
     },
     currentStress: function currentStress() {
-      var _this2 = this;
-
-      var total = 0;
-
-      this.resistances.forEach(function (r) {
-        total += _this2.char[r].stress;
-      });
-
-      return total;
+      return this.calculateTotalStress(this.char);
     },
     remainingToClear: function remainingToClear() {
       var cleared = this.startingStress - this.currentStress;
@@ -23627,22 +23851,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     layLow: function layLow() {
-      var _this3 = this;
+      var _this = this;
 
       this.resistances.forEach(function (r) {
-        _this3.char[r].stress = -_this3.char[r].freeSlots || 0;
+        _this.char[r].stress = -_this.char[r].freeSlots || 0;
       });
     },
-    getRandomIntInclusive: function getRandomIntInclusive(min, max) {
-      var randomBuffer = new Uint32Array(1);
+    slots: function slots(resistance, slotType) {
+      if (!this.char) {
+        return [];
+      }
 
-      window.crypto.getRandomValues(randomBuffer);
+      return this.char.stress[resistance].filter(function (r) {
+        return r.type === slotType;
+      });
+    },
+    removeSlot: function removeSlot(resistance, type) {
+      var objs = this.char.stress[resistance].filter(function (r) {
+        return r.type === type;
+      });
 
-      var randomNumber = randomBuffer[0] / (0xffffffff + 1);
+      if (objs.length === 0) {
+        return;
+      }
 
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(randomNumber * (max - min + 1)) + min;
+      var index = this.char.stress[resistance].indexOf(objs[0]);
+      this.char.stress[resistance].splice(index, 1);
+      this.char.slots[resistance]--;
+    },
+    addSlot: function addSlot(resistance, type) {
+      var group = this.char.stress[resistance].filter(function (r) {
+        return r.type === type;
+      });
+      var index = this.char.stress[resistance].indexOf(group[group.length - 1]);
+      this.char.stress[resistance].splice(index + 1, 0, { type: type, used: false });
+      this.char.slots[resistance]++;
     }
   },
 
@@ -23893,6 +24136,34 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.char.name = $event.target.value
             }
           }
+        })]), _vm._v(" "), _c('div', {
+          staticClass: "input-row"
+        }, [_c('label', {
+          attrs: {
+            "for": "character-notes"
+          }
+        }, [_vm._v("Notes")]), _vm._v(" "), _c('input', {
+          directives: [{
+            name: "model",
+            rawName: "v-model",
+            value: (_vm.char.notes),
+            expression: "char.notes"
+          }],
+          staticClass: "character-notes",
+          attrs: {
+            "type": "text",
+            "name": "character-notes",
+            "id": "character-notes"
+          },
+          domProps: {
+            "value": (_vm.char.notes)
+          },
+          on: {
+            "input": function($event) {
+              if ($event.target.composing) { return; }
+              _vm.char.notes = $event.target.value
+            }
+          }
         })]), _vm._v(" "), _c('h3', [_vm._v("Stress")]), _vm._v(" "), _c('div', {
           staticClass: "clear-actions flex-container"
         }, [_c('btn', {
@@ -23918,102 +24189,322 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           }
         })], 1), _vm._v(" "), _c('div', {
           staticClass: "clear-key"
-        }, [_c('span', [_vm._v("Act/Refresh")])]), _vm._v(" "), _c('table', [_c('thead', [_c('tr', [_c('th', [_vm._v("Resistance")]), _vm._v(" "), _c('th', [_vm._v("Free Slots")]), _vm._v(" "), _c('th', [_vm._v("Stress")])])]), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', [_vm._v("Blood")]), _vm._v(" "), _c('td', [_c('counter-control', {
-          model: {
-            value: (_vm.char.blood.freeSlots),
-            callback: function($$v) {
-              _vm.char.blood.freeSlots = $$v
-            },
-            expression: "char.blood.freeSlots"
+        }, [_c('span', [_vm._v("Act/Refresh")])]), _vm._v(" "), _c('div', {
+          staticClass: "panel stress-in-resistance editor-resistance"
+        }, [_c('header', [_vm._v("Blood")]), _vm._v(" "), _c('div', {
+          staticClass: "body"
+        }, [_c('div', {
+          staticClass: "input-row"
+        }, [_c('div', [_vm._v("Free Slots")]), _vm._v(" "), _c('div', {
+          staticClass: "flex-container flex-wrap flex-vertical-center"
+        }, [_c('btn', {
+          staticClass: "shadowless has-icon secondary",
+          nativeOn: {
+            "click": function($event) {
+              _vm.removeSlot('blood', 'slot')
+            }
           }
-        })], 1), _vm._v(" "), _c('td', [_c('counter-control', {
-          attrs: {
-            "min": -_vm.char.blood.freeSlots
-          },
-          model: {
-            value: (_vm.char.blood.stress),
-            callback: function($$v) {
-              _vm.char.blood.stress = $$v
-            },
-            expression: "char.blood.stress"
+        }, [_c('minus-icon')], 1), _vm._v(" "), _vm._l((_vm.slots('blood', 'slot')), function(s, index) {
+          return _c('circle-icon', {
+            key: index,
+            class: {
+              slot: true, 'free-slot': true, used: s.used
+            }
+          })
+        }), _vm._v(" "), _c('btn', {
+          staticClass: "shadowless has-icon secondary",
+          nativeOn: {
+            "click": function($event) {
+              _vm.addSlot('blood', 'slot')
+            }
           }
-        })], 1)]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("Mind")]), _vm._v(" "), _c('td', [_c('counter-control', {
-          model: {
-            value: (_vm.char.mind.freeSlots),
-            callback: function($$v) {
-              _vm.char.mind.freeSlots = $$v
-            },
-            expression: "char.mind.freeSlots"
+        }, [_c('plus-icon')], 1)], 2)]), _vm._v(" "), _c('div', {
+          staticClass: "input-row"
+        }, [_c('div', [_vm._v("Armour")]), _vm._v(" "), _c('div', {
+          staticClass: "flex-container flex-wrap flex-vertical-center"
+        }, [_c('btn', {
+          staticClass: "shadowless has-icon secondary",
+          nativeOn: {
+            "click": function($event) {
+              _vm.removeSlot('blood', 'armour')
+            }
           }
-        })], 1), _vm._v(" "), _c('td', [_c('counter-control', {
-          attrs: {
-            "min": -_vm.char.mind.freeSlots
-          },
-          model: {
-            value: (_vm.char.mind.stress),
-            callback: function($$v) {
-              _vm.char.mind.stress = $$v
-            },
-            expression: "char.mind.stress"
+        }, [_c('minus-icon')], 1), _vm._v(" "), _vm._l((_vm.slots('blood', 'armour')), function(s, index) {
+          return _c('shield-icon', {
+            key: index,
+            class: {
+              slot: true, 'armour-slot': true, used: s.used
+            }
+          })
+        }), _vm._v(" "), _c('btn', {
+          staticClass: "shadowless has-icon secondary",
+          nativeOn: {
+            "click": function($event) {
+              _vm.addSlot('blood', 'armour')
+            }
           }
-        })], 1)]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("Shadow")]), _vm._v(" "), _c('td', [_c('counter-control', {
-          model: {
-            value: (_vm.char.shadow.freeSlots),
-            callback: function($$v) {
-              _vm.char.shadow.freeSlots = $$v
-            },
-            expression: "char.shadow.freeSlots"
+        }, [_c('plus-icon')], 1)], 2)]), _vm._v(" "), _c('div', {
+          staticClass: "input-row"
+        }, [_c('div', [_vm._v("Stress")]), _vm._v(" "), _c('div', {
+          staticClass: "flex-container flex-wrap flex-vertical-center"
+        }, _vm._l((_vm.slots('blood', 'stress')), function(s, index) {
+          return _c('circle-icon', {
+            key: index,
+            class: {
+              slot: true, 'stress-slot': true, used: s.used
+            }
+          })
+        }))]), _vm._v(" "), _c('div', {
+          staticClass: "input-row footer"
+        }, [_c('div', [_vm._v("Adjust Stress")]), _vm._v(" "), _c('div', {
+          staticClass: "flex-container flex-wrap"
+        }, [_c('btn', {
+          staticClass: "shadowless has-icon secondary",
+          nativeOn: {
+            "click": function($event) {
+              _vm.removeStress(_vm.char, 'blood')
+            }
           }
-        })], 1), _vm._v(" "), _c('td', [_c('counter-control', {
-          attrs: {
-            "min": -_vm.char.shadow.freeSlots
-          },
-          model: {
-            value: (_vm.char.shadow.stress),
-            callback: function($$v) {
-              _vm.char.shadow.stress = $$v
-            },
-            expression: "char.shadow.stress"
+        }, [_c('minus-icon')], 1), _vm._v(" "), _c('btn', {
+          staticClass: "shadowless has-icon secondary",
+          nativeOn: {
+            "click": function($event) {
+              _vm.addStress(_vm.char, 'blood')
+            }
           }
-        })], 1)]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("Silver")]), _vm._v(" "), _c('td', [_c('counter-control', {
-          model: {
-            value: (_vm.char.silver.freeSlots),
-            callback: function($$v) {
-              _vm.char.silver.freeSlots = $$v
-            },
-            expression: "char.silver.freeSlots"
+        }, [_c('plus-icon')], 1)], 1)])])]), _vm._v(" "), _c('div', {
+          staticClass: "panel stress-in-resistance editor-resistance"
+        }, [_c('header', [_vm._v("Mind")]), _vm._v(" "), _c('div', {
+          staticClass: "body"
+        }, [_c('div', {
+          staticClass: "input-row"
+        }, [_c('div', [_vm._v("Free Slots")]), _vm._v(" "), _c('div', {
+          staticClass: "flex-container flex-wrap flex-vertical-center"
+        }, [_c('btn', {
+          staticClass: "shadowless has-icon secondary",
+          nativeOn: {
+            "click": function($event) {
+              _vm.removeSlot('mind', 'slot')
+            }
           }
-        })], 1), _vm._v(" "), _c('td', [_c('counter-control', {
-          attrs: {
-            "min": -_vm.char.silver.freeSlots
-          },
-          model: {
-            value: (_vm.char.silver.stress),
-            callback: function($$v) {
-              _vm.char.silver.stress = $$v
-            },
-            expression: "char.silver.stress"
+        }, [_c('minus-icon')], 1), _vm._v(" "), _vm._l((_vm.slots('mind', 'slot')), function(s, index) {
+          return _c('circle-icon', {
+            key: index,
+            class: {
+              slot: true, 'free-slot': true, used: s.used
+            }
+          })
+        }), _vm._v(" "), _c('btn', {
+          staticClass: "shadowless has-icon secondary",
+          nativeOn: {
+            "click": function($event) {
+              _vm.addSlot('mind', 'slot')
+            }
           }
-        })], 1)]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("Reputation")]), _vm._v(" "), _c('td', [_c('counter-control', {
-          model: {
-            value: (_vm.char.reputation.freeSlots),
-            callback: function($$v) {
-              _vm.char.reputation.freeSlots = $$v
-            },
-            expression: "char.reputation.freeSlots"
+        }, [_c('plus-icon')], 1)], 2)]), _vm._v(" "), _c('div', {
+          staticClass: "input-row"
+        }, [_c('div', [_vm._v("Stress")]), _vm._v(" "), _c('div', {
+          staticClass: "flex-container flex-wrap flex-vertical-center"
+        }, _vm._l((_vm.slots('mind', 'stress')), function(s, index) {
+          return _c('circle-icon', {
+            key: index,
+            class: {
+              slot: true, 'stress-slot': true, used: s.used
+            }
+          })
+        }))]), _vm._v(" "), _c('div', {
+          staticClass: "input-row footer"
+        }, [_c('div', [_vm._v("Adjust Stress")]), _vm._v(" "), _c('div', {
+          staticClass: "flex-container flex-wrap"
+        }, [_c('btn', {
+          staticClass: "shadowless has-icon secondary",
+          nativeOn: {
+            "click": function($event) {
+              _vm.removeStress(_vm.char, 'mind')
+            }
           }
-        })], 1), _vm._v(" "), _c('td', [_c('counter-control', {
-          attrs: {
-            "min": -_vm.char.reputation.freeSlots
-          },
-          model: {
-            value: (_vm.char.reputation.stress),
-            callback: function($$v) {
-              _vm.char.reputation.stress = $$v
-            },
-            expression: "char.reputation.stress"
+        }, [_c('minus-icon')], 1), _vm._v(" "), _c('btn', {
+          staticClass: "shadowless has-icon secondary",
+          nativeOn: {
+            "click": function($event) {
+              _vm.addStress(_vm.char, 'mind')
+            }
           }
-        })], 1)])])]), _vm._v(" "), _c('h3', [_vm._v("Fallout")]), _vm._v(" "), (_vm.char.fallout.length) ? _c('div', {
+        }, [_c('plus-icon')], 1)], 1)])])]), _vm._v(" "), _c('div', {
+          staticClass: "panel stress-in-resistance editor-resistance"
+        }, [_c('header', [_vm._v("Shadow")]), _vm._v(" "), _c('div', {
+          staticClass: "body"
+        }, [_c('div', {
+          staticClass: "input-row"
+        }, [_c('div', [_vm._v("Free Slots")]), _vm._v(" "), _c('div', {
+          staticClass: "flex-container flex-wrap flex-vertical-center"
+        }, [_c('btn', {
+          staticClass: "shadowless has-icon secondary",
+          nativeOn: {
+            "click": function($event) {
+              _vm.removeSlot('shadow', 'slot')
+            }
+          }
+        }, [_c('minus-icon')], 1), _vm._v(" "), _vm._l((_vm.slots('shadow', 'slot')), function(s, index) {
+          return _c('circle-icon', {
+            key: index,
+            class: {
+              slot: true, 'free-slot': true, used: s.used
+            }
+          })
+        }), _vm._v(" "), _c('btn', {
+          staticClass: "shadowless has-icon secondary",
+          nativeOn: {
+            "click": function($event) {
+              _vm.addSlot('shadow', 'slot')
+            }
+          }
+        }, [_c('plus-icon')], 1)], 2)]), _vm._v(" "), _c('div', {
+          staticClass: "input-row"
+        }, [_c('div', [_vm._v("Stress")]), _vm._v(" "), _c('div', {
+          staticClass: "flex-container flex-wrap flex-vertical-center"
+        }, _vm._l((_vm.slots('shadow', 'stress')), function(s, index) {
+          return _c('circle-icon', {
+            key: index,
+            class: {
+              slot: true, 'stress-slot': true, used: s.used
+            }
+          })
+        }))]), _vm._v(" "), _c('div', {
+          staticClass: "input-row footer"
+        }, [_c('div', [_vm._v("Adjust Stress")]), _vm._v(" "), _c('div', {
+          staticClass: "flex-container flex-wrap"
+        }, [_c('btn', {
+          staticClass: "shadowless has-icon secondary",
+          nativeOn: {
+            "click": function($event) {
+              _vm.removeStress(_vm.char, 'shadow')
+            }
+          }
+        }, [_c('minus-icon')], 1), _vm._v(" "), _c('btn', {
+          staticClass: "shadowless has-icon secondary",
+          nativeOn: {
+            "click": function($event) {
+              _vm.addStress(_vm.char, 'shadow')
+            }
+          }
+        }, [_c('plus-icon')], 1)], 1)])])]), _vm._v(" "), _c('div', {
+          staticClass: "panel stress-in-resistance editor-resistance"
+        }, [_c('header', [_vm._v("Silver")]), _vm._v(" "), _c('div', {
+          staticClass: "body"
+        }, [_c('div', {
+          staticClass: "input-row"
+        }, [_c('div', [_vm._v("Free Slots")]), _vm._v(" "), _c('div', {
+          staticClass: "flex-container flex-wrap flex-vertical-center"
+        }, [_c('btn', {
+          staticClass: "shadowless has-icon secondary",
+          nativeOn: {
+            "click": function($event) {
+              _vm.removeSlot('silver', 'slot')
+            }
+          }
+        }, [_c('minus-icon')], 1), _vm._v(" "), _vm._l((_vm.slots('silver', 'slot')), function(s, index) {
+          return _c('circle-icon', {
+            key: index,
+            class: {
+              slot: true, 'free-slot': true, used: s.used
+            }
+          })
+        }), _vm._v(" "), _c('btn', {
+          staticClass: "shadowless has-icon secondary",
+          nativeOn: {
+            "click": function($event) {
+              _vm.addSlot('silver', 'slot')
+            }
+          }
+        }, [_c('plus-icon')], 1)], 2)]), _vm._v(" "), _c('div', {
+          staticClass: "input-row"
+        }, [_c('div', [_vm._v("Stress")]), _vm._v(" "), _c('div', {
+          staticClass: "flex-container flex-wrap flex-vertical-center"
+        }, _vm._l((_vm.slots('silver', 'stress')), function(s, index) {
+          return _c('circle-icon', {
+            key: index,
+            class: {
+              slot: true, 'stress-slot': true, used: s.used
+            }
+          })
+        }))]), _vm._v(" "), _c('div', {
+          staticClass: "input-row footer"
+        }, [_c('div', [_vm._v("Adjust Stress")]), _vm._v(" "), _c('div', {
+          staticClass: "flex-container flex-wrap"
+        }, [_c('btn', {
+          staticClass: "shadowless has-icon secondary",
+          nativeOn: {
+            "click": function($event) {
+              _vm.removeStress(_vm.char, 'silver')
+            }
+          }
+        }, [_c('minus-icon')], 1), _vm._v(" "), _c('btn', {
+          staticClass: "shadowless has-icon secondary",
+          nativeOn: {
+            "click": function($event) {
+              _vm.addStress(_vm.char, 'silver')
+            }
+          }
+        }, [_c('plus-icon')], 1)], 1)])])]), _vm._v(" "), _c('div', {
+          staticClass: "panel stress-in-resistance editor-resistance"
+        }, [_c('header', [_vm._v("Reputation")]), _vm._v(" "), _c('div', {
+          staticClass: "body"
+        }, [_c('div', {
+          staticClass: "input-row"
+        }, [_c('div', [_vm._v("Free Slots")]), _vm._v(" "), _c('div', {
+          staticClass: "flex-container flex-wrap flex-vertical-center"
+        }, [_c('btn', {
+          staticClass: "shadowless has-icon secondary",
+          nativeOn: {
+            "click": function($event) {
+              _vm.removeSlot('reputation', 'slot')
+            }
+          }
+        }, [_c('minus-icon')], 1), _vm._v(" "), _vm._l((_vm.slots('reputation', 'slot')), function(s, index) {
+          return _c('circle-icon', {
+            key: index,
+            class: {
+              slot: true, 'free-slot': true, used: s.used
+            }
+          })
+        }), _vm._v(" "), _c('btn', {
+          staticClass: "shadowless has-icon secondary",
+          nativeOn: {
+            "click": function($event) {
+              _vm.addSlot('reputation', 'slot')
+            }
+          }
+        }, [_c('plus-icon')], 1)], 2)]), _vm._v(" "), _c('div', {
+          staticClass: "input-row"
+        }, [_c('div', [_vm._v("Stress")]), _vm._v(" "), _c('div', {
+          staticClass: "flex-container flex-wrap flex-vertical-center"
+        }, _vm._l((_vm.slots('reputation', 'stress')), function(s, index) {
+          return _c('circle-icon', {
+            key: index,
+            class: {
+              slot: true, 'stress-slot': true, used: s.used
+            }
+          })
+        }))]), _vm._v(" "), _c('div', {
+          staticClass: "input-row footer"
+        }, [_c('div', [_vm._v("Adjust Stress")]), _vm._v(" "), _c('div', {
+          staticClass: "flex-container flex-wrap"
+        }, [_c('btn', {
+          staticClass: "shadowless has-icon secondary",
+          nativeOn: {
+            "click": function($event) {
+              _vm.removeStress(_vm.char, 'reputation')
+            }
+          }
+        }, [_c('minus-icon')], 1), _vm._v(" "), _c('btn', {
+          staticClass: "shadowless has-icon secondary",
+          nativeOn: {
+            "click": function($event) {
+              _vm.addStress(_vm.char, 'reputation')
+            }
+          }
+        }, [_c('plus-icon')], 1)], 1)])])]), _vm._v(" "), _c('h3', [_vm._v("Fallout")]), _vm._v(" "), (_vm.char.fallout.length) ? _c('div', {
           staticClass: "fallout"
         }, _vm._l((_vm.char.fallout), function(falloutId) {
           return _c('fallout-badge', {

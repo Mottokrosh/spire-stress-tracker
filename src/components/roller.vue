@@ -161,16 +161,7 @@
       },
 
       totalStress() {
-        if (!this.character) {
-          return 0;
-        }
-
-        let total = 0;
-        Object.keys(this.character.stress).forEach((resistance) => {
-          total += this.character.stress[resistance].filter(r => r.type === 'stress').length;
-        });
-
-        return total;
+        return this.calculateTotalStress(this.character);
       },
 
       name() {
@@ -261,20 +252,7 @@
           // add stress to character
           let remaining = this.result;
           while (remaining) {
-            let unusedFreeSlots = this.character.stress[this.resistance]
-              .filter(r => r.type === 'slot' && r.used === false);
-
-            let unusedArmour = this.resistance === 'blood'
-              ? this.character.stress.blood.filter(r => r.type === 'armour' && r.used === false)
-              : 0;
-
-            if (unusedFreeSlots.length) {
-              unusedFreeSlots[0].used = true;
-            } else if (unusedArmour.length) {
-              unusedArmour[0].used = true;
-            } else {
-              this.character.stress[this.resistance].push({ type: 'stress', used: true });
-            }
+            this.addStress(this.character, this.resistance);
 
             remaining--;
           }

@@ -133,6 +133,47 @@ h1 small {
   flex-wrap: wrap;
 }
 
+.flex-vertical-center {
+  align-items: center;
+}
+
+.panel {
+  border-radius: 0.25rem;
+  border: 1px solid #214050;
+  overflow: hidden;
+}
+
+.panel header {
+  background-color: #214050;
+  text-align: left;
+  padding: 0.5rem;
+  color: #fff;
+  font-weight: bold;
+}
+
+.panel .body {
+  margin-top: 0;
+  background-color: #fff;
+}
+
+.panel .body > div {
+  margin-top: 0;
+  padding: 0.5rem;
+  border-bottom: 1px solid #214050;
+}
+
+.panel .body > div:last-of-type {
+  border-bottom: none;
+}
+
+.panel .body > div > div {
+  width: 100%;
+}
+
+.panel .body > div > div:first-of-type {
+  margin-right: 0.5rem;
+}
+
 table {
   width: 100%;
   border-spacing: 0;
@@ -141,7 +182,7 @@ table {
 
 table thead th {
   background-color: #214050;
-  text-align: center;
+  text-align: left;
   padding: 0.5rem;
   color: #fff;
   font-weight: bold;
@@ -149,7 +190,6 @@ table thead th {
 
 table thead th:first-of-type {
   border-top-left-radius: 0.25rem;
-  text-align: left;
 }
 
 table thead th:last-of-type {
@@ -1339,6 +1379,22 @@ select.small {
 
 .editor .clear-actions .d8 .die {
   background-image: url(../images/d8-bright.svg);
+}
+
+.editor .editor-resistance .input-row .flex-container {
+  justify-content: flex-end;
+}
+
+.editor .editor-resistance .input-row .flex-container > * {
+  margin-left: 0.25rem;
+}
+
+.editor .character-notes {
+  width: 100%;
+}
+
+.editor .footer {
+  background-color: rgba(143, 165, 176, 0.2);
 }
 
 .clear-key {
