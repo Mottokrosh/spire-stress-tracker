@@ -934,11 +934,29 @@ select {
 
     h2 {
       flex: 1;
+      transform: translateY(2px);
+    }
+
+    .total-stress {
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Mahalo, sans-serif;
+      background-color: $red;
+      color: #fff;
+      min-width: 1.5rem;
+      min-height: 1.5rem;
+      margin-right: 0.5rem;
+
+      span {
+        transform: translateY(2px);
+      }
     }
   }
 
   .notes {
-    margin-top: 0.25rem;
+    margin-top: 0.5rem;
     font-size: 1.2rem;
   }
 

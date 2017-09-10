@@ -21077,10 +21077,11 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__fallout_badge_vue__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__fallout_badge_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__fallout_badge_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__stress_vue__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__stress_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__stress_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_mixin__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__fallout_badge_vue__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__fallout_badge_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__fallout_badge_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__stress_vue__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__stress_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__stress_vue__);
 //
 //
 //
@@ -21115,6 +21116,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+
 
 
 
@@ -21129,11 +21132,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   components: {
     Edit2Icon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["d" /* Edit2Icon */],
-    FalloutBadge: __WEBPACK_IMPORTED_MODULE_2__fallout_badge_vue___default.a,
+    FalloutBadge: __WEBPACK_IMPORTED_MODULE_3__fallout_badge_vue___default.a,
     PlusIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["g" /* PlusIcon */],
-    Stress: __WEBPACK_IMPORTED_MODULE_3__stress_vue___default.a,
+    Stress: __WEBPACK_IMPORTED_MODULE_4__stress_vue___default.a,
     XIcon: __WEBPACK_IMPORTED_MODULE_0_vue_feather_icons__["j" /* XIcon */]
   },
+
+  mixins: [__WEBPACK_IMPORTED_MODULE_2__helpers_mixin__["a" /* default */]],
 
   data: function data() {
     return {
@@ -21141,6 +21146,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
 
+
+  computed: {
+    totalStress: function totalStress() {
+      return this.calculateTotalStress(this.c);
+    }
+  },
 
   methods: {
     ucfirst: function ucfirst(string) {
@@ -21472,7 +21483,12 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "character"
-  }, [_c('header', [_c('h2', [_vm._v(_vm._s(_vm.c.name))]), _vm._v(" "), _c('btn', {
+  }, [_c('header', [_c('h2', [_vm._v(_vm._s(_vm.c.name))]), _vm._v(" "), (_vm.totalStress > 0) ? _c('div', {
+    staticClass: "total-stress",
+    attrs: {
+      "aria-label": "Total stress"
+    }
+  }, [_c('span', [_vm._v(_vm._s(_vm.totalStress))])]) : _vm._e(), _vm._v(" "), _c('btn', {
     staticClass: "backgroundless has-icon",
     attrs: {
       "aria-label": "Edit"

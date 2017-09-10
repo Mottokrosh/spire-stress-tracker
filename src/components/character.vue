@@ -3,6 +3,7 @@
 
     <header>
       <h2>{{ c.name }}</h2>
+      <div class="total-stress" v-if="totalStress > 0" aria-label="Total stress"><span>{{ totalStress }}</span></div>
       <btn class="backgroundless has-icon" aria-label="Edit" @click.native="editCharacter"><edit-2-icon></edit-2-icon></btn>
       <btn class="backgroundless has-icon" aria-label="Delete" @click.native="deleteCharacter"><x-icon></x-icon></btn>
     </header>
@@ -35,6 +36,7 @@
 <script>
   import { Edit2Icon, PlusIcon, XIcon } from 'vue-feather-icons';
   import Store from '../store';
+  import Helpers from '../helpers.mixin';
   import FalloutBadge from './fallout-badge.vue';
   import Stress from './stress.vue';
 
@@ -52,10 +54,18 @@
       XIcon,
     },
 
+    mixins: [Helpers],
+
     data() {
       return {
         resistances: Store.resistances,
       };
+    },
+
+    computed: {
+      totalStress() {
+        return this.calculateTotalStress(this.c);
+      },
     },
 
     methods: {
