@@ -19840,7 +19840,7 @@ var stressSchema = {
       rollerOptions: null,
       characterToEdit: null,
       stressToClear: null,
-      newCharacter: Object.assign({}, characterSchema),
+      newCharacter: this.clone(characterSchema),
       names: null,
       allFallout: null
     };
