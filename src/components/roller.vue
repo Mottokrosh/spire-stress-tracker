@@ -138,7 +138,6 @@
         falloutLevel: null,
         falloutChoices: null,
         rolling: null,
-        totalStress: 0,
         newFallout: [],
         characterCopy: null,
       };
@@ -161,12 +160,17 @@
         return this.options ? this.options.resistance : '';
       },
 
-      stress() {
-        return this.character && this.character[this.resistance] ? this.character[this.resistance].stress : 0;
-      },
+      totalStress() {
+        if (!this.character) {
+          return 0;
+        }
 
-      freeSlots() {
-        return this.character && this.character[this.resistance] ? this.character[this.resistance].freeSlots : 0;
+        let total = 0;
+        Object.keys(this.character.stress).forEach((resistance) => {
+          total += this.character.stress[resistance].filter(r => r.type === 'stress').length;
+        });
+
+        return total;
       },
 
       name() {
@@ -231,7 +235,6 @@
         this.falloutChoices = null;
         this.falloutOffset = 100;
         this.rolling = false;
-        this.totalStress = 0;
         this.newFallout = this.character.fallout || [];
         this.characterCopy = this.options ? this.clone(this.options.character) : null;
       },
@@ -254,6 +257,27 @@
 
           this[name].result = Math.max.apply(Math, results);
           this.result = this[name].result;
+
+          // add stress to character
+          let remaining = this.result;
+          while (remaining) {
+            let unusedFreeSlots = this.character.stress[this.resistance]
+              .filter(r => r.type === 'slot' && r.used === false);
+
+            let unusedArmour = this.resistance === 'blood'
+              ? this.character.stress.blood.filter(r => r.type === 'armour' && r.used === false)
+              : 0;
+
+            if (unusedFreeSlots.length) {
+              unusedFreeSlots[0].used = true;
+            } else if (unusedArmour.length) {
+              unusedArmour[0].used = true;
+            } else {
+              this.character.stress[this.resistance].push({ type: 'stress', used: true });
+            }
+
+            remaining--;
+          }
         }, 375);
 
         setTimeout(this.checkForFallout, 750);
@@ -264,12 +288,9 @@
 
         let stressedResistances = [];
 
-        this.character[this.resistance].stress += this.result;
-
-        this.resistances.forEach((res) => {
-          if (this.character[res].stress > 0) {
-            this.totalStress += this.character[res].stress;
-            stressedResistances.push(res);
+        Object.keys(this.character.stress).forEach((resistance) => {
+          if (this.character.stress[resistance].filter(r => r.type === 'stress').length) {
+            stressedResistances.push(resistance);
           }
         });
 
@@ -357,7 +378,7 @@
         this.$emit('update', {
           character: this.options.character,
           resistance: this.resistance,
-          stress: this.stress,
+          stress: this.character.stress,
           fallout: this.newFallout,
           clear: stressToClear,
         });

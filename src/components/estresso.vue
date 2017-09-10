@@ -49,27 +49,44 @@
             :placeholder="'e.g. ' + randomName()">
         </div>
 
+        <div class="input-row">
+          <label for="new-character-notes">Notes</label>
+          <input type="text"
+            name="new-character-notes"
+            id="new-character-notes"
+            class="new-character-notes"
+            v-model="newCharacter.notes"
+            placeholder="e.g. class, mannerisms">
+        </div>
+
         <h3>Free Slots</h3>
 
         <div class="input-row">
           <label for="resistance-blood">Blood</label>
-          <counter-control id="resistance-blood" v-model="newCharacter.blood.freeSlots"></counter-control>
+          <counter-control id="resistance-blood" v-model="newCharacter.slots.blood"></counter-control>
         </div>
         <div class="input-row">
           <label for="resistance-mind">Mind</label>
-          <counter-control id="resistance-mind" v-model="newCharacter.mind.freeSlots"></counter-control>
+          <counter-control id="resistance-mind" v-model="newCharacter.slots.mind"></counter-control>
         </div>
         <div class="input-row">
           <label for="resistance-shadow">Shadow</label>
-          <counter-control id="resistance-shadow" v-model="newCharacter.shadow.freeSlots"></counter-control>
+          <counter-control id="resistance-shadow" v-model="newCharacter.slots.shadow"></counter-control>
         </div>
         <div class="input-row">
           <label for="resistance-silver">Silver</label>
-          <counter-control id="resistance-silver" v-model="newCharacter.silver.freeSlots"></counter-control>
+          <counter-control id="resistance-silver" v-model="newCharacter.slots.silver"></counter-control>
         </div>
         <div class="input-row">
           <label for="resistance-reputation">Reputation</label>
-          <counter-control id="resistance-reputation" v-model="newCharacter.reputation.freeSlots"></counter-control>
+          <counter-control id="resistance-reputation" v-model="newCharacter.slots.reputation"></counter-control>
+        </div>
+
+        <h3>Armour</h3>
+
+        <div class="input-row">
+          <label for="resistance-armour">Armour</label>
+          <counter-control id="resistance-armour" v-model="newCharacter.armour"></counter-control>
         </div>
 
         <div class="input-row action-row">
@@ -93,13 +110,28 @@
 
   const characterSchema = {
     name: '',
-    blood: { freeSlots: 0, stress: 0 },
-    mind: { freeSlots: 0, stress: 0 },
-    shadow: { freeSlots: 0, stress: 0 },
-    silver: { freeSlots: 0, stress: 0 },
-    reputation: { freeSlots: 0, stress: 0 },
-    fallout: [],
+    notes: '',
+    stress: {
+      blood: [],
+      mind: [],
+      shadow: [],
+      silver: [],
+      reputation: [],
+    },
+    slots: {
+      blood: 0,
+      mind: 0,
+      shadow: 0,
+      silver: 0,
+      reputation: 0,
+    },
     armour: 0,
+    fallout: [],
+  };
+
+  const stressSchema = {
+    type: 'slot', // slot|armour|stress
+    used: false,
   };
 
   export default {
@@ -130,14 +162,25 @@
     methods: {
       addCharacter() {
         const char = this.clone(this.newCharacter);
-        this.resistances.forEach((res) => {
-          if (char[res].freeSlots) {
-            char[res].stress -= char[res].freeSlots;
+
+        // for each free slot in a resistance, add a stress object
+        Object.keys(char.slots).forEach((resistance) => {
+          for (let i = 0; i < char.slots[resistance]; i++) {
+            let stressObj = this.clone(stressSchema);
+            char.stress[resistance].push(stressObj);
           }
         });
-        this.newCharacter = Object.assign({}, characterSchema);
+
+        // for each armout value, add an armour stress object to blood
+        for (let i = 0; i < char.armour; i++) {
+          let stressObj = this.clone(stressSchema);
+          stressObj.type = 'armour';
+          char.stress.blood.push(stressObj);
+        }
+
         this.characters.push(char);
         this.store.save();
+        this.newCharacter = this.clone(characterSchema);
       },
 
       deleteCharacter(character) {
@@ -147,7 +190,7 @@
 
       updateCharacter(result) {
         const c = this.characters[this.characters.indexOf(result.character)];
-        c[result.resistance].stress = result.stress;
+        c.stress = result.stress;
         c.fallout = result.fallout;
         this.store.save();
 
@@ -177,7 +220,6 @@
       },
 
       addStress(options) {
-        const {character, resistance} = options;
         this.rollerOptions = options;
       },
 

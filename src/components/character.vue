@@ -7,21 +7,22 @@
       <btn class="backgroundless has-icon" aria-label="Delete" @click.native="deleteCharacter"><x-icon></x-icon></btn>
     </header>
 
+    <p v-if="c.notes" class="notes">{{ c.notes }}</p>
+
     <div class="resistances">
-      <div class="resistance" v-for="r in resistances">
+      <div class="resistance" v-for="(stressList, resistance) in c.stress">
         <div>
-          <h3>{{ ucfirst(r) }}<small v-if="freeSlots(r)"> + {{ freeSlots(r) }}</small></h3>
+          <h3>{{ ucfirst(resistance) }}</h3>
           <div>
-            <span>Stress</span>
-            <strong>{{ c[r].stress }}</strong>
+            <stress :list="stressList"></stress>
           </div>
-          <btn @click.native="addStress(r)" :class="stressButtonClasses(r)"><plus-icon></plus-icon></btn>
+          <btn @click.native="addStress(resistance)" :class="stressButtonClasses(resistance)"><plus-icon></plus-icon></btn>
         </div>
         <div class="any-fallout">
           <fallout-badge v-for="falloutId in c.fallout" :key="falloutId"
             :all-fallout="allFallout"
             :fallout-id="falloutId"
-            :resistance="r"
+            :resistance="resistance"
             @remove="removeFallout(falloutId)"
           ></fallout-badge>
         </div>
@@ -33,8 +34,9 @@
 
 <script>
   import { Edit2Icon, PlusIcon, XIcon } from 'vue-feather-icons';
-  import FalloutBadge from './fallout-badge.vue';
   import Store from '../store';
+  import FalloutBadge from './fallout-badge.vue';
+  import Stress from './stress.vue';
 
   export default {
     props: {
@@ -46,6 +48,7 @@
       Edit2Icon,
       FalloutBadge,
       PlusIcon,
+      Stress,
       XIcon,
     },
 
@@ -58,10 +61,6 @@
     methods: {
       ucfirst(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
-      },
-
-      freeSlots(resistance) {
-        return this.c[resistance].freeSlots || null;
       },
 
       addStress(resistance) {
