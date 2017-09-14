@@ -418,8 +418,17 @@
       },
 
       layLow() {
-        this.resistances.forEach((r) => {
-          this.char[r].stress = -this.char[r].freeSlots || 0;
+        Object.keys(this.char.stress).forEach((resistance) => {
+          let stressList = this.char.stress[resistance];
+          let i = stressList.length;
+          while (i--) {
+            let obj = stressList[i];
+            if (obj.type === 'stress') {
+              stressList.splice(i, 1);
+            } else {
+              obj.used = false;
+            }
+          }
         });
       },
 
