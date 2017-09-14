@@ -293,6 +293,7 @@
                   :fallout-id="falloutId"
                   :full="true"
                   @remove="removeFallout(falloutId)"
+                  @show-fallout-details="emitFalloutBadgeClick"
                 ></fallout-badge>
               </div>
 
@@ -458,6 +459,10 @@
         const index = this.char.stress[resistance].indexOf(group[group.length - 1]);
         this.char.stress[resistance].splice(index + 1, 0, { type: type, used: false });
         this.char.slots[resistance]++;
+      },
+
+      emitFalloutBadgeClick(fallout) {
+        this.$emit('falloutModal', fallout);
       },
     },
 

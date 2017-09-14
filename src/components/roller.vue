@@ -64,7 +64,7 @@
             <fallout v-for="(f, index) in falloutChoices" :key="index"
               :details="f"
               :character="character"
-              @show-details="showModal = f"
+              @show-details="$emit('fallout-modal', f)"
               @tick="newFalloutAdd(f)"
               @untick="newFalloutRemove(f)"
             ></fallout>
@@ -76,21 +76,6 @@
           </nav>
 
         </div>
-
-        <modal :show="showModal" @close="showModal = false"
-          :title="showModal.name"
-          :sub-title="showModal.resistance"
-          :buttons="['Close']"
-        >
-          <template scope="body">
-            <p>{{ showModal.description }}</p>
-            <div class="fallout-level">
-              <icon id="drop" v-for="i in showModal.severity" :key="i"></icon>
-              <span>{{ showModal.level }}</span>
-            </div>
-          </template>
-        </modal>
-
       </div>
     </template>
   </motion>
@@ -126,7 +111,6 @@
       return {
         resistances: Store.resistances,
         offset: 100,
-        showModal: false,
         falloutOffset: 100,
         d1: { flipped: false, result: null, brutal: 0 },
         d3: { flipped: false, result: null, brutal: 0 },

@@ -1,11 +1,12 @@
 <template>
   <tag v-if="value" @remove="$emit('remove')">
-    <span class="fallout">{{ value }}</span>
+    <btn @click.native="$emit('show-fallout-details', fallout)" class="fallout shadowless backgroundless">{{ value }}</btn>
     <span v-if="full" class="resistance">{{ fallout.resistance }}</span>
   </tag>
 </template>
 
 <script>
+  import Btn from './btn.vue';
   import Tag from './tag.vue';
 
   export default {
@@ -17,6 +18,7 @@
     },
 
     components: {
+      Btn,
       Tag,
     },
 

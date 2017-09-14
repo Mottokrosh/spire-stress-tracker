@@ -25,6 +25,7 @@
             :fallout-id="falloutId"
             :resistance="resistance"
             @remove="removeFallout(falloutId)"
+            @show-fallout-details="emitFalloutBadgeClick"
           ></fallout-badge>
         </div>
       </div>
@@ -109,6 +110,10 @@
           'has-icon': true,
           'bottom-left-rounded': this.hasFalloutIn(resistance),
         };
+      },
+
+      emitFalloutBadgeClick(fallout) {
+        this.$emit('show-fallout-details', fallout);
       },
     },
   };

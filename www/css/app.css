@@ -803,19 +803,19 @@ select.small {
   margin-top: 2rem;
 }
 
-.roller .fallout-level {
+.fallout-level {
   text-transform: uppercase;
   color: #cf413b;
   display: flex;
   align-items: center;
 }
 
-.roller .fallout-level > * {
+.fallout-level > * {
   margin: 0;
   filter: drop-shadow(0 0 0.25rem #000);
 }
 
-.roller .fallout-level > *:last-child {
+.fallout-level > *:last-child {
   margin-left: 0.5rem;
   font-weight: bold;
 }
@@ -1128,6 +1128,8 @@ select.small {
   justify-content: center;
   align-items: flex-start;
   pointer-events: none;
+  z-index: 12;
+  color: #fff;
 }
 
 .modal .modal-backdrop {
@@ -1201,6 +1203,14 @@ select.small {
   padding-top: 0.5rem;
 }
 
+.modal .modal-content header h2 {
+  color: #8fa5b0;
+}
+
+.modal .modal-content header h2 small {
+  color: #fff;
+}
+
 .modal .modal-content header > * {
   margin: 0;
 }
@@ -1241,11 +1251,17 @@ select.small {
   display: flex;
 }
 
+.tag .text button {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
 .tag .text span {
   padding: 0.125rem 0;
 }
 
-.tag .text span + span {
+.tag .text span + span, .tag .text button + span {
   margin-left: 0.25rem;
 }
 

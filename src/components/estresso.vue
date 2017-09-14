@@ -6,6 +6,7 @@
       :fallout="allFallout"
       @close="rollerOptions = null"
       @update="updateCharacter"
+      @fallout-modal="showFalloutModal"
     ></roller>
 
     <editor
@@ -14,6 +15,7 @@
       :fallout="allFallout"
       @close="characterToEdit = null; clear = null"
       @apply="replaceCharacter"
+      @fallout-modal="showFalloutModal"
     ></editor>
 
     <header>
@@ -31,6 +33,7 @@
           @edit="editCharacter"
           @delete="deleteCharacter"
           @remove-fallout="removeFallout"
+          @show-fallout-details="showFalloutModal"
         ></character>
       </li>
     </transition-group>
@@ -95,6 +98,20 @@
       </div>
     </form>
 
+    <modal :show="showModal" @close="showModal = false"
+      :title="showModal.name"
+      :sub-title="showModal.resistance"
+      :buttons="['Close']"
+    >
+      <template scope="body">
+        <p>{{ showModal.description }}</p>
+        <div class="fallout-level">
+          <icon id="drop" v-for="i in showModal.severity" :key="i"></icon>
+          <span>{{ showModal.level }}</span>
+        </div>
+      </template>
+    </modal>
+
   </div>
 </template>
 
@@ -104,6 +121,8 @@
   import Helpers from '../helpers.mixin';
   import Character from './character.vue';
   import CounterControl from './counter-control.vue';
+  import Icon from './icon.vue';
+  import Modal from './modal.vue';
   import Roller from './roller.vue';
   import Editor from './editor.vue';
   import Store from '../store';
@@ -148,6 +167,7 @@
         newCharacter: this.clone(characterSchema),
         names: null,
         allFallout: null,
+        showModal: false,
       };
     },
 
@@ -155,6 +175,8 @@
       Character,
       CounterControl,
       Editor,
+      Icon,
+      Modal,
       Roller,
       UserPlusIcon,
     },
@@ -233,6 +255,10 @@
           character.fallout.splice(index, 1);
           this.store.save();
         }
+      },
+
+      showFalloutModal(fallout) {
+        this.showModal = fallout;
       },
     },
 
