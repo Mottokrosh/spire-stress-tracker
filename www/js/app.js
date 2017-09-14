@@ -23891,9 +23891,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.$emit('close');
     },
     reset: function reset() {
-      this.characterCopy = this.clone(this.character);
+      this.characterCopy = null;
     },
     apply: function apply() {
+      setTimeout(this.reset, 250);
       this.$emit('apply', this.char, this.character);
     },
     removeFallout: function removeFallout(falloutId) {
@@ -24722,7 +24723,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     on: {
       "close": function($event) {
-        _vm.characterToEdit = null
+        _vm.characterToEdit = null;
+        _vm.clear = null
       },
       "apply": _vm.replaceCharacter
     }

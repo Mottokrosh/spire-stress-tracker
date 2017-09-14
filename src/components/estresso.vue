@@ -12,7 +12,7 @@
       :character="characterToEdit"
       :clear="stressToClear"
       :fallout="allFallout"
-      @close="characterToEdit = null"
+      @close="characterToEdit = null; clear = null"
       @apply="replaceCharacter"
     ></editor>
 

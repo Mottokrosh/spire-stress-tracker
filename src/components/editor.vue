@@ -403,10 +403,11 @@
       },
 
       reset() {
-        this.characterCopy = this.clone(this.character);
+        this.characterCopy = null;
       },
 
       apply() {
+        setTimeout(this.reset, 250);
         this.$emit('apply', this.char, this.character);
       },
 
