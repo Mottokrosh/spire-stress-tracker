@@ -1,13 +1,13 @@
 {
-  "name": "estresso",
-  "displayName": "Vermissian Estresso the First",
+  "name": "spire-companion",
+  "displayName": "Spire Companion",
   "version": "1.0.0",
   "description": "Stress and fallout tracker for the Spire RPG",
   "repository": "https://github.com/mottokrosh/spire-stress-tracker",
-  "homepage": "https://symbook.io/about.html",
+  "homepage": "https://mottokrosh.com/apps/spire-companion/",
   "bugs": {
     "url": "https://github.com/mottokrosh/spire-stress-tracker/issues",
-    "email": "frank@symbook.io"
+    "email": "frank.reding@gmail.com"
   },
   "main": "src/app.js",
   "scripts": {
@@ -18,7 +18,7 @@
     "production": "NODE_ENV=production webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "start": "npx http-server www"
   },
-  "author": "Frank Reding <frank@symbook.io>",
+  "author": "Frank Reding <frank.reding@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.15.3",
@@ -48,5 +48,8 @@
   "engines": {
     "node": ">=8.1.0",
     "npm": "^5.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.18.1"
   }
 }
