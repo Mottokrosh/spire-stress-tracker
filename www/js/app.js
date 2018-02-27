@@ -19692,7 +19692,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__roller_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__roller_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__editor_vue__ = __webpack_require__(74);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__editor_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__editor_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__store__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__the_footer_vue__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__the_footer_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__the_footer_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__store__ = __webpack_require__(5);
 //
 //
 //
@@ -19793,6 +19795,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+
 
 
 
@@ -19834,8 +19839,8 @@ var stressSchema = {
 
   data: function data() {
     return {
-      store: __WEBPACK_IMPORTED_MODULE_7__store__["a" /* default */],
-      resistances: __WEBPACK_IMPORTED_MODULE_7__store__["a" /* default */].resistances,
+      store: __WEBPACK_IMPORTED_MODULE_8__store__["a" /* default */],
+      resistances: __WEBPACK_IMPORTED_MODULE_8__store__["a" /* default */].resistances,
       characters: [],
       rollerOptions: null,
       characterToEdit: null,
@@ -19852,6 +19857,7 @@ var stressSchema = {
     CounterControl: __WEBPACK_IMPORTED_MODULE_4__counter_control_vue___default.a,
     Editor: __WEBPACK_IMPORTED_MODULE_6__editor_vue___default.a,
     Roller: __WEBPACK_IMPORTED_MODULE_5__roller_vue___default.a,
+    TheFooter: __WEBPACK_IMPORTED_MODULE_7__the_footer_vue___default.a,
     UserPlusIcon: __WEBPACK_IMPORTED_MODULE_1_vue_feather_icons__["i" /* UserPlusIcon */]
   },
 
@@ -24799,7 +24805,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.addCharacter($event)
       }
     }
-  }, [_c('user-plus-icon'), _vm._v(" Add")], 1)], 1)])])], 1)
+  }, [_c('user-plus-icon'), _vm._v(" Add")], 1)], 1)])]), _vm._v(" "), _c('the-footer')], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('header', [_c('div', {
     staticClass: "column"
@@ -24810,6 +24816,86 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-78c207b0", module.exports)
+  }
+}
+
+/***/ }),
+/* 81 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(0)(
+  /* script */
+  null,
+  /* template */
+  __webpack_require__(82),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/mottokrosh/Projects/spire-stress-tracker/src/components/the-footer.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] the-footer.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2163e3f1", Component.options)
+  } else {
+    hotAPI.reload("data-v-2163e3f1", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 82 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('footer', {
+    staticClass: "app-footer"
+  }, [_c('p', {
+    staticClass: "copyright column"
+  }, [_vm._v("This is the official companion app for Spire, a role-playing game developed and published by "), _c('a', {
+    attrs: {
+      "href": "http://rowanrookanddecard.com/",
+      "target": "_blank"
+    }
+  }, [_vm._v("Rowan, Rook and Decard Limited")]), _vm._v(". All text, images and other materials contained in our app are used under licence from Rowan, Rook and Decard Limited. © 2018 Rowan, Rook and Decard Limited. All trade marks are the property of the relevant owners. All rights reserved.")]), _vm._v(" "), _c('p', {
+    staticClass: "credits column"
+  }, [_vm._v("Spire Companion was designed and developed by Frank Reding, a.k.a. Mottokrosh, with an easter egg painting by Karen Reding.")]), _vm._v(" "), _c('p', {
+    staticClass: "links column"
+  }, [_c('a', {
+    attrs: {
+      "href": "https://mottokrosh.com",
+      "target": "_blank"
+    }
+  }, [_vm._v("Blog, Contact, & Other Apps")]), _vm._v(" | "), _c('a', {
+    attrs: {
+      "href": "https://github.com/Mottokrosh/spire-stress-tracker",
+      "target": "_blank"
+    }
+  }, [_vm._v("GitHub")])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-2163e3f1", module.exports)
   }
 }
 

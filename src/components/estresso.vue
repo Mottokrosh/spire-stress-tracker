@@ -95,6 +95,8 @@
       </div>
     </form>
 
+    <the-footer></the-footer>
+
   </div>
 </template>
 
@@ -106,6 +108,7 @@
   import CounterControl from './counter-control.vue';
   import Roller from './roller.vue';
   import Editor from './editor.vue';
+  import TheFooter from './the-footer.vue';
   import Store from '../store';
 
   const characterSchema = {
@@ -156,6 +159,7 @@
       CounterControl,
       Editor,
       Roller,
+      TheFooter,
       UserPlusIcon,
     },
 

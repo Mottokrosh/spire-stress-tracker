@@ -1485,3 +1485,25 @@ select {
     margin: 0 1px;
   }
 }
+
+.app-footer {
+  margin: 0;
+  background-color: darken($beigeLight, 10%);
+  color: $beigeDark;
+  text-align: justify;
+  padding: 2rem 0;
+  font-size: 0.9rem;
+
+  p {
+    padding-top: 0;
+    padding-bottom: 1rem;
+  }
+
+  a {
+    color: $beigeDark;
+  }
+
+  .links {
+    text-align: center;
+  }
+}

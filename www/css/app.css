@@ -1478,3 +1478,25 @@ select.small {
 .stress-in-resistance .regular-slot {
   margin: 0 1px;
 }
+
+.app-footer {
+  margin: 0;
+  background-color: #dfdfd8;
+  color: #9a9a92;
+  text-align: justify;
+  padding: 2rem 0;
+  font-size: 0.9rem;
+}
+
+.app-footer p {
+  padding-top: 0;
+  padding-bottom: 1rem;
+}
+
+.app-footer a {
+  color: #9a9a92;
+}
+
+.app-footer .links {
+  text-align: center;
+}
