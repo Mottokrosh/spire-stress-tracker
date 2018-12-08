@@ -1,0 +1,27 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:debug:20170905':
+    - axios > follow-redirects > debug:
+        patched: '2018-12-08T03:10:54.081Z'
+  'npm:lodash:20180130':
+    - cordova-ios > plist > xmlbuilder > lodash:
+        patched: '2018-12-08T03:10:54.081Z'
+    - cordova > cordova-common > plist > xmlbuilder > lodash:
+        patched: '2018-12-08T03:10:54.081Z'
+    - cordova-android > cordova-common > plist > xmlbuilder > lodash:
+        patched: '2018-12-08T03:10:54.081Z'
+    - cordova-ios > cordova-common > plist > xmlbuilder > lodash:
+        patched: '2018-12-08T03:10:54.081Z'
+    - cordova-ios > ios-sim > plist > xmlbuilder > lodash:
+        patched: '2018-12-08T03:10:54.081Z'
+    - cordova > cordova-lib > cordova-common > plist > xmlbuilder > lodash:
+        patched: '2018-12-08T03:10:54.081Z'
+    - cordova > cordova-lib > cordova-fetch > cordova-common > plist > xmlbuilder > lodash:
+        patched: '2018-12-08T03:10:54.081Z'
+    - cordova > cordova-lib > cordova-create > cordova-common > plist > xmlbuilder > lodash:
+        patched: '2018-12-08T03:10:54.081Z'
+    - cordova > cordova-lib > cordova-create > cordova-fetch > cordova-common > plist > xmlbuilder > lodash:
+        patched: '2018-12-08T03:10:54.081Z'
