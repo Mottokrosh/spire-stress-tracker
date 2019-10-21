@@ -20,8 +20,8 @@
     "level": "minor",
     "severity": 1,
     "resistance": "blood",
-    "name": "Adrenaline",
-    "description": "Your instincts kick in and you do something stupid. If you’re trying to get away or de-escalate, you lash out at your opponents. If you’re trying to fight, you get panicked and retreat. This is only momentary, and fades after a moment – long enough for a single, immediate action."
+    "name": "Instinctive",
+    "description": "Your hands shake and you fight with instinct, not skill. You can't use any positive weapon tags for the rest of the situation."
   },
   {
     "id": 104,
@@ -29,7 +29,7 @@
     "severity": 1,
     "resistance": "blood",
     "name": "Tired",
-    "description": "You struggle to stay awake, and you overlook something crucial in the current situation. The GM works out what it is, and it comes back to haunt you before the session is over."
+    "description": "Your limbs are shaky and you struggle to stay awake. You can't use Fight, Pursue or Sneak skills until you rest."
   },
   {
     "id": 105,
@@ -37,7 +37,7 @@
     "severity": 1,
     "resistance": "mind",
     "name": "Panicked",
-    "description": "Your heart hammers in your chest. Choose: either leave the scene and calm down, or make things difficult for everyone else around you and increase the difficulty of all actions performed nearby to you by 1."
+    "description": "You can't handle this. You flee the current situation, and take no further part in it."
   },
   {
     "id": 106,
@@ -45,7 +45,7 @@
     "severity": 1,
     "resistance": "mind",
     "name": "Shaken",
-    "description": "You can’t focus on what you’re doing. You may not gain dice from Domains until you take time to calm down.."
+    "description": "You can't focus on what you're doing. You can't use Investigate or Fix skills, or the Academic, Technology, Religion or Occult domains until you take time to calm down."
   },
   {
     "id": 107,
@@ -53,7 +53,15 @@
     "severity": 1,
     "resistance": "mind",
     "name": "Weird",
-    "description": "You do something unsettling that bothers normal people – obsessive behaviour, singing to yourself, fulfilling a strange compulsion at inappropriate times. At the earliest opportunity, the GM can declare that your weirdness puts a useful NPC off you (and probably your allies, too). Once this happens, remove this fallout."
+    "description": "There's just something... off about you. All social actions you undertake increase their difficulty by 1 until you manage to get your head back together again."
+  },
+  {
+    "id": 108,
+    "level": "minor",
+    "severity": 1,
+    "resistance": "reputation",
+    "name": "Vendetta",
+    "description": "During the next session, an NPC from this session will return with a vendetta against you."
   },
   {
     "id": 109,
@@ -93,7 +101,7 @@
     "severity": 1,
     "resistance": "silver",
     "name": "Debtor",
-    "description": "During the next session or later in this one, an NPC who lent you money will call in a favour."
+    "description": "During the next session, an NPC who lent you money will call in a favour."
   },
   {
     "id": 114,
@@ -101,31 +109,15 @@
     "severity": 1,
     "resistance": "silver",
     "name": "Pawned",
-    "description": "Until the end of the next session, you lose the use of one valuable piece of equipment that’s important to you."
-  },
-  {
-    "id": 115,
-    "level": "minor",
-    "severity": 1,
-    "resistance": "mind",
-    "name": "Adrenaline",
-    "description": "Your instincts kick in and you do something stupid. If you’re trying to get away or de-escalate, you lash out at your opponents. If you’re trying to fight, you get panicked and retreat. This is only momentary, and fades after a moment – long enough for a single, immediate action."
-  },
-  {
-    "id": 116,
-    "level": "minor",
-    "severity": 1,
-    "resistance": "shadow",
-    "name": "Rumour",
-    "description": "Word of your actions gets around the area. The GM and the other players should work out three statements that are whispered about you in bars and taverns: two true, one false."
+    "description": "Until the end of the next session, you lose the use of one valuable piece of equipment."
   },
   {
     "id": 201,
     "level": "moderate",
     "severity": 2,
     "resistance": "blood",
-    "name": "Broken Arm",
-    "description": "Your arm breaks under the strain, and splintered bone juts up through your skin. You can’t use the arm until it heals (which will take a month or so, or require powerful healing magic)."
+    "name": "Broken Limb",
+    "description": "Your arm or leg is broken, and you can't use it properly until it heals (which will take months unless you use magic)."
   },
   {
     "id": 202,
@@ -133,7 +125,7 @@
     "severity": 2,
     "resistance": "blood",
     "name": "Knocked Out",
-    "description": "You fall unconscious for several hours, during which time your enemies get an advantage."
+    "description": "You fall unconscious for several hours."
   },
   {
     "id": 203,
@@ -157,7 +149,7 @@
     "severity": 2,
     "resistance": "mind",
     "name": "Phobia",
-    "description": "You acquire a phobia of something related to the stress you suffered - a person, an item, a place, a situation, or something even more abstract. You will avoid the subject of your phobia whenever possible, and if you have to interact with it, difficulties are increased by 1."
+    "description": "You acquire a phobia of something related to the stress you suffered - a person, an item, a place, a situation, or something even more abstract. You will avoid the subject of your phobia whenever possible, and if you have to interact with it, difficulties are increased by 2."
   },
   {
     "id": 206,
@@ -181,15 +173,15 @@
     "severity": 2,
     "resistance": "shadow",
     "name": "Criminal",
-    "description": "You are accused of criminal acts, whether true or not, and wanted posters featuring your face and name are put up throughout the district in which you committed the crime. If the crime is particularly exciting,  your name and face may make it into the papers."
+    "description": "You are accused of criminal acts, whether true or not, and wanted posters featuring your face and name are put up throughout the district in which you committed the crime."
   },
   {
     "id": 209,
     "level": "moderate",
     "severity": 2,
     "resistance": "shadow",
-    "name": "Watched",
-    "description": "At any point from now until the end of the next session, the GM can decide that someone tailing you watches you perform an action; they can tell you which action if they wish. This will come back to haunt you before long."
+    "name": "Tail",
+    "description": "You've picked up a tail who will watch the next thing you do, if at all possible. You aren't aware of this. What they do with that information is up to the GM."
   },
   {
     "id": 210,
@@ -197,39 +189,7 @@
     "severity": 2,
     "resistance": "silver",
     "name": "Sold",
-    "description": "You're forced to sell off something valuable to pay your debtors. Work out with the GM what you’re forced to sell."
-  },
-  {
-    "id": 211,
-    "level": "moderate",
-    "severity": 2,
-    "resistance": "blood",
-    "name": "Broken Leg",
-    "description": "Your leg bones splinter and crack. You can’t walk without crutches for a month or so, and you’ll automatically fail any Pursue attempts. Any action where you’d need to be quick on your feet (fighting, dancing, climbing) is either impossible or suffers from an increased difficulty."
-  },
-  {
-    "id": 212,
-    "level": "moderate",
-    "severity": 2,
-    "resistance": "mind",
-    "name": "Permanently Weird",
-    "description": "As WEIRD,but: it lasts until you get proper treatment, and the GM can trigger it whenever they like. You can suppress the effects of this fallout for a scene by marking D3 stress against Mind."
-  },
-  {
-    "id": 213,
-    "level": "moderate",
-    "severity": 2,
-    "resistance": "reputation",
-    "name": "Vendetta",
-    "description": "During the next session, an NPC from this session will return with a vendetta against you."
-  },
-  {
-    "id": 214,
-    "level": "moderate",
-    "severity": 2,
-    "resistance": "silver",
-    "name": "Services Rendered",
-    "description": "You’re forced to sell your skills to a third party to pay your debtors, and the work is not pleasant. Work out with the GM what your character doesn’t want to do but is prepared to in order to make ends meet.."
+    "description": "You're forced to sell off something valuable to pay your debtors."
   },
   {
     "id": 301,
@@ -244,8 +204,8 @@
     "level": "severe",
     "severity": 3,
     "resistance": "blood",
-    "name": "Dying",
-    "description": "You’re dying. Choose: do something useful before you die (and roll with mastery, because this is the last thing you’ll ever do) or desperately try to cling onto life (and lose something vital in the bargain)."
+    "name": "Dead",
+    "description": "You die. You get a chance to do something useful before you die, though."
   },
   {
     "id": 303,
@@ -253,7 +213,7 @@
     "severity": 3,
     "resistance": "mind",
     "name": "Obsessed",
-    "description": "Your mind splinters and shards until it is razor-sharp and barbed, focused on a single goal. You are now PERMANENTLY WEIRD (as above)and the difficulty for all other actions increases by 1. Once you achieve your goal, your mind gives under the strain, and you are forcibly retired."
+    "description": "Your mind splinters and shards until it is razor-sharp and barbed, focused on a single goal. You are now permanently WEIRD (as above), but when you attempt to achieve your goal you roll with mastery. Each session, the penalty for WEIRD increases by one step - if it reaches 5, you are declared unfit to serve and eliminated. Once you achieve your goal, your mind gives under the strain, and you are forcibly retired."
   },
   {
     "id": 304,
@@ -261,7 +221,7 @@
     "severity": 3,
     "resistance": "mind",
     "name": "Renegade",
-    "description": "Your mind shattered by the stress of your actions, you turn against the ministry and all it stands for. (The precise reasons why are up to you and the GM.) You and your assets become a faction in and of themselves, and will work against the player group at every turn to undermine their actions. This isn't immediate; the fallout represents the first crack in the dam of your mind. Over the next few sessions, play out your descent. Should you survive, you join a rival faction, or become one unto yourself, set against the cell."
+    "description": "Your mind shattered by the stress of your actions, you turn against the ministry and all it stands for. (The precise reasons why are up to you and the GM.) You and your assets become a faction in and of themselves, and will work against the player group at every turn to undermine their actions. This isn't immediate, but it will probably happen within the next session or two."
   },
   {
     "id": 305,
@@ -269,7 +229,7 @@
     "severity": 3,
     "resistance": "reputation",
     "name": "Reviled",
-    "description": "You are expelled from somewhere important to you, and you can no longer return on pain of death (or, in more civilised society, arrest). People in the district will spread stories of how utterly reprehensible you are throughout the city."
+    "description": "You are expelled from somewhere precious to you, and you can no longer return on pain of death (or, in more civilised society, arrest). People in the district will spread stories of how utterly reprehensible you are throughout the city."
   },
   {
     "id": 306,
@@ -285,7 +245,7 @@
     "severity": 3,
     "resistance": "shadow",
     "name": "Wrath of the Sun Gods",
-    "description": "Your operations are uncovered by the Solar Guard, the grand inquisitors of the aelfir church, and you are hunted. Many of your NPC bonds are dragged out into the street and shot. Your friends dare not speak your name."
+    "description": "Your operations are uncovered by the Solar Guard, the grand inquisitors of the aelfir church, and you are hunted. Your allies are dragged out into the street and shot. Your friends dare not speak your name."
   },
   {
     "id": 308,
