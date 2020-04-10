@@ -22,7 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.15.3",
-    "cordova": "^8.0.0",
+    "cordova": "^9.0.0",
     "cordova-android": "^6.2.3",
     "cordova-ios": "^4.4.0",
     "cordova-plugin-hidden-statusbar": "^1.0.0",
