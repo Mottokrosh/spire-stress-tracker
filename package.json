@@ -21,7 +21,7 @@
   "author": "Frank Reding <frank.reding@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.15.3",
+    "axios": "^0.21.1",
     "cordova": "^8.0.0",
     "cordova-android": "^6.2.3",
     "cordova-ios": "^4.4.0",
